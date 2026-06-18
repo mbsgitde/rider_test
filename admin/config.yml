@@ -1,0 +1,29 @@
+backend:
+  name: github
+  repo: USER/REPO
+  branch: main
+
+media_folder: ""
+public_folder: ""
+
+collections:
+  - name: "tours"
+    label: "Touren"
+    folder: "data"
+    create: true
+    extension: "json"
+    format: "json"
+    fields:
+      - { name: "name", label: "Name", widget: "string" }
+      - { name: "year", label: "Jahr", widget: "number" }
+      - { name: "gpx", label: "GPX", widget: "string" }
+      - name: "hotels"
+        label: "Hotels"
+        widget: "list"
+        fields:
+          - { name: "name", widget: "string" }
+          - { name: "street", widget: "string" }
+          - { name: "nr", widget: "string" }
+          - { name: "zip", widget: "string" }
+          - { name: "city", widget: "string" }
+          - { name: "country", widget: "string" }
