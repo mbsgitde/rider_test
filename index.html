@@ -1,90 +1,10 @@
-<!DOCTYPE html>
-<html lang="de">
+
 <head>
 <meta charset="UTF-8">
-<title>Tour Planung</title>
-<link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css"> 
+
+<title>Test</title>
+
+<link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css">
 <script defer src="https://pyscript.net/latest/pyscript.js"></script>
-<style>
-body { font-family: Arial; max-width: 900px; margin: auto; }
-.section { border: 1px solid #ccc; padding: 10px; margin-top: 10px; }
-.good { color: green; }
-.medium { color: orange; }
-.bad { color: red; }
-table { width:100%; border-collapse: collapse; }
-th, td { padding:5px; border-bottom:1px solid #ddd;}
-</style>
+
 </head>
-<body>
-<h1>🗺️ Tour Planung</h1>
-<div class="section"><h2>📅 Referenz</h2><div id="reference"></div></div>
-<div class="section"><h2>✅ Empfehlung</h2><div id="recommendation"></div></div>
-<div class="section"><h2>📊 Vergleich</h2><div id="comparison"></div></div>
-<div class="section"><h2>📄 Roadbook</h2>
-<button onclick="generatePDF()">Export PDF</button>
-<div id="roadbook"></div></div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-<script>
-function generatePDF(){ const element=document.getElementById('roadbook'); html2pdf().from(element).save(); }
-</script>
-<py-script>
-from pyodide.http import pyfetch
-from js import document
-from datetime import datetime
-
-def format_time(h):
-    hh=int(h)
-    mm=int((h-hh)*60)
-    return f"{hh}:{mm:02d} h"
-
-def classify_tour(t,ref):
-    diff=t['ascent']-ref['ascent']
-    if abs(diff)<=200: return "🟢 sehr passend","good"
-    elif diff<0: return "🟡 leichter","medium"
-    elif diff<=500: return "🟠 anspruchsvoller","medium"
-    else: return "🔴 schwer","bad"
-
-def score(t,ref): return abs(t['km']-ref['km'])+abs(t['ascent']-ref['ascent'])*0.002
-
-def find_best(tours,ref): return min(tours, key=lambda t: score(t,ref))
-
-def show_reference(ref):
-    document.getElementById('reference').innerHTML=f"{ref['name']}<br>{ref['km']} km | ↑{ref['ascent']} m | {format_time(ref['time'])}"
-
-def show_recommendation(best,ref):
-    label,css=classify_tour(best,ref)
-    document.getElementById('recommendation').innerHTML=f"<b>{best['name']}</b><br>{best['km']} km | ↑{best['ascent']} m | {format_time(best['time'])}<br><span class='{css}'>{label}</span>"
-
-def show_comparison(tours,ref):
-    html="<table><tr><th>Tour</th><th>km</th><th>hm</th><th>Dauer</th><th>Einordnung</th></tr>"
-    for t in tours:
-        label,css=classify_tour(t,ref)
-        html+=f"<tr><td>{t['name']}</td><td>{t['km']}</td><td>{t['ascent']}</td><td>{format_time(t['time'])}</td><td class='{css}'>{label}</td></tr>"
-    html+="</table>"
-    document.getElementById('comparison').innerHTML=html
-
-def render_roadbook(ref,tours):
-    html=f"<h2>{ref['name']}</h2><p>{ref['km']} km | ↑{ref['ascent']} m</p>"
-    for i,t in enumerate(tours):
-        html+=f"<h3>Etappe {i+1}</h3><p>{t['name']}</p><p>{t['km']} km | ↑{t['ascent']} m</p>"
-    document.getElementById('roadbook').innerHTML=html
-
-async def main():
-    response=await pyfetch('data/tours.json')
-    tours=await response.json()
-    current_year=datetime.now().year
-    last_year=current_year-1
-    current=[t for t in tours if t['year']==current_year][:3]
-    previous=[t for t in tours if t['year']==last_year]
-    if not previous: return
-    ref=previous[0]
-    best=find_best(current,ref)
-    show_reference(ref)
-    show_recommendation(best,ref)
-    show_comparison(current,ref)
-    render_roadbook(ref,current)
-
-await main()
-</py-script>
-</body>
-</html>
