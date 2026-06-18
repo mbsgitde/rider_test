@@ -17,3 +17,83 @@ body {
 
 .section {
   border: 1px solid #ccc;
+  padding: 10px;
+  margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🗺️ Tour Planung</h1>
+
+<div class="section">
+  <h2>Tour wählen</h2>
+  <select id="tour-select" py-change="load_tour"></select>
+</div>
+
+<div class="section">
+  <h2>Hotels</h2>
+  <div id="hotels"></div>
+</div>
+
+<div class="section">
+  <h2>Status</h2>
+  <div id="status">Lade...</div>
+</div>
+
+<py-script>
+
+from pyodide.http import pyfetch
+from js import document
+
+tours = []
+
+# ✅ Daten laden
+async def load_data():
+    global tours
+
+    response = await pyfetch("data/tours.json")
+    tours = await response.json()
+
+    select = document.getElementById("tour-select")
+
+    for i, t in enumerate(tours):
+        option = document.createElement("option")
+        option.value = str(i)
+        option.text = t["name"]
+        select.appendChild(option)
+
+    document.getElementById("status").innerText = "✅ Touren geladen"
+
+# ✅ Tour auswählen
+async def load_tour(event):
+    idx = int(event.target.value)
+    tour = tours[idx]
+
+    output = document.getElementById("hotels")
+
+    html = ""
+
+    if "hotels" in tour and len(tour["hotels"]) > 0:
+        for h in tour["hotels"]:
+            html += f"""
+            <p>
+            <b>{h['name']}</b><br>
+            {h['street']} {h['nr']}<br>
+            {h['zip']} {h['city']}<br>
+            {h['country']}
+            </p>
+            <hr>
+            """
+    else:
+        html = "Keine Hotels vorhanden"
+
+    output.innerHTML = html
+
+await load_data()
+
+</py-script>
+
+</body>
+</html>
