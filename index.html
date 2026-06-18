@@ -1,1 +1,78 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Tour</title><link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css"><script defer src="https://pyscript.net/latest/pyscript.js"></script></head><body><h1>Tour App</h1><div id="out"></div><py-script>from js import document; document.getElementById("out").innerText="App läuft ✅"</py-script></body></html>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Tour Planung</title>
+
+<link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css">
+<script defer src="https://pyscript.net/latest/pyscript.js"></script>
+
+<style>
+body { font-family: Arial; max-width: 900px; margin: auto; }
+.section { border:1px solid #ccc; padding:10px; margin-top:10px; }
+</style>
+</head>
+
+<body>
+
+<h1>🗺️ Tour Planung</h1>
+
+<h2>Tour wählen</h2>
+<select id="tour-select" py-change="load_tour">
+</select>
+
+<div class="section">
+  <h2>📍 Hotels</h2>
+  <div id="hotels"></div>
+</div>
+
+<div class="section">
+  <h2>📍 Status</h2>
+  <div id="status">Lade Daten...</div>
+</div>
+
+<py-script>
+
+from pyodide.http import pyfetch
+from js import document
+
+tours = []
+
+async def load_data():
+    global tours
+
+    response = await pyfetch("data/tours.json")
+    tours = await response.json()
+
+    select = document.getElementById("tour-select")
+
+    for i, t in enumerate(tours):
+        option = document.createElement("option")
+        option.value = str(i)
+        option.text = t["name"]
+        select.appendChild(option)
+
+    document.getElementById("status").innerText = "✅ Touren geladen"
+
+async def load_tour(event):
+    idx = int(event.target.value)
+    tour = tours[idx]
+
+    output = document.getElementById("hotels")
+
+    # Hotels anzeigen
+    html = ""
+
+    if "hotels" in tour:
+        for h in tour["hotels"]:
+            html += f"""
+            <p>
+            <b>{h['name']}</b><br>
+            {h['street']} {h['nr']}<br>
+            {h['zip']} {h['city']}<br>
+            {h['country']}
+            </p>
+            <hr>
+            """
+
+    else:
