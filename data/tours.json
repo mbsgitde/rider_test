@@ -1,1 +1,17 @@
-[{"name":"Alpen Tour 2026","year":2026,"gpx":"gpx/sample.gpx","hotels":[]}]
+[
+  {
+    "name": "Test Tour",
+    "year": 2026,
+    "gpx": "gpx/sample.gpx",
+    "hotels": [
+      {
+        "name": "Hotel Alpenblick",
+        "street": "Dorfstraße",
+        "nr": "12",
+        "zip": "82467",
+        "city": "Garmisch-Partenkirchen",
+        "country": "Deutschland"
+      }
+    ]
+  }
+]
