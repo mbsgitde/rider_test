@@ -2,101 +2,25 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Bike Tour Planner</title>
+  <title>Test</title>
 
   <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css">
   <script src="https://pyscript.net/releases/2024.1.1/core.js"></script>
 </head>
-
 <body>
-  <h1>🚴 Bike Tour Planner</h1>
 
-  <label>Route wählen:</label>
-  <select id="routeSelect">
-    <option value="data/route-alps.gpx">Alpenroute</option>
-    <option value="data/route-lake.gpx">Seenroute</option>
-  </select>
+  <h1>Test</h1>
+  <button id="btn">Click Me</button>
 
-  <button id="loadBtn">Laden</button>
+  <div id="output">Noch nichts passiert</div>
 
-  <div id="output"></div>
-
-  <!-- ✅ ALLE LOGIK INLINE -->
   <script type="py">
 import js
-import xml.etree.ElementTree as ET
-from math import radians, sin, cos, sqrt, atan2
 
-def haversine(p1, p2):
-    R = 6371
-    dlat = radians(p2["lat"] - p1["lat"])
-    dlon = radians(p2["lon"] - p1["lon"])
+def test(event):
+    js.document.getElementById("output").innerHTML = "✅ PyScript funktioniert!"
 
-    a = sin(dlat/2)**2 + cos(radians(p1["lat"])) * cos(radians(p2["lat"])) * sin(dlon/2)**2
-    return R * 2 * atan2(sqrt(a), sqrt(1-a))
-
-def parse_gpx(gpx_text):
-    root = ET.fromstring(gpx_text)
-    ns = {'default': 'http://www.topografix.com/GPX/1/1'}
-
-    points = []
-    for trkpt in root.findall(".//default:trkpt", ns):
-        lat = float(trkpt.get("lat"))
-        lon = float(trkpt.get("lon"))
-        ele = trkpt.find("default:ele", ns)
-        elevation = float(ele.text) if ele is not None else 0
-
-        points.append({"lat": lat, "lon": lon, "ele": elevation})
-
-    return points
-
-def build_stages(points, stops):
-    stages = []
-    chunk_size = len(points) // (len(stops) - 1)
-
-    for i in range(len(stops) - 1):
-        segment = points[i*chunk_size:(i+1)*chunk_size]
-
-        dist = 0
-        for j in range(len(segment)-1):
-            dist += haversine(segment[j], segment[j+1])
-
-        stages.append({
-            "name": f"{stops[i]['name']} → {stops[i+1]['name']}",
-            "distance_km": dist
-        })
-
-    return stages
-
-async def load_data(event=None):
-    try:
-        route_select = js.document.getElementById("routeSelect")
-        route_file = route_select.value
-
-        # GPX laden
-        response = await js.fetch(route_file)
-        gpx_text = await response.text()
-
-        points = parse_gpx(gpx_text)
-
-        # Stops laden
-        response_stops = await js.fetch("data/stops.json")
-        stops = await response_stops.json()
-
-        stages = build_stages(points, stops)
-
-        output = ""
-        for s in stages:
-            output += f"<p><b>{s['name']}</b>: {round(s['distance_km'],1)} km</p>"
-
-        js.document.getElementById("output").innerHTML = output
-
-    except Exception as e:
-        js.console.error(str(e))
-        js.document.getElementById("output").innerHTML = f"Fehler: {e}"
-
-# ✅ Event sauber binden
-js.document.getElementById("loadBtn").addEventListener("click", load_data)
+js.document.getElementById("btn").addEventListener("click", test)
   </script>
 
 </body>
