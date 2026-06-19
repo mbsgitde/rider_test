@@ -1,15 +1,37 @@
-<script type="py">
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>PyScript Stable</title>
+
+  <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css">
+  <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+</head>
+
+<body>
+
+<h1>✅ Stabiler Test</h1>
+
+<button onclick="runPython()">Click Me</button>
+
+<div id="output">Noch nichts passiert</div>
+
+<py-script>
 import js
-from pyodide.ffi import create_proxy
 
-# ✅ globale Variable (WICHTIG!)
-proxy = None
+def test():
+    js.document.getElementById("output").innerHTML = "✅ Funktioniert stabil!"
 
-def test(event):
-    js.document.getElementById("output").innerHTML = "✅ PyScript funktioniert!"
+# Funktion global verfügbar machen
+js.window.test = test
+</py-script>
 
-# ✅ Proxy erstellen und global speichern
-proxy = create_proxy(test)
-
-js.document.getElementById("btn").addEventListener("click", proxy)
+<!-- ✅ JS ruft Python auf -->
+<script>
+function runPython() {
+    window.test();  // ruft Python sicher auf
+}
 </script>
+
+</body>
+</html>
