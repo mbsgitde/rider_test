@@ -1,20 +1,26 @@
-<html>
-  <head>
-    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
-    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
-  </head>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>PyScript Test</title>
 
-  <body>
+  <!-- ✅ RICHTIG eingebunden -->
+  <link rel="stylesheet" href="https://pyscript.net/latest/prc="https://pyscript.net/latestd>
 
-    <button py-click="run">Click Me</button>
+<body>
 
-    <div id="output"></div>
+<h1>🚴 Test</h1>
 
-    <py-script>
+<button py-click="run">Click Me</button>
+
+<div id="output"></div>
+
+<py-script>
 def run():
     from js import document
     document.getElementById("output").innerHTML = "✅ Button funktioniert!"
-    </py-script>
+</py-script>
 
-  </body>
+</body>
 </html>
+``
