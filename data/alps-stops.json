@@ -1,0 +1,18 @@
+[
+  {
+    "name": "M\u00fcnchen",
+    "address": "M\u00fcnchen"
+  },
+  {
+    "name": "Garmisch",
+    "address": "Garmisch-Partenkirchen"
+  },
+  {
+    "name": "Innsbruck",
+    "url": "https://maps.google.com/?q=47.27,11.39"
+  },
+  {
+    "name": "Bozen",
+    "address": "Bozen"
+  }
+]

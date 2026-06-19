@@ -2,59 +2,76 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>🚴 Bike Tour Planner</title>
+<title>Bike Tour Planner V6</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
-body { font-family: Arial; padding: 20px; }
-.stage { border: 1px solid #ccc; padding: 10px; margin: 10px 0; }
+body{font-family:Arial;padding:20px}
+#map{height:400px;margin-top:20px}
+.stage{border:1px solid #ccc;margin:8px;padding:8px;cursor:pointer}
+canvas{width:100%;max-width:800px}
 </style>
 </head>
 <body>
-<h1>🚴 Bike Tour Planner (All-in-One)</h1>
+<h1>🚴 Bike Tour Planner V6</h1>
 <select id="routeSelect">
-  <option value="alps">Alpenroute</option>
-  <option value="lake">Seenroute</option>
+<option value="alps">Alpenroute</option>
+<option value="lake">Seenroute</option>
 </select>
 <button onclick="loadTour()">Tour laden</button>
+<div id="map"></div>
 <div id="output"></div>
+<canvas id="elevationChart"></canvas>
 <script>
-const routes = {
-  alps: {
-    gpx: [
-      {lat:48.14, lon:11.56, ele:500},
-      {lat:47.8, lon:11.2, ele:800},
-      {lat:47.3, lon:11.3, ele:600},
-      {lat:46.7, lon:11.4, ele:1000},
-      {lat:46.5, lon:11.35, ele:300}
-    ],
-    stops: [
-      { name: "München", address: "München Hbf", type: "start" },
-      { name: "Garmisch Hotel", address: "Garmisch-Partenkirchen", type: "overnight" },
-      { name: "Innsbruck", url: "https://maps.google.com/?q=47.27,11.39", type: "overnight" },
-      { name: "Bozen", address: "Bozen Italien", type: "end" }
-    ]
-  },
-  lake: {
-    gpx: [
-      {lat:47.55, lon:10.7, ele:600},
-      {lat:47.7, lon:11.2, ele:650},
-      {lat:47.9, lon:11.8, ele:660},
-      {lat:48.0, lon:12.0, ele:600}
-    ],
-    stops: [
-      { name: "Start", address: "Füssen Deutschland", type: "start" },
-      { name: "Hotel Tegernsee", address: "Tegernsee Deutschland", type: "overnight" },
-      { name: "Chiemsee", address: "Chiemsee Deutschland", type: "end" }
-    ]
-  }
-};
-function haversine(a,b){const R=6371;const toRad=x=>x*Math.PI/180;const dLat=toRad(b.lat-a.lat);const dLon=toRad(b.lon-a.lon);const val=Math.sin(dLat/2)**2+Math.cos(toRad(a.lat))*Math.cos(toRad(b.lat))*Math.sin(dLon/2)**2;return R*2*Math.atan2(Math.sqrt(val),Math.sqrt(1-val));}
-async function geocode(address){const url=`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`;const data=await fetch(url).then(r=>r.json());if(!data.length)return null;return{lat:parseFloat(data[0].lat),lon:parseFloat(data[0].lon)};}
-function parseGoogle(url){const m=url.match(/q=([0-9.\-]+),([0-9.\-]+)/);if(!m)return null;return{lat:parseFloat(m[1]),lon:parseFloat(m[2])};}
-function findNearest(stop,points){let min=Infinity,idx=0;points.forEach((p,i)=>{const d=haversine(stop,p);if(d<min){min=d;idx=i;}});return idx;}
-async function prepareStops(stops,points){const result=[];for(const s of stops){let coords=null;if(s.url)coords=parseGoogle(s.url);if(!coords&&s.address)coords=await geocode(s.address);if(!coords)continue;const index=findNearest(coords,points);result.push({...s,lat:coords.lat,lon:coords.lon,index});}result.sort((a,b)=>a.index-b.index);return result;}
-function buildStages(points,stops){const stages=[];for(let i=0;i<stops.length-1;i++){const seg=points.slice(stops[i].index,stops[i+1].index);let dist=0,up=0,down=0;for(let j=0;j<seg.length-1;j++){dist+=haversine(seg[j],seg[j+1]);const diff=seg[j+1].ele-seg[j].ele;if(diff>0)up+=diff;else down+=Math.abs(diff);}stages.push({name:`${stops[i].name} → ${stops[i+1].name}`,dist,up,down,lat:stops[i+1].lat,lon:stops[i+1].lon});}return stages;}
-async function getWeather(lat,lon){const url=`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=temperature_2m_max,precipitation_sum&timezone=auto`;const data=await fetch(url).then(r=>r.json());return{temp:data.daily.temperature_2m_max[0],rain:data.daily.precipitation_sum[0]};}
-async function loadTour(){const routeKey=document.getElementById("routeSelect").value;const route=routes[routeKey];const points=route.gpx;const stops=await prepareStops(route.stops,points);const stages=buildStages(points,stops);const output=document.getElementById("output");output.innerHTML="";for(const s of stages){const weather=await getWeather(s.lat,s.lon);const div=document.createElement("div");div.className="stage";div.innerHTML=`<b>${s.name}</b><br>Distanz: ${s.dist.toFixed(1)} km<br>↑ ${Math.round(s.up)} m ↓ ${Math.round(s.down)} m<br>🌡️ ${weather.temp} °C<br>🌧️ ${weather.rain} mm`;output.appendChild(div);}}
+let map=L.map('map').setView([47.5,11.5],7);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+let group=L.layerGroup().addTo(map);
+let chart;
+async function loadGPX(name){
+ const text=await fetch('gpx/'+name+'.gpx').then(r=>r.text());
+ const xml=new DOMParser().parseFromString(text,'text/xml');
+ return Array.from(xml.getElementsByTagName('trkpt')).map(pt=>({
+  lat:+pt.getAttribute('lat'),
+  lon:+pt.getAttribute('lon'),
+  ele:+(pt.getElementsByTagName('ele')[0]?.textContent||0)
+ }));
+}
+function dist(a,b){const R=6371;const t=x=>x*Math.PI/180;
+const dLat=t(b.lat-a.lat), dLon=t(b.lon-a.lon);
+const x=Math.sin(dLat/2)**2+Math.cos(t(a.lat))*Math.cos(t(b.lat))*Math.sin(dLon/2)**2;
+return R*2*Math.atan2(Math.sqrt(x),Math.sqrt(1-x));}
+async function geocode(addr){
+ const u=`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(addr)}`;
+ const d=await fetch(u).then(r=>r.json());
+ if(!d.length) return null; return {lat:+d[0].lat,lon:+d[0].lon};
+}
+function parseGoogle(url){const m=url.match(/q=([0-9.-]+),([0-9.-]+)/);
+return m?{lat:+m[1],lon:+m[2]}:null}
+function nearest(s,pts){let m=Infinity,i0=0;pts.forEach((p,i)=>{let d0=dist(s,p);if(d0<m){m=d0;i0=i}});return i0}
+async function loadStops(r){return fetch('data/'+r+'-stops.json').then(r=>r.json())}
+async function prepare(pts,st){const res=[];for(const s of st){let c=s.url?parseGoogle(s.url):await geocode(s.address);if(!c)continue;const i=nearest(c,pts);res.push({...s,...c,index:i})}
+res.sort((a,b)=>a.index-b.index);return res}
+function buildStages(pts,stops){let arr=[];for(let i=0;i<stops.length-1;i++){let a=stops[i].index,b=stops[i+1].index;if(b<=a)b=a+1;let seg=pts.slice(a,b);let d=0;let ele=[];seg.forEach((p,j)=>{if(j>0)d+=dist(seg[j-1],p);ele.push(p.ele)});
+arr.push({name:stops[i].name+' → '+stops[i+1].name,dist:d,seg,ele})}
+return arr}
+function drawChart(ele){if(chart) chart.destroy();chart=new Chart(document.getElementById('elevationChart'),{
+type:'line',data:{labels:ele.map((_,i)=>i),datasets:[{label:'Höhenprofil',data:ele}]}})}
+async function loadTour(){group.clearLayers();const r=document.getElementById('routeSelect').value;const pts=await loadGPX(r);const stRaw=await loadStops(r);const st=await prepare(pts,stRaw);
+const poly=pts.map(p=>[p.lat,p.lon]);L.polyline(poly,{color:'blue'}).addTo(group);
+st.forEach(s=>L.marker([s.lat,s.lon]).addTo(group).bindPopup(s.name));
+const stages=buildStages(pts,st);const out=document.getElementById('output');out.innerHTML='';
+stages.forEach(s=>{
+ let div=document.createElement('div');div.className='stage';div.innerHTML='<b>'+s.name+'</b><br>'+s.dist.toFixed(1)+' km';
+ div.onclick=()=>{
+  group.clearLayers();
+  L.polyline(s.seg.map(p=>[p.lat,p.lon]),{color:'red'}).addTo(group);
+  drawChart(s.ele);
+ };
+ out.appendChild(div);
+});
+map.fitBounds(poly);
+}
 </script>
 </body>
 </html>
