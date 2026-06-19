@@ -1,1 +1,1 @@
-# Bike Tour Planner Starter
+V2 mit CMS und Routen-Stops

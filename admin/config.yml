@@ -1,13 +1,30 @@
 backend:
   name: github
-  repo: YOUR_USERNAME/bike-tour-planner
+  repo: YOUR_USERNAME/YOUR_REPO
   branch: main
-
 collections:
-  - name: "stops"
-    label: "Stops"
-    files:
-      - file: "data/stops.json"
-        label: "Stops Liste"
-        name: "stops"
-        format: "json"
+- name: routes
+  label: Routes
+  files:
+    - file: data/route-alps-stops.json
+      label: Alpen Stops
+      name: alps
+      format: json
+      fields:
+        - label: Stops
+          name: stops
+          widget: list
+          fields:
+            - {label: Name, name: name, widget: string}
+            - {label: Typ, name: type, widget: select, options: [start, overnight, end]}
+    - file: data/route-lake-stops.json
+      label: Lake Stops
+      name: lake
+      format: json
+      fields:
+        - label: Stops
+          name: stops
+          widget: list
+          fields:
+            - {label: Name, name: name, widget: string}
+            - {label: Typ, name: type, widget: select, options: [start, overnight, end]}

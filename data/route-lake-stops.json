@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Start",
+    "type": "start"
+  },
+  {
+    "name": "Hotel 1",
+    "type": "overnight"
+  },
+  {
+    "name": "Ziel",
+    "type": "end"
+  }
+]

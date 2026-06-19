@@ -1,111 +1,69 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang='de'>
 <head>
-  <meta charset="UTF-8">
-  <title>Bike Tour Planner</title>
-
-  <style>
-    body { font-family: Arial; padding: 20px; }
-    .stage { margin: 10px 0; padding: 10px; border: 1px solid #ccc; }
-  </style>
+<meta charset='UTF-8'>
+<title>Bike Tour Planner</title>
+<style>
+body{font-family:Arial;padding:20px}
+.stage{border:1px solid #ccc;margin:10px;padding:10px}
+</style>
 </head>
-
 <body>
-
 <h1>🚴 Bike Tour Planner</h1>
-
-<label>Route wählen:</label>
-<select id="routeSelect">
-  <option value="data/route-alps.gpx">Alpenroute</option>
-  <option value="data/route-lake.gpx">Seenroute</option>
+<select id='routeSelect' onchange='loadStopsConfig()'>
+<option value='route-alps'>Alpenroute</option>
+<option value='route-lake'>Seenroute</option>
 </select>
-
-<button onclick="loadData()">Laden</button>
-
-<div id="output"></div>
-
+<button onclick='loadData()'>Berechnen</button>
+<div id='output'></div>
 <script>
-async function loadData() {
-  const routeFile = document.getElementById("routeSelect").value;
-
-  const gpxText = await fetch(routeFile).then(r => r.text());
-  const stops = await fetch("data/stops.json").then(r => r.json());
-
-  const points = parseGPX(gpxText);
-  const stages = buildStages(points, stops);
-
-  renderStages(stages);
+async function loadData(){
+ const route = document.getElementById('routeSelect').value;
+ const gpx = await fetch(`data/${route}.gpx`).then(r=>r.text());
+ const stops = await fetch(`data/${route}-stops.json`).then(r=>r.json());
+ const points = parseGPX(gpx);
+ const stages = buildStages(points,stops);
+ renderStages(stages);
 }
-
-function parseGPX(xmlText) {
-  const parser = new DOMParser();
-  const xml = parser.parseFromString(xmlText, "text/xml");
-
-  const trkpts = xml.getElementsByTagName("trkpt");
-  const points = [];
-
-  for (let pt of trkpts) {
-    points.push({
-      lat: parseFloat(pt.getAttribute("lat")),
-      lon: parseFloat(pt.getAttribute("lon")),
-      ele: parseFloat(pt.getElementsByTagName("ele")[0]?.textContent || 0)
-    });
+function parseGPX(xmlText){
+ const xml=new DOMParser().parseFromString(xmlText,'text/xml');
+ return Array.from(xml.getElementsByTagName('trkpt')).map(pt=>({
+ lat:+pt.getAttribute('lat'),
+ lon:+pt.getAttribute('lon'),
+ ele:+(pt.getElementsByTagName('ele')[0]?.textContent||0)
+ }));
+}
+function haversine(p1,p2){
+ const R=6371; const t=x=>x*Math.PI/180;
+ const dLat=t(p2.lat-p1.lat);
+ const dLon=t(p2.lon-p1.lon);
+ const a=Math.sin(dLat/2)**2+Math.cos(t(p1.lat))*Math.cos(t(p2.lat))*Math.sin(dLon/2)**2;
+ return R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
+}
+function buildStages(points,stops){
+ const chunk=Math.floor(points.length/(stops.length-1));
+ const stages=[];
+ for(let i=0;i<stops.length-1;i++){
+  const seg=points.slice(i*chunk,(i+1)*chunk);
+  let dist=0,up=0,down=0;
+  for(let j=0;j<seg.length-1;j++){
+    dist+=haversine(seg[j],seg[j+1]);
+    const diff=seg[j+1].ele-seg[j].ele;
+    if(diff>0) up+=diff; else down+=Math.abs(diff);
   }
-
-  return points;
+  const dur=(dist/18)+(up/500);
+  stages.push({name:`${stops[i].name} → ${stops[i+1].name}`,dist,up,down,dur});
+ }
+ return stages;
 }
-
-function haversine(p1, p2) {
-  const R = 6371;
-  const toRad = x => x * Math.PI / 180;
-
-  const dLat = toRad(p2.lat - p1.lat);
-  const dLon = toRad(p2.lon - p1.lon);
-
-  const a = Math.sin(dLat/2)**2 +
-            Math.cos(toRad(p1.lat)) *
-            Math.cos(toRad(p2.lat)) *
-            Math.sin(dLon/2)**2;
-
-  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-}
-
-function buildStages(points, stops) {
-  const stages = [];
-  const chunk = Math.floor(points.length / (stops.length - 1));
-
-  for (let i = 0; i < stops.length - 1; i++) {
-    const segment = points.slice(i * chunk, (i + 1) * chunk);
-
-    let dist = 0;
-    for (let j = 0; j < segment.length - 1; j++) {
-      dist += haversine(segment[j], segment[j+1]);
-    }
-
-    stages.push({
-      name: `${stops[i].name} → ${stops[i+1].name}`,
-      distance: dist
-    });
-  }
-
-  return stages;
-}
-
-function renderStages(stages) {
-  const output = document.getElementById("output");
-  output.innerHTML = "";
-
-  stages.forEach(s => {
-    const div = document.createElement("div");
-    div.className = "stage";
-    div.innerHTML = `
-      <b>${s.name}</b><br>
-      Distanz: ${s.distance.toFixed(1)} km
-    `;
-    output.appendChild(div);
-  });
+function renderStages(stages){
+ const el=document.getElementById('output'); el.innerHTML='';
+ stages.forEach(s=>{
+  const d=document.createElement('div'); d.className='stage';
+  d.innerHTML=`<b>${s.name}</b><br>${s.dist.toFixed(1)} km<br>↑ ${Math.round(s.up)} m ↓ ${Math.round(s.down)} m<br>${s.dur.toFixed(1)} h`;
+  el.appendChild(d);
+ });
 }
 </script>
-
 </body>
 </html>
