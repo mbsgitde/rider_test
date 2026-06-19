@@ -1,31 +1,31 @@
 [
   {
-    "name": "München",
-    "address": "München Hbf",
+    "name": "München Hbf",
     "type": "start",
+    "address": "München Hbf",
     "lat": 48.1402,
     "lon": 11.5586
   },
   {
     "name": "Garmisch Hotel",
-    "address": "Garmisch-Partenkirchen",
     "type": "overnight",
+    "address": "Garmisch-Partenkirchen",
     "hotelUrl": "https://www.booking.com/searchresults.de.html?ss=Garmisch-Partenkirchen",
     "lat": 47.4917,
     "lon": 11.0955
   },
   {
-    "name": "Innsbruck",
-    "url": "https://maps.google.com/?q=47.2672,11.3923",
+    "name": "Innsbruck Hotel",
     "type": "overnight",
+    "url": "https://maps.google.com/?q=47.2672,11.3923",
     "hotelUrl": "https://www.booking.com/searchresults.de.html?ss=Innsbruck",
     "lat": 47.2672,
     "lon": 11.3923
   },
   {
     "name": "Bozen",
-    "address": "Bozen, Italien",
     "type": "end",
+    "address": "Bozen, Italien",
     "lat": 46.4983,
     "lon": 11.3548
   }

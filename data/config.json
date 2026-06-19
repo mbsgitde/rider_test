@@ -1,0 +1,28 @@
+{
+  "timing": {
+    "baseCyclingSpeedKmh": 15,
+    "climbSpeedReductionPer1000mKmh": 3,
+    "minimumCyclingSpeedKmh": 8,
+    "shortBreakMinutesPerHour": 10,
+    "longBreakMinutesPerStage": 45
+  },
+  "weatherAlertThresholds": {
+    "rainWarningMillimeters": 5,
+    "rainProbabilityWarningPercent": 60,
+    "windWarningKmh": 25,
+    "warmTemperatureCelsius": 28,
+    "hotTemperatureCelsius": 30,
+    "criticalHeatTemperatureCelsius": 35,
+    "forecastRainIncreaseMillimeters": 3,
+    "forecastRainProbabilityIncreasePercent": 20,
+    "forecastWindIncreaseKmh": 10
+  },
+  "routePlausibilityCheck": {
+    "distanceFromRouteInfoThresholdKm": 0.5,
+    "distanceFromRouteWarningThresholdKm": 2,
+    "distanceFromRouteCriticalThresholdKm": 5
+  },
+  "automation": {
+    "weatherUpdateInterval": "hourly"
+  }
+}
