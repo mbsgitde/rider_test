@@ -1,29 +1,13 @@
 backend:
   name: github
-  repo: USER/REPO
+  repo: YOUR_USERNAME/bike-tour-planner
   branch: main
 
-media_folder: ""
-public_folder: ""
-
 collections:
-  - name: "tours"
-    label: "Touren"
-    folder: "data"
-    create: true
-    extension: "json"
-    format: "json"
-    fields:
-      - { name: "name", label: "Name", widget: "string" }
-      - { name: "year", label: "Jahr", widget: "number" }
-      - { name: "gpx", label: "GPX", widget: "string" }
-      - name: "hotels"
-        label: "Hotels"
-        widget: "list"
-        fields:
-          - { name: "name", widget: "string" }
-          - { name: "street", widget: "string" }
-          - { name: "nr", widget: "string" }
-          - { name: "zip", widget: "string" }
-          - { name: "city", widget: "string" }
-          - { name: "country", widget: "string" }
+  - name: "stops"
+    label: "Stops"
+    files:
+      - file: "data/stops.json"
+        label: "Stops Liste"
+        name: "stops"
+        format: "json"
