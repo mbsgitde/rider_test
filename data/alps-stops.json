@@ -1,18 +1,24 @@
 [
   {
     "name": "M\u00fcnchen",
-    "address": "M\u00fcnchen"
+    "address": "M\u00fcnchen",
+    "type": "start"
   },
   {
-    "name": "Garmisch",
-    "address": "Garmisch-Partenkirchen"
+    "name": "Garmisch Hotel",
+    "address": "Garmisch-Partenkirchen",
+    "type": "overnight",
+    "hotelUrl": "https://www.booking.com"
   },
   {
     "name": "Innsbruck",
-    "url": "https://maps.google.com/?q=47.27,11.39"
+    "url": "https://maps.google.com/?q=47.27,11.39",
+    "type": "overnight",
+    "hotelUrl": "https://www.booking.com"
   },
   {
     "name": "Bozen",
-    "address": "Bozen"
+    "address": "Bozen",
+    "type": "end"
   }
 ]

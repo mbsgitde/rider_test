@@ -1,14 +1,18 @@
 [
   {
     "name": "F\u00fcssen",
-    "address": "F\u00fcssen"
+    "address": "F\u00fcssen",
+    "type": "start"
   },
   {
     "name": "Tegernsee",
-    "address": "Tegernsee"
+    "address": "Tegernsee",
+    "type": "overnight",
+    "hotelUrl": "https://www.booking.com"
   },
   {
     "name": "Chiemsee",
-    "address": "Chiemsee"
+    "address": "Chiemsee",
+    "type": "end"
   }
 ]
