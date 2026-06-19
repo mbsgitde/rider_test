@@ -1,69 +1,60 @@
 <!DOCTYPE html>
-<html lang='de'>
+<html lang="de">
 <head>
-<meta charset='UTF-8'>
-<title>Bike Tour Planner</title>
+<meta charset="UTF-8">
+<title>🚴 Bike Tour Planner</title>
 <style>
-body{font-family:Arial;padding:20px}
-.stage{border:1px solid #ccc;margin:10px;padding:10px}
+body { font-family: Arial; padding: 20px; }
+.stage { border: 1px solid #ccc; padding: 10px; margin: 10px 0; }
 </style>
 </head>
 <body>
-<h1>🚴 Bike Tour Planner</h1>
-<select id='routeSelect' onchange='loadStopsConfig()'>
-<option value='route-alps'>Alpenroute</option>
-<option value='route-lake'>Seenroute</option>
+<h1>🚴 Bike Tour Planner (All-in-One)</h1>
+<select id="routeSelect">
+  <option value="alps">Alpenroute</option>
+  <option value="lake">Seenroute</option>
 </select>
-<button onclick='loadData()'>Berechnen</button>
-<div id='output'></div>
+<button onclick="loadTour()">Tour laden</button>
+<div id="output"></div>
 <script>
-async function loadData(){
- const route = document.getElementById('routeSelect').value;
- const gpx = await fetch(`data/${route}.gpx`).then(r=>r.text());
- const stops = await fetch(`data/${route}-stops.json`).then(r=>r.json());
- const points = parseGPX(gpx);
- const stages = buildStages(points,stops);
- renderStages(stages);
-}
-function parseGPX(xmlText){
- const xml=new DOMParser().parseFromString(xmlText,'text/xml');
- return Array.from(xml.getElementsByTagName('trkpt')).map(pt=>({
- lat:+pt.getAttribute('lat'),
- lon:+pt.getAttribute('lon'),
- ele:+(pt.getElementsByTagName('ele')[0]?.textContent||0)
- }));
-}
-function haversine(p1,p2){
- const R=6371; const t=x=>x*Math.PI/180;
- const dLat=t(p2.lat-p1.lat);
- const dLon=t(p2.lon-p1.lon);
- const a=Math.sin(dLat/2)**2+Math.cos(t(p1.lat))*Math.cos(t(p2.lat))*Math.sin(dLon/2)**2;
- return R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
-}
-function buildStages(points,stops){
- const chunk=Math.floor(points.length/(stops.length-1));
- const stages=[];
- for(let i=0;i<stops.length-1;i++){
-  const seg=points.slice(i*chunk,(i+1)*chunk);
-  let dist=0,up=0,down=0;
-  for(let j=0;j<seg.length-1;j++){
-    dist+=haversine(seg[j],seg[j+1]);
-    const diff=seg[j+1].ele-seg[j].ele;
-    if(diff>0) up+=diff; else down+=Math.abs(diff);
+const routes = {
+  alps: {
+    gpx: [
+      {lat:48.14, lon:11.56, ele:500},
+      {lat:47.8, lon:11.2, ele:800},
+      {lat:47.3, lon:11.3, ele:600},
+      {lat:46.7, lon:11.4, ele:1000},
+      {lat:46.5, lon:11.35, ele:300}
+    ],
+    stops: [
+      { name: "München", address: "München Hbf", type: "start" },
+      { name: "Garmisch Hotel", address: "Garmisch-Partenkirchen", type: "overnight" },
+      { name: "Innsbruck", url: "https://maps.google.com/?q=47.27,11.39", type: "overnight" },
+      { name: "Bozen", address: "Bozen Italien", type: "end" }
+    ]
+  },
+  lake: {
+    gpx: [
+      {lat:47.55, lon:10.7, ele:600},
+      {lat:47.7, lon:11.2, ele:650},
+      {lat:47.9, lon:11.8, ele:660},
+      {lat:48.0, lon:12.0, ele:600}
+    ],
+    stops: [
+      { name: "Start", address: "Füssen Deutschland", type: "start" },
+      { name: "Hotel Tegernsee", address: "Tegernsee Deutschland", type: "overnight" },
+      { name: "Chiemsee", address: "Chiemsee Deutschland", type: "end" }
+    ]
   }
-  const dur=(dist/18)+(up/500);
-  stages.push({name:`${stops[i].name} → ${stops[i+1].name}`,dist,up,down,dur});
- }
- return stages;
-}
-function renderStages(stages){
- const el=document.getElementById('output'); el.innerHTML='';
- stages.forEach(s=>{
-  const d=document.createElement('div'); d.className='stage';
-  d.innerHTML=`<b>${s.name}</b><br>${s.dist.toFixed(1)} km<br>↑ ${Math.round(s.up)} m ↓ ${Math.round(s.down)} m<br>${s.dur.toFixed(1)} h`;
-  el.appendChild(d);
- });
-}
+};
+function haversine(a,b){const R=6371;const toRad=x=>x*Math.PI/180;const dLat=toRad(b.lat-a.lat);const dLon=toRad(b.lon-a.lon);const val=Math.sin(dLat/2)**2+Math.cos(toRad(a.lat))*Math.cos(toRad(b.lat))*Math.sin(dLon/2)**2;return R*2*Math.atan2(Math.sqrt(val),Math.sqrt(1-val));}
+async function geocode(address){const url=`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`;const data=await fetch(url).then(r=>r.json());if(!data.length)return null;return{lat:parseFloat(data[0].lat),lon:parseFloat(data[0].lon)};}
+function parseGoogle(url){const m=url.match(/q=([0-9.\-]+),([0-9.\-]+)/);if(!m)return null;return{lat:parseFloat(m[1]),lon:parseFloat(m[2])};}
+function findNearest(stop,points){let min=Infinity,idx=0;points.forEach((p,i)=>{const d=haversine(stop,p);if(d<min){min=d;idx=i;}});return idx;}
+async function prepareStops(stops,points){const result=[];for(const s of stops){let coords=null;if(s.url)coords=parseGoogle(s.url);if(!coords&&s.address)coords=await geocode(s.address);if(!coords)continue;const index=findNearest(coords,points);result.push({...s,lat:coords.lat,lon:coords.lon,index});}result.sort((a,b)=>a.index-b.index);return result;}
+function buildStages(points,stops){const stages=[];for(let i=0;i<stops.length-1;i++){const seg=points.slice(stops[i].index,stops[i+1].index);let dist=0,up=0,down=0;for(let j=0;j<seg.length-1;j++){dist+=haversine(seg[j],seg[j+1]);const diff=seg[j+1].ele-seg[j].ele;if(diff>0)up+=diff;else down+=Math.abs(diff);}stages.push({name:`${stops[i].name} → ${stops[i+1].name}`,dist,up,down,lat:stops[i+1].lat,lon:stops[i+1].lon});}return stages;}
+async function getWeather(lat,lon){const url=`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=temperature_2m_max,precipitation_sum&timezone=auto`;const data=await fetch(url).then(r=>r.json());return{temp:data.daily.temperature_2m_max[0],rain:data.daily.precipitation_sum[0]};}
+async function loadTour(){const routeKey=document.getElementById("routeSelect").value;const route=routes[routeKey];const points=route.gpx;const stops=await prepareStops(route.stops,points);const stages=buildStages(points,stops);const output=document.getElementById("output");output.innerHTML="";for(const s of stages){const weather=await getWeather(s.lat,s.lon);const div=document.createElement("div");div.className="stage";div.innerHTML=`<b>${s.name}</b><br>Distanz: ${s.dist.toFixed(1)} km<br>↑ ${Math.round(s.up)} m ↓ ${Math.round(s.down)} m<br>🌡️ ${weather.temp} °C<br>🌧️ ${weather.rain} mm`;output.appendChild(div);}}
 </script>
 </body>
 </html>
