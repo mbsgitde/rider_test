@@ -2,25 +2,32 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>PyScript Test</title>
+  <title>PyScript Fix</title>
 
-  <!-- ✅ RICHTIG eingebunden -->
-  <link rel="stylesheet" href="https://pyscript.net/latest/prc="https://pyscript.net/latestd>
+  <!-- ✅ STABILE CDN VERSION -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pyscript@latest/dist/core.css">
+  <script type="module" src="https://cdn.jsdelivr.net/npm/pyscript@latest/dist/core.js"></script>
+
+</head>
 
 <body>
 
-<h1>🚴 Test</h1>
+<h1>✅ PyScript Debug Fix</h1>
 
-<button py-click="run">Click Me</button>
+<button id="btn">Click Me</button>
 
-<div id="output"></div>
+<div id="output">Noch nichts passiert</div>
 
-<py-script>
-def run():
-    from js import document
-    document.getElementById("output").innerHTML = "✅ Button funktioniert!"
-</py-script>
+<script type="py">
+import js
+from pyodide.ffi import create_proxy
+
+def test(event):
+    js.document.getElementById("output").innerHTML = "✅ Es funktioniert jetzt!"
+
+proxy = create_proxy(test)
+js.document.getElementById("btn").addEventListener("click", proxy)
+</script>
 
 </body>
 </html>
-``
