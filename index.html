@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>Bike Tour Planner V8</title>
+<title>Bike Tour Planner V8 FIXED</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -15,7 +15,7 @@ canvas{max-width:600px}
 </style>
 </head>
 <body>
-<h1>🚴 Bike Tour Planner V8</h1>
+<h1>🚴 Bike Tour Planner V8 FIXED</h1>
 <select id="routeSelect">
 <option value="alps">Alpenroute</option>
 <option value="lake">Seenroute</option>
@@ -100,7 +100,8 @@ function buildStages(pts,stops){
    duration:d/speed(d,up),
    difficulty:classify(d,up),
    ele:seg.map(p=>p.ele),
-   hotel:stops[i+1]
+   seg,
+   hotel:stops[i+1].type==='overnight'?stops[i+1]:null
   });
  }
  return arr;
@@ -123,7 +124,7 @@ async function loadTour(){
  const colors=['red','blue','green','orange'];
 
  stages.forEach((s,i)=>{
-  L.polyline(pts.slice(stops[i].index,stops[i+1].index).map(p=>[p.lat,p.lon]),
+  L.polyline(s.seg.map(p=>[p.lat,p.lon]),
     {color:colors[i%colors.length]}).addTo(group);
  });
 
@@ -143,11 +144,12 @@ async function loadTour(){
    Dauer: ${s.duration.toFixed(1)} h<br>
    Schwierigkeit: ${s.difficulty}<br>
    <canvas id="chart-${i}"></canvas>
+   ${s.hotel?`
    <div class="hotel">
      <b>🏨 Unterkunft:</b><br>
      ${s.hotel.name}<br>
-     ${s.hotel.hotelUrl ? `<a href="${s.hotel.hotelUrl}" target="_blank">Hotel öffnen</a>` : ''}
-   </div>
+     ${s.hotel.hotelUrl?`<a href="${s.hotel.hotelUrl}" target="_blank">Hotel öffnen</a>`:''}
+   </div>`:''}
   `;
   out.appendChild(div);
   drawChart(`chart-${i}`, s.ele);
