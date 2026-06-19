@@ -1,0 +1,16 @@
+[
+  {
+    "id": "alps",
+    "label": "Alps",
+    "gpxFile": "alps.gpx",
+    "stopsFile": "alps-stops.json",
+    "hasStopsFile": true
+  },
+  {
+    "id": "lake",
+    "label": "Lake",
+    "gpxFile": "lake.gpx",
+    "stopsFile": "lake-stops.json",
+    "hasStopsFile": true
+  }
+]

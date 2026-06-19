@@ -24,5 +24,13 @@
   },
   "automation": {
     "weatherUpdateInterval": "hourly"
+  },
+  "mapView": {
+    "defaultBaseMap": "Standard",
+    "availableBaseMaps": [
+      "Standard",
+      "Humanitarian",
+      "Topografisch"
+    ]
   }
 }
