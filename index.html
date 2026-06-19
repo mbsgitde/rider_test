@@ -2,10 +2,13 @@
 import js
 from pyodide.ffi import create_proxy
 
+# ✅ globale Variable (WICHTIG!)
+proxy = None
+
 def test(event):
     js.document.getElementById("output").innerHTML = "✅ PyScript funktioniert!"
 
-# ✅ WICHTIG: create_proxy verwenden
+# ✅ Proxy erstellen und global speichern
 proxy = create_proxy(test)
 
 js.document.getElementById("btn").addEventListener("click", proxy)
