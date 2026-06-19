@@ -1,18 +1,24 @@
 [
   {
-    "name": "F\u00fcssen",
-    "address": "F\u00fcssen",
-    "type": "start"
+    "name": "Füssen",
+    "address": "Füssen",
+    "type": "start",
+    "lat": 47.5705,
+    "lon": 10.7007
   },
   {
     "name": "Tegernsee",
     "address": "Tegernsee",
     "type": "overnight",
-    "hotelUrl": "https://www.booking.com"
+    "hotelUrl": "https://www.booking.com/searchresults.de.html?ss=Tegernsee",
+    "lat": 47.7123,
+    "lon": 11.7584
   },
   {
     "name": "Chiemsee",
     "address": "Chiemsee",
-    "type": "end"
+    "type": "end",
+    "lat": 47.856,
+    "lon": 12.394
   }
 ]
