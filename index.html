@@ -1,33 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>PyScript Test</title>
-
-  <!-- ✅ CSS -->
-  <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css">
-
-  <!-- ✅ WICHTIG: type="module" -->
-  <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
-</head>
-
-<body>
-
-  <h1>Test</h1>
-
-  <button id="btn">Click Me</button>
-
-  <div id="output">Noch nichts passiert</div>
-
-  <!-- ✅ Python Code -->
-  <script type="py">
+<script type="py">
 import js
+from pyodide.ffi import create_proxy
 
 def test(event):
     js.document.getElementById("output").innerHTML = "✅ PyScript funktioniert!"
 
-js.document.getElementById("btn").addEventListener("click", test)
-  </script>
+# ✅ WICHTIG: create_proxy verwenden
+proxy = create_proxy(test)
 
-</body>
-</html>
+js.document.getElementById("btn").addEventListener("click", proxy)
+</script>
