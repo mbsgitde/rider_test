@@ -319,18 +319,11 @@ function setupMapMaximizeControl() {
     }
   });
 }
-
 function toggleMapMaximized(button, forceState) {
-  const mapEl = document.getElementById('map');
-  if (!mapEl) return;
+  const mapEl = document.getElementById('map'); if (!mapEl) return;
   const shouldMaximize = typeof forceState === 'boolean' ? forceState : !mapEl.classList.contains('map-maximized');
-  mapEl.classList.toggle('map-maximized', shouldMaximize);
-  document.body.classList.toggle('map-is-maximized', shouldMaximize);
-  if (button) {
-    button.innerHTML = shouldMaximize ? '×' : '⛶';
-    button.title = shouldMaximize ? 'Karte schließen' : 'Karte maximieren';
-    button.setAttribute('aria-label', shouldMaximize ? 'Karte schließen' : 'Karte maximieren');
-  }
+  mapEl.classList.toggle('map-maximized', shouldMaximize); document.body.classList.toggle('map-is-maximized', shouldMaximize);
+  if (button) { button.innerHTML = shouldMaximize ? '×' : '⛶'; button.title = shouldMaximize ? 'Karte schließen' : 'Karte maximieren'; button.setAttribute('aria-label', shouldMaximize ? 'Karte schließen' : 'Karte maximieren'); }
   setTimeout(() => APP.map?.invalidateSize(), 150);
 }
 
@@ -432,8 +425,7 @@ function parseGoogleMapsCoordinates(url) {
   for (const text of variants) {
     const patterns = [/@(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)(?:[,/z?&]|$)/i, /[?&](?:query|q|ll|center)=(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)(?:[&]|$)/i, /!3d(-?\d+(?:\.\d+)?)!4d(-?\d+(?:\.\d+)?)/i, /!2d(-?\d+(?:\.\d+)?)!3d(-?\d+(?:\.\d+)?)/i];
     for (const pattern of patterns) { const match = text.match(pattern); if (!match) continue; let lat, lon; if (pattern.source.startsWith('!2d')) { lon = parseFloat(match[1]); lat = parseFloat(match[2]); } else { lat = parseFloat(match[1]); lon = parseFloat(match[2]); } if (isValidLatLon(lat, lon)) return { lat, lon }; }
-  }
-  return null;
+  } return null;
 }
 function normalizeMatchName(value) { return String(value || '').toLowerCase().replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss').normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/(hotel|gasthof|landhotel|bahnhof|hbf|restaurant|pension|hostel|garni|am|an|der|die|das|zum|zur)/g,' ').replace(/[^a-z0-9]+/g,' ').trim(); }
 function levenshteinDistance(a, b) { const dp = Array.from({ length: a.length + 1 }, () => Array(b.length + 1).fill(0)); for (let i=0;i<=a.length;i++) dp[i][0]=i; for (let j=0;j<=b.length;j++) dp[0][j]=j; for (let i=1;i<=a.length;i++) for (let j=1;j<=b.length;j++) { const cost=a[i-1]===b[j-1]?0:1; dp[i][j]=Math.min(dp[i-1][j]+1, dp[i][j-1]+1, dp[i-1][j-1]+cost); } return dp[a.length][b.length]; }
@@ -480,6 +472,7 @@ function midpointOfSegment(seg) {
 
 function cleanStagePlaceName(value) { if (!value) return ''; return String(value).replace(/(Hotel|Gasthof|Landhotel|Pension|Hostel|Garni|Bahnhof|Hbf)/gi, '').replace(/\s+/g, ' ').trim(); }
 function getStopStagePlace(stop) { if (!stop) return ''; if (stop.stagePlace) return stop.stagePlace; if (stop.place) return stop.place; if (stop.city) return stop.city; if (stop.town) return stop.town; if (stop.type === 'overnight') { const address = String(stop.address || '').trim(); if (address) return address.split(',')[0].trim(); const cleaned = cleanStagePlaceName(stop.name); if (cleaned) return cleaned; } return stop.name; }
+function formatDisplayUrl(url) { return String(url || '').replace(/^https?:\/\//, '').replace(/\/$/, ''); }
 
 function buildStages(points, stops, config) {
   const steepThreshold = config.profileView?.steepSectionThresholdPercent ?? 8;
@@ -597,7 +590,7 @@ function renderSummary(stages, routeLabel) {
   const totalDown = stages.reduce((a, s) => a + s.down, 0);
   const totalNet = stages.reduce((a, s) => a + s.netRideTimeHours, 0);
   const totalGross = stages.reduce((a, s) => a + s.grossRideTimeHours, 0);
-  document.getElementById('summary').innerHTML = `<div class="summary-card"><div class="label">Route</div><div class="value">${routeLabel}</div></div><div class="summary-card"><div class="label">Etappen</div><div class="value">${stages.length}</div></div><div class="summary-card"><div class="label">Gesamtdistanz</div><div class="value">${totalDistance.toFixed(1)} km</div></div><div class="summary-card"><div class="label">Höhenmeter</div><div class="value">↑ ${Math.round(totalUp)} / ↓ ${Math.round(totalDown)}</div></div><div class="summary-card"><div class="label">Netto-Fahrzeit</div><div class="value">${formatDurationWithUnit(totalNet)}</div></div><div class="summary-card"><div class="label">Brutto-Fahrzeit</div><div class="value">${formatDurationWithUnit(totalGross)}</div></div>`;
+  document.getElementById('summary').innerHTML = `<div class="summary-card"><div class="label">Etappen</div><div class="value">${stages.length}</div></div><div class="summary-card"><div class="label">Gesamtdistanz</div><div class="value">${totalDistance.toFixed(1)} km</div></div><div class="summary-card"><div class="label">Höhenmeter</div><div class="value">↑ ${Math.round(totalUp)} / ↓ ${Math.round(totalDown)}</div></div><div class="summary-card"><div class="label">Netto-Fahrzeit</div><div class="value">${formatDurationWithUnit(totalNet)}</div></div><div class="summary-card"><div class="label">Brutto-Fahrzeit</div><div class="value">${formatDurationWithUnit(totalGross)}</div></div>`;
 }
 
 function formatTransfers(transfers) {
@@ -611,7 +604,7 @@ function formatReservationPills(values) {
 }
 
 function renderStationBox(stops) { const mount = document.getElementById('stationBox'); if (mount) mount.innerHTML = ''; }
-function renderHotelCard(hotel) { if (!hotel) return ''; return `<aside class="hotel-between-stages" data-stop-name="${hotel.name}"><div class="overview-card hotel-stage-card compact-logistics-card"><div class="compact-card-head"><div class="title">🏨 Übernachtung: ${hotel.name}</div>${hotel.hotelUrl ? `<a class="hotel-link" href="${hotel.hotelUrl}" target="_blank" rel="noopener noreferrer">Hotel öffnen</a>` : ''}${hotel.googleMapsUrl ? `<a class="hotel-link" href="${hotel.googleMapsUrl}" target="_blank" rel="noopener noreferrer">Maps</a>` : ''}</div><div class="overview-list compact-info-line">${hotel.address ? `<span>${hotel.address}</span>` : ''}${hotel.notes ? `<span class="muted">${hotel.notes}</span>` : ''}</div></div></aside>`; }
+function renderHotelCard(hotel) { if (!hotel) return ''; return `<aside class="hotel-between-stages" data-stop-name="${hotel.name}"><div class="overview-card hotel-stage-card compact-logistics-card"><div class="compact-card-head"><div class="title">🏨 Übernachtung: ${hotel.name}</div>${hotel.hotelUrl ? `<a class="hotel-link hotel-url-link" href="${hotel.hotelUrl}" target="_blank" rel="noopener noreferrer">${formatDisplayUrl(hotel.hotelUrl)}</a>` : ''}${hotel.googleMapsUrl ? `<a class="hotel-link" href="${hotel.googleMapsUrl}" target="_blank" rel="noopener noreferrer">Maps</a>` : ''}</div>${hotel.notes ? `<div class="overview-list compact-info-line"><span class="muted">${hotel.notes}</span></div>` : ''}</div></aside>`; }
 function renderTransferDetails(stop) { if (!Array.isArray(stop.transfers) || !stop.transfers.length) return ''; return `<details class="compact-details transfer-details"><summary>↔ Umstiege (${stop.transfers.length})</summary><ul>${stop.transfers.map(t => `<li>${t.label}${t.arrivalTime || t.departureTime ? ` (${t.arrivalTime || '-'} / ${t.departureTime || '-'})` : ''}</li>`).join('')}</ul></details>`; }
 function renderReservationInline(stop) { const rows = []; if (Array.isArray(stop.reservedSeats) && stop.reservedSeats.length) rows.push(`<span class="reservation-group"><strong>Sitz:</strong>${formatReservationPills(stop.reservedSeats)}</span>`); if (Array.isArray(stop.reservedBikeSpots) && stop.reservedBikeSpots.length) rows.push(`<span class="reservation-group"><strong>Rad:</strong>${formatReservationPills(stop.reservedBikeSpots)}</span>`); return rows.length ? `<div class="reservation-inline">${rows.join('')}</div>` : ''; }
 function renderStationInlineCard(stop, mode) { if (!stop) return null; const wrapper = document.createElement('aside'); const icon = mode === 'start' ? '🚉' : '🏁'; const label = mode === 'start' ? 'Start' : 'Ziel'; wrapper.className = `station-inline-card station-inline-card-${mode}`; wrapper.dataset.stopName = stop.name; wrapper.innerHTML = `<div class="overview-card compact-logistics-card ${mode === 'start' ? 'start-card' : 'end-card'}"><div class="compact-card-head"><div class="title station-title"><span class="station-title-icon">${icon}</span><span>${label}: ${stop.name}</span></div><div class="station-head-tools">${stop.carriageNumber ? `<span class="badge station-wagon-badge">${stop.carriageNumber}</span>` : ''}${stop.googleMapsUrl ? `<a class="inline-link" href="${stop.googleMapsUrl}" target="_blank" rel="noopener noreferrer">Maps</a>` : ''}</div></div><div class="compact-info-line">${stop.meetingPoint ? `<span><strong>Treffpunkt:</strong> ${stop.meetingPoint}</span>` : ''}${(stop.departureTime || stop.arrivalTime) ? `<span><strong>Abfahrt / Ankunft:</strong> ${stop.departureTime || '-'} / ${stop.arrivalTime || '-'}</span>` : ''}${stop.connection ? `<span><strong>Verbindung:</strong> ${stop.connection}</span>` : ''}${renderTransferDetails(stop)}${stop.address ? `<span class="muted">${stop.address}</span>` : ''}</div>${renderReservationInline(stop)}</div>`; stop.element = wrapper; return wrapper; }
