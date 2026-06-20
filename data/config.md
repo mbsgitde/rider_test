@@ -1,3 +1,3 @@
 # Konfigurationsdatei `config.json`
 
-V8 ergänzt UX-Verbesserungen für Etappenfokus, Etappenbadge und Kartenstil-Auswahl.
+V9 korrigiert die Etappendarstellung auf der Karte und behebt den Fokus-/Filter-Reset.

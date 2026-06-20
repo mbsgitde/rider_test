@@ -1,13 +1,12 @@
 # PRD – Bike Tour Planner (Best-Practice Kurzfassung für Repo)
 
-## Änderungen in V8 – Bugfixes und UX-Verbesserungen
-1. **Kartenstil-Auswahl lesbar**: In der Kartenstil-Auswahl im Overlay sind jetzt alle verfügbaren Optionen unabhängig vom aktiven Stil klar lesbar. Die aktive Auswahl bleibt visuell hervorgehoben, ohne die übrigen Optionen unlesbar zu machen.
-2. **Zuverlässiger Etappenzoom**: Der Klick auf eine Etappe zoomt die Karte nun zuverlässig auf genau den ausgewählten Abschnitt – auch dann, wenn zuvor bereits auf eine benachbarte Etappe gezoomt wurde.
-3. **Etappen-Nummer als Symbol**: Jede Etappe erhält in der Übersicht zusätzlich ein rundes Symbol mit der Etappennummer, z. B. `1`, `2`, `3`.
-4. **Fokus auf einzelne Etappe**: Wenn eine Etappe ausgewählt wird, kommt sie zusätzlich in den Fokus. Die anderen Etappen werden temporär ausgeblendet. Über einen Rücksetzen-Button können wieder alle Etappen angezeigt werden.
+## Korrekturen in V9
+1. **Etappennummern auf der grafischen Etappendarstellung**: Die runden Kreise mit `1`, `2`, `3` usw. werden nicht in der Listenübersicht angezeigt, sondern direkt **in der Mitte der farbigen Etappenlinie auf der Karte**.
+2. **Fokus-/Filter-Reset funktioniert zuverlässig**: Wenn eine einzelne Etappe ausgewählt und die übrigen temporär ausgeblendet wurden, kann der Zustand über den Reset-Button zuverlässig zurückgesetzt werden.
+3. **Kartenstil-Auswahl bleibt gut lesbar**.
+4. **Zeitformat bleibt überall `hh:mm`**.
 
 ## Bestehende Kernfeatures bleiben erhalten
-- Zeitformat überall `hh:mm`
 - Hotelmarker-Popup mit Direktlink in neuem Browser-Tab
 - Höhenprofil-Hover mit Overlay
 - Hover auf Etappe hebt Kartenabschnitt hervor
@@ -16,3 +15,4 @@
 - dynamisches Tour-Dropdown über `data/routes.json`
 - Pausen = Kurzpausen + große Pause
 - Schwierigkeit als farbiger Badge analog Ski-Pisten
+- Klick auf Etappe zoomt zuverlässig auf den Kartenabschnitt

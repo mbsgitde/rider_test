@@ -6,7 +6,8 @@ const APP = {
   state: { config: null, stages: [], stops: [], routeName: null, routesManifest: [], selectedStageId: null },
   baseLayers: {},
   currentBaseLayer: null,
-  mapStyleControl: null
+  mapStyleControl: null,
+  stageNumberMarkers: []
 };
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -178,6 +179,13 @@ function getPlausibilityMessage(distanceKm, level) {
   return '';
 }
 
+function midpointOfSegment(seg) {
+  if (!seg?.length) return null;
+  const midIdx = Math.floor(seg.length / 2);
+  const p = seg[midIdx];
+  return [p.lat, p.lon];
+}
+
 function buildStages(points, stops, config) {
   const stages = [];
   for (let i = 0; i < stops.length - 1; i++) {
@@ -213,7 +221,7 @@ function buildStages(points, stops, config) {
       profilePoints.push({ distanceKm: cumulativeDist, upMeters: cumulativeUp, netRideTimeHours: cumulativeDist / avgSpeed, elevation: seg[j].ele });
     }
 
-    stages.push({ id: i + 1, name: `${stops[i].name} → ${stops[i+1].name}`, seg, ele: seg.map(p => p.ele), dist, up, down, netRideTimeHours, grossRideTimeHours, totalPauseMinutes, difficulty, color, hotel, plausibilityLevel, plausibilityMessage, polyline: null, bounds: null, profilePoints });
+    stages.push({ id: i + 1, name: `${stops[i].name} → ${stops[i+1].name}`, seg, ele: seg.map(p => p.ele), dist, up, down, netRideTimeHours, grossRideTimeHours, totalPauseMinutes, difficulty, color, hotel, plausibilityLevel, plausibilityMessage, polyline: null, bounds: null, profilePoints, midpointLatLng: midpointOfSegment(seg) });
   }
   return stages;
 }
@@ -316,6 +324,17 @@ function createStopMarker(stop) {
   return L.marker([stop.lat, stop.lon], { icon });
 }
 
+function createStageNumberMarker(stage) {
+  if (!stage.midpointLatLng) return null;
+  const icon = L.divIcon({
+    className: '',
+    html: `<div class="stage-line-number-marker" style="background:${stage.color}">${stage.id}</div>`,
+    iconSize: [28, 28],
+    iconAnchor: [14, 14]
+  });
+  return L.marker(stage.midpointLatLng, { icon, interactive: false, keyboard: false });
+}
+
 function buildMarkerPopupHtml(stop, warningHtml) {
   let html = `<strong>${stop.name}</strong>`;
   if (stop.type === 'overnight' && stop.hotelUrl) {
@@ -327,17 +346,10 @@ function buildMarkerPopupHtml(stop, warningHtml) {
 
 function resetStageFocus() {
   APP.state.selectedStageId = null;
-  const resetBtn = document.getElementById('resetStageFocusBtn');
-  resetBtn.classList.add('hidden');
-  document.querySelectorAll('.stage').forEach(el => {
-    el.classList.remove('is-selected','is-hidden-temp');
-  });
-  APP.state.stages.forEach(stage => {
-    resetStageHighlight(stage);
-  });
-  if (APP.routeLayerGroup.getLayers().length > 0) {
-    APP.map.fitBounds(APP.routeLayerGroup.getBounds(), { padding: [20, 20] });
-  }
+  document.getElementById('resetStageFocusBtn').classList.add('hidden');
+  document.querySelectorAll('.stage').forEach(el => el.classList.remove('is-selected','is-hidden-temp'));
+  APP.state.stages.forEach(stage => resetStageHighlight(stage));
+  if (APP.routeLayerGroup.getLayers().length > 0) APP.map.fitBounds(APP.routeLayerGroup.getBounds(), { padding: [20, 20] });
 }
 
 function focusStage(stage, stageEl) {
@@ -349,7 +361,7 @@ function focusStage(stage, stageEl) {
     el.classList.toggle('is-hidden-temp', !isSame);
   });
   if (stage.bounds && stage.bounds.isValid()) {
-    APP.map.flyToBounds(stage.bounds.pad(0.15), { padding: [30, 30], maxZoom: 13, duration: 0.45 });
+    APP.map.fitBounds(stage.bounds.pad(0.15), { padding: [30, 30], maxZoom: 13, animate: false });
   }
   stageEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
@@ -360,7 +372,7 @@ function renderStages(stages) {
   stages.forEach((stage, idx) => {
     const stageEl = document.createElement('section');
     stageEl.className = 'stage';
-    stageEl.innerHTML = `<div class="stage-color" style="background:${stage.color}"></div><div class="stage-body"><div class="stage-head"><div class="stage-title-wrap"><div class="stage-number-circle" style="background:${stage.color}">${stage.id}</div><div class="stage-title">Etappe ${stage.id}: ${stage.name}</div></div><div class="badge ${getDifficultyBadgeClass(stage.difficulty)}">${stage.difficulty}</div></div><div class="meta"><div class="meta-item"><div class="label">Distanz</div><div class="value">${stage.dist.toFixed(1)} km</div></div><div class="meta-item"><div class="label">Höhenmeter</div><div class="value">↑ ${Math.round(stage.up)} m</div></div><div class="meta-item"><div class="label">Höhenmeter</div><div class="value">↓ ${Math.round(stage.down)} m</div></div><div class="meta-item"><div class="label">Netto-Fahrzeit</div><div class="value">${formatHoursHm(stage.netRideTimeHours)}</div></div><div class="meta-item"><div class="label">Brutto-Fahrzeit</div><div class="value">${formatHoursHm(stage.grossRideTimeHours)}</div></div><div class="meta-item"><div class="label">Pausen</div><div class="value">${Math.round(stage.totalPauseMinutes)} min</div></div></div><div class="canvas-wrap" style="height:220px"><canvas id="chart-${idx}"></canvas></div>${stage.hotel ? `<div class="hotel"><strong>🏨 Unterkunft</strong><br>${stage.hotel.name}<br>${stage.hotel.hotelUrl ? `<a href="${stage.hotel.hotelUrl}" target="_blank" rel="noopener noreferrer">Hotel-Link öffnen</a>` : ''}${stage.hotel.distanceToRouteKm != null ? `<div class="small-note">Abstand zur Route: ${stage.hotel.distanceToRouteKm.toFixed(1)} km</div>` : ''}</div>` : ''}${stage.plausibilityLevel ? `<div class="warnings"><div class="warning ${stage.plausibilityLevel}">${stage.plausibilityMessage}</div></div>` : ''}</div>`;
+    stageEl.innerHTML = `<div class="stage-color" style="background:${stage.color}"></div><div class="stage-body"><div class="stage-head"><div class="stage-title">Etappe ${stage.id}: ${stage.name}</div><div class="badge ${getDifficultyBadgeClass(stage.difficulty)}">${stage.difficulty}</div></div><div class="meta"><div class="meta-item"><div class="label">Distanz</div><div class="value">${stage.dist.toFixed(1)} km</div></div><div class="meta-item"><div class="label">Höhenmeter</div><div class="value">↑ ${Math.round(stage.up)} m</div></div><div class="meta-item"><div class="label">Höhenmeter</div><div class="value">↓ ${Math.round(stage.down)} m</div></div><div class="meta-item"><div class="label">Netto-Fahrzeit</div><div class="value">${formatHoursHm(stage.netRideTimeHours)}</div></div><div class="meta-item"><div class="label">Brutto-Fahrzeit</div><div class="value">${formatHoursHm(stage.grossRideTimeHours)}</div></div><div class="meta-item"><div class="label">Pausen</div><div class="value">${Math.round(stage.totalPauseMinutes)} min</div></div></div><div class="canvas-wrap" style="height:220px"><canvas id="chart-${idx}"></canvas></div>${stage.hotel ? `<div class="hotel"><strong>🏨 Unterkunft</strong><br>${stage.hotel.name}<br>${stage.hotel.hotelUrl ? `<a href="${stage.hotel.hotelUrl}" target="_blank" rel="noopener noreferrer">Hotel-Link öffnen</a>` : ''}${stage.hotel.distanceToRouteKm != null ? `<div class="small-note">Abstand zur Route: ${stage.hotel.distanceToRouteKm.toFixed(1)} km</div>` : ''}</div>` : ''}${stage.plausibilityLevel ? `<div class="warnings"><div class="warning ${stage.plausibilityLevel}">${stage.plausibilityMessage}</div></div>` : ''}</div>`;
     stageEl.addEventListener('mouseenter', () => { stageEl.classList.add('is-hovered'); highlightStage(stage); });
     stageEl.addEventListener('mouseleave', () => { stageEl.classList.remove('is-hovered'); if (APP.state.selectedStageId !== stage.id) resetStageHighlight(stage); });
     stageEl.addEventListener('click', () => focusStage(stage, stageEl));
@@ -371,11 +383,19 @@ function renderStages(stages) {
 
 function renderMap(stages, stops) {
   APP.routeLayerGroup.clearLayers();
+  APP.stageNumberMarkers.forEach(m => { try { APP.map.removeLayer(m); } catch(e) {} });
+  APP.stageNumberMarkers = [];
+
   stages.forEach(stage => {
     const coords = stage.seg.map(p => [p.lat, p.lon]);
     const polyline = L.polyline(coords, { color: stage.color, weight: 4, opacity: 0.95 }).addTo(APP.routeLayerGroup);
     stage.polyline = polyline;
     stage.bounds = polyline.getBounds();
+    const numberMarker = createStageNumberMarker(stage);
+    if (numberMarker) {
+      numberMarker.addTo(APP.map);
+      APP.stageNumberMarkers.push(numberMarker);
+    }
   });
   stops.forEach(stop => {
     const level = getPlausibilityLevel(stop.distanceToRouteKm ?? 0, APP.state.config.routePlausibilityCheck);
@@ -389,8 +409,7 @@ function renderMap(stages, stops) {
 async function loadTour() {
   try {
     destroyCharts();
-    APP.state.selectedStageId = null;
-    document.getElementById('resetStageFocusBtn').classList.add('hidden');
+    resetStageFocus();
     setStatus('Lade Tour …');
     const routeName = document.getElementById('routeSelect').value;
     const routeMeta = APP.state.routesManifest.find(r => r.id === routeName) || { label: routeName };
@@ -404,7 +423,7 @@ async function loadTour() {
     }
     preparedStops.sort((a,b) => a.trackIndex - b.trackIndex);
     const stages = buildStages(points, preparedStops, APP.state.config);
-    APP.state.routeName = routeName; APP.state.stops = preparedStops; APP.state.stages = stages;
+    APP.state.routeName = routeName; APP.state.stops = preparedStops; APP.state.stages = stages; APP.state.selectedStageId = null;
     renderSummary(stages, routeMeta.label); renderStages(stages); renderMap(stages, preparedStops);
     setStatus(`${stages.length} Tagesabschnitt(e) geladen`);
   } catch (err) {
