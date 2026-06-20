@@ -3,7 +3,18 @@ const APP = {
   routeLayerGroup: null,
   charts: [],
   colors: ['#14b8a6', '#f59e0b', '#8b5cf6', '#84cc16', '#ec4899', '#06b6d4', '#f97316'],
-  state: { config: null, stages: [], stops: [], routeName: null, routeLabel: null, routesManifest: [], selectedStageId: null, rawGpxText: '', activeRouteMeta: null, stopMarkers: new Map() },
+  state: {
+    config: null,
+    stages: [],
+    stops: [],
+    routeName: null,
+    routeLabel: null,
+    routesManifest: [],
+    selectedStageId: null,
+    rawGpxText: '',
+    activeRouteMeta: null,
+    stopMarkers: new Map()
+  },
   baseLayers: {},
   currentBaseLayer: null,
   mapStyleControl: null,
@@ -97,7 +108,7 @@ function todayStamp() {
 function sanitizeFilenamePart(value) {
   return String(value || '')
     .normalize('NFKD')
-    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[̀-ͯ]/g, '')
     .replace(/ß/g, 'ss')
     .replace(/[^a-zA-Z0-9-_]+/g, '-')
     .replace(/-+/g, '-')
@@ -139,7 +150,8 @@ function gpxFromPoints(points, name) {
   const lines = ['<?xml version="1.0" encoding="UTF-8"?>', '<gpx version="1.1" creator="M365 Copilot" xmlns="http://www.topografix.com/GPX/1/1">', `<trk><name>${escapeXml(name)}</name><trkseg>`];
   points.forEach(p => lines.push(`<trkpt lat="${Number(p.lat).toFixed(6)}" lon="${Number(p.lon).toFixed(6)}"><ele>${Number(p.ele || 0).toFixed(1)}</ele></trkpt>`));
   lines.push('</trkseg></trk>', '</gpx>');
-  return lines.join('\n');
+  return lines.join('
+');
 }
 
 function triggerBlobDownload(blob, filename) {
@@ -196,7 +208,8 @@ function buildTourBriefText() {
     'Hotels:',
     ...(hotels.length ? hotels.map(h => `- ${h.name}${h.hotelUrl ? ` | ${h.hotelUrl}` : ''}`) : ['- keine Hotels hinterlegt'])
   ];
-  return lines.join('\n');
+  return lines.join('
+');
 }
 
 function downloadTourBrief() {
@@ -234,29 +247,33 @@ function buildZipReadmeText() {
     '',
     'Anreise',
     start ? `${start.name} | Treffpunkt: ${start.meetingPoint || '-'} | Abfahrt: ${start.departureTime || '-'} | Ankunft: ${start.arrivalTime || '-'}` : 'kein Start hinterlegt',
-    ...(start?.transfers?.length ? ['Umstiege:', ...start.transfers.slice(0,3).map(t => `- ${formatTransferLine(t)}`)] : []),
-    ...(start?.reservedSeats?.length ? [`Sitzplätze: ${start.reservedSeats.slice(0,10).join(', ')}`] : []),
-    ...(start?.reservedBikeSpots?.length ? [`Radplätze: ${start.reservedBikeSpots.slice(0,10).join(', ')}`] : []),
+    ...(start?.transfers?.length ? ['Umstiege:', ...start.transfers.map(t => `- ${formatTransferLine(t)}`)] : []),
+    ...(start?.reservedSeats?.length ? [`Sitzplätze: ${start.reservedSeats.join(', ')}`] : []),
+    ...(start?.reservedBikeSpots?.length ? [`Radplätze: ${start.reservedBikeSpots.join(', ')}`] : []),
     '',
     'Hotels',
     ...(hotels.length ? hotels.map(h => `${h.name}${h.hotelUrl ? ` | ${h.hotelUrl}` : ''}`) : ['keine Hotels hinterlegt']),
     '',
     'Rückreise',
     end ? `${end.name} | Treffpunkt: ${end.meetingPoint || '-'} | Abfahrt: ${end.departureTime || '-'} | Ankunft: ${end.arrivalTime || '-'}` : 'kein Ziel hinterlegt',
-    ...(end?.transfers?.length ? ['Umstiege:', ...end.transfers.slice(0,3).map(t => `- ${formatTransferLine(t)}`)] : []),
-    ...(end?.reservedSeats?.length ? [`Sitzplätze: ${end.reservedSeats.slice(0,10).join(', ')}`] : []),
-    ...(end?.reservedBikeSpots?.length ? [`Radplätze: ${end.reservedBikeSpots.slice(0,10).join(', ')}`] : []),
+    ...(end?.transfers?.length ? ['Umstiege:', ...end.transfers.map(t => `- ${formatTransferLine(t)}`)] : []),
+    ...(end?.reservedSeats?.length ? [`Sitzplätze: ${end.reservedSeats.join(', ')}`] : []),
+    ...(end?.reservedBikeSpots?.length ? [`Radplätze: ${end.reservedBikeSpots.join(', ')}`] : []),
     '',
     'Enthaltene GPX-Dateien',
     ...files.map(name => `- ${name}`),
     '',
     'Dateinamen und interne GPX-Tracknamen sind für Garmin/Komoot kompatibel vereinfacht.'
   ];
-  return lines.join('\n');
+  return lines.join('
+');
 }
 
 async function downloadAllStagesZip() {
-  if (typeof JSZip === 'undefined') { setStatus('ZIP-Download ist aktuell nicht verfügbar.'); return; }
+  if (typeof JSZip === 'undefined') {
+    setStatus('ZIP-Download ist aktuell nicht verfügbar.');
+    return;
+  }
   setStatus('Erzeuge ZIP mit Gesamtstrecke und Etappen ...');
   const zip = new JSZip();
   zip.file(buildFullRouteFilename(), APP.state.rawGpxText || '');
@@ -271,32 +288,34 @@ async function downloadAllStagesZip() {
 function updateTopMetaBar(routeMeta) {
   const tourismMeta = document.getElementById('tourismMeta');
   const adfcMeta = document.getElementById('adfcMeta');
-  if (routeMeta?.officialDescriptionUrl) {
-    tourismMeta.classList.remove('hidden');
-    tourismMeta.innerHTML = `<a href="${routeMeta.officialDescriptionUrl}" target="_blank" rel="noopener noreferrer">Tourismus / offizieller Link</a>`;
-  } else {
-    tourismMeta.classList.add('hidden');
-    tourismMeta.innerHTML = '';
-  }
+  const hasTourism = !!routeMeta?.officialDescriptionUrl;
+  tourismMeta.classList.toggle('hidden', !hasTourism);
+  tourismMeta.innerHTML = hasTourism ? `<a href="${routeMeta.officialDescriptionUrl}" target="_blank" rel="noopener noreferrer">Tourismus / offizieller Link</a>` : '';
+
   const hasAdfcStars = Number.isInteger(routeMeta?.adfcStars) && routeMeta.adfcStars >= 1 && routeMeta.adfcStars <= 5;
-  const hasAdfcUrl = !!routeMeta?.adfcTourUrl;
-  if (hasAdfcStars || hasAdfcUrl) {
-    adfcMeta.classList.remove('hidden');
-    const title = hasAdfcUrl ? `<a href="${routeMeta.adfcTourUrl}" target="_blank" rel="noopener noreferrer">ADFC-Wertung</a>` : 'ADFC-Wertung';
-    const count = hasAdfcStars ? `${routeMeta.adfcStars}/5 Sterne` : 'keine Sterne hinterlegt';
-    adfcMeta.innerHTML = `${title}<span class="count">${count}</span>`;
-  } else {
-    adfcMeta.classList.add('hidden');
+  const hasAdfcLink = !!routeMeta?.adfcTourUrl;
+  const hasAdfcInfo = hasAdfcStars || hasAdfcLink;
+  adfcMeta.classList.toggle('hidden', !hasAdfcInfo);
+  if (!hasAdfcInfo) {
     adfcMeta.innerHTML = '';
+    return;
   }
+  const title = hasAdfcLink
+    ? `<a href="${routeMeta.adfcTourUrl}" target="_blank" rel="noopener noreferrer">ADFC-Wertung</a>`
+    : 'ADFC-Wertung';
+  const count = hasAdfcStars ? `${routeMeta.adfcStars}/5 Sterne` : 'keine Sterne hinterlegt';
+  adfcMeta.innerHTML = `${title}<span class="count">${count}</span>`;
 }
 
-function focusStopOnMap(stopName) {
-  const marker = APP.state.stopMarkers.get(stopName);
-  if (!marker) return;
-  const latLng = marker.getLatLng();
-  APP.map.setView(latLng, 12, { animate: false });
-  marker.openPopup();
+async function initializeApp() {
+  APP.state.config = await loadJSON('data/config.json');
+  APP.colors = APP.state.config.visuals?.stageColors || APP.colors;
+  const logisticsColor = APP.state.config.visuals?.logisticsMarkerColor;
+  if (logisticsColor) document.documentElement.style.setProperty('--logistics-marker', logisticsColor);
+  setupMapStyleOverlay(APP.state.config.mapView?.availableBaseMaps || ['Standard', 'Humanitarian', 'Topografisch'], APP.state.config.mapView?.defaultBaseMap || 'Humanitarian');
+  await loadRoutesManifest();
+  setStatus('Anwendung bereit');
+  await loadTour();
 }
 
 function setupMapStyleOverlay(styles, defaultStyle) {
@@ -363,7 +382,11 @@ async function loadGPX(routeName) {
   APP.state.rawGpxText = text;
   const xml = new DOMParser().parseFromString(text, 'text/xml');
   const ns = 'http://www.topografix.com/GPX/1/1';
-  return Array.from(xml.getElementsByTagNameNS(ns, 'trkpt')).map(pt => ({ lat: parseFloat(pt.getAttribute('lat')), lon: parseFloat(pt.getAttribute('lon')), ele: parseFloat(pt.getElementsByTagNameNS(ns, 'ele')[0]?.textContent || '0') }));
+  return Array.from(xml.getElementsByTagNameNS(ns, 'trkpt')).map(pt => ({
+    lat: parseFloat(pt.getAttribute('lat')),
+    lon: parseFloat(pt.getAttribute('lon')),
+    ele: parseFloat(pt.getElementsByTagNameNS(ns, 'ele')[0]?.textContent || '0')
+  }));
 }
 
 function haversine(a, b) {
@@ -448,7 +471,18 @@ function buildStages(points, stops, config) {
     const hotel = stops[i + 1].type === 'overnight' ? stops[i + 1] : null;
     const plausibilityLevel = hotel ? getPlausibilityLevel(hotel.distanceToRouteKm, config.routePlausibilityCheck) : null;
     const plausibilityMessage = hotel ? getPlausibilityMessage(hotel.distanceToRouteKm, plausibilityLevel) : '';
-    stages.push({ id: i + 1, name: `${stops[i].name} → ${stops[i + 1].name}`, seg, dist, up, down, netRideTimeHours, grossRideTimeHours, totalPauseMinutes, difficulty, color, hotel, plausibilityLevel, plausibilityMessage, profilePoints, steepPoints, midpointLatLng: midpointOfSegment(seg), polyline: null, bounds: null, marker: null, element: null, remainingTotalHours: netRideTimeHours, remainingTotalDistanceKm: dist });
+    stages.push({
+      id: i + 1,
+      name: `${stops[i].name} → ${stops[i + 1].name}`,
+      seg, dist, up, down,
+      netRideTimeHours, grossRideTimeHours, totalPauseMinutes,
+      difficulty, color, hotel, plausibilityLevel, plausibilityMessage,
+      profilePoints, steepPoints,
+      midpointLatLng: midpointOfSegment(seg),
+      polyline: null, bounds: null, marker: null, element: null,
+      remainingTotalHours: netRideTimeHours,
+      remainingTotalDistanceKm: dist
+    });
   }
   return stages;
 }
@@ -484,8 +518,29 @@ function renderChart(canvasId, stage) {
     type: 'line',
     data: {
       datasets: [
-        { data: stage.profilePoints.map(p => ({ x: p.distanceKm, y: p.elevation })), borderColor: stage.color, backgroundColor: `${stage.color}33`, fill: true, tension: 0.25, pointRadius: 0, pointHoverRadius: 5, pointHoverBackgroundColor: stage.color, pointHoverBorderColor: '#ffffff', pointHoverBorderWidth: 2, borderWidth: 2 },
-        { type: 'scatter', data: stage.steepPoints, showLine: false, pointRadius: 3, pointHoverRadius: 4, pointBackgroundColor: '#b91c1c', pointBorderColor: '#ffffff', pointBorderWidth: 1.5 }
+        {
+          data: stage.profilePoints.map(p => ({ x: p.distanceKm, y: p.elevation })),
+          borderColor: stage.color,
+          backgroundColor: `${stage.color}33`,
+          fill: true,
+          tension: 0.25,
+          pointRadius: 0,
+          pointHoverRadius: 5,
+          pointHoverBackgroundColor: stage.color,
+          pointHoverBorderColor: '#ffffff',
+          pointHoverBorderWidth: 2,
+          borderWidth: 2
+        },
+        {
+          type: 'scatter',
+          data: stage.steepPoints,
+          showLine: false,
+          pointRadius: 3,
+          pointHoverRadius: 4,
+          pointBackgroundColor: '#b91c1c',
+          pointBorderColor: '#ffffff',
+          pointBorderWidth: 1.5
+        }
       ]
     },
     options: {
@@ -526,7 +581,13 @@ function renderSummary(stages, routeLabel) {
   const totalDown = stages.reduce((a, s) => a + s.down, 0);
   const totalNet = stages.reduce((a, s) => a + s.netRideTimeHours, 0);
   const totalGross = stages.reduce((a, s) => a + s.grossRideTimeHours, 0);
-  document.getElementById('summary').innerHTML = `<div class="summary-card"><div class="label">Route</div><div class="value">${routeLabel}</div></div><div class="summary-card"><div class="label">Etappen</div><div class="value">${stages.length}</div></div><div class="summary-card"><div class="label">Gesamtdistanz</div><div class="value">${totalDistance.toFixed(1)} km</div></div><div class="summary-card"><div class="label">Höhenmeter</div><div class="value">↑ ${Math.round(totalUp)} / ↓ ${Math.round(totalDown)}</div></div><div class="summary-card"><div class="label">Netto-Fahrzeit</div><div class="value">${formatDurationWithUnit(totalNet)}</div></div><div class="summary-card"><div class="label">Brutto-Fahrzeit</div><div class="value">${formatDurationWithUnit(totalGross)}</div></div>`;
+  document.getElementById('summary').innerHTML = `
+    <div class="summary-card"><div class="label">Route</div><div class="value">${routeLabel}</div></div>
+    <div class="summary-card"><div class="label">Etappen</div><div class="value">${stages.length}</div></div>
+    <div class="summary-card"><div class="label">Gesamtdistanz</div><div class="value">${totalDistance.toFixed(1)} km</div></div>
+    <div class="summary-card"><div class="label">Höhenmeter</div><div class="value">↑ ${Math.round(totalUp)} / ↓ ${Math.round(totalDown)}</div></div>
+    <div class="summary-card"><div class="label">Netto-Fahrzeit</div><div class="value">${formatDurationWithUnit(totalNet)}</div></div>
+    <div class="summary-card"><div class="label">Brutto-Fahrzeit</div><div class="value">${formatDurationWithUnit(totalGross)}</div></div>`;
 }
 
 function pills(values) {
@@ -552,31 +613,41 @@ function stationFields(stop) {
   ].filter(Boolean).join('');
 }
 
+function focusStopOnMap(stopName) {
+  const marker = APP.state.stopMarkers.get(stopName);
+  if (!marker) return;
+  APP.map.setView(marker.getLatLng(), 12, { animate: false });
+  marker.openPopup();
+}
+
 function renderStartAndEndBlocks(stops) {
   const startMount = document.getElementById('startBox');
   const endMount = document.getElementById('endBox');
   const start = stops.find(stop => stop.type === 'start');
   const end = stops.find(stop => stop.type === 'end');
 
-  if (start) {
-    startMount.innerHTML = `<section class="logistics-box clickable" data-stop-focus="${start.name}"><div class="logistics-title">🚉 Startbahnhof: ${start.name}</div><div class="logistics-grid">${stationFields(start)}</div></section>`;
-  } else startMount.innerHTML = '';
-
-  if (end) {
-    endMount.innerHTML = `<section class="logistics-box clickable" data-stop-focus="${end.name}"><div class="logistics-title">🏁 Endbahnhof: ${end.name}</div><div class="logistics-grid">${stationFields(end)}</div></section>`;
-  } else endMount.innerHTML = '';
+  startMount.innerHTML = start
+    ? `<section class="logistics-box clickable" data-stop-focus="${start.name}"><div class="logistics-title">🚉 Startbahnhof: ${start.name}</div><div class="logistics-grid">${stationFields(start)}</div></section>`
+    : '';
+  endMount.innerHTML = end
+    ? `<section class="logistics-box clickable" data-stop-focus="${end.name}"><div class="logistics-title">🏁 Endbahnhof: ${end.name}</div><div class="logistics-grid">${stationFields(end)}</div></section>`
+    : '';
 
   document.querySelectorAll('[data-stop-focus]').forEach(el => {
     el.addEventListener('click', () => focusStopOnMap(el.dataset.stopFocus));
   });
 }
 
-function renderHotelInlineCard(hotel) {
-  return `<section class="logistics-box clickable" data-stop-focus="${hotel.name}"><div class="logistics-title">🏨 Hotel: ${hotel.name}</div><div class="logistics-grid">${hotel.address ? `<div class="logistics-item"><div class="label">Adresse</div><div class="value">${hotel.address}</div></div>` : ''}${hotel.notes ? `<div class="logistics-item"><div class="label">Notiz</div><div class="value">${hotel.notes}</div></div>` : ''}${hotel.hotelUrl ? `<div class="logistics-item"><div class="label">Link</div><div class="value"><a class="inline-link" href="${hotel.hotelUrl}" target="_blank" rel="noopener noreferrer">Hotel-Link öffnen</a></div></div>` : ''}</div></section>`;
+function highlightStage(stage) {
+  if (!stage?.polyline) return;
+  stage.polyline.setStyle({ weight: 7, opacity: 1.0 });
+  stage.polyline.bringToFront();
 }
 
-function highlightStage(stage) { if (stage?.polyline) { stage.polyline.setStyle({ weight: 7, opacity: 1.0 }); stage.polyline.bringToFront(); } }
-function resetStageHighlight(stage) { if (stage?.polyline) stage.polyline.setStyle({ weight: 4, opacity: 0.95 }); }
+function resetStageHighlight(stage) {
+  if (!stage?.polyline) return;
+  stage.polyline.setStyle({ weight: 4, opacity: 0.95 });
+}
 
 function applySelectionStyles() {
   APP.state.stages.forEach(stage => {
@@ -632,6 +703,10 @@ function createStageNumberMarker(stage) {
   return L.marker(stage.midpointLatLng, { icon });
 }
 
+function renderHotelInlineCard(hotel) {
+  return `<section class="logistics-box clickable" data-stop-focus="${hotel.name}"><div class="logistics-title">🏨 Hotel: ${hotel.name}</div><div class="logistics-grid">${hotel.address ? `<div class="logistics-item"><div class="label">Adresse</div><div class="value">${hotel.address}</div></div>` : ''}${hotel.notes ? `<div class="logistics-item"><div class="label">Notiz</div><div class="value">${hotel.notes}</div></div>` : ''}${hotel.hotelUrl ? `<div class="logistics-item"><div class="label">Link</div><div class="value"><a class="inline-link" href="${hotel.hotelUrl}" target="_blank" rel="noopener noreferrer">Hotel-Link öffnen</a></div></div>` : ''}</div></section>`;
+}
+
 function renderStages(stages) {
   const mount = document.getElementById('stages');
   mount.innerHTML = '';
@@ -639,21 +714,43 @@ function renderStages(stages) {
     const el = document.createElement('section');
     stage.element = el;
     el.className = 'stage';
-    el.innerHTML = `<div class="stage-color" style="background:${stage.color}"></div><div class="stage-body"><div class="stage-head"><div class="stage-title">Etappe ${stage.id}: ${stage.name}</div><div class="stage-tools"><button class="stage-download-btn" type="button">Etappen-GPX herunterladen</button><div class="badge ${getDifficultyBadgeClass(stage.difficulty)}">${stage.difficulty}</div></div></div><div class="meta"><div class="meta-item"><div class="label">Distanz</div><div class="value">${stage.dist.toFixed(1)} km</div></div><div class="meta-item"><div class="label">Höhenmeter</div><div class="value">↑ ${Math.round(stage.up)} m</div></div><div class="meta-item"><div class="label">Höhenmeter</div><div class="value">↓ ${Math.round(stage.down)} m</div></div><div class="meta-item"><div class="label">Netto-Fahrzeit</div><div class="value">${formatDurationWithUnit(stage.netRideTimeHours)}</div></div><div class="meta-item"><div class="label">Brutto inkl. Pausen</div><div class="value">${formatDurationWithUnit(stage.grossRideTimeHours)}<span class="subline">Pausen: ${formatDurationWithUnit(stage.totalPauseMinutes / 60)}</span></div></div></div><div class="canvas-wrap" style="height:220px"><canvas id="chart-${idx}"></canvas></div>${stage.plausibilityLevel ? `<div class="small-note">${stage.plausibilityMessage}</div>` : ''}</div>`;
+    el.innerHTML = `
+      <div class="stage-color" style="background:${stage.color}"></div>
+      <div class="stage-body">
+        <div class="stage-head">
+          <div class="stage-title">Etappe ${stage.id}: ${stage.name}</div>
+          <div class="stage-tools">
+            <button class="stage-download-btn" type="button">Etappen-GPX herunterladen</button>
+            <div class="badge ${getDifficultyBadgeClass(stage.difficulty)}">${stage.difficulty}</div>
+          </div>
+        </div>
+        <div class="meta">
+          <div class="meta-item"><div class="label">Distanz</div><div class="value">${stage.dist.toFixed(1)} km</div></div>
+          <div class="meta-item"><div class="label">Höhenmeter</div><div class="value">↑ ${Math.round(stage.up)} m</div></div>
+          <div class="meta-item"><div class="label">Höhenmeter</div><div class="value">↓ ${Math.round(stage.down)} m</div></div>
+          <div class="meta-item"><div class="label">Netto-Fahrzeit</div><div class="value">${formatDurationWithUnit(stage.netRideTimeHours)}</div></div>
+          <div class="meta-item"><div class="label">Brutto inkl. Pausen</div><div class="value">${formatDurationWithUnit(stage.grossRideTimeHours)}<span class="subline">Pausen: ${formatDurationWithUnit(stage.totalPauseMinutes / 60)}</span></div></div>
+        </div>
+        <div class="canvas-wrap" style="height:220px"><canvas id="chart-${idx}"></canvas></div>
+        ${stage.plausibilityLevel ? `<div class="small-note">${stage.plausibilityMessage}</div>` : ''}
+      </div>`;
     el.addEventListener('mouseenter', () => { el.classList.add('is-hovered'); highlightStage(stage); });
     el.addEventListener('mouseleave', () => { el.classList.remove('is-hovered'); if (APP.state.selectedStageId !== stage.id) resetStageHighlight(stage); });
     el.addEventListener('click', () => focusStage(stage));
+    el.querySelector('.stage-download-btn').addEventListener('click', ev => {
+      ev.stopPropagation();
+      downloadStageGpx(stage);
+    });
     mount.appendChild(el);
-    el.querySelector('.stage-download-btn').addEventListener('click', ev => { ev.stopPropagation(); downloadStageGpx(stage); });
     renderChart(`chart-${idx}`, stage);
 
     if (stage.hotel) {
-      const hotelWrap = document.createElement('div');
-      hotelWrap.innerHTML = renderHotelInlineCard(stage.hotel);
-      const card = hotelWrap.firstElementChild;
+      const wrap = document.createElement('div');
+      wrap.innerHTML = renderHotelInlineCard(stage.hotel);
+      const card = wrap.firstElementChild;
       card.addEventListener('click', ev => {
-        const target = ev.target.closest('a');
-        if (target) return;
+        const anchor = ev.target.closest('a');
+        if (anchor) return;
         focusStopOnMap(stage.hotel.name);
       });
       mount.appendChild(card);

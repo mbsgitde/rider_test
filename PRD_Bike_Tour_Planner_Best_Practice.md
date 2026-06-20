@@ -1,29 +1,25 @@
-# PRD – Bike Tour Planner (Best-Practice Kurzfassung für Repo)
+## PRD – Bike Tour Planner (Best-Practice Kurzfassung für Repo)
 
-## Zielbild V20
-Die Oberfläche priorisiert Informationshierarchie und Lesbarkeit: Kompakte externe Metadaten oben, Karte und Summary zentral, danach ein klarer Fluss aus Start, Etappen mit integrierten Hotels und abschließend Ziel.
+### Zielbild V20
+Die Oberfläche folgt dem Tourablauf: kompakte externe Metadaten direkt unter der Tourauswahl, dann Karte und Summary, danach Startbahnhof, Etappen mit integrierten Hotelblöcken und abschließend der Endbahnhof.
 
-## Änderungen in V20
-1. **Meta-Bereich komprimiert**
-   - Offizielle Tourismus-/Radweginfo als kleine, direkt verlinkte Überschrift.
-   - ADFC-Wertung als kleine, direkt verlinkte Überschrift mit kurzer Sternangabe (`x/5 Sterne`).
+### Änderungen in V20
+- **Meta-Bereich komprimiert**
+  - Tourismus-/offizieller Link als kleine, direkt verlinkte Überschrift.
+  - ADFC-Wertung als kleine, direkt verlinkte Überschrift mit knapper Angabe (`x/5 Sterne`).
+- **Startbahnhof vor der ersten Etappe**
+  - Vollbreiter Kasten vor den Etappen.
+  - Klick springt zum Marker in der Karte.
+- **Hotels zwischen den Etappen**
+  - Hotels erscheinen als Vollbreiten-Blöcke direkt nach der Etappe, an deren Ende sie liegen.
+  - Klick springt zum Marker in der Karte.
+- **Endbahnhof nach der letzten Etappe**
+  - Vollbreiter Kasten nach den Etappen.
+  - Klick springt zum Marker in der Karte.
+- **Bestehende Logistik bleibt vollständig**
+  - Treffpunkt, Abfahrts-/Ankunftszeit, Verbindung, Wagen, bis zu 3 Umstiege, bis zu 10 Sitz-/Radplatzreservierungen.
+  - Nicht gepflegte Bereiche bleiben verborgen.
 
-2. **Startbahnhof vor den Etappen**
-   - Vollbreiter Kasten oberhalb der ersten Etappe.
-   - Klick verlinkt auf den Marker in der Karte.
-
-3. **Endbahnhof nach den Etappen**
-   - Vollbreiter Kasten unterhalb der letzten Etappe.
-   - Klick verlinkt auf den Marker in der Karte.
-
-4. **Hotels als Etappen-Zwischenblöcke**
-   - Jeder Hotelstopp wird als eigener Vollbreiten-Block direkt nach der Etappe angezeigt, die dort endet.
-   - Klick verlinkt auf den Marker in der Karte.
-
-5. **Bahnhofslogistik unverändert vollständig**
-   - Treffpunkt, Abfahrts-/Ankunftszeit, Verbindung, Wagen, bis zu 3 Umstiege, bis zu 10 Sitz- und Radplatzreservierungen.
-   - Leere Felder bleiben unsichtbar.
-
-## Entschlackung
-- Fokus ausschließlich auf Layout, Mapping zwischen Kartenobjekten und UI-Blöcken sowie bestehende Exporte.
-- Keine zusätzlichen neuen Featurezweige außerhalb dieses Layout-Umbaus.
+### Entschlackung
+- Fokus nur auf Layout, Kartenverlinkung und die bestehenden Exporte.
+- Keine zusätzlichen Nebenfunktionen außerhalb dieses Umbaus.
