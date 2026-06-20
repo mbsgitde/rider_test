@@ -81,7 +81,19 @@ button:disabled { opacity: .45; cursor: default; }
 @media (max-width:700px) { .container { padding:14px; } #map { height:360px; } .chart-hover-tooltip { font-size:11px; } }
 
 
-/* Feature Request V20: kompakte Meta-Leiste und Hotels zwischen Etappen */
+/* Feature Request V25: kompakte Toolbar / Download-Menü */
+.compact-controls { gap:8px; align-items:center; margin-bottom:8px; }
+.control-label { font-weight:700; font-size:13px; color:var(--muted); }
+.compact-controls select { min-width:170px; padding:7px 10px; border-radius:999px; }
+.compact-controls button { padding:7px 10px; border-radius:999px; font-size:13px; line-height:1.15; }
+.download-menu { position:relative; }
+.download-menu summary { list-style:none; cursor:pointer; padding:7px 10px; border:1px solid var(--border); border-radius:999px; background:#fff; font-size:13px; font-weight:700; }
+.download-menu summary::-webkit-details-marker { display:none; }
+.download-menu-content { position:absolute; z-index:1000; top:calc(100% + 6px); left:0; display:grid; gap:6px; min-width:190px; padding:8px; border:1px solid var(--border); border-radius:12px; background:#fff; box-shadow:0 8px 22px rgba(0,0,0,.12); }
+.download-menu-content button { width:100%; text-align:left; border-radius:9px; }
+#status { font-size:13px; }
+
+/* Feature Request V20/V25: kompakte Meta-Leiste */
 #metaBar { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin:0 0 10px; }
 .meta-bar-card { padding:6px 10px; border-radius:999px; box-shadow:none; line-height:1.2; }
 .meta-bar-card .title { margin:0; font-size:13px; font-weight:700; }
@@ -91,7 +103,7 @@ button:disabled { opacity: .45; cursor: default; }
 .meta-bar-card .star-row { font-size:13px; letter-spacing:0; vertical-align:baseline; }
 .hotel-stage-card { border-left:8px solid #64748b; background:#fffdf7; }
 
-/* Feature Request V21/V22/V23: kompakte Logistikboxen, Marker-Klick, Reservierungen sichtbar */
+/* Feature Request V21-V25: Logistikboxen */
 .station-inline-card, .hotel-between-stages { margin-left:22px; }
 .station-inline-card { --station-accent:#64748b; }
 .station-inline-card-start { margin-bottom:-4px; }
@@ -99,6 +111,8 @@ button:disabled { opacity: .45; cursor: default; }
 .compact-logistics-card { padding:8px 10px; border-radius:12px; }
 .compact-card-head { display:flex; align-items:center; justify-content:space-between; gap:8px; flex-wrap:wrap; margin-bottom:3px; }
 .compact-card-head .title { margin:0; }
+.station-title { display:flex; align-items:center; gap:8px; }
+.station-title-icon { display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px; min-width:26px; border-radius:999px; background:var(--station-accent); color:#fff; font-size:14px; box-shadow:0 1px 4px rgba(0,0,0,.22); border:2px solid #fff; }
 .station-head-tools { display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
 .compact-info-line { display:flex; flex-wrap:wrap; gap:4px 12px; font-size:13px; line-height:1.3; }
 .compact-details { font-size:12px; background:#f8fafc; border:1px solid var(--border); border-radius:999px; padding:3px 8px; }
@@ -139,6 +153,7 @@ button:disabled { opacity: .45; cursor: default; }
   .compact-card-head { align-items:flex-start; }
   .stage-body { padding:9px; }
   .stage-title { font-size:15px; gap:7px; }
-  .stage-title-number { width:24px; height:24px; min-width:24px; font-size:12px; }
+  .stage-title-number, .station-title-icon { width:24px; height:24px; min-width:24px; font-size:12px; }
   .meta { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .download-menu-content { left:auto; right:0; }
 }

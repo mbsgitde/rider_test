@@ -281,14 +281,14 @@ function updateTopMetaBar(routeMeta) {
   const adfcTitle = adfcCard?.querySelector('.title');
   const hasTourism = !!routeMeta?.officialDescriptionUrl;
   tourismCard.classList.toggle('hidden', !hasTourism);
-  if (tourismTitle) tourismTitle.innerHTML = hasTourism ? `<a class="meta-title-link" href="${routeMeta.officialDescriptionUrl}" target="_blank" rel="noopener noreferrer">🔗 Tourismus / offizielle Beschreibung</a>` : '🔗 Tourismus / offizielle Beschreibung';
+  if (tourismTitle) tourismTitle.innerHTML = hasTourism ? `<a class="meta-title-link" href="${routeMeta.officialDescriptionUrl}" target="_blank" rel="noopener noreferrer">🔗 Offizielle Beschreibung</a>` : '🔗 Offizielle Beschreibung';
   if (tourismContent) tourismContent.innerHTML = '';
   const hasValidStars = Number.isInteger(routeMeta?.adfcStars) && routeMeta.adfcStars >= 1 && routeMeta.adfcStars <= 5;
   const stars = hasValidStars ? `${'★'.repeat(routeMeta.adfcStars)}${'☆'.repeat(5 - routeMeta.adfcStars)}` : '';
   const hasAdfcInfo = (!!routeMeta?.adfcTourUrl) || hasValidStars;
   adfcCard.classList.toggle('hidden', !hasAdfcInfo);
   if (adfcTitle) {
-    const label = `${stars ? `<span class="star-row">${stars}</span> ` : ''}ADFC-Bewertung`;
+    const label = `${stars ? `<span class="star-row">${stars}</span> ` : ''}ADFC`;
     adfcTitle.innerHTML = routeMeta?.adfcTourUrl ? `<a class="meta-title-link" href="${routeMeta.adfcTourUrl}" target="_blank" rel="noopener noreferrer">${label}</a>` : label;
   }
   if (adfcStarsEl) adfcStarsEl.innerHTML = '';
@@ -584,13 +584,15 @@ function renderReservationInline(stop) {
 function renderStationInlineCard(stop, mode, accentColor) {
   if (!stop) return null;
   const wrapper = document.createElement('aside');
+  const icon = mode === 'start' ? '🚉' : '🏁';
+  const label = mode === 'start' ? 'Start' : 'Ziel';
   wrapper.className = `station-inline-card station-inline-card-${mode}`;
   wrapper.dataset.stopName = stop.name;
   if (accentColor) wrapper.style.setProperty('--station-accent', accentColor);
   wrapper.innerHTML = `
     <div class="overview-card compact-logistics-card ${mode === 'start' ? 'start-card' : 'end-card'}">
       <div class="compact-card-head">
-        <div class="title">${mode === 'start' ? '🚉 Start' : '🏁 Ziel'}: ${stop.name}</div>
+        <div class="title station-title"><span class="station-title-icon">${icon}</span><span>${label}: ${stop.name}</span></div>
         <div class="station-head-tools">
           ${stop.carriageNumber ? `<span class="badge station-wagon-badge">${stop.carriageNumber}</span>` : ''}
           ${renderTransferDetails(stop)}
@@ -669,11 +671,10 @@ function moveStageFocus(delta) {
 }
 
 function createStopMarker(stop) {
-  const htmlIcon = stop.type === 'overnight' ? '🏨' : (stop.type === 'start' ? 'S' : 'Z');
-  const icon = L.divIcon({ className: '', html: `<div class="logistics-label-marker">${htmlIcon}</div>`, iconSize: [28, 28], iconAnchor: [14, 14], popupAnchor: [0, -10] });
+  const htmlIcon = stop.type === 'overnight' ? '🏨' : (stop.type === 'start' ? '🚉' : '🏁');
   const bgStyle = stop.markerColor ? ` style="background:${stop.markerColor}"` : '';
-  const coloredIcon = L.divIcon({ className: '', html: `<div class="logistics-label-marker"${bgStyle}>${htmlIcon}</div>`, iconSize: [28, 28], iconAnchor: [14, 14], popupAnchor: [0, -10] });
-  return L.marker([stop.lat, stop.lon], { icon: coloredIcon });
+  const icon = L.divIcon({ className: '', html: `<div class="logistics-label-marker"${bgStyle}>${htmlIcon}</div>`, iconSize: [28, 28], iconAnchor: [14, 14], popupAnchor: [0, -10] });
+  return L.marker([stop.lat, stop.lon], { icon });
 }
 
 function createStageNumberMarker(stage) {

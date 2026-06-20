@@ -14,17 +14,22 @@
   <div class="container">
     <h1>🚴 Bike Tour Planner</h1>
     <p class="lead">V19 ordnet die Oberfläche neu: Offizielle Links und ADFC-Bewertung stehen direkt unter der Tourauswahl, Bahnhofsinfos in eigener Box vor den Etappen und Hotels in eigener Box nach den Etappen.</p>
-    <div class="controls">
-      <label for="routeSelect">Tour:</label>
+    <div class="controls compact-controls">
+      <label for="routeSelect" class="control-label">Tour</label>
       <select id="routeSelect"></select>
-      <button id="loadBtn">Tour laden</button>
-      <button id="downloadFullGpxBtn" class="secondary">Gesamt-GPX herunterladen</button>
-      <button id="downloadAllStagesZipBtn" class="secondary">Gesamt + Etappen als ZIP herunterladen</button>
-      <button id="downloadTourBriefBtn" class="secondary">Tour-Steckbrief als TXT herunterladen</button>
-      <button id="downloadActiveStageBtn" class="secondary hidden">Aktive Etappe als GPX herunterladen</button>
-      <button id="prevStageBtn" class="secondary hidden">← Vorherige Etappe</button>
-      <button id="nextStageBtn" class="secondary hidden">Nächste Etappe →</button>
-      <button id="resetStageFocusBtn" class="secondary hidden">Alle Etappen anzeigen</button>
+      <button id="loadBtn" title="Tour laden">↻ Laden</button>
+      <details class="download-menu">
+        <summary>⬇ Downloads</summary>
+        <div class="download-menu-content">
+          <button id="downloadFullGpxBtn" class="secondary" title="Gesamt-GPX herunterladen">GPX gesamt</button>
+          <button id="downloadAllStagesZipBtn" class="secondary" title="Gesamtstrecke und Etappen als ZIP herunterladen">ZIP gesamt + Etappen</button>
+          <button id="downloadTourBriefBtn" class="secondary" title="Tour-Steckbrief als TXT herunterladen">TXT Steckbrief</button>
+        </div>
+      </details>
+      <button id="downloadActiveStageBtn" class="secondary hidden" title="Aktive Etappe als GPX herunterladen">GPX Etappe</button>
+      <button id="prevStageBtn" class="secondary hidden" title="Vorherige Etappe">←</button>
+      <button id="nextStageBtn" class="secondary hidden" title="Nächste Etappe">→</button>
+      <button id="resetStageFocusBtn" class="secondary hidden" title="Alle Etappen anzeigen">Alle</button>
       <span id="status">Initialisiere …</span>
     </div>
 
