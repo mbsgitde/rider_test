@@ -81,7 +81,7 @@ button:disabled { opacity: .45; cursor: default; }
 @media (max-width:700px) { .container { padding:14px; } #map { height:360px; } .chart-hover-tooltip { font-size:11px; } }
 
 
-/* Feature Request V27: kompakte Kopfzeile mit rechtsbündiger Meta-Leiste */
+/* V28 consolidated UI */
 .compact-controls { display:flex; gap:8px; align-items:center; margin-bottom:8px; width:100%; }
 .control-label { font-weight:700; font-size:13px; color:var(--muted); }
 .compact-controls select { min-width:170px; padding:7px 10px; border-radius:999px; }
@@ -99,8 +99,6 @@ button:disabled { opacity: .45; cursor: default; }
 .meta-title-link { color:var(--text); text-decoration:none; }
 .meta-title-link:hover { text-decoration:underline; }
 .meta-bar-card .star-row { font-size:13px; letter-spacing:0; vertical-align:baseline; }
-
-/* Logistikboxen: Start/Ziel grau analog Hotel */
 .station-inline-card, .hotel-between-stages { margin-left:22px; }
 .station-inline-card { --station-accent:var(--logistics-marker); }
 .station-inline-card-start { margin-bottom:-4px; }
@@ -123,8 +121,6 @@ button:disabled { opacity: .45; cursor: default; }
 .start-card, .end-card, .hotel-stage-card { border-left:8px solid var(--logistics-marker); background:#fffdf7; }
 .station-wagon-badge { border-color:var(--logistics-marker); color:var(--text); }
 .is-stop-focused .overview-card { outline:3px solid rgba(37,99,235,.28); box-shadow:0 8px 20px rgba(37,99,235,.16); }
-
-/* Kompakte Etappenboxen und Nummernkreis */
 .stage-list { gap:10px; }
 .stage { grid-template-columns:6px 1fr; border-radius:10px; }
 .stage-color { width:6px; }
@@ -144,12 +140,4 @@ button:disabled { opacity: .45; cursor: default; }
 .canvas-wrap { margin-top:6px; }
 .small-note { margin-top:6px; }
 @media (max-width:900px) { #metaBar.meta-inline { margin-left:0; width:100%; justify-content:flex-start; } }
-@media (max-width:700px) {
-  .station-inline-card, .hotel-between-stages { margin-left:0; }
-  .compact-card-head { align-items:flex-start; }
-  .stage-body { padding:9px; }
-  .stage-title { font-size:15px; gap:7px; }
-  .stage-title-number, .station-title-icon { width:24px; height:24px; min-width:24px; font-size:12px; }
-  .meta { grid-template-columns:repeat(2,minmax(0,1fr)); }
-  .download-menu-content { left:auto; right:0; }
-}
+@media (max-width:700px) { .station-inline-card, .hotel-between-stages { margin-left:0; } .compact-card-head { align-items:flex-start; } .stage-body { padding:9px; } .stage-title { font-size:15px; gap:7px; } .stage-title-number, .station-title-icon { width:24px; height:24px; min-width:24px; font-size:12px; } .meta { grid-template-columns:repeat(2,minmax(0,1fr)); } .download-menu-content { left:auto; right:0; } }
