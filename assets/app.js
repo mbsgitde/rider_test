@@ -366,7 +366,8 @@ async function loadRoutesManifest() {
 }
 
 async function loadGPX(routeName) {
-  const text = await loadText(`gpx/${routeName}.gpx`);
+  const routeMeta = APP.state.routesManifest.find(r => r.id === routeName) || {};
+  const text = await loadText(`gpx/${routeMeta.gpxFile || `${routeName}.gpx`}`);
   APP.state.rawGpxText = text;
   const xml = new DOMParser().parseFromString(text, 'text/xml');
   const ns = 'http://www.topografix.com/GPX/1/1';
@@ -382,8 +383,44 @@ function haversine(a, b) {
   return R * 2 * Math.atan2(Math.sqrt(h), Math.sqrt(1 - h));
 }
 
+function isValidLatLon(lat, lon) {
+  return Number.isFinite(lat) && Number.isFinite(lon) && lat >= -90 && lat <= 90 && lon >= -180 && lon <= 180;
+}
+
+function parseGoogleMapsCoordinates(url) {
+  if (!url || typeof url !== 'string') return null;
+  const variants = [url];
+  try { variants.push(decodeURIComponent(url)); } catch (e) {}
+  for (const text of variants) {
+    const patterns = [
+      /@(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)(?:[,/z?&]|$)/i,
+      /[?&](?:query|q|ll|center)=(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)(?:[&]|$)/i,
+      /!3d(-?\d+(?:\.\d+)?)!4d(-?\d+(?:\.\d+)?)/i,
+      /!2d(-?\d+(?:\.\d+)?)!3d(-?\d+(?:\.\d+)?)/i
+    ];
+    for (const pattern of patterns) {
+      const match = text.match(pattern);
+      if (!match) continue;
+      let lat;
+      let lon;
+      if (pattern.source.startsWith('!2d')) {
+        lon = parseFloat(match[1]);
+        lat = parseFloat(match[2]);
+      } else {
+        lat = parseFloat(match[1]);
+        lon = parseFloat(match[2]);
+      }
+      if (isValidLatLon(lat, lon)) return { lat, lon };
+    }
+  }
+  return null;
+}
+
 async function resolveStopCoordinates(stop) {
   if (typeof stop.lat === 'number' && typeof stop.lon === 'number') return { lat: stop.lat, lon: stop.lon };
+  const mapsUrl = stop.googleMapsUrl || stop.googleUrl || stop.mapsUrl || stop.googleMapsLink;
+  const parsed = parseGoogleMapsCoordinates(mapsUrl);
+  if (parsed) return parsed;
   return null;
 }
 
@@ -559,6 +596,7 @@ function renderHotelCard(hotel) {
         <div class="compact-card-head">
           <div class="title">🏨 Übernachtung: ${hotel.name}</div>
           ${hotel.hotelUrl ? `<a class="hotel-link" href="${hotel.hotelUrl}" target="_blank" rel="noopener noreferrer">Hotel öffnen</a>` : ''}
+          ${hotel.googleMapsUrl ? `<a class="hotel-link" href="${hotel.googleMapsUrl}" target="_blank" rel="noopener noreferrer">Maps</a>` : ''}
         </div>
         <div class="overview-list compact-info-line">
           ${hotel.address ? `<span>${hotel.address}</span>` : ''}
@@ -594,6 +632,7 @@ function renderStationInlineCard(stop, mode) {
         <div class="title station-title"><span class="station-title-icon">${icon}</span><span>${label}: ${stop.name}</span></div>
         <div class="station-head-tools">
           ${stop.carriageNumber ? `<span class="badge station-wagon-badge">${stop.carriageNumber}</span>` : ''}
+          ${stop.googleMapsUrl ? `<a class="inline-link" href="${stop.googleMapsUrl}" target="_blank" rel="noopener noreferrer">Maps</a>` : ''}
         </div>
       </div>
       <div class="compact-info-line">
@@ -752,11 +791,15 @@ async function loadTour() {
   APP.state.routeLabel = routeMeta.label;
   APP.state.activeRouteMeta = routeMeta;
   updateTopMetaBar(routeMeta);
-  const [rawStops, points] = await Promise.all([loadJSON(`data/${routeName}-stops.json`), loadGPX(routeName)]);
+  const stopsFile = routeMeta.stopsFile || `${routeName}-stops.json`;
+  const [rawStops, points] = await Promise.all([loadJSON(`data/${stopsFile}`), loadGPX(routeName)]);
   const preparedStops = [];
   for (const stop of rawStops) {
     const coords = await resolveStopCoordinates(stop);
-    if (!coords) continue;
+    if (!coords) {
+      console.warn('Koordinaten fehlen oder Google-Maps-Link enthält keine auslesbaren Koordinaten:', stop.name, stop.googleMapsUrl || stop.address || '');
+      continue;
+    }
     const nearest = findNearestTrackPoint(coords, points);
     preparedStops.push({ ...stop, lat: coords.lat, lon: coords.lon, trackIndex: nearest.index, distanceToRouteKm: nearest.distanceToRouteKm });
   }

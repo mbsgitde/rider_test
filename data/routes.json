@@ -21,12 +21,12 @@
   },
   {
     "id": "Hohenzollernradweg_2027_Relax",
-    "label": "Hohenzollernradweg (2027) (Relax)",
+    "label": "Hohenzollernradweg 2027 Relax",
     "gpxFile": "Hohenzollernradweg_2027_Relax.gpx",
-    "stopsFile": "sHohenzollernradweg_2027_Relax-stops.json",
+    "stopsFile": "Hohenzollernradweg_2027_Relax-stops.json",
     "hasStopsFile": true,
     "officialDescriptionUrl": "",
     "adfcStars": null,
     "adfcTourUrl": ""
-  } 
+  }
 ]

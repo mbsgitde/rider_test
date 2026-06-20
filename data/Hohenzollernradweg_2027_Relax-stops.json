@@ -2,28 +2,34 @@
   {
     "name": "Stuttgart Hbf",
     "type": "start",
+    "address": "Stuttgart Hbf",
+    "googleMapsUrl": ""
   },
   {
     "name": "Landhotel Hirsch",
     "type": "overnight",
     "address": "Bebenhausen",
     "hotelUrl": "https://www.hirsch-bebenhausen.de/",
+    "googleMapsUrl": ""
   },
   {
     "name": "Hotel Löwen",
     "type": "overnight",
     "address": "Hechingen",
     "hotelUrl": "https://www.gasthof-hotel-loewen.de/",
+    "googleMapsUrl": ""
   },
   {
     "name": "Karls Hotel",
     "type": "overnight",
     "address": "Sigmaringen",
     "hotelUrl": "https://karlshotel.de/",
+    "googleMapsUrl": ""
   },
   {
     "name": "Bahnhof Singen (Hohentwiel)",
     "type": "end",
+    "address": "Bahnhof Singen (Hohentwiel)",
+    "googleMapsUrl": ""
   }
 ]
-
