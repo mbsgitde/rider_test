@@ -3,21 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bike Tour Planner – GitHub Pages Starter V9</title>
+  <title>Bike Tour Planner – GitHub Pages Starter V14</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
   <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
   <div class="container">
     <h1>🚴 Bike Tour Planner</h1>
-    <p class="lead">V9 korrigiert die Etappennummern auf der Kartenlinie und behebt den Fokus-/Filter-Reset. Alle bisherigen Interaktionen bleiben erhalten.</p>
+    <p class="lead">V14 ergänzt ZIP-Downloads für alle Etappen, schönere Dateinamen, einen prominenten Download für die aktive Etappe und trennt das Farbschema von Schwierigkeit und Tourabschnitten klar voneinander.</p>
 
     <div class="controls">
       <label for="routeSelect">Tour:</label>
       <select id="routeSelect"></select>
       <button id="loadBtn">Tour laden</button>
+      <button id="downloadFullGpxBtn" class="secondary">Gesamt-GPX herunterladen</button>
+      <button id="downloadAllStagesZipBtn" class="secondary">Alle Etappen als ZIP herunterladen</button>
+      <button id="downloadActiveStageBtn" class="secondary hidden">Aktive Etappe als GPX herunterladen</button>
+      <button id="prevStageBtn" class="secondary hidden">← Vorherige Etappe</button>
+      <button id="nextStageBtn" class="secondary hidden">Nächste Etappe →</button>
       <button id="resetStageFocusBtn" class="secondary hidden">Alle Etappen anzeigen</button>
       <span id="status">Initialisiere …</span>
     </div>
@@ -26,7 +32,7 @@
     <div id="summary" class="summary-grid"></div>
     <div id="stages" class="stage-list"></div>
 
-    <p class="footer-note">V9: Die Etappennummern sitzen jetzt als runde Marker in der Mitte der farbigen Etappenlinie auf der Karte. Der Fokusmodus lässt sich über „Alle Etappen anzeigen“ zuverlässig zurücksetzen.</p>
+    <p class="footer-note">V14: Downloads verwenden jetzt sprechende Dateinamen mit Route und Datum. Die Etappenfarben sind bewusst von den Schwierigkeitsfarben getrennt, damit es keine Verwechslungsgefahr mehr gibt.</p>
   </div>
   <script src="assets/app.js"></script>
 </body>

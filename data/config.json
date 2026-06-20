@@ -6,31 +6,31 @@
     "shortBreakMinutesPerHour": 10,
     "longBreakMinutesPerStage": 45
   },
-  "weatherAlertThresholds": {
-    "rainWarningMillimeters": 5,
-    "rainProbabilityWarningPercent": 60,
-    "windWarningKmh": 25,
-    "warmTemperatureCelsius": 28,
-    "hotTemperatureCelsius": 30,
-    "criticalHeatTemperatureCelsius": 35,
-    "forecastRainIncreaseMillimeters": 3,
-    "forecastRainProbabilityIncreasePercent": 20,
-    "forecastWindIncreaseKmh": 10
-  },
   "routePlausibilityCheck": {
     "distanceFromRouteInfoThresholdKm": 0.5,
     "distanceFromRouteWarningThresholdKm": 2,
     "distanceFromRouteCriticalThresholdKm": 5
   },
-  "automation": {
-    "weatherUpdateInterval": "hourly"
-  },
   "mapView": {
-    "defaultBaseMap": "Standard",
+    "defaultBaseMap": "Humanitarian",
     "availableBaseMaps": [
       "Standard",
       "Humanitarian",
       "Topografisch"
+    ]
+  },
+  "profileView": {
+    "steepSectionThresholdPercent": 8
+  },
+  "visuals": {
+    "stageColors": [
+      "#14b8a6",
+      "#f59e0b",
+      "#8b5cf6",
+      "#84cc16",
+      "#ec4899",
+      "#06b6d4",
+      "#f97316"
     ]
   }
 }

@@ -16,23 +16,27 @@ select, button { padding: 10px 12px; border: 1px solid var(--border); border-rad
 button { cursor: pointer; background: #111827; border-color: #111827; color: #fff; }
 button.secondary { background: #fff; color: var(--text); border-color: var(--border); }
 button.hidden { display: none; }
+button:disabled { opacity: .45; cursor: default; }
 #status { color: var(--muted); font-size: 14px; }
 #map { height: 460px; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); background: #fff; }
-.summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin: 16px 0 20px; }
+.summary-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap:12px; margin:16px 0 20px; }
 .summary-card, .stage { background: var(--card); border: 1px solid var(--border); border-radius: 12px; box-shadow: var(--shadow); }
 .summary-card { padding: 12px 14px; }
 .summary-card .label { color: var(--muted); font-size: 12px; margin-bottom: 6px; }
 .summary-card .value { font-size: 22px; font-weight: 700; }
 .stage-list { display: grid; gap: 16px; margin-top: 16px; }
-.stage { display: grid; grid-template-columns: 8px 1fr; overflow: hidden; transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease; }
+.stage { display: grid; grid-template-columns: 8px 1fr; overflow: hidden; transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease, opacity .16s ease, filter .16s ease; }
 .stage:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,.08); }
 .stage.is-hovered { border-color: #94a3b8; box-shadow: 0 6px 16px rgba(0,0,0,.12); }
 .stage.is-selected { border-color: #2563eb; box-shadow: 0 8px 18px rgba(37,99,235,.18); }
-.stage.is-hidden-temp { display: none; }
+.stage.is-dimmed { opacity: .38; filter: grayscale(.15); }
 .stage-color { width: 8px; }
 .stage-body { padding: 14px 16px; cursor: pointer; }
 .stage-head { display: flex; justify-content: space-between; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 10px; }
 .stage-title { font-size: 18px; font-weight: 700; }
+.stage-tools { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+.stage-download-btn, #downloadActiveStageBtn { background:#fff; color:var(--text); border-color:var(--border); }
+#downloadActiveStageBtn { font-weight: 700; }
 .badge { display: inline-block; padding: 4px 8px; border-radius: 999px; font-size: 12px; border: 1px solid var(--border); background: #f9fafb; }
 .badge-ski-blue { background: #2563eb; border-color:#2563eb; color:#fff; }
 .badge-ski-red { background: #dc2626; border-color:#dc2626; color:#fff; }
@@ -41,9 +45,10 @@ button.hidden { display: none; }
 .meta-item { border: 1px solid var(--border); border-radius: 10px; padding: 10px; background: #fafafa; }
 .meta-item .label { color: var(--muted); font-size: 12px; }
 .meta-item .value { font-weight: 700; margin-top: 4px; }
+.meta-item .subline { display:block; color: var(--muted); font-size: 12px; margin-top: 4px; }
 .canvas-wrap { margin-top: 10px; position: relative; }
-.chart-hover-tooltip { position: absolute; pointer-events: none; background: rgba(17,24,39,.92); color: #fff; padding: 10px 12px; border-radius: 10px; font-size: 12px; line-height: 1.45; box-shadow: 0 4px 16px rgba(0,0,0,.22); transform: translate(-50%, calc(-100% - 12px)); white-space: nowrap; z-index: 5; }
-.chart-hover-tooltip.hidden { display: none; }
+.chart-hover-tooltip { position:absolute; pointer-events:none; background:rgba(17,24,39,.92); color:#fff; padding:10px 12px; border-radius:10px; font-size:12px; line-height:1.45; box-shadow:0 4px 16px rgba(0,0,0,.22); transform:translate(-50%, calc(-100% - 12px)); white-space:nowrap; z-index:5; }
+.chart-hover-tooltip.hidden { display:none; }
 .hotel { margin-top: 12px; border: 1px solid var(--border); background: #f9fafb; border-radius: 10px; padding: 12px; }
 .warnings { margin-top: 10px; display: grid; gap: 8px; }
 .warning { border-radius: 8px; padding: 10px 12px; font-size: 14px; border: 1px solid; }
@@ -51,7 +56,7 @@ button.hidden { display: none; }
 .warning.warning { background: #fff7ed; border-color: #fdba74; color: #c2410c; }
 .warning.critical { background: #fef2f2; border-color: #fca5a5; color: #b91c1c; }
 .small-note, .footer-note { color: var(--muted); font-size: 13px; }
-.map-style-control.leaflet-control { background: white; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.12); overflow: hidden; }
+.map-style-control.leaflet-control { background:white; border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,.12); overflow:hidden; }
 .map-style-toggle { display:flex; align-items:center; gap:8px; padding:10px 12px; background:white; border:0; width:100%; cursor:pointer; font-size:14px; color: var(--text); }
 .map-style-toggle:hover { background:#f9fafb; }
 .map-style-menu { display:none; border-top:1px solid var(--border); background:white; min-width:180px; }
@@ -59,8 +64,8 @@ button.hidden { display: none; }
 .map-style-item { display:block; width:100%; text-align:left; padding:10px 12px; background:white; border:0; border-bottom:1px solid #f3f4f6; cursor:pointer; font-size:14px; color: var(--text); }
 .map-style-item:hover { background:#f9fafb; }
 .map-style-item.active { background:#eff6ff; color:#1d4ed8; font-weight:700; }
-.stop-label-marker, .hotel-label-marker { display:flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:999px; font-size:14px; box-shadow: 0 2px 6px rgba(0,0,0,.25); border: 2px solid #fff; }
+.stop-label-marker, .hotel-label-marker, .stage-line-number-marker { display:flex; align-items:center; justify-content:center; width:28px; height:28px; border-radius:999px; font-size:13px; font-weight:700; box-shadow:0 2px 6px rgba(0,0,0,.25); border:2px solid #fff; }
 .stop-label-marker { background:#2563eb; color:#fff; }
 .hotel-label-marker { background:#f59e0b; color:#111827; }
-.stage-line-number-marker { display:flex; align-items:center; justify-content:center; width:28px; height:28px; border-radius:999px; font-size:13px; font-weight:700; color:#fff; border:2px solid #fff; box-shadow:0 2px 6px rgba(0,0,0,.25); }
-@media (max-width: 700px) { .container { padding: 14px; } #map { height: 360px; } .chart-hover-tooltip { font-size: 11px; } }
+.stage-line-number-marker { color:#fff; cursor:pointer; }
+@media (max-width: 700px) { .container { padding:14px; } #map { height:360px; } .chart-hover-tooltip { font-size:11px; } }

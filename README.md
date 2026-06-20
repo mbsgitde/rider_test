@@ -1,7 +1,8 @@
-# Bike Tour Planner – GitHub Pages Starter V9
+# Bike Tour Planner – GitHub Pages Starter V14
 
-## Änderungen in V9
-1. **Etappennummern auf der Karte**: runde Marker mit `1`, `2`, `3`, ... sitzen jetzt in der Mitte der farbigen Etappenlinie.
-2. **Fokus-/Filter-Reset behoben**: Über „Alle Etappen anzeigen“ lässt sich der Fokusmodus zuverlässig zurücksetzen.
-3. **Kartenstil-Auswahl weiterhin gut lesbar**.
-4. Alle bisherigen Features bleiben enthalten.
+## Änderungen in V14
+1. **Alle Etappen als ZIP herunterladen**.
+2. **Schönere Dateinamen** mit Route und Datum.
+3. **Prominenter Download der aktiven Etappe** im Fokusmodus.
+4. **Getrenntes Farbschema** für Schwierigkeit und Tourabschnitte.
+5. Alle bisherigen Features aus V13 bleiben enthalten.

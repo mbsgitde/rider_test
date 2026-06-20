@@ -1,3 +1,3 @@
 # Konfigurationsdatei `config.json`
 
-V9 korrigiert die Etappendarstellung auf der Karte und behebt den Fokus-/Filter-Reset.
+V14 ergänzt ZIP-Downloads für alle Etappen, schönere Dateinamen, einen prominenten Download der aktiven Etappe und ein getrenntes Farbschema für Tourschwierigkeit und Etappenfarben.
