@@ -1,3 +1,3 @@
-# Digitales Roadbook – V38
+# Digitales Roadbook – V39
 
-Fixes: Skipistenfarben für Schwierigkeit, Downloads in Gesamttour-Kasten, ZIP enthält Steckbrief, technisches Auge-Icon.
+Bugfix für V38: Etappenboxen rendern wieder korrekt; Skipistenfarben/Downloads/technisches Auge bleiben erhalten.
