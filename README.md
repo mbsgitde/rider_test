@@ -1,3 +1,3 @@
-# Digitales Roadbook – V39
+# Digitales Roadbook – V40
 
-Bugfix für V38: Etappenboxen rendern wieder korrekt; Skipistenfarben/Downloads/technisches Auge bleiben erhalten.
+Start-/Zielboxen wieder integriert, Hotel-Links mit technischem Web-Icon, offizielle Route/ADFC in Gesamttourbox vor den Downloadbuttons.
