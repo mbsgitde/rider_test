@@ -81,7 +81,7 @@ button:disabled { opacity: .45; cursor: default; }
 @media (max-width:700px) { .container { padding:14px; } #map { height:360px; } .chart-hover-tooltip { font-size:11px; } }
 
 
-/* V28 consolidated UI */
+/* V29 consolidated UI */
 .compact-controls { display:flex; gap:8px; align-items:center; margin-bottom:8px; width:100%; }
 .control-label { font-weight:700; font-size:13px; color:var(--muted); }
 .compact-controls select { min-width:170px; padding:7px 10px; border-radius:999px; }

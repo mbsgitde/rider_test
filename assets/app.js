@@ -371,7 +371,20 @@ async function loadGPX(routeName) {
   APP.state.rawGpxText = text;
   const xml = new DOMParser().parseFromString(text, 'text/xml');
   const ns = 'http://www.topografix.com/GPX/1/1';
-  return Array.from(xml.getElementsByTagNameNS(ns, 'trkpt')).map(pt => ({ lat: parseFloat(pt.getAttribute('lat')), lon: parseFloat(pt.getAttribute('lon')), ele: parseFloat(pt.getElementsByTagNameNS(ns, 'ele')[0]?.textContent || '0') }));
+  const points = Array.from(xml.getElementsByTagNameNS(ns, 'trkpt')).map(pt => ({
+    lat: parseFloat(pt.getAttribute('lat')),
+    lon: parseFloat(pt.getAttribute('lon')),
+    ele: parseFloat(pt.getElementsByTagNameNS(ns, 'ele')[0]?.textContent || '0')
+  }));
+  const waypoints = Array.from(xml.getElementsByTagNameNS(ns, 'wpt')).map(wpt => ({
+    name: wpt.getElementsByTagNameNS(ns, 'name')[0]?.textContent?.trim() || '',
+    sym: wpt.getElementsByTagNameNS(ns, 'sym')[0]?.textContent?.trim() || '',
+    lat: parseFloat(wpt.getAttribute('lat')),
+    lon: parseFloat(wpt.getAttribute('lon'))
+  })).filter(wpt => Number.isFinite(wpt.lat) && Number.isFinite(wpt.lon));
+  APP.state.gpxTrackPoints = points;
+  APP.state.gpxWaypoints = waypoints;
+  return points;
 }
 
 function haversine(a, b) {
@@ -401,8 +414,7 @@ function parseGoogleMapsCoordinates(url) {
     for (const pattern of patterns) {
       const match = text.match(pattern);
       if (!match) continue;
-      let lat;
-      let lon;
+      let lat, lon;
       if (pattern.source.startsWith('!2d')) { lon = parseFloat(match[1]); lat = parseFloat(match[2]); }
       else { lat = parseFloat(match[1]); lon = parseFloat(match[2]); }
       if (isValidLatLon(lat, lon)) return { lat, lon };
@@ -411,11 +423,71 @@ function parseGoogleMapsCoordinates(url) {
   return null;
 }
 
+function normalizeMatchName(value) {
+  return String(value || '')
+    .toLowerCase()
+    .replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss')
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/\b(hotel|gasthof|landhotel|bahnhof|hbf|restaurant|pension|hostel|garni|am|an|der|die|das|zum|zur)\b/g, ' ')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim();
+}
+
+function levenshteinDistance(a, b) {
+  const dp = Array.from({ length: a.length + 1 }, () => Array(b.length + 1).fill(0));
+  for (let i = 0; i <= a.length; i++) dp[i][0] = i;
+  for (let j = 0; j <= b.length; j++) dp[0][j] = j;
+  for (let i = 1; i <= a.length; i++) {
+    for (let j = 1; j <= b.length; j++) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      dp[i][j] = Math.min(dp[i - 1][j] + 1, dp[i][j - 1] + 1, dp[i - 1][j - 1] + cost);
+    }
+  }
+  return dp[a.length][b.length];
+}
+
+function waypointSimilarity(a, b) {
+  const na = normalizeMatchName(a);
+  const nb = normalizeMatchName(b);
+  if (!na || !nb) return 0;
+  if (na === nb) return 1;
+  if (na.includes(nb) || nb.includes(na)) return 0.92;
+  const dist = levenshteinDistance(na, nb);
+  return 1 - dist / Math.max(na.length, nb.length);
+}
+
+function findBestWaypointMatch(stop, waypoints) {
+  const wanted = stop.matchName || stop.waypointName || stop.name;
+  let best = null;
+  for (const waypoint of waypoints || []) {
+    const score = waypointSimilarity(wanted, waypoint.name);
+    if (!best || score > best.score) best = { waypoint, score };
+  }
+  const threshold = typeof stop.matchThreshold === 'number' ? stop.matchThreshold : 0.82;
+  if (best && best.score >= threshold) return best;
+  return null;
+}
+
 async function resolveStopCoordinates(stop) {
-  if (typeof stop.lat === 'number' && typeof stop.lon === 'number') return { lat: stop.lat, lon: stop.lon };
+  if (typeof stop.lat === 'number' && typeof stop.lon === 'number') return { lat: stop.lat, lon: stop.lon, source: 'json' };
   const mapsUrl = stop.googleMapsUrl || stop.googleUrl || stop.mapsUrl || stop.googleMapsLink;
   const parsed = parseGoogleMapsCoordinates(mapsUrl);
-  if (parsed) return parsed;
+  if (parsed) return { ...parsed, source: 'googleMapsUrl' };
+  const match = findBestWaypointMatch(stop, APP.state.gpxWaypoints || []);
+  if (match) {
+    console.info(`Waypoint-Match: ${stop.name} → ${match.waypoint.name} (${Math.round(match.score * 100)}%)`);
+    return { lat: match.waypoint.lat, lon: match.waypoint.lon, source: 'gpxWaypoint', waypointName: match.waypoint.name, matchScore: match.score };
+  }
+  if (stop.type === 'start' && APP.state.gpxTrackPoints?.length) {
+    const first = APP.state.gpxTrackPoints[0];
+    console.info(`Start-Fallback: ${stop.name} → erster Trackpoint`);
+    return { lat: first.lat, lon: first.lon, source: 'firstTrackPoint' };
+  }
+  if (stop.type === 'end' && APP.state.gpxTrackPoints?.length) {
+    const last = APP.state.gpxTrackPoints[APP.state.gpxTrackPoints.length - 1];
+    console.info(`Ziel-Fallback: ${stop.name} → letzter Trackpoint`);
+    return { lat: last.lat, lon: last.lon, source: 'lastTrackPoint' };
+  }
   return null;
 }
 
@@ -726,7 +798,7 @@ async function loadTour() {
   const preparedStops = [];
   for (const stop of rawStops) {
     const coords = await resolveStopCoordinates(stop);
-    if (!coords) { console.warn('Koordinaten fehlen oder Google-Maps-Link enthält keine auslesbaren Koordinaten:', stop.name, stop.googleMapsUrl || stop.address || ''); continue; }
+    if (!coords) { console.warn('Koordinaten konnten nicht automatisch ermittelt werden:', stop.name, stop.googleMapsUrl || stop.address || ''); continue; }
     const nearest = findNearestTrackPoint(coords, points);
     preparedStops.push({ ...stop, lat: coords.lat, lon: coords.lon, trackIndex: nearest.index, distanceToRouteKm: nearest.distanceToRouteKm });
   }

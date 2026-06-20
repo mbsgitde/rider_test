@@ -1,9 +1,10 @@
-# Bike Tour Planner – GitHub Pages Starter V28
+# Bike Tour Planner – GitHub Pages Starter V29
 
-Fix für Hohenzollernradweg:
+Neu in V29:
 
-- `gpx/Hohenzollernradweg_2027_Relax.gpx` ist jetzt enthalten.
-- `data/Hohenzollernradweg_2027_Relax-stops.json` enthält gültige JSON-Daten inklusive lat/lon.
-- Die Stop-Koordinaten wurden aus dem GPX-Track bzw. den GPX-Waypoints übernommen.
-- Die App nutzt weiterhin `gpxFile` und `stopsFile` aus `routes.json`.
-- Google-Maps-Links werden weiterhin als Fallback unterstützt.
+- GPX-Waypoint-Auto-Matching für Stops ohne `lat`/`lon`.
+- Fuzzy Search über Waypoint-Namen, inkl. Normalisierung von Umlauten und Begriffen wie Hotel, Landhotel, Bahnhof, Hbf.
+- Optionales `matchName` oder `waypointName` in der Stop-JSON für kontrolliertes Matching.
+- Fallback: Start = erster Trackpoint, Ziel = letzter Trackpoint, falls kein Waypoint passt.
+- Google-Maps-Koordinaten-Fallback bleibt erhalten.
+- Hohenzollern-Stops sind bewusst schlank ohne lat/lon, um den Self-Service-Workflow zu demonstrieren.
