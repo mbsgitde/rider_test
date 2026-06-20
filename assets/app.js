@@ -3,7 +3,7 @@ const APP = {
   routeLayerGroup: null,
   charts: [],
   colors: ['#14b8a6', '#f59e0b', '#8b5cf6', '#84cc16', '#ec4899', '#06b6d4', '#f97316'],
-  state: { config: null, stages: [], stops: [], routeName: null, routeLabel: null, routesManifest: [], selectedStageId: null, rawGpxText: '', activeRouteMeta: null },
+  state: { config: null, stages: [], stops: [], routeName: null, routeLabel: null, routesManifest: [], selectedStageId: null, rawGpxText: '', activeRouteMeta: null, stopMarkers: new Map() },
   baseLayers: {},
   currentBaseLayer: null,
   mapStyleControl: null,
@@ -166,6 +166,10 @@ function buildFullRouteFilename() {
   return `${getRouteFileBase()}-gesamt.gpx`;
 }
 
+function formatTransferLine(t) {
+  return `${t.label}${t.arrivalTime || t.departureTime ? ` (${t.arrivalTime || '-'} / ${t.departureTime || '-'})` : ''}`;
+}
+
 function buildTourBriefText() {
   const hotels = APP.state.stops.filter(s => s.type === 'overnight');
   const start = APP.state.stops.find(s => s.type === 'start');
@@ -213,10 +217,6 @@ function downloadActiveStage() {
   if (stage) downloadStageGpx(stage);
 }
 
-function formatTransferLine(t) {
-  return `${t.label}${t.arrivalTime || t.departureTime ? ` (${t.arrivalTime || '-'} / ${t.departureTime || '-'})` : ''}`;
-}
-
 function buildZipReadmeText() {
   const hotels = APP.state.stops.filter(s => s.type === 'overnight');
   const start = APP.state.stops.find(s => s.type === 'start');
@@ -234,18 +234,18 @@ function buildZipReadmeText() {
     '',
     'Anreise',
     start ? `${start.name} | Treffpunkt: ${start.meetingPoint || '-'} | Abfahrt: ${start.departureTime || '-'} | Ankunft: ${start.arrivalTime || '-'}` : 'kein Start hinterlegt',
-    ...(start?.transfers?.length ? ['Umstiege:', ...start.transfers.map(t => `- ${formatTransferLine(t)}`)] : []),
-    ...(start?.reservedSeats?.length ? [`Sitzplätze: ${start.reservedSeats.join(', ')}`] : []),
-    ...(start?.reservedBikeSpots?.length ? [`Radplätze: ${start.reservedBikeSpots.join(', ')}`] : []),
+    ...(start?.transfers?.length ? ['Umstiege:', ...start.transfers.slice(0,3).map(t => `- ${formatTransferLine(t)}`)] : []),
+    ...(start?.reservedSeats?.length ? [`Sitzplätze: ${start.reservedSeats.slice(0,10).join(', ')}`] : []),
+    ...(start?.reservedBikeSpots?.length ? [`Radplätze: ${start.reservedBikeSpots.slice(0,10).join(', ')}`] : []),
     '',
     'Hotels',
     ...(hotels.length ? hotels.map(h => `${h.name}${h.hotelUrl ? ` | ${h.hotelUrl}` : ''}`) : ['keine Hotels hinterlegt']),
     '',
     'Rückreise',
     end ? `${end.name} | Treffpunkt: ${end.meetingPoint || '-'} | Abfahrt: ${end.departureTime || '-'} | Ankunft: ${end.arrivalTime || '-'}` : 'kein Ziel hinterlegt',
-    ...(end?.transfers?.length ? ['Umstiege:', ...end.transfers.map(t => `- ${formatTransferLine(t)}`)] : []),
-    ...(end?.reservedSeats?.length ? [`Sitzplätze: ${end.reservedSeats.join(', ')}`] : []),
-    ...(end?.reservedBikeSpots?.length ? [`Radplätze: ${end.reservedBikeSpots.join(', ')}`] : []),
+    ...(end?.transfers?.length ? ['Umstiege:', ...end.transfers.slice(0,3).map(t => `- ${formatTransferLine(t)}`)] : []),
+    ...(end?.reservedSeats?.length ? [`Sitzplätze: ${end.reservedSeats.slice(0,10).join(', ')}`] : []),
+    ...(end?.reservedBikeSpots?.length ? [`Radplätze: ${end.reservedBikeSpots.slice(0,10).join(', ')}`] : []),
     '',
     'Enthaltene GPX-Dateien',
     ...files.map(name => `- ${name}`),
@@ -256,10 +256,7 @@ function buildZipReadmeText() {
 }
 
 async function downloadAllStagesZip() {
-  if (typeof JSZip === 'undefined') {
-    setStatus('ZIP-Download ist aktuell nicht verfügbar.');
-    return;
-  }
+  if (typeof JSZip === 'undefined') { setStatus('ZIP-Download ist aktuell nicht verfügbar.'); return; }
   setStatus('Erzeuge ZIP mit Gesamtstrecke und Etappen ...');
   const zip = new JSZip();
   zip.file(buildFullRouteFilename(), APP.state.rawGpxText || '');
@@ -272,39 +269,34 @@ async function downloadAllStagesZip() {
 }
 
 function updateTopMetaBar(routeMeta) {
-  const tourismCard = document.getElementById('tourismMetaCard');
-  const tourismContent = document.getElementById('tourismMetaContent');
-  const adfcCard = document.getElementById('adfcMetaCard');
-  const adfcLink = document.getElementById('adfcTourLinkInline');
-  const adfcStarsEl = document.getElementById('adfcStarsInline');
-
-  const hasTourism = !!routeMeta?.officialDescriptionUrl;
-  tourismCard.classList.toggle('hidden', !hasTourism);
-  tourismContent.innerHTML = hasTourism ? `<a class="inline-link" href="${routeMeta.officialDescriptionUrl}" target="_blank" rel="noopener noreferrer">Tourismus-/Radwegelink öffnen</a>` : '';
-
-  const hasAdfcInfo = (!!routeMeta?.adfcTourUrl) || Number.isInteger(routeMeta?.adfcStars);
-  adfcCard.classList.toggle('hidden', !hasAdfcInfo);
-  adfcStarsEl.innerHTML = Number.isInteger(routeMeta?.adfcStars) && routeMeta.adfcStars >= 1 && routeMeta.adfcStars <= 5
-    ? `${'★'.repeat(routeMeta.adfcStars)}${'☆'.repeat(5 - routeMeta.adfcStars)}`
-    : '<span class="muted">keine Sterne hinterlegt</span>';
-  if (routeMeta?.adfcTourUrl) {
-    adfcLink.classList.remove('hidden');
-    adfcLink.href = routeMeta.adfcTourUrl;
+  const tourismMeta = document.getElementById('tourismMeta');
+  const adfcMeta = document.getElementById('adfcMeta');
+  if (routeMeta?.officialDescriptionUrl) {
+    tourismMeta.classList.remove('hidden');
+    tourismMeta.innerHTML = `<a href="${routeMeta.officialDescriptionUrl}" target="_blank" rel="noopener noreferrer">Tourismus / offizieller Link</a>`;
   } else {
-    adfcLink.classList.add('hidden');
-    adfcLink.removeAttribute('href');
+    tourismMeta.classList.add('hidden');
+    tourismMeta.innerHTML = '';
+  }
+  const hasAdfcStars = Number.isInteger(routeMeta?.adfcStars) && routeMeta.adfcStars >= 1 && routeMeta.adfcStars <= 5;
+  const hasAdfcUrl = !!routeMeta?.adfcTourUrl;
+  if (hasAdfcStars || hasAdfcUrl) {
+    adfcMeta.classList.remove('hidden');
+    const title = hasAdfcUrl ? `<a href="${routeMeta.adfcTourUrl}" target="_blank" rel="noopener noreferrer">ADFC-Wertung</a>` : 'ADFC-Wertung';
+    const count = hasAdfcStars ? `${routeMeta.adfcStars}/5 Sterne` : 'keine Sterne hinterlegt';
+    adfcMeta.innerHTML = `${title}<span class="count">${count}</span>`;
+  } else {
+    adfcMeta.classList.add('hidden');
+    adfcMeta.innerHTML = '';
   }
 }
 
-async function initializeApp() {
-  APP.state.config = await loadJSON('data/config.json');
-  APP.colors = APP.state.config.visuals?.stageColors || APP.colors;
-  const logisticsColor = APP.state.config.visuals?.logisticsMarkerColor;
-  if (logisticsColor) document.documentElement.style.setProperty('--logistics-marker', logisticsColor);
-  setupMapStyleOverlay(APP.state.config.mapView?.availableBaseMaps || ['Standard', 'Humanitarian', 'Topografisch'], APP.state.config.mapView?.defaultBaseMap || 'Humanitarian');
-  await loadRoutesManifest();
-  setStatus('Anwendung bereit');
-  await loadTour();
+function focusStopOnMap(stopName) {
+  const marker = APP.state.stopMarkers.get(stopName);
+  if (!marker) return;
+  const latLng = marker.getLatLng();
+  APP.map.setView(latLng, 12, { animate: false });
+  marker.openPopup();
 }
 
 function setupMapStyleOverlay(styles, defaultStyle) {
@@ -537,51 +529,50 @@ function renderSummary(stages, routeLabel) {
   document.getElementById('summary').innerHTML = `<div class="summary-card"><div class="label">Route</div><div class="value">${routeLabel}</div></div><div class="summary-card"><div class="label">Etappen</div><div class="value">${stages.length}</div></div><div class="summary-card"><div class="label">Gesamtdistanz</div><div class="value">${totalDistance.toFixed(1)} km</div></div><div class="summary-card"><div class="label">Höhenmeter</div><div class="value">↑ ${Math.round(totalUp)} / ↓ ${Math.round(totalDown)}</div></div><div class="summary-card"><div class="label">Netto-Fahrzeit</div><div class="value">${formatDurationWithUnit(totalNet)}</div></div><div class="summary-card"><div class="label">Brutto-Fahrzeit</div><div class="value">${formatDurationWithUnit(totalGross)}</div></div>`;
 }
 
-function formatTransfers(transfers) {
-  if (!Array.isArray(transfers) || !transfers.length) return '';
-  return `<div><strong>Umstiege:</strong></div><ul>${transfers.slice(0, 3).map(t => `<li>${t.label}${t.arrivalTime || t.departureTime ? ` (${t.arrivalTime || '-'} / ${t.departureTime || '-'})` : ''}</li>`).join('')}</ul>`;
-}
-
-function formatReservationPills(values) {
+function pills(values) {
   if (!Array.isArray(values) || !values.length) return '';
   return `<div class="pill-list">${values.slice(0, 10).map(v => `<span class="pill">${v}</span>`).join('')}</div>`;
 }
 
-function renderStationBox(stops) {
-  const mount = document.getElementById('stationBox');
-  const stationStops = stops.filter(stop => stop.type === 'start' || stop.type === 'end');
-  const cards = stationStops.length ? stationStops.map(stop => `
-    <div class="overview-card">
-      <div class="title">${stop.type === 'start' ? '🚉 Anreise' : '🏁 Rückreise'}: ${stop.name}</div>
-      <div class="overview-list">
-        ${stop.address ? `<div>${stop.address}</div>` : ''}
-        ${stop.meetingPoint ? `<div><strong>Treffpunkt:</strong> ${stop.meetingPoint}</div>` : ''}
-        ${(stop.departureTime || stop.arrivalTime) ? `<div><strong>Abfahrt / Ankunft:</strong> ${stop.departureTime || '-'} / ${stop.arrivalTime || '-'}</div>` : ''}
-        ${stop.connection ? `<div><strong>Verbindung:</strong> ${stop.connection}</div>` : ''}
-        ${stop.carriageNumber ? `<div><strong>Wagen:</strong> ${stop.carriageNumber}</div>` : ''}
-        ${formatTransfers(stop.transfers)}
-        ${Array.isArray(stop.reservedSeats) && stop.reservedSeats.length ? `<div><strong>Sitzplätze:</strong>${formatReservationPills(stop.reservedSeats)}</div>` : ''}
-        ${Array.isArray(stop.reservedBikeSpots) && stop.reservedBikeSpots.length ? `<div><strong>Radplätze:</strong>${formatReservationPills(stop.reservedBikeSpots)}</div>` : ''}
-      </div>
-    </div>
-  `).join('') : '<div class="overview-card"><div class="title">Keine Bahnhofsdaten hinterlegt</div></div>';
-  mount.innerHTML = `<div class="overview-box"><div class="section-title">🚉 Bahnhof / An- und Rückreise</div><div class="station-grid">${cards}</div></div>`;
+function transferList(transfers) {
+  if (!Array.isArray(transfers) || !transfers.length) return '';
+  return `<div class="logistics-item"><div class="label">Umstiege</div><div class="value">${transfers.slice(0, 3).map(t => formatTransferLine(t)).join('<br>')}</div></div>`;
 }
 
-function renderHotelBox(stops) {
-  const mount = document.getElementById('hotelBox');
-  const hotels = stops.filter(stop => stop.type === 'overnight');
-  const cards = hotels.length ? hotels.map(h => `
-    <div class="overview-card">
-      <div class="title">🏨 ${h.name}</div>
-      <div class="overview-list">
-        ${h.address ? `<div>${h.address}</div>` : ''}
-        ${h.notes ? `<div class="muted">${h.notes}</div>` : ''}
-      </div>
-      ${h.hotelUrl ? `<a class="hotel-link" href="${h.hotelUrl}" target="_blank" rel="noopener noreferrer">Hotel-Link öffnen</a>` : ''}
-    </div>
-  `).join('') : '<div class="overview-card"><div class="title">Keine Hotels hinterlegt</div></div>';
-  mount.innerHTML = `<div class="overview-box"><div class="section-title">🏨 Hotels</div><div class="hotel-grid">${cards}</div></div>`;
+function stationFields(stop) {
+  return [
+    stop.address ? `<div class="logistics-item"><div class="label">Adresse</div><div class="value">${stop.address}</div></div>` : '',
+    stop.meetingPoint ? `<div class="logistics-item"><div class="label">Treffpunkt</div><div class="value">${stop.meetingPoint}</div></div>` : '',
+    (stop.departureTime || stop.arrivalTime) ? `<div class="logistics-item"><div class="label">Abfahrt / Ankunft</div><div class="value">${stop.departureTime || '-'} / ${stop.arrivalTime || '-'}</div></div>` : '',
+    stop.connection ? `<div class="logistics-item"><div class="label">Verbindung</div><div class="value">${stop.connection}</div></div>` : '',
+    stop.carriageNumber ? `<div class="logistics-item"><div class="label">Wagen</div><div class="value">${stop.carriageNumber}</div></div>` : '',
+    transferList(stop.transfers),
+    Array.isArray(stop.reservedSeats) && stop.reservedSeats.length ? `<div class="logistics-item"><div class="label">Sitzplätze</div>${pills(stop.reservedSeats)}</div>` : '',
+    Array.isArray(stop.reservedBikeSpots) && stop.reservedBikeSpots.length ? `<div class="logistics-item"><div class="label">Radplätze</div>${pills(stop.reservedBikeSpots)}</div>` : ''
+  ].filter(Boolean).join('');
+}
+
+function renderStartAndEndBlocks(stops) {
+  const startMount = document.getElementById('startBox');
+  const endMount = document.getElementById('endBox');
+  const start = stops.find(stop => stop.type === 'start');
+  const end = stops.find(stop => stop.type === 'end');
+
+  if (start) {
+    startMount.innerHTML = `<section class="logistics-box clickable" data-stop-focus="${start.name}"><div class="logistics-title">🚉 Startbahnhof: ${start.name}</div><div class="logistics-grid">${stationFields(start)}</div></section>`;
+  } else startMount.innerHTML = '';
+
+  if (end) {
+    endMount.innerHTML = `<section class="logistics-box clickable" data-stop-focus="${end.name}"><div class="logistics-title">🏁 Endbahnhof: ${end.name}</div><div class="logistics-grid">${stationFields(end)}</div></section>`;
+  } else endMount.innerHTML = '';
+
+  document.querySelectorAll('[data-stop-focus]').forEach(el => {
+    el.addEventListener('click', () => focusStopOnMap(el.dataset.stopFocus));
+  });
+}
+
+function renderHotelInlineCard(hotel) {
+  return `<section class="logistics-box clickable" data-stop-focus="${hotel.name}"><div class="logistics-title">🏨 Hotel: ${hotel.name}</div><div class="logistics-grid">${hotel.address ? `<div class="logistics-item"><div class="label">Adresse</div><div class="value">${hotel.address}</div></div>` : ''}${hotel.notes ? `<div class="logistics-item"><div class="label">Notiz</div><div class="value">${hotel.notes}</div></div>` : ''}${hotel.hotelUrl ? `<div class="logistics-item"><div class="label">Link</div><div class="value"><a class="inline-link" href="${hotel.hotelUrl}" target="_blank" rel="noopener noreferrer">Hotel-Link öffnen</a></div></div>` : ''}</div></section>`;
 }
 
 function highlightStage(stage) { if (stage?.polyline) { stage.polyline.setStyle({ weight: 7, opacity: 1.0 }); stage.polyline.bringToFront(); } }
@@ -652,15 +643,28 @@ function renderStages(stages) {
     el.addEventListener('mouseenter', () => { el.classList.add('is-hovered'); highlightStage(stage); });
     el.addEventListener('mouseleave', () => { el.classList.remove('is-hovered'); if (APP.state.selectedStageId !== stage.id) resetStageHighlight(stage); });
     el.addEventListener('click', () => focusStage(stage));
-    el.querySelector('.stage-download-btn').addEventListener('click', ev => { ev.stopPropagation(); downloadStageGpx(stage); });
     mount.appendChild(el);
+    el.querySelector('.stage-download-btn').addEventListener('click', ev => { ev.stopPropagation(); downloadStageGpx(stage); });
     renderChart(`chart-${idx}`, stage);
+
+    if (stage.hotel) {
+      const hotelWrap = document.createElement('div');
+      hotelWrap.innerHTML = renderHotelInlineCard(stage.hotel);
+      const card = hotelWrap.firstElementChild;
+      card.addEventListener('click', ev => {
+        const target = ev.target.closest('a');
+        if (target) return;
+        focusStopOnMap(stage.hotel.name);
+      });
+      mount.appendChild(card);
+    }
   });
   applySelectionStyles();
 }
 
 function renderMap(stages, stops) {
   APP.routeLayerGroup.clearLayers();
+  APP.state.stopMarkers.clear();
   APP.stageNumberMarkers.forEach(m => { try { APP.map.removeLayer(m); } catch (e) {} });
   APP.stageNumberMarkers = [];
   stages.forEach(stage => {
@@ -677,11 +681,11 @@ function renderMap(stages, stops) {
   });
   stops.forEach(stop => {
     const marker = createStopMarker(stop).addTo(APP.routeLayerGroup);
+    APP.state.stopMarkers.set(stop.name, marker);
     let popupHtml = `<strong>${stop.name}</strong>`;
-    if (stop.type === 'start' || stop.type === 'end') {
-      if (stop.connection) popupHtml += `<br>${stop.connection}`;
-      if (stop.departureTime || stop.arrivalTime) popupHtml += `<br>${stop.departureTime || '-'} / ${stop.arrivalTime || '-'}`;
-    }
+    if (stop.meetingPoint) popupHtml += `<br>${stop.meetingPoint}`;
+    if (stop.connection) popupHtml += `<br>${stop.connection}`;
+    if (stop.departureTime || stop.arrivalTime) popupHtml += `<br>${stop.departureTime || '-'} / ${stop.arrivalTime || '-'}`;
     if (stop.type === 'overnight' && stop.hotelUrl) popupHtml += `<br><a href="${stop.hotelUrl}" target="_blank" rel="noopener noreferrer">Hotel-Link öffnen</a>`;
     marker.bindPopup(popupHtml);
   });
@@ -710,9 +714,8 @@ async function loadTour() {
   APP.state.stops = preparedStops;
   APP.state.stages = buildStages(points, preparedStops, APP.state.config);
   renderSummary(APP.state.stages, routeMeta.label);
-  renderStationBox(preparedStops);
+  renderStartAndEndBlocks(preparedStops);
   renderStages(APP.state.stages);
-  renderHotelBox(preparedStops);
   renderMap(APP.state.stages, preparedStops);
   updateFocusControls();
   setStatus(`${APP.state.stages.length} Tagesabschnitt(e) geladen`);

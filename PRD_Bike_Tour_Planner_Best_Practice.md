@@ -1,32 +1,29 @@
 # PRD – Bike Tour Planner (Best-Practice Kurzfassung für Repo)
 
-## Zielbild V19
-Die App trennt Tourdarstellung, Links und Logistik klar voneinander: Direkt nach der Tourauswahl stehen externe Links und Klassifizierung, danach Karte und Summary, anschließend Bahnhofsinfos vor den Etappen und Hotels nach den Etappen.
+## Zielbild V20
+Die Oberfläche priorisiert Informationshierarchie und Lesbarkeit: Kompakte externe Metadaten oben, Karte und Summary zentral, danach ein klarer Fluss aus Start, Etappen mit integrierten Hotels und abschließend Ziel.
 
-## Änderungen in V19
-1. **Neue Aufteilung der Oberfläche**
-   - Externe Links und ADFC-Bewertung zwischen Tourauswahl und Karte.
-   - Bahnhofs-/Start-Ziel-Infos in eigenem Kasten vor den Etappen.
-   - Hotels in eigenem Kasten nach den Etappen.
+## Änderungen in V20
+1. **Meta-Bereich komprimiert**
+   - Offizielle Tourismus-/Radweginfo als kleine, direkt verlinkte Überschrift.
+   - ADFC-Wertung als kleine, direkt verlinkte Überschrift mit kurzer Sternangabe (`x/5 Sterne`).
 
-2. **Manuelle ADFC-Bewertung**
-   - `adfcStars` und `adfcTourUrl` werden manuell in `data/routes.json` gepflegt.
-   - Anzeige nur, wenn Werte vorhanden sind.
+2. **Startbahnhof vor den Etappen**
+   - Vollbreiter Kasten oberhalb der ersten Etappe.
+   - Klick verlinkt auf den Marker in der Karte.
 
-3. **Erweiterte Bahnhofslogistik**
-   - Start und Ziel unterstützen:
-     - Treffpunkt
-     - Abfahrtszeit
-     - Ankunftszeit
-     - bis zu 3 Umstiege
-     - bis zu 10 Sitzplatzreservierungen
-     - bis zu 10 Radplatzreservierungen
-   - Leere Listen oder fehlende Werte werden nicht angezeigt.
+3. **Endbahnhof nach den Etappen**
+   - Vollbreiter Kasten unterhalb der letzten Etappe.
+   - Klick verlinkt auf den Marker in der Karte.
 
-4. **Exporte bleiben vollständig**
-   - ZIP enthält Gesamtstrecke + Etappen + README + Tour-Steckbrief.
-   - README/TXT spiegeln die neuen Logistikdaten wider.
+4. **Hotels als Etappen-Zwischenblöcke**
+   - Jeder Hotelstopp wird als eigener Vollbreiten-Block direkt nach der Etappe angezeigt, die dort endet.
+   - Klick verlinkt auf den Marker in der Karte.
+
+5. **Bahnhofslogistik unverändert vollständig**
+   - Treffpunkt, Abfahrts-/Ankunftszeit, Verbindung, Wagen, bis zu 3 Umstiege, bis zu 10 Sitz- und Radplatzreservierungen.
+   - Leere Felder bleiben unsichtbar.
 
 ## Entschlackung
-- Fokus nur auf aktuelle Kernbereiche: Tourwahl, Links/Klassifizierung, Karte, Etappen, Bahnhof, Hotels, Exporte.
-- Veraltete Zwischenstufen wurden entfernt.
+- Fokus ausschließlich auf Layout, Mapping zwischen Kartenobjekten und UI-Blöcken sowie bestehende Exporte.
+- Keine zusätzlichen neuen Featurezweige außerhalb dieses Layout-Umbaus.
