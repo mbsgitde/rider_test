@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Salzburg Hbf",
+    "type": "start",
+    "address": "Salzburg Hauptbahnhof",
+    "lat": 47.813,
+    "lon": 13.0457,
+    "connection": "RJX 561 Wien Hbf → Salzburg Hbf",
+    "carriageNumber": "Wagen 21",
+    "reservedSeat": "Sitzplatz 64",
+    "reservedBikeSpot": "Radplatz B07"
+  },
+  {
+    "name": "Bad Gastein Hotel",
+    "type": "overnight",
+    "address": "Bad Gastein",
+    "hotelUrl": "https://www.booking.com/searchresults.de.html?ss=Bad+Gastein",
+    "lat": 47.1156,
+    "lon": 13.1324,
+    "notes": "Dummyhotel nahe Bahnhof"
+  },
+  {
+    "name": "Villach Hotel",
+    "type": "overnight",
+    "address": "Villach",
+    "hotelUrl": "https://www.booking.com/searchresults.de.html?ss=Villach",
+    "lat": 46.6149,
+    "lon": 13.8498,
+    "notes": "Dummyhotel in Zentrumsnähe"
+  },
+  {
+    "name": "Grado Bahnhof Shuttle",
+    "type": "end",
+    "address": "Grado / Rücktransfer",
+    "lat": 45.6777,
+    "lon": 13.3976,
+    "connection": "Micotra + Railjet Grado Shuttle → Villach Hbf → Salzburg Hbf",
+    "carriageNumber": "Wagen 08",
+    "reservedSeat": "Sitzplatz 32",
+    "reservedBikeSpot": "Radplatz A03"
+  }
+]

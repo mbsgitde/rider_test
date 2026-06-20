@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bike Tour Planner – GitHub Pages Starter V14</title>
+  <title>Bike Tour Planner – GitHub Pages Starter V18</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -13,26 +13,27 @@
 <body>
   <div class="container">
     <h1>🚴 Bike Tour Planner</h1>
-    <p class="lead">V14 ergänzt ZIP-Downloads für alle Etappen, schönere Dateinamen, einen prominenten Download für die aktive Etappe und trennt das Farbschema von Schwierigkeit und Tourabschnitten klar voneinander.</p>
-
+    <p class="lead">V18 trennt die Logistikmarker klar von den Etappenfarben, ergänzt optionale ADFC-Sterne mit Tour-Link und erweitert die Exporte um einen kompakten Tour-Steckbrief sowie verbesserte Templates und ZIP-Dokumentation.</p>
     <div class="controls">
       <label for="routeSelect">Tour:</label>
       <select id="routeSelect"></select>
       <button id="loadBtn">Tour laden</button>
       <button id="downloadFullGpxBtn" class="secondary">Gesamt-GPX herunterladen</button>
-      <button id="downloadAllStagesZipBtn" class="secondary">Alle Etappen als ZIP herunterladen</button>
+      <button id="downloadAllStagesZipBtn" class="secondary">Gesamt + Etappen als ZIP herunterladen</button>
+      <button id="downloadTourBriefBtn" class="secondary">Tour-Steckbrief als TXT herunterladen</button>
+      <a id="officialDescriptionLink" class="control-link hidden" target="_blank" rel="noopener noreferrer">Offizielle Radwegbeschreibung</a>
+      <a id="adfcTourLink" class="control-link hidden" target="_blank" rel="noopener noreferrer">ADFC-Tour öffnen</a>
       <button id="downloadActiveStageBtn" class="secondary hidden">Aktive Etappe als GPX herunterladen</button>
       <button id="prevStageBtn" class="secondary hidden">← Vorherige Etappe</button>
       <button id="nextStageBtn" class="secondary hidden">Nächste Etappe →</button>
       <button id="resetStageFocusBtn" class="secondary hidden">Alle Etappen anzeigen</button>
       <span id="status">Initialisiere …</span>
     </div>
-
     <div id="map"></div>
     <div id="summary" class="summary-grid"></div>
+    <div id="routeOverview"></div>
     <div id="stages" class="stage-list"></div>
-
-    <p class="footer-note">V14: Downloads verwenden jetzt sprechende Dateinamen mit Route und Datum. Die Etappenfarben sind bewusst von den Schwierigkeitsfarben getrennt, damit es keine Verwechslungsgefahr mehr gibt.</p>
+    <p class="footer-note">V18: ADFC-Sterne und ADFC-Link werden nur angezeigt, wenn sie in `data/routes.json` gepflegt sind. Start, Ziel und Hotels verwenden dieselbe dezente Markerfarbe.</p>
   </div>
   <script src="assets/app.js"></script>
 </body>

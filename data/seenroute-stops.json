@@ -1,0 +1,33 @@
+[
+  {
+    "name": "Füssen Bahnhof",
+    "type": "start",
+    "address": "Füssen Bahnhof",
+    "lat": 47.5705,
+    "lon": 10.7007,
+    "connection": "RE 3885 München Hbf → Füssen",
+    "carriageNumber": "Wagen 04",
+    "reservedSeat": "Sitzplatz 18",
+    "reservedBikeSpot": "Radplatz R02"
+  },
+  {
+    "name": "Hotel Tegernsee",
+    "type": "overnight",
+    "address": "Tegernsee",
+    "hotelUrl": "https://www.booking.com/searchresults.de.html?ss=Tegernsee",
+    "lat": 47.7123,
+    "lon": 11.7584,
+    "notes": "Dummyhotel direkt am See"
+  },
+  {
+    "name": "Prien am Chiemsee Bahnhof",
+    "type": "end",
+    "address": "Prien am Chiemsee",
+    "lat": 47.856,
+    "lon": 12.394,
+    "connection": "RB 27023 Prien a. Chiemsee → München Hbf",
+    "carriageNumber": "Wagen 06",
+    "reservedSeat": "Sitzplatz 45",
+    "reservedBikeSpot": "Radplatz R11"
+  }
+]

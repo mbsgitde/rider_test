@@ -1,11 +1,33 @@
 # PRD – Bike Tour Planner (Best-Practice Kurzfassung für Repo)
 
-## Änderungen in V14
-1. **Alle Etappen als ZIP herunterladen**: Für die aktuell geladene Tour können alle Tagesetappen gesammelt als ZIP-Datei heruntergeladen werden.
-2. **Schönere Dateinamen**: GPX- und ZIP-Dateien verwenden jetzt sprechende Dateinamen mit Routennamen, Etappennummer und aktuellem Datum.
-3. **Prominenter Download der aktiven Etappe**: Wenn eine Etappe fokussiert ist, erscheint zusätzlich im oberen Steuerbereich ein gut sichtbarer Download-Button für genau diese aktive Etappe.
-4. **Getrenntes Farbschema**: Die Schwierigkeits-Badges bleiben im Ski-Pisten-Schema (Blau / Rot / Schwarz), während die farbigen Tourabschnitte bewusst eine andere Farbpalette verwenden, um Verwechslungen zu vermeiden.
-5. **Bestehende Features bleiben erhalten**: HOT als Default-Karte, Fokusmodus, klickbare Etappenmarker auf der Karte, kombinierte Anzeige von Brutto-Fahrzeit und Pausen, Hotelmarker-Popups, Zeitformat `hh:mm`, Höhenprofil mit km-Achse, Hover-Hilfslinie, Rest-km/Restzeit, Markierung steiler Abschnitte sowie GPX-Download für Gesamtstrecke und einzelne Etappen.
+## Zielbild V18
+Die App bündelt Tourdarstellung, Export und Logistik in einer klaren, aufgeräumten Oberfläche. Logistikobjekte (Start, Ziel, Hotels) sollen die Kartensicht nicht visuell stören, aber in der Übersicht und im Export vollständig dokumentiert sein.
 
-## UX-Ziel
-Die App soll Touren nicht nur analysieren, sondern als vollständiges Export-Werkzeug dienen. Downloads sollen einem klaren, konsistenten Namensschema folgen und im aktiven Nutzungskontext besonders schnell erreichbar sein.
+## Änderungen in V18
+1. **Kartendarstellung Logistik entschärft**
+   - Start, Ziel und Hotels nutzen dieselbe dezente Markerfarbe.
+   - Etappenfarben bleiben ausschließlich den Streckenabschnitten vorbehalten.
+
+2. **Optionale ADFC-Darstellung**
+   - Pro Route können in `data/routes.json` optional `adfcStars` und `adfcTourUrl` gepflegt werden.
+   - Die Oberfläche zeigt Sterne und Link nur dann, wenn valide Daten vorhanden sind.
+   - Ohne gepflegte ADFC-Sterne wird nichts suggeriert.
+
+3. **Logistikübersicht bleibt kompakt**
+   - Separate, platzoptimierte Bereiche für:
+     - Start & Ziel (Anreise / Rückreise)
+     - Hotels
+     - offizielle / ADFC-Links
+
+4. **Exporte erweitert**
+   - ZIP-Export enthält Gesamtstrecke + Etappen.
+   - ZIP-README dokumentiert Route, offizielle Beschreibung, ADFC-Daten, Start/Ziel, Hotels und enthaltene Dateien.
+   - Ein kompakter Tour-Steckbrief kann zusätzlich als TXT exportiert werden.
+
+5. **Datenpflege erleichtert**
+   - Template-Dateien für Routen und Stops liegen im Repo.
+   - README beschreibt die relevanten Felder prägnant.
+
+## Entschlackung
+- Ältere Zwischenstände und überflüssige Wiederholungen wurden gestrichen.
+- Fokus nur auf aktuell sichtbare Kernfunktionen: Route laden, Karte, Etappen, Logistik, Links und Exporte.
