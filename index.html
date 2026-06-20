@@ -1,96 +1,53 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Rider Test – Touren & GPX Dashboard</title>
-  <meta name="description" content="Statisches GitHub-Pages Dashboard für Rider-Touren, GPX-Tracks und Tourendaten." />
-  <link rel="preconnect" href="https://unpkg.com">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQ4M8xYfby58M28HMj7bSOo7i6zDQ5I=" crossorigin="" />
-  <link rel="stylesheet" href="assets/styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bike Tour Planner – GitHub Pages Starter V19</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+  <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
-  <header class="hero">
-    <nav class="nav" aria-label="Hauptnavigation">
-      <a class="brand" href="#top" aria-label="Rider Test Startseite">
-        <span class="brand-mark">R</span>
-        <span>Rider Test</span>
-      </a>
-      <div class="nav-links">
-        <a href="#touren">Touren</a>
-        <a href="#karte">Karte</a>
-        <a href="#daten">Daten</a>
-      </div>
-    </nav>
-    <section id="top" class="hero-grid">
-      <div>
-        <p class="eyebrow">GitHub Pages · Static Web App</p>
-        <h1>Touren, GPX-Tracks und Rider-Daten übersichtlich weiterentwickeln.</h1>
-        <p class="lead">Diese Version ist bewusst als wartbarer, rein statischer Code aufgebaut: HTML, CSS, JavaScript, JSON und GPX-Dateien. Ideal als Grundlage für dein GitHub-Pages Repository.</p>
-        <div class="actions">
-          <a class="button primary" href="#touren">Touren ansehen</a>
-          <a class="button secondary" href="gpx/demo-track.gpx" download>Demo-GPX laden</a>
-        </div>
-      </div>
-      <aside class="status-card" aria-label="Projektstatus">
-        <span class="pulse"></span>
-        <h2>Live-Prototyp</h2>
-        <p>Bereit für weitere Features wie Upload, Admin-Bereich, Filter, Ranking oder Tour-Archiv.</p>
-        <dl class="metrics">
-          <div><dt>Touren</dt><dd id="metricTours">–</dd></div>
-          <div><dt>Distanz</dt><dd id="metricDistance">–</dd></div>
-          <div><dt>GPX</dt><dd id="metricGpx">–</dd></div>
-        </dl>
-      </aside>
-    </section>
-  </header>
+  <div class="container">
+    <h1>🚴 Bike Tour Planner</h1>
+    <p class="lead">V19 ordnet die Oberfläche neu: Offizielle Links und ADFC-Bewertung stehen direkt unter der Tourauswahl, Bahnhofsinfos in eigener Box vor den Etappen und Hotels in eigener Box nach den Etappen.</p>
+    <div class="controls">
+      <label for="routeSelect">Tour:</label>
+      <select id="routeSelect"></select>
+      <button id="loadBtn">Tour laden</button>
+      <button id="downloadFullGpxBtn" class="secondary">Gesamt-GPX herunterladen</button>
+      <button id="downloadAllStagesZipBtn" class="secondary">Gesamt + Etappen als ZIP herunterladen</button>
+      <button id="downloadTourBriefBtn" class="secondary">Tour-Steckbrief als TXT herunterladen</button>
+      <button id="downloadActiveStageBtn" class="secondary hidden">Aktive Etappe als GPX herunterladen</button>
+      <button id="prevStageBtn" class="secondary hidden">← Vorherige Etappe</button>
+      <button id="nextStageBtn" class="secondary hidden">Nächste Etappe →</button>
+      <button id="resetStageFocusBtn" class="secondary hidden">Alle Etappen anzeigen</button>
+      <span id="status">Initialisiere …</span>
+    </div>
 
-  <main>
-    <section id="touren" class="section">
-      <div class="section-heading">
-        <p class="eyebrow">Übersicht</p>
-        <h2>Touren</h2>
-        <p>Die Karten werden aus <code>data/tours.json</code> geladen. Neue Touren kannst du später einfach dort ergänzen.</p>
+    <div id="metaBar">
+      <div id="tourismMetaCard" class="meta-bar-card hidden">
+        <div class="title">🔗 Tourismus / offizielle Beschreibung</div>
+        <div id="tourismMetaContent" class="content"></div>
       </div>
-      <div class="toolbar">
-        <input id="searchInput" type="search" placeholder="Tour suchen …" aria-label="Tour suchen">
-        <select id="typeFilter" aria-label="Tourtyp filtern">
-          <option value="all">Alle Typen</option>
-        </select>
+      <div id="adfcMetaCard" class="meta-bar-card hidden">
+        <div class="title">⭐ ADFC-Bewertung</div>
+        <div id="adfcStarsInline" class="star-row muted">☆☆☆☆☆</div>
+        <a id="adfcTourLinkInline" class="inline-link hidden" target="_blank" rel="noopener noreferrer">ADFC-Tour öffnen</a>
       </div>
-      <div id="tourGrid" class="tour-grid" aria-live="polite"></div>
-    </section>
+    </div>
 
-    <section id="karte" class="section split">
-      <div>
-        <p class="eyebrow">GPX Preview</p>
-        <h2>Karte</h2>
-        <p>Die Demo lädt einen GPX-Track aus dem Ordner <code>gpx/</code>. Du kannst weitere Tracks im JSON referenzieren.</p>
-        <div id="selectedTour" class="selected-tour">Noch keine Tour ausgewählt.</div>
-      </div>
-      <div id="map" class="map" role="application" aria-label="GPX Kartenansicht"></div>
-    </section>
+    <div id="map"></div>
+    <div id="summary" class="summary-grid"></div>
+    <div id="stationBox"></div>
+    <div id="stages" class="stage-list"></div>
+    <div id="hotelBox"></div>
 
-    <section id="daten" class="section">
-      <div class="section-heading">
-        <p class="eyebrow">Struktur</p>
-        <h2>So entwickelst du weiter</h2>
-      </div>
-      <div class="info-grid">
-        <article class="info-card"><h3>1. Inhalte</h3><p>Touren in <code>data/tours.json</code> pflegen.</p></article>
-        <article class="info-card"><h3>2. GPX</h3><p>Tracks in <code>gpx/</code> ablegen und im JSON verlinken.</p></article>
-        <article class="info-card"><h3>3. Design</h3><p>Farben, Layout und Komponenten in <code>assets/styles.css</code> anpassen.</p></article>
-        <article class="info-card"><h3>4. Logik</h3><p>Filter, Karte und Datenlogik in <code>assets/app.js</code> erweitern.</p></article>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <span>© <span id="year"></span> Rider Test</span>
-    <a href="#top">Nach oben ↑</a>
-  </footer>
-
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <p class="footer-note">V19: ADFC-Sterne sind jetzt manuell im JSON pflegbar. Bahnhofsdetails wie Treffpunkt, Zeiten, Umstiege und Reservierungen werden nur angezeigt, wenn sie befüllt sind.</p>
+  </div>
   <script src="assets/app.js"></script>
 </body>
 </html>
