@@ -279,32 +279,20 @@ function updateTopMetaBar(routeMeta) {
   const adfcLink = document.getElementById('adfcTourLinkInline');
   const adfcStarsEl = document.getElementById('adfcStarsInline');
   const adfcTitle = adfcCard?.querySelector('.title');
-
   const hasTourism = !!routeMeta?.officialDescriptionUrl;
   tourismCard.classList.toggle('hidden', !hasTourism);
-  if (tourismTitle) {
-    tourismTitle.innerHTML = hasTourism
-      ? `<a class="meta-title-link" href="${routeMeta.officialDescriptionUrl}" target="_blank" rel="noopener noreferrer">🔗 Tourismus / offizielle Beschreibung</a>`
-      : '🔗 Tourismus / offizielle Beschreibung';
-  }
+  if (tourismTitle) tourismTitle.innerHTML = hasTourism ? `<a class="meta-title-link" href="${routeMeta.officialDescriptionUrl}" target="_blank" rel="noopener noreferrer">🔗 Tourismus / offizielle Beschreibung</a>` : '🔗 Tourismus / offizielle Beschreibung';
   if (tourismContent) tourismContent.innerHTML = '';
-
   const hasValidStars = Number.isInteger(routeMeta?.adfcStars) && routeMeta.adfcStars >= 1 && routeMeta.adfcStars <= 5;
   const stars = hasValidStars ? `${'★'.repeat(routeMeta.adfcStars)}${'☆'.repeat(5 - routeMeta.adfcStars)}` : '';
   const hasAdfcInfo = (!!routeMeta?.adfcTourUrl) || hasValidStars;
   adfcCard.classList.toggle('hidden', !hasAdfcInfo);
-
   if (adfcTitle) {
     const label = `${stars ? `<span class="star-row">${stars}</span> ` : ''}ADFC-Bewertung`;
-    adfcTitle.innerHTML = routeMeta?.adfcTourUrl
-      ? `<a class="meta-title-link" href="${routeMeta.adfcTourUrl}" target="_blank" rel="noopener noreferrer">${label}</a>`
-      : label;
+    adfcTitle.innerHTML = routeMeta?.adfcTourUrl ? `<a class="meta-title-link" href="${routeMeta.adfcTourUrl}" target="_blank" rel="noopener noreferrer">${label}</a>` : label;
   }
   if (adfcStarsEl) adfcStarsEl.innerHTML = '';
-  if (adfcLink) {
-    adfcLink.classList.add('hidden');
-    adfcLink.removeAttribute('href');
-  }
+  if (adfcLink) { adfcLink.classList.add('hidden'); adfcLink.removeAttribute('href'); }
 }
 
 async function initializeApp() {
@@ -583,31 +571,30 @@ function renderHotelCard(hotel) {
 
 function renderTransferDetails(stop) {
   if (!Array.isArray(stop.transfers) || !stop.transfers.length) return '';
-  return `<details class="compact-details"><summary>Umstiege (${stop.transfers.length})</summary><ul>${stop.transfers.map(t => `<li>${t.label}${t.arrivalTime || t.departureTime ? ` (${t.arrivalTime || '-'} / ${t.departureTime || '-'})` : ''}</li>`).join('')}</ul></details>`;
+  return `<details class="compact-details transfer-details"><summary>Umstiege (${stop.transfers.length})</summary><ul>${stop.transfers.map(t => `<li>${t.label}${t.arrivalTime || t.departureTime ? ` (${t.arrivalTime || '-'} / ${t.departureTime || '-'})` : ''}</li>`).join('')}</ul></details>`;
 }
 
-function renderReservationDetails(stop) {
-  const parts = [];
-  if (Array.isArray(stop.reservedSeats) && stop.reservedSeats.length) {
-    parts.push(`<div><strong>Sitzplätze:</strong>${formatReservationPills(stop.reservedSeats)}</div>`);
-  }
-  if (Array.isArray(stop.reservedBikeSpots) && stop.reservedBikeSpots.length) {
-    parts.push(`<div><strong>Radplätze:</strong>${formatReservationPills(stop.reservedBikeSpots)}</div>`);
-  }
-  if (!parts.length) return '';
-  return `<details class="compact-details"><summary>Reservierungen</summary>${parts.join('')}</details>`;
+function renderReservationInline(stop) {
+  const rows = [];
+  if (Array.isArray(stop.reservedSeats) && stop.reservedSeats.length) rows.push(`<span class="reservation-group"><strong>Sitz:</strong>${formatReservationPills(stop.reservedSeats)}</span>`);
+  if (Array.isArray(stop.reservedBikeSpots) && stop.reservedBikeSpots.length) rows.push(`<span class="reservation-group"><strong>Rad:</strong>${formatReservationPills(stop.reservedBikeSpots)}</span>`);
+  return rows.length ? `<div class="reservation-inline">${rows.join('')}</div>` : '';
 }
 
-function renderStationInlineCard(stop, mode) {
+function renderStationInlineCard(stop, mode, accentColor) {
   if (!stop) return null;
   const wrapper = document.createElement('aside');
   wrapper.className = `station-inline-card station-inline-card-${mode}`;
   wrapper.dataset.stopName = stop.name;
+  if (accentColor) wrapper.style.setProperty('--station-accent', accentColor);
   wrapper.innerHTML = `
     <div class="overview-card compact-logistics-card ${mode === 'start' ? 'start-card' : 'end-card'}">
       <div class="compact-card-head">
         <div class="title">${mode === 'start' ? '🚉 Start' : '🏁 Ziel'}: ${stop.name}</div>
-        ${stop.carriageNumber ? `<span class="badge">${stop.carriageNumber}</span>` : ''}
+        <div class="station-head-tools">
+          ${stop.carriageNumber ? `<span class="badge station-wagon-badge">${stop.carriageNumber}</span>` : ''}
+          ${renderTransferDetails(stop)}
+        </div>
       </div>
       <div class="compact-info-line">
         ${stop.meetingPoint ? `<span><strong>Treffpunkt:</strong> ${stop.meetingPoint}</span>` : ''}
@@ -615,10 +602,7 @@ function renderStationInlineCard(stop, mode) {
         ${stop.connection ? `<span><strong>Verbindung:</strong> ${stop.connection}</span>` : ''}
         ${stop.address ? `<span class="muted">${stop.address}</span>` : ''}
       </div>
-      <div class="compact-extra-row">
-        ${renderTransferDetails(stop)}
-        ${renderReservationDetails(stop)}
-      </div>
+      ${renderReservationInline(stop)}
     </div>
   `;
   stop.element = wrapper;
@@ -687,7 +671,9 @@ function moveStageFocus(delta) {
 function createStopMarker(stop) {
   const htmlIcon = stop.type === 'overnight' ? '🏨' : (stop.type === 'start' ? 'S' : 'Z');
   const icon = L.divIcon({ className: '', html: `<div class="logistics-label-marker">${htmlIcon}</div>`, iconSize: [28, 28], iconAnchor: [14, 14], popupAnchor: [0, -10] });
-  return L.marker([stop.lat, stop.lon], { icon });
+  const bgStyle = stop.markerColor ? ` style="background:${stop.markerColor}"` : '';
+  const coloredIcon = L.divIcon({ className: '', html: `<div class="logistics-label-marker"${bgStyle}>${htmlIcon}</div>`, iconSize: [28, 28], iconAnchor: [14, 14], popupAnchor: [0, -10] });
+  return L.marker([stop.lat, stop.lon], { icon: coloredIcon });
 }
 
 function createStageNumberMarker(stage) {
@@ -701,13 +687,13 @@ function renderStages(stages) {
   mount.innerHTML = '';
   const startStop = APP.state.stops.find(stop => stop.type === 'start');
   const endStop = [...APP.state.stops].reverse().find(stop => stop.type === 'end');
-  const startCard = renderStationInlineCard(startStop, 'start');
+  const startCard = renderStationInlineCard(startStop, 'start', stages[0]?.color);
   if (startCard) mount.appendChild(startCard);
   stages.forEach((stage, idx) => {
     const el = document.createElement('section');
     stage.element = el;
     el.className = 'stage';
-    el.innerHTML = `<div class="stage-color" style="background:${stage.color}"></div><div class="stage-body"><div class="stage-head"><div class="stage-title">Etappe ${stage.id}: ${stage.name}</div><div class="stage-tools"><button class="stage-download-btn" type="button">Etappen-GPX herunterladen</button><div class="badge ${getDifficultyBadgeClass(stage.difficulty)}">${stage.difficulty}</div></div></div><div class="meta"><div class="meta-item"><div class="label">Distanz</div><div class="value">${stage.dist.toFixed(1)} km</div></div><div class="meta-item"><div class="label">Höhenmeter</div><div class="value">↑ ${Math.round(stage.up)} m</div></div><div class="meta-item"><div class="label">Höhenmeter</div><div class="value">↓ ${Math.round(stage.down)} m</div></div><div class="meta-item"><div class="label">Netto-Fahrzeit</div><div class="value">${formatDurationWithUnit(stage.netRideTimeHours)}</div></div><div class="meta-item"><div class="label">Brutto inkl. Pausen</div><div class="value">${formatDurationWithUnit(stage.grossRideTimeHours)}<span class="subline">Pausen: ${formatDurationWithUnit(stage.totalPauseMinutes / 60)}</span></div></div></div><div class="canvas-wrap" style="height:220px"><canvas id="chart-${idx}"></canvas></div>${stage.plausibilityLevel ? `<div class="small-note">${stage.plausibilityMessage}</div>` : ''}</div>`;
+    el.innerHTML = `<div class="stage-color" style="background:${stage.color}"></div><div class="stage-body"><div class="stage-head"><div class="stage-title"><span class="stage-title-number" style="background:${stage.color}">${stage.id}</span><span class="stage-title-text">${stage.name}</span></div><div class="stage-tools"><button class="stage-download-btn" type="button">Etappen-GPX herunterladen</button><div class="badge ${getDifficultyBadgeClass(stage.difficulty)}">${stage.difficulty}</div></div></div><div class="meta"><div class="meta-item"><div class="label">Distanz</div><div class="value">${stage.dist.toFixed(1)} km</div></div><div class="meta-item"><div class="label">Höhenmeter</div><div class="value">↑ ${Math.round(stage.up)} m</div></div><div class="meta-item"><div class="label">Höhenmeter</div><div class="value">↓ ${Math.round(stage.down)} m</div></div><div class="meta-item"><div class="label">Netto-Fahrzeit</div><div class="value">${formatDurationWithUnit(stage.netRideTimeHours)}</div></div><div class="meta-item"><div class="label">Brutto inkl. Pausen</div><div class="value">${formatDurationWithUnit(stage.grossRideTimeHours)} <span class="inline-pause">(Pausen ${formatDurationWithUnit(stage.totalPauseMinutes / 60)})</span></div></div></div><div class="canvas-wrap" style="height:180px"><canvas id="chart-${idx}"></canvas></div>${stage.plausibilityLevel ? `<div class="small-note">${stage.plausibilityMessage}</div>` : ''}</div>`;
     el.addEventListener('mouseenter', () => { el.classList.add('is-hovered'); highlightStage(stage); });
     el.addEventListener('mouseleave', () => { el.classList.remove('is-hovered'); if (APP.state.selectedStageId !== stage.id) resetStageHighlight(stage); });
     el.addEventListener('click', () => focusStage(stage));
@@ -722,7 +708,7 @@ function renderStages(stages) {
     }
     renderChart(`chart-${idx}`, stage);
   });
-  const endCard = renderStationInlineCard(endStop, 'end');
+  const endCard = renderStationInlineCard(endStop, 'end', stages[stages.length - 1]?.color);
   if (endCard) mount.appendChild(endCard);
   applySelectionStyles();
 }
@@ -743,7 +729,11 @@ function renderMap(stages, stops) {
       APP.stageNumberMarkers.push(marker);
     }
   });
+  const firstStageColor = stages[0]?.color;
+  const lastStageColor = stages[stages.length - 1]?.color;
   stops.forEach(stop => {
+    if (stop.type === 'start' && firstStageColor) stop.markerColor = firstStageColor;
+    if (stop.type === 'end' && lastStageColor) stop.markerColor = lastStageColor;
     const marker = createStopMarker(stop).addTo(APP.routeLayerGroup);
     let popupHtml = `<strong>${stop.name}</strong>`;
     if (stop.type === 'start' || stop.type === 'end') {
