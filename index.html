@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bike Tour Planner – GitHub Pages Starter V2</title>
+  <title>Bike Tour Planner – GitHub Pages Starter V7</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -12,13 +12,11 @@
 <body>
   <div class="container">
     <h1>🚴 Bike Tour Planner</h1>
-    <p class="lead">Statische Tourenplanung auf GitHub Pages mit dynamischer Tourliste, umschaltbarer Kartenansicht, Höhenprofilen, Netto-/Brutto-Fahrzeit und Plausibilitätswarnungen.</p>
+    <p class="lead">Statische Tourenplanung auf GitHub Pages mit Zeitdarstellung im Format hh:mm, interaktiver Etappenliste, Hotel-Links in Karten-Popups und komoot-artigem Overlay im Höhenprofil.</p>
 
     <div class="controls">
       <label for="routeSelect">Tour:</label>
       <select id="routeSelect"></select>
-      <label for="mapStyleSelect">Kartenansicht:</label>
-      <select id="mapStyleSelect"></select>
       <button id="loadBtn">Tour laden</button>
       <span id="status">Initialisiere …</span>
     </div>
@@ -27,7 +25,7 @@
     <div id="summary" class="summary-grid"></div>
     <div id="stages" class="stage-list"></div>
 
-    <p class="footer-note">Hinweis: Diese Version erweitert die App um eine umschaltbare Kartenansicht sowie ein dynamisches Tour-Dropdown auf Basis der vorhandenen GPX-Dateien (technisch über <code>data/routes.json</code>).</p>
+    <p class="footer-note">V7: Alle Zeiten werden im Format hh:mm angezeigt – sowohl in der Etappenübersicht, in der Summary als auch im Hover-Overlay des Höhenprofils.</p>
   </div>
   <script src="assets/app.js"></script>
 </body>

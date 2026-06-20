@@ -1,27 +1,22 @@
-# Bike Tour Planner – GitHub Pages Starter V2
+# Bike Tour Planner – GitHub Pages Starter V7
 
-## Neue Features
-1. **Kartenansicht umschalten**: Standard, Humanitarian und Topografisch.
-2. **Dynamisches Tour-Dropdown**: Die Tourliste wird aus `data/routes.json` geladen. Diese Datei ist aus den vorhandenen GPX-Dateien im Ordner `/gpx` abgeleitet.
+## Änderung in V7
+- **Zeitformat überall auf `hh:mm`** umgestellt.
 
-## Wichtiger Hinweis für GitHub Pages
-Direktes Einlesen eines Ordnerinhalts im Browser ist auf GitHub Pages nicht zuverlässig möglich. Deshalb wird die dynamische Tourliste GitHub-Pages-kompatibel über eine erzeugte Manifestdatei `data/routes.json` umgesetzt.
+## Das gilt für
+- Netto-Fahrzeit je Etappe
+- Brutto-Fahrzeit je Etappe
+- Gesamt-Netto-Fahrzeit in der Summary
+- Gesamt-Brutto-Fahrzeit in der Summary
+- Hover-Overlay im Höhenprofil
 
-## Inhalt
-```text
-index.html
-assets/
-  app.js
-  styles.css
-gpx/
-  alps.gpx
-  lake.gpx
-data/
-  config.json
-  config.md
-  routes.json
-  alps-stops.json
-  lake-stops.json
-PRD_Bike_Tour_Planner_Best_Practice.md
-README.md
-```
+## Bereits enthalten
+- Hotelmarker-Popup mit Direktlink
+- Höhenprofil-Hover mit Overlay
+- Klick auf Etappe → Karte zoomt auf genau diese Etappe
+- Hover auf Etappe → Kartenabschnitt wird hervorgehoben
+- Unterkunftsmarker optisch anders als normale Stops
+- Overlay-Control für Kartenansicht
+- dynamisches Tour-Dropdown über `data/routes.json`
+- Pausen = Kurzpausen + große Pause
+- Schwierigkeit als farbiger Badge analog Ski-Pisten
