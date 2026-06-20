@@ -1,0 +1,32 @@
+[
+  {
+    "id": "isar-loop",
+    "title": "Isar Loop",
+    "type": "Training",
+    "region": "München",
+    "distanceKm": 42.3,
+    "difficulty": "Mittel",
+    "gpx": "gpx/demo-track.gpx",
+    "description": "Kurze Trainingsrunde entlang der Isar mit urbanen und grünen Abschnitten."
+  },
+  {
+    "id": "alpenblick",
+    "title": "Alpenblick Ride",
+    "type": "Ausfahrt",
+    "region": "Oberbayern",
+    "distanceKm": 86.7,
+    "difficulty": "Anspruchsvoll",
+    "gpx": "gpx/demo-track.gpx",
+    "description": "Längere Ausfahrt mit welligem Profil und schönen Blickachsen Richtung Alpen."
+  },
+  {
+    "id": "city-test",
+    "title": "City Test Track",
+    "type": "Test",
+    "region": "München",
+    "distanceKm": 18.5,
+    "difficulty": "Leicht",
+    "gpx": "gpx/demo-track.gpx",
+    "description": "Kompakter Test-Track für Navigation, Kartendarstellung und mobile Ansicht."
+  }
+]

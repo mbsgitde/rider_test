@@ -1,38 +1,37 @@
-# Bike Tour Planner – GitHub Pages Starter V19
+# Rider Test – GitHub Pages Vorlage
 
-## Änderungen in V19
-1. **Bahnhof und Hotels als eigene Kästen**
-   - Start und Ziel werden als eigene Bahnhofssektion **vor** den Etappen dargestellt.
-   - Hotels werden als eigene Sektion **nach** den Etappen dargestellt.
+Statische Weiterentwicklung der bestehenden `rider_test`-Idee als GitHub-Pages-kompatible Website.
 
-2. **Tourismus-URL und ADFC-Bewertung zwischen Tourauswahl und Karte**
-   - Der Bereich zwischen Tourauswahl und Karte zeigt:
-     - offiziellen Tourismus-/Radwegelink
-     - manuell gepflegte ADFC-Sterne
-     - ADFC-Link
+## Struktur
 
-3. **ADFC-Bewertung manuell im JSON**
-   - `data/routes.json` unterstützt:
-     - `adfcStars`
-     - `adfcTourUrl`
-   - Sterne werden symbolisch (`★`) dargestellt.
+```text
+index.html
+assets/styles.css
+assets/app.js
+data/tours.json
+gpx/demo-track.gpx
+```
 
-4. **Bahnhofsdetails erweitert**
-   - Für `start` und `end` unterstützt das Stop-JSON jetzt zusätzlich:
-     - `meetingPoint`
-     - `departureTime`
-     - `arrivalTime`
-     - `transfers` (0–3 Einträge)
-     - `reservedSeats` (0–10 Einträge)
-     - `reservedBikeSpots` (0–10 Einträge)
-   - Leere Bereiche werden in der UI automatisch ausgeblendet.
+## Lokal testen
 
-5. **Templates aktualisiert**
-   - `data/routes-template.json`
-   - `data/stops-template.json`
+Da die Seite JSON/GPX per `fetch()` lädt, am besten über einen lokalen Webserver starten:
 
-## Beispielroute Alpe Adria
-- offizieller Radwegelink hinterlegt
-- ADFC-Tour-Link hinterlegt
-- manuelle ADFC-Sterne: 4
-- Dummywerte für Treffpunkt, Zeiten, Umstiege und Reservierungen enthalten
+```bash
+python3 -m http.server 8000
+```
+
+Dann öffnen: <http://localhost:8000>
+
+## Deployment auf GitHub Pages
+
+1. Dateien in dein Repository kopieren.
+2. Commit & Push auf `main`.
+3. In GitHub: **Settings → Pages → Deploy from a branch → main / root** auswählen.
+
+## Weiterentwicklungsideen
+
+- Admin-Ansicht zum Bearbeiten der JSON-Daten
+- GPX-Upload und automatische Track-Auswertung
+- Distanz-/Höhenmeter-Berechnung
+- Mehrsprachigkeit
+- Tour-Ranking oder Favoriten
