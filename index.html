@@ -1,39 +1,34 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bike Tour Planner – GitHub Pages Starter V19</title>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digitales Roadbook</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
   <link rel="stylesheet" href="assets/styles.css">
 </head>
-<body>
-  <div class="container">
-    <h1>🚴 Bike Tour Planner</h1>
-    <p class="lead">V19 ordnet die Oberfläche neu: Offizielle Links und ADFC-Bewertung stehen direkt unter der Tourauswahl, Bahnhofsinfos in eigener Box vor den Etappen und Hotels in eigener Box nach den Etappen.</p>
-    <div class="controls compact-controls">
-      <label for="routeSelect" class="control-label">Tour</label>
-      <select id="routeSelect"></select>
-      <button id="loadBtn" title="Tour laden">↻ Laden</button>
-      <details class="download-menu"><summary>⬇ Downloads</summary><div class="download-menu-content"><button id="downloadFullGpxBtn" class="secondary">GPX gesamt</button><button id="downloadAllStagesZipBtn" class="secondary">ZIP gesamt + Etappen</button><button id="downloadTourBriefBtn" class="secondary">TXT Steckbrief</button></div></details>
-      <button id="downloadActiveStageBtn" class="secondary hidden">GPX Etappe</button>
-      <button id="prevStageBtn" class="secondary hidden">←</button>
-      <button id="nextStageBtn" class="secondary hidden">→</button>
-      <button id="resetStageFocusBtn" class="secondary hidden">Alle Etappen einblenden</button>
-      <span id="status">Initialisiere …</span>
-      <div id="metaBar" class="meta-inline"><div id="tourismMetaCard" class="meta-bar-card hidden"><div class="title">🔗 Offizielle Beschreibung</div><div id="tourismMetaContent" class="content"></div></div><div id="adfcMetaCard" class="meta-bar-card hidden"><div class="title">⭐ ADFC</div><div id="adfcStarsInline" class="star-row muted">☆☆☆☆☆</div><a id="adfcTourLinkInline" class="inline-link hidden" target="_blank" rel="noopener noreferrer">ADFC-Tour öffnen</a></div></div>
+<body><div class="container">
+  <h1>🚴 Digitales Roadbook</h1>
+  <div class="controls compact-controls">
+    <label for="routeSelect" class="control-label">Tour</label><select id="routeSelect"></select>
+    <button id="loadBtn">↻ Laden</button>
+    <details class="download-menu"><summary>⬇ Downloads</summary><div class="download-menu-content">
+      <button id="downloadFullGpxBtn" class="secondary">GPX gesamt</button>
+      <button id="downloadAllStagesZipBtn" class="secondary">ZIP gesamt + Etappen</button>
+      <button id="downloadTourBriefBtn" class="secondary">TXT Steckbrief</button>
+    </div></details>
+    <button id="downloadActiveStageBtn" class="secondary hidden">⬇ GPX Etappe</button>
+    <span id="status"></span>
+    <div id="metaBar" class="meta-inline">
+      <div id="tourismMetaCard" class="meta-bar-card hidden"><div class="title">🔗 Offizielle Beschreibung</div></div>
+      <div id="adfcMetaCard" class="meta-bar-card hidden"><div class="title">⭐ ADFC</div></div>
     </div>
-    <div id="map"></div>
-    <div id="summary" class="summary-grid"></div>
-    <div id="stationBox"></div>
-    <div id="stages" class="stage-list"></div>
-    <div id="hotelBox"></div>
-
-    <p class="footer-note">V19: ADFC-Sterne sind jetzt manuell im JSON pflegbar. Bahnhofsdetails wie Treffpunkt, Zeiten, Umstiege und Reservierungen werden nur angezeigt, wenn sie befüllt sind.</p>
   </div>
-  <script src="assets/app.js"></script>
-</body>
-</html>
+  <div id="map"></div>
+  <div id="summary" class="summary-grid"></div>
+  <div id="stationBox"></div>
+  <div id="stages" class="stage-list"></div>
+  <div id="hotelBox"></div>
+</div><script src="assets/app.js"></script></body></html>

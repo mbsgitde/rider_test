@@ -1,7 +1,3 @@
-# Bike Tour Planner – V34
+# Digitales Roadbook – V36
 
-Neu:
-- Button heißt jetzt `Alle Etappen einblenden`.
-- Bei ausgewählter Tagesetappe werden Summary/Gesamttourdaten, Start-/Zielboxen, andere Etappen und deren Hotelboxen vollständig ausgeblendet.
-- Auf der Karte werden andere Etappen und Stop-Marker außerhalb der aktiven Tagesetappe ausgeblendet.
-- Dadurch liegt die ausgewählte Tagesetappe direkt unter der Karte.
+UI-Update: kein Ladezähler, gemeinsamer Fokus von Karte und Etappe, kompakter GPX-Button, graue Fokuslinie, Gesamttourkarte und Karten-Fit-Button.
