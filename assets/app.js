@@ -274,23 +274,34 @@ async function downloadAllStagesZip() {
 function updateTopMetaBar(routeMeta) {
   const tourismCard = document.getElementById('tourismMetaCard');
   const tourismContent = document.getElementById('tourismMetaContent');
+  const tourismTitle = tourismCard?.querySelector('.title');
   const adfcCard = document.getElementById('adfcMetaCard');
   const adfcLink = document.getElementById('adfcTourLinkInline');
   const adfcStarsEl = document.getElementById('adfcStarsInline');
+  const adfcTitle = adfcCard?.querySelector('.title');
 
   const hasTourism = !!routeMeta?.officialDescriptionUrl;
   tourismCard.classList.toggle('hidden', !hasTourism);
-  tourismContent.innerHTML = hasTourism ? `<a class="inline-link" href="${routeMeta.officialDescriptionUrl}" target="_blank" rel="noopener noreferrer">Tourismus-/Radwegelink öffnen</a>` : '';
+  if (tourismTitle) {
+    tourismTitle.innerHTML = hasTourism
+      ? `<a class="meta-title-link" href="${routeMeta.officialDescriptionUrl}" target="_blank" rel="noopener noreferrer">🔗 Tourismus / offizielle Beschreibung</a>`
+      : '🔗 Tourismus / offizielle Beschreibung';
+  }
+  if (tourismContent) tourismContent.innerHTML = '';
 
-  const hasAdfcInfo = (!!routeMeta?.adfcTourUrl) || Number.isInteger(routeMeta?.adfcStars);
+  const hasValidStars = Number.isInteger(routeMeta?.adfcStars) && routeMeta.adfcStars >= 1 && routeMeta.adfcStars <= 5;
+  const stars = hasValidStars ? `${'★'.repeat(routeMeta.adfcStars)}${'☆'.repeat(5 - routeMeta.adfcStars)}` : '';
+  const hasAdfcInfo = (!!routeMeta?.adfcTourUrl) || hasValidStars;
   adfcCard.classList.toggle('hidden', !hasAdfcInfo);
-  adfcStarsEl.innerHTML = Number.isInteger(routeMeta?.adfcStars) && routeMeta.adfcStars >= 1 && routeMeta.adfcStars <= 5
-    ? `${'★'.repeat(routeMeta.adfcStars)}${'☆'.repeat(5 - routeMeta.adfcStars)}`
-    : '<span class="muted">keine Sterne hinterlegt</span>';
-  if (routeMeta?.adfcTourUrl) {
-    adfcLink.classList.remove('hidden');
-    adfcLink.href = routeMeta.adfcTourUrl;
-  } else {
+
+  if (adfcTitle) {
+    const label = `${stars ? `<span class="star-row">${stars}</span> ` : ''}ADFC-Bewertung`;
+    adfcTitle.innerHTML = routeMeta?.adfcTourUrl
+      ? `<a class="meta-title-link" href="${routeMeta.adfcTourUrl}" target="_blank" rel="noopener noreferrer">${label}</a>`
+      : label;
+  }
+  if (adfcStarsEl) adfcStarsEl.innerHTML = '';
+  if (adfcLink) {
     adfcLink.classList.add('hidden');
     adfcLink.removeAttribute('href');
   }
@@ -568,20 +579,25 @@ function renderStationBox(stops) {
   mount.innerHTML = `<div class="overview-box"><div class="section-title">🚉 Bahnhof / An- und Rückreise</div><div class="station-grid">${cards}</div></div>`;
 }
 
+function renderHotelCard(hotel) {
+  if (!hotel) return '';
+  return `
+    <aside class="hotel-between-stages">
+      <div class="overview-card hotel-stage-card">
+        <div class="title">🏨 Übernachtung: ${hotel.name}</div>
+        <div class="overview-list">
+          ${hotel.address ? `<div>${hotel.address}</div>` : ''}
+          ${hotel.notes ? `<div class="muted">${hotel.notes}</div>` : ''}
+        </div>
+        ${hotel.hotelUrl ? `<a class="hotel-link" href="${hotel.hotelUrl}" target="_blank" rel="noopener noreferrer">Hotel-Link öffnen</a>` : ''}
+      </div>
+    </aside>
+  `;
+}
+
 function renderHotelBox(stops) {
   const mount = document.getElementById('hotelBox');
-  const hotels = stops.filter(stop => stop.type === 'overnight');
-  const cards = hotels.length ? hotels.map(h => `
-    <div class="overview-card">
-      <div class="title">🏨 ${h.name}</div>
-      <div class="overview-list">
-        ${h.address ? `<div>${h.address}</div>` : ''}
-        ${h.notes ? `<div class="muted">${h.notes}</div>` : ''}
-      </div>
-      ${h.hotelUrl ? `<a class="hotel-link" href="${h.hotelUrl}" target="_blank" rel="noopener noreferrer">Hotel-Link öffnen</a>` : ''}
-    </div>
-  `).join('') : '<div class="overview-card"><div class="title">Keine Hotels hinterlegt</div></div>';
-  mount.innerHTML = `<div class="overview-box"><div class="section-title">🏨 Hotels</div><div class="hotel-grid">${cards}</div></div>`;
+  if (mount) mount.innerHTML = '';
 }
 
 function highlightStage(stage) { if (stage?.polyline) { stage.polyline.setStyle({ weight: 7, opacity: 1.0 }); stage.polyline.bringToFront(); } }
@@ -654,6 +670,11 @@ function renderStages(stages) {
     el.addEventListener('click', () => focusStage(stage));
     el.querySelector('.stage-download-btn').addEventListener('click', ev => { ev.stopPropagation(); downloadStageGpx(stage); });
     mount.appendChild(el);
+    if (stage.hotel) {
+      const hotelWrap = document.createElement('div');
+      hotelWrap.innerHTML = renderHotelCard(stage.hotel);
+      mount.appendChild(hotelWrap.firstElementChild);
+    }
     renderChart(`chart-${idx}`, stage);
   });
   applySelectionStyles();

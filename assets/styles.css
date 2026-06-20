@@ -79,3 +79,48 @@ button:disabled { opacity: .45; cursor: default; }
 .logistics-label-marker { background: var(--logistics-marker); color:#fff; }
 .stage-line-number-marker { color:#fff; cursor:pointer; }
 @media (max-width:700px) { .container { padding:14px; } #map { height:360px; } .chart-hover-tooltip { font-size:11px; } }
+
+
+/* Feature Request V20: kompakte Meta-Leiste und Hotels zwischen Etappen */
+#metaBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin: 0 0 10px;
+}
+.meta-bar-card {
+  padding: 6px 10px;
+  border-radius: 999px;
+  box-shadow: none;
+  line-height: 1.2;
+}
+.meta-bar-card .title {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+}
+.meta-bar-card .content,
+#adfcStarsInline,
+#adfcTourLinkInline {
+  display: none !important;
+}
+.meta-title-link {
+  color: var(--text);
+  text-decoration: none;
+}
+.meta-title-link:hover {
+  text-decoration: underline;
+}
+.meta-bar-card .star-row {
+  font-size: 13px;
+  letter-spacing: 0;
+  vertical-align: baseline;
+}
+.hotel-between-stages {
+  margin: -6px 0 2px 22px;
+}
+.hotel-stage-card {
+  border-left: 8px solid #64748b;
+  background: #fffdf7;
+}

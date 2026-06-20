@@ -1,40 +1,15 @@
-# Bike Tour Planner – GitHub Pages Starter V19
+# Bike Tour Planner – GitHub Pages Starter V20
 
-Exakte Projektbasis aus den gelieferten Dateien.
+Feature Request umgesetzt:
 
-## Struktur
-
-```text
-index.html
-assets/app.js
-assets/styles.css
-data/config.json
-data/routes.json
-data/*-stops.json
-gpx/*.gpx
-```
-
-## GPX-Hinweis
-
-Die hochgeladenen `.txt`-Dateien enthielten Höhenprofile. Daraus wurden gültige GPX-Dateien erzeugt:
-
-- `gpx/alpe-adria.gpx`
-- `gpx/seenroute.gpx`
-
-Die Höhenwerte wurden übernommen; die Koordinaten wurden entlang der in den jeweiligen `*-stops.json` Dateien hinterlegten Stop-Koordinaten interpoliert, damit die bestehende Leaflet-/Chart-Logik direkt lauffähig ist.
+- Tourismus- und ADFC-Boxen drastisch verkleinert.
+- Überschriften sind direkt verlinkt.
+- ADFC-Sterne stehen direkt vor „ADFC-Bewertung“, sofern vorhanden.
+- Hotels werden zwischen den Etappen angezeigt, z. B. Bad Gastein nach Etappe 1 und Villach nach Etappe 2.
+- Die GPX-Dateien wurden direkt aus den hochgeladenen TXT-Dateien übernommen und nur mit `.gpx`-Endung abgelegt.
 
 ## Lokal testen
 
 ```bash
 python3 -m http.server 8000
 ```
-
-Dann öffnen:
-
-```text
-http://localhost:8000
-```
-
-## GitHub Pages
-
-Dateien in das Repository kopieren, committen und GitHub Pages auf `main` / root aktivieren.
