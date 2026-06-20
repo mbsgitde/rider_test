@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bike Tour Planner – GitHub Pages Starter V7</title>
+  <title>Bike Tour Planner – GitHub Pages Starter V8</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -12,12 +12,13 @@
 <body>
   <div class="container">
     <h1>🚴 Bike Tour Planner</h1>
-    <p class="lead">Statische Tourenplanung auf GitHub Pages mit Zeitdarstellung im Format hh:mm, interaktiver Etappenliste, Hotel-Links in Karten-Popups und komoot-artigem Overlay im Höhenprofil.</p>
+    <p class="lead">Statische Tourenplanung auf GitHub Pages mit besserem Etappenfokus, zuverlässigem Etappenzoom, Etappennummern-Symbolen, leisbarer Kartenstil-Auswahl und allen bisherigen Interaktionen.</p>
 
     <div class="controls">
       <label for="routeSelect">Tour:</label>
       <select id="routeSelect"></select>
       <button id="loadBtn">Tour laden</button>
+      <button id="resetStageFocusBtn" class="secondary hidden">Alle Etappen anzeigen</button>
       <span id="status">Initialisiere …</span>
     </div>
 
@@ -25,7 +26,7 @@
     <div id="summary" class="summary-grid"></div>
     <div id="stages" class="stage-list"></div>
 
-    <p class="footer-note">V7: Alle Zeiten werden im Format hh:mm angezeigt – sowohl in der Etappenübersicht, in der Summary als auch im Hover-Overlay des Höhenprofils.</p>
+    <p class="footer-note">V8: Klick auf eine Etappe zoomt zuverlässig auf den Abschnitt und blendet die übrigen Etappen temporär aus. Über „Alle Etappen anzeigen“ stellst du die Gesamtübersicht wieder her.</p>
   </div>
   <script src="assets/app.js"></script>
 </body>

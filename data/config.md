@@ -1,3 +1,3 @@
 # Konfigurationsdatei `config.json`
 
-Die Zeitdarstellung im UI erfolgt in V7 überall im Format `hh:mm`.
+V8 ergänzt UX-Verbesserungen für Etappenfokus, Etappenbadge und Kartenstil-Auswahl.

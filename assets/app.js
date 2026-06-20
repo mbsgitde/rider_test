@@ -3,7 +3,7 @@ const APP = {
   routeLayerGroup: null,
   charts: [],
   colors: ['#ef4444','#2563eb','#16a34a','#f59e0b','#8b5cf6','#06b6d4','#ec4899'],
-  state: { config: null, stages: [], stops: [], routeName: null, routesManifest: [] },
+  state: { config: null, stages: [], stops: [], routeName: null, routesManifest: [], selectedStageId: null },
   baseLayers: {},
   currentBaseLayer: null,
   mapStyleControl: null
@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   APP.currentBaseLayer.addTo(APP.map);
   APP.routeLayerGroup = L.featureGroup().addTo(APP.map);
   document.getElementById('loadBtn').addEventListener('click', loadTour);
+  document.getElementById('resetStageFocusBtn').addEventListener('click', resetStageFocus);
   await initializeApp();
 });
 
@@ -212,7 +213,7 @@ function buildStages(points, stops, config) {
       profilePoints.push({ distanceKm: cumulativeDist, upMeters: cumulativeUp, netRideTimeHours: cumulativeDist / avgSpeed, elevation: seg[j].ele });
     }
 
-    stages.push({ id: i + 1, name: `${stops[i].name} → ${stops[i+1].name}`, seg, ele: seg.map(p => p.ele), dist, up, down, netRideTimeHours, grossRideTimeHours, totalPauseMinutes, difficulty, color, hotel, plausibilityLevel, plausibilityMessage, polyline: null, profilePoints });
+    stages.push({ id: i + 1, name: `${stops[i].name} → ${stops[i+1].name}`, seg, ele: seg.map(p => p.ele), dist, up, down, netRideTimeHours, grossRideTimeHours, totalPauseMinutes, difficulty, color, hotel, plausibilityLevel, plausibilityMessage, polyline: null, bounds: null, profilePoints });
   }
   return stages;
 }
@@ -324,16 +325,45 @@ function buildMarkerPopupHtml(stop, warningHtml) {
   return html;
 }
 
+function resetStageFocus() {
+  APP.state.selectedStageId = null;
+  const resetBtn = document.getElementById('resetStageFocusBtn');
+  resetBtn.classList.add('hidden');
+  document.querySelectorAll('.stage').forEach(el => {
+    el.classList.remove('is-selected','is-hidden-temp');
+  });
+  APP.state.stages.forEach(stage => {
+    resetStageHighlight(stage);
+  });
+  if (APP.routeLayerGroup.getLayers().length > 0) {
+    APP.map.fitBounds(APP.routeLayerGroup.getBounds(), { padding: [20, 20] });
+  }
+}
+
+function focusStage(stage, stageEl) {
+  APP.state.selectedStageId = stage.id;
+  document.getElementById('resetStageFocusBtn').classList.remove('hidden');
+  document.querySelectorAll('.stage').forEach(el => {
+    const isSame = el === stageEl;
+    el.classList.toggle('is-selected', isSame);
+    el.classList.toggle('is-hidden-temp', !isSame);
+  });
+  if (stage.bounds && stage.bounds.isValid()) {
+    APP.map.flyToBounds(stage.bounds.pad(0.15), { padding: [30, 30], maxZoom: 13, duration: 0.45 });
+  }
+  stageEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
 function renderStages(stages) {
   const mount = document.getElementById('stages');
   mount.innerHTML = '';
   stages.forEach((stage, idx) => {
     const stageEl = document.createElement('section');
     stageEl.className = 'stage';
-    stageEl.innerHTML = `<div class="stage-color" style="background:${stage.color}"></div><div class="stage-body"><div class="stage-head"><div class="stage-title">Etappe ${stage.id}: ${stage.name}</div><div class="badge ${getDifficultyBadgeClass(stage.difficulty)}">${stage.difficulty}</div></div><div class="meta"><div class="meta-item"><div class="label">Distanz</div><div class="value">${stage.dist.toFixed(1)} km</div></div><div class="meta-item"><div class="label">Höhenmeter</div><div class="value">↑ ${Math.round(stage.up)} m</div></div><div class="meta-item"><div class="label">Höhenmeter</div><div class="value">↓ ${Math.round(stage.down)} m</div></div><div class="meta-item"><div class="label">Netto-Fahrzeit</div><div class="value">${formatHoursHm(stage.netRideTimeHours)}</div></div><div class="meta-item"><div class="label">Brutto-Fahrzeit</div><div class="value">${formatHoursHm(stage.grossRideTimeHours)}</div></div><div class="meta-item"><div class="label">Pausen</div><div class="value">${Math.round(stage.totalPauseMinutes)} min</div></div></div><div class="canvas-wrap" style="height:220px"><canvas id="chart-${idx}"></canvas></div>${stage.hotel ? `<div class="hotel"><strong>🏨 Unterkunft</strong><br>${stage.hotel.name}<br>${stage.hotel.hotelUrl ? `<a href="${stage.hotel.hotelUrl}" target="_blank" rel="noopener noreferrer">Hotel-Link öffnen</a>` : ''}${stage.hotel.distanceToRouteKm != null ? `<div class="small-note">Abstand zur Route: ${stage.hotel.distanceToRouteKm.toFixed(1)} km</div>` : ''}</div>` : ''}${stage.plausibilityLevel ? `<div class="warnings"><div class="warning ${stage.plausibilityLevel}">${stage.plausibilityMessage}</div></div>` : ''}</div>`;
+    stageEl.innerHTML = `<div class="stage-color" style="background:${stage.color}"></div><div class="stage-body"><div class="stage-head"><div class="stage-title-wrap"><div class="stage-number-circle" style="background:${stage.color}">${stage.id}</div><div class="stage-title">Etappe ${stage.id}: ${stage.name}</div></div><div class="badge ${getDifficultyBadgeClass(stage.difficulty)}">${stage.difficulty}</div></div><div class="meta"><div class="meta-item"><div class="label">Distanz</div><div class="value">${stage.dist.toFixed(1)} km</div></div><div class="meta-item"><div class="label">Höhenmeter</div><div class="value">↑ ${Math.round(stage.up)} m</div></div><div class="meta-item"><div class="label">Höhenmeter</div><div class="value">↓ ${Math.round(stage.down)} m</div></div><div class="meta-item"><div class="label">Netto-Fahrzeit</div><div class="value">${formatHoursHm(stage.netRideTimeHours)}</div></div><div class="meta-item"><div class="label">Brutto-Fahrzeit</div><div class="value">${formatHoursHm(stage.grossRideTimeHours)}</div></div><div class="meta-item"><div class="label">Pausen</div><div class="value">${Math.round(stage.totalPauseMinutes)} min</div></div></div><div class="canvas-wrap" style="height:220px"><canvas id="chart-${idx}"></canvas></div>${stage.hotel ? `<div class="hotel"><strong>🏨 Unterkunft</strong><br>${stage.hotel.name}<br>${stage.hotel.hotelUrl ? `<a href="${stage.hotel.hotelUrl}" target="_blank" rel="noopener noreferrer">Hotel-Link öffnen</a>` : ''}${stage.hotel.distanceToRouteKm != null ? `<div class="small-note">Abstand zur Route: ${stage.hotel.distanceToRouteKm.toFixed(1)} km</div>` : ''}</div>` : ''}${stage.plausibilityLevel ? `<div class="warnings"><div class="warning ${stage.plausibilityLevel}">${stage.plausibilityMessage}</div></div>` : ''}</div>`;
     stageEl.addEventListener('mouseenter', () => { stageEl.classList.add('is-hovered'); highlightStage(stage); });
-    stageEl.addEventListener('mouseleave', () => { stageEl.classList.remove('is-hovered'); resetStageHighlight(stage); });
-    stageEl.addEventListener('click', () => { if (stage.polyline) APP.map.fitBounds(stage.polyline.getBounds(), { padding: [30, 30] }); });
+    stageEl.addEventListener('mouseleave', () => { stageEl.classList.remove('is-hovered'); if (APP.state.selectedStageId !== stage.id) resetStageHighlight(stage); });
+    stageEl.addEventListener('click', () => focusStage(stage, stageEl));
     mount.appendChild(stageEl);
     renderChart(`chart-${idx}`, stage);
   });
@@ -342,8 +372,10 @@ function renderStages(stages) {
 function renderMap(stages, stops) {
   APP.routeLayerGroup.clearLayers();
   stages.forEach(stage => {
-    const polyline = L.polyline(stage.seg.map(p => [p.lat, p.lon]), { color: stage.color, weight: 4, opacity: 0.95 }).addTo(APP.routeLayerGroup);
+    const coords = stage.seg.map(p => [p.lat, p.lon]);
+    const polyline = L.polyline(coords, { color: stage.color, weight: 4, opacity: 0.95 }).addTo(APP.routeLayerGroup);
     stage.polyline = polyline;
+    stage.bounds = polyline.getBounds();
   });
   stops.forEach(stop => {
     const level = getPlausibilityLevel(stop.distanceToRouteKm ?? 0, APP.state.config.routePlausibilityCheck);
@@ -356,7 +388,10 @@ function renderMap(stages, stops) {
 
 async function loadTour() {
   try {
-    destroyCharts(); setStatus('Lade Tour …');
+    destroyCharts();
+    APP.state.selectedStageId = null;
+    document.getElementById('resetStageFocusBtn').classList.add('hidden');
+    setStatus('Lade Tour …');
     const routeName = document.getElementById('routeSelect').value;
     const routeMeta = APP.state.routesManifest.find(r => r.id === routeName) || { label: routeName };
     const [rawStops, points] = await Promise.all([loadJSON(`data/${routeName}-stops.json`), loadGPX(routeName)]);
