@@ -1,0 +1,12 @@
+[
+  {
+    "id": "beispielroute",
+    "label": "Beispielroute",
+    "gpxFile": "beispielroute.gpx",
+    "stopsFile": "beispielroute-stops.json",
+    "hasStopsFile": true,
+    "officialDescriptionUrl": "https://example.com/offizielle-beschreibung",
+    "adfcStars": 4,
+    "adfcTourUrl": "https://example.com/adfc-tour"
+  }
+]

@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Füssen Bahnhof",
+    "type": "start",
+    "address": "Füssen Bahnhof",
+    "lat": 47.5705,
+    "lon": 10.7007,
+    "meetingPoint": "Treffpunkt: Vor dem Reisezentrum",
+    "departureTime": "07:42",
+    "arrivalTime": "09:36",
+    "connection": "RE 3885 München Hbf → Füssen",
+    "carriageNumber": "Wagen 04",
+    "transfers": [],
+    "reservedSeats": [
+      "18",
+      "19"
+    ],
+    "reservedBikeSpots": [
+      "R02"
+    ]
+  },
+  {
+    "name": "Hotel Tegernsee",
+    "type": "overnight",
+    "address": "Tegernsee",
+    "hotelUrl": "https://www.booking.com/searchresults.de.html?ss=Tegernsee",
+    "lat": 47.7123,
+    "lon": 11.7584,
+    "notes": "Dummyhotel direkt am See"
+  },
+  {
+    "name": "Prien am Chiemsee Bahnhof",
+    "type": "end",
+    "address": "Prien am Chiemsee",
+    "lat": 47.856,
+    "lon": 12.394,
+    "meetingPoint": "Treffpunkt: Gleis 1 am Aufzug",
+    "departureTime": "18:10",
+    "arrivalTime": "19:16",
+    "connection": "RB 27023 Prien a. Chiemsee → München Hbf",
+    "carriageNumber": "Wagen 06",
+    "transfers": [
+      {
+        "label": "Umstieg in Rosenheim",
+        "arrivalTime": "18:42",
+        "departureTime": "18:49"
+      }
+    ],
+    "reservedSeats": [
+      "45",
+      "46",
+      "47",
+      "48",
+      "49"
+    ],
+    "reservedBikeSpots": [
+      "R11",
+      "R12",
+      "R13"
+    ]
+  }
+]
