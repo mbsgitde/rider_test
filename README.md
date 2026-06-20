@@ -1,3 +1,3 @@
-# Digitales Roadbook – V40
+# Digitales Roadbook – V41
 
-Start-/Zielboxen wieder integriert, Hotel-Links mit technischem Web-Icon, offizielle Route/ADFC in Gesamttourbox vor den Downloadbuttons.
+Entfernt überflüssigen Etappen-Downloadbutton neben der Tourauswahl; ADFC/Offizielle Tour stehen direkt neben dem Tourtitel; Hotel-Webicon steht rechts neben dem Namen.
