@@ -1,22 +1,26 @@
 [
   {
-    "name": "M\u00fcnchen",
+    "name": "M\u00fcnchen Hbf",
     "lat": 48.14,
-    "lon": 11.56
+    "lon": 11.558,
+    "type": "start"
   },
   {
     "name": "Garmisch",
-    "lat": 47.49,
-    "lon": 11.09
+    "lat": 47.491,
+    "lon": 11.095,
+    "type": "overnight"
   },
   {
     "name": "Innsbruck",
-    "lat": 47.27,
-    "lon": 11.39
+    "lat": 47.267,
+    "lon": 11.392,
+    "type": "overnight"
   },
   {
     "name": "Bozen",
-    "lat": 46.5,
-    "lon": 11.35
+    "lat": 46.498,
+    "lon": 11.354,
+    "type": "end"
   }
 ]

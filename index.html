@@ -1,53 +1,25 @@
 <!DOCTYPE html>
-<html lang="de">
+<html>
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bike Tour Planner – GitHub Pages Starter V19</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
-  <link rel="stylesheet" href="assets/styles.css">
+  <title>Bike Tour Planner</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css">
+  <script src="https://pyscript.net/releases/2024.1.1/core.js"></script>
 </head>
 <body>
-  <div class="container">
-    <h1>🚴 Bike Tour Planner</h1>
-    <p class="lead">V19 ordnet die Oberfläche neu: Offizielle Links und ADFC-Bewertung stehen direkt unter der Tourauswahl, Bahnhofsinfos in eigener Box vor den Etappen und Hotels in eigener Box nach den Etappen.</p>
-    <div class="controls">
-      <label for="routeSelect">Tour:</label>
-      <select id="routeSelect"></select>
-      <button id="loadBtn">Tour laden</button>
-      <button id="downloadFullGpxBtn" class="secondary">Gesamt-GPX herunterladen</button>
-      <button id="downloadAllStagesZipBtn" class="secondary">Gesamt + Etappen als ZIP herunterladen</button>
-      <button id="downloadTourBriefBtn" class="secondary">Tour-Steckbrief als TXT herunterladen</button>
-      <button id="downloadActiveStageBtn" class="secondary hidden">Aktive Etappe als GPX herunterladen</button>
-      <button id="prevStageBtn" class="secondary hidden">← Vorherige Etappe</button>
-      <button id="nextStageBtn" class="secondary hidden">Nächste Etappe →</button>
-      <button id="resetStageFocusBtn" class="secondary hidden">Alle Etappen anzeigen</button>
-      <span id="status">Initialisiere …</span>
-    </div>
+  <h1>🚴 Bike Tour Planner</h1>
 
-    <div id="metaBar">
-      <div id="tourismMetaCard" class="meta-bar-card hidden">
-        <div class="title">🔗 Tourismus / offizielle Beschreibung</div>
-        <div id="tourismMetaContent" class="content"></div>
-      </div>
-      <div id="adfcMetaCard" class="meta-bar-card hidden">
-        <div class="title">⭐ ADFC-Bewertung</div>
-        <div id="adfcStarsInline" class="star-row muted">☆☆☆☆☆</div>
-        <a id="adfcTourLinkInline" class="inline-link hidden" target="_blank" rel="noopener noreferrer">ADFC-Tour öffnen</a>
-      </div>
-    </div>
+  <label>Route wählen:</label>
+  <select id="routeSelect">
+    <option value="data/route-alps.gpx">Alpenroute</option>
+    <option value="data/route-lake.gpx">Seenroute</option>
+  </select>
 
-    <div id="map"></div>
-    <div id="summary" class="summary-grid"></div>
-    <div id="stationBox"></div>
-    <div id="stages" class="stage-list"></div>
-    <div id="hotelBox"></div>
+  <button py-click="load_data()">Laden</button>
 
-    <p class="footer-note">V19: ADFC-Sterne sind jetzt manuell im JSON pflegbar. Bahnhofsdetails wie Treffpunkt, Zeiten, Umstiege und Reservierungen werden nur angezeigt, wenn sie befüllt sind.</p>
-  </div>
-  <script src="assets/app.js"></script>
+  <div id="output"></div>
+
+  <py-script src="python/app.py"></py-script>
 </body>
 </html>
