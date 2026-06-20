@@ -638,7 +638,20 @@ function renderHotelBox(stops) { const mount = document.getElementById('hotelBox
 
 function highlightStage(stage) { if (stage?.polyline) { stage.polyline.setStyle({ weight: 7, opacity: 1.0 }); stage.polyline.bringToFront(); } }
 function resetStageHighlight(stage) { if (stage?.polyline) stage.polyline.setStyle({ weight: 4, opacity: 0.95 }); }
-
+function setStageMapVisibility(stage, visible, selected) {
+  if (stage?.polyline) {
+    stage.polyline.setStyle({ weight: visible ? (selected ? 7 : 4) : 0, opacity: visible ? (selected ? 1 : 0.95) : 0 });
+    if (visible) stage.polyline.bringToFront();
+  }
+  if (stage?.marker) {
+    if (visible) {
+      if (!APP.map.hasLayer(stage.marker)) stage.marker.addTo(APP.map);
+      stage.marker.setOpacity(selected ? 1 : 0.95);
+    } else if (APP.map.hasLayer(stage.marker)) {
+      APP.map.removeLayer(stage.marker);
+    }
+  }
+}
 function applySelectionStyles() {
   APP.state.stages.forEach(stage => {
     if (!stage.element) return;
@@ -646,7 +659,9 @@ function applySelectionStyles() {
     const hasSelection = APP.state.selectedStageId != null;
     stage.element.classList.toggle('is-selected', isSelected);
     stage.element.classList.toggle('is-dimmed', hasSelection && !isSelected);
-    if (isSelected) highlightStage(stage); else resetStageHighlight(stage);
+    const showAllBtn = stage.element.querySelector('.stage-show-all-btn');
+    if (showAllBtn) showAllBtn.classList.toggle('hidden', !isSelected);
+    setStageMapVisibility(stage, !hasSelection || isSelected, isSelected);
   });
 }
 
@@ -704,11 +719,12 @@ function renderStages(stages) {
     const el = document.createElement('section');
     stage.element = el;
     el.className = 'stage';
-    el.innerHTML = `<div class="stage-color" style="background:${stage.color}"></div><div class="stage-body"><div class="stage-head"><div class="stage-title"><span class="stage-title-number" style="background:${stage.color}">${stage.id}</span><span class="stage-title-text">${stage.name}</span></div><div class="stage-tools"><button class="stage-download-btn" type="button">Etappen-GPX herunterladen</button><div class="badge ${getDifficultyBadgeClass(stage.difficulty)}">${stage.difficulty}</div></div></div><div class="meta"><div class="meta-item"><div class="label">Distanz</div><div class="value">${stage.dist.toFixed(1)} km</div></div><div class="meta-item"><div class="label">Höhenmeter</div><div class="value">↑ ${Math.round(stage.up)} m</div></div><div class="meta-item"><div class="label">Höhenmeter</div><div class="value">↓ ${Math.round(stage.down)} m</div></div><div class="meta-item"><div class="label">Netto-Fahrzeit</div><div class="value">${formatDurationWithUnit(stage.netRideTimeHours)}</div></div><div class="meta-item"><div class="label">Brutto (inkl. Pausen)</div><div class="value">${formatDurationWithUnit(stage.grossRideTimeHours)} <span class="inline-pause">(${formatDurationWithUnit(stage.totalPauseMinutes / 60)})</span></div></div></div><div class="canvas-wrap" style="height:180px"><canvas id="chart-${idx}"></canvas></div>${stage.plausibilityLevel ? `<div class="small-note">${stage.plausibilityMessage}</div>` : ''}</div>`;
+    el.innerHTML = `<div class="stage-color" style="background:${stage.color}"></div><div class="stage-body"><div class="stage-head"><div class="stage-title"><span class="stage-title-number" style="background:${stage.color}">${stage.id}</span><span class="stage-title-text">${stage.name}</span></div><div class="stage-tools"><button class="stage-show-all-btn hidden" type="button" title="Alle Etappen wieder anzeigen">Alle</button><button class="stage-download-btn" type="button">Etappen-GPX herunterladen</button><div class="badge ${getDifficultyBadgeClass(stage.difficulty)}">${stage.difficulty}</div></div></div><div class="meta"><div class="meta-item"><div class="label">Distanz</div><div class="value">${stage.dist.toFixed(1)} km</div></div><div class="meta-item"><div class="label">Höhenmeter</div><div class="value">↑ ${Math.round(stage.up)} m</div></div><div class="meta-item"><div class="label">Höhenmeter</div><div class="value">↓ ${Math.round(stage.down)} m</div></div><div class="meta-item"><div class="label">Netto-Fahrzeit</div><div class="value">${formatDurationWithUnit(stage.netRideTimeHours)}</div></div><div class="meta-item"><div class="label">Brutto (inkl. Pausen)</div><div class="value">${formatDurationWithUnit(stage.grossRideTimeHours)} <span class="inline-pause">(${formatDurationWithUnit(stage.totalPauseMinutes / 60)})</span></div></div></div><div class="canvas-wrap" style="height:180px"><canvas id="chart-${idx}"></canvas></div>${stage.plausibilityLevel ? `<div class="small-note">${stage.plausibilityMessage}</div>` : ''}</div>`;
     el.addEventListener('mouseenter', () => { el.classList.add('is-hovered'); highlightStage(stage); });
     el.addEventListener('mouseleave', () => { el.classList.remove('is-hovered'); if (APP.state.selectedStageId !== stage.id) resetStageHighlight(stage); });
     el.addEventListener('click', () => focusStage(stage));
     el.querySelector('.stage-download-btn').addEventListener('click', ev => { ev.stopPropagation(); downloadStageGpx(stage); });
+    el.querySelector('.stage-show-all-btn')?.addEventListener('click', ev => { ev.stopPropagation(); resetStageFocus(); });
     mount.appendChild(el);
     if (stage.hotel) { const hotelWrap = document.createElement('div'); hotelWrap.innerHTML = renderHotelCard(stage.hotel); const hotelElement = hotelWrap.firstElementChild; stage.hotel.element = hotelElement; mount.appendChild(hotelElement); }
     renderChart(`chart-${idx}`, stage);
