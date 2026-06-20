@@ -1,33 +1,32 @@
 # PRD – Bike Tour Planner (Best-Practice Kurzfassung für Repo)
 
-## Zielbild V18
-Die App bündelt Tourdarstellung, Export und Logistik in einer klaren, aufgeräumten Oberfläche. Logistikobjekte (Start, Ziel, Hotels) sollen die Kartensicht nicht visuell stören, aber in der Übersicht und im Export vollständig dokumentiert sein.
+## Zielbild V19
+Die App trennt Tourdarstellung, Links und Logistik klar voneinander: Direkt nach der Tourauswahl stehen externe Links und Klassifizierung, danach Karte und Summary, anschließend Bahnhofsinfos vor den Etappen und Hotels nach den Etappen.
 
-## Änderungen in V18
-1. **Kartendarstellung Logistik entschärft**
-   - Start, Ziel und Hotels nutzen dieselbe dezente Markerfarbe.
-   - Etappenfarben bleiben ausschließlich den Streckenabschnitten vorbehalten.
+## Änderungen in V19
+1. **Neue Aufteilung der Oberfläche**
+   - Externe Links und ADFC-Bewertung zwischen Tourauswahl und Karte.
+   - Bahnhofs-/Start-Ziel-Infos in eigenem Kasten vor den Etappen.
+   - Hotels in eigenem Kasten nach den Etappen.
 
-2. **Optionale ADFC-Darstellung**
-   - Pro Route können in `data/routes.json` optional `adfcStars` und `adfcTourUrl` gepflegt werden.
-   - Die Oberfläche zeigt Sterne und Link nur dann, wenn valide Daten vorhanden sind.
-   - Ohne gepflegte ADFC-Sterne wird nichts suggeriert.
+2. **Manuelle ADFC-Bewertung**
+   - `adfcStars` und `adfcTourUrl` werden manuell in `data/routes.json` gepflegt.
+   - Anzeige nur, wenn Werte vorhanden sind.
 
-3. **Logistikübersicht bleibt kompakt**
-   - Separate, platzoptimierte Bereiche für:
-     - Start & Ziel (Anreise / Rückreise)
-     - Hotels
-     - offizielle / ADFC-Links
+3. **Erweiterte Bahnhofslogistik**
+   - Start und Ziel unterstützen:
+     - Treffpunkt
+     - Abfahrtszeit
+     - Ankunftszeit
+     - bis zu 3 Umstiege
+     - bis zu 10 Sitzplatzreservierungen
+     - bis zu 10 Radplatzreservierungen
+   - Leere Listen oder fehlende Werte werden nicht angezeigt.
 
-4. **Exporte erweitert**
-   - ZIP-Export enthält Gesamtstrecke + Etappen.
-   - ZIP-README dokumentiert Route, offizielle Beschreibung, ADFC-Daten, Start/Ziel, Hotels und enthaltene Dateien.
-   - Ein kompakter Tour-Steckbrief kann zusätzlich als TXT exportiert werden.
-
-5. **Datenpflege erleichtert**
-   - Template-Dateien für Routen und Stops liegen im Repo.
-   - README beschreibt die relevanten Felder prägnant.
+4. **Exporte bleiben vollständig**
+   - ZIP enthält Gesamtstrecke + Etappen + README + Tour-Steckbrief.
+   - README/TXT spiegeln die neuen Logistikdaten wider.
 
 ## Entschlackung
-- Ältere Zwischenstände und überflüssige Wiederholungen wurden gestrichen.
-- Fokus nur auf aktuell sichtbare Kernfunktionen: Route laden, Karte, Etappen, Logistik, Links und Exporte.
+- Fokus nur auf aktuelle Kernbereiche: Tourwahl, Links/Klassifizierung, Karte, Etappen, Bahnhof, Hotels, Exporte.
+- Veraltete Zwischenstufen wurden entfernt.

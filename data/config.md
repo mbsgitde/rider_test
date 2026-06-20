@@ -1,7 +1,6 @@
 # Konfigurationsdatei `config.json`
 
-V18 ergänzt:
-- eine dezente gemeinsame Markerfarbe für Start, Ziel und Hotels (`visuals.logisticsMarkerColor`)
-- optionale ADFC-Felder in `data/routes.json` (`adfcStars`, `adfcTourUrl`)
-- Template-Dateien für `routes.json` und `*-stops.json`
-- einen kompakten Tour-Steckbrief-Export als TXT
+V19 ergänzt:
+- eigene Bahnhofsboxen vor den Etappen und eine eigene Hotelbox nach den Etappen
+- ADFC-Sterne als **manuell gepflegte** Bewertung in `data/routes.json`
+- neue Stop-Felder für Treffpunkt, Abfahr-/Ankunftszeit, bis zu 3 Umstiege sowie Listen für bis zu 10 Sitz- und Radplatzreservierungen

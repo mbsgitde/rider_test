@@ -5,10 +5,26 @@
     "address": "Startbahnhof Adresse",
     "lat": 48.0,
     "lon": 11.0,
+    "meetingPoint": "Treffpunkt: ...",
+    "departureTime": "08:00",
+    "arrivalTime": "10:30",
     "connection": "RB/RE/ICE ...",
     "carriageNumber": "Wagen 01",
-    "reservedSeat": "Sitzplatz 12",
-    "reservedBikeSpot": "Radplatz R01"
+    "transfers": [
+      {
+        "label": "Umstieg in ...",
+        "arrivalTime": "09:10",
+        "departureTime": "09:18"
+      }
+    ],
+    "reservedSeats": [
+      "12",
+      "13"
+    ],
+    "reservedBikeSpots": [
+      "R01",
+      "R02"
+    ]
   },
   {
     "name": "Hotel Muster",
@@ -25,9 +41,17 @@
     "address": "Zielbahnhof Adresse",
     "lat": 48.2,
     "lon": 11.2,
+    "meetingPoint": "Treffpunkt: ...",
+    "departureTime": "17:15",
+    "arrivalTime": "19:55",
     "connection": "Rückfahrt ...",
     "carriageNumber": "Wagen 02",
-    "reservedSeat": "Sitzplatz 45",
-    "reservedBikeSpot": "Radplatz R07"
+    "transfers": [],
+    "reservedSeats": [
+      "45"
+    ],
+    "reservedBikeSpots": [
+      "R07"
+    ]
   }
 ]

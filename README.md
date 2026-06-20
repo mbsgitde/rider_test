@@ -1,46 +1,38 @@
-# Bike Tour Planner – GitHub Pages Starter V18
+# Bike Tour Planner – GitHub Pages Starter V19
 
-## Änderungen in V18
-1. **Dezente gemeinsame Logistikfarbe auf der Karte**
-   - Start, Ziel und Hotels teilen sich jetzt eine unaufdringliche Markerfarbe.
-   - Dadurch kollidiert die Logistikdarstellung nicht mehr mit den farbigen Etappenlinien.
+## Änderungen in V19
+1. **Bahnhof und Hotels als eigene Kästen**
+   - Start und Ziel werden als eigene Bahnhofssektion **vor** den Etappen dargestellt.
+   - Hotels werden als eigene Sektion **nach** den Etappen dargestellt.
 
-2. **ADFC-Klassifizierung mit Sternen (optional)**
-   - In `data/routes.json` können jetzt optional hinterlegt werden:
-     - `adfcStars` (1–5)
+2. **Tourismus-URL und ADFC-Bewertung zwischen Tourauswahl und Karte**
+   - Der Bereich zwischen Tourauswahl und Karte zeigt:
+     - offiziellen Tourismus-/Radwegelink
+     - manuell gepflegte ADFC-Sterne
+     - ADFC-Link
+
+3. **ADFC-Bewertung manuell im JSON**
+   - `data/routes.json` unterstützt:
+     - `adfcStars`
      - `adfcTourUrl`
-   - Die UI zeigt Sterne und Link nur dann, wenn diese Daten tatsächlich gepflegt sind.
+   - Sterne werden symbolisch (`★`) dargestellt.
 
-3. **V18-Vorschläge umgesetzt**
-   - JSON-Templates für Routen und Stops: `data/routes-template.json`, `data/stops-template.json`
-   - Icons für Anreise / Rückreise in der Logistikübersicht
-   - strukturiertere `README.txt` im ZIP
-   - **Tour-Steckbrief als TXT herunterladen**
+4. **Bahnhofsdetails erweitert**
+   - Für `start` und `end` unterstützt das Stop-JSON jetzt zusätzlich:
+     - `meetingPoint`
+     - `departureTime`
+     - `arrivalTime`
+     - `transfers` (0–3 Einträge)
+     - `reservedSeats` (0–10 Einträge)
+     - `reservedBikeSpots` (0–10 Einträge)
+   - Leere Bereiche werden in der UI automatisch ausgeblendet.
 
-4. **ZIP-Export erweitert**
-   - ZIP enthält weiterhin alle Etappen und zusätzlich die Gesamtstrecke.
-   - Die `README.txt` im ZIP listet jetzt Route, offiziellen Radwegelink, ADFC-Daten, Start/Ziel-Logistik, Hotels und enthaltene GPX-Dateien.
-
-## JSON-Schema-Erweiterung
-### `data/routes.json`
-Optionale Felder pro Route:
-- `officialDescriptionUrl`
-- `adfcStars`
-- `adfcTourUrl`
-
-### `data/*-stops.json`
-Für `start` und `end`:
-- `connection`
-- `carriageNumber`
-- `reservedSeat`
-- `reservedBikeSpot`
-
-Für `overnight`:
-- `hotelUrl`
-- `notes`
+5. **Templates aktualisiert**
+   - `data/routes-template.json`
+   - `data/stops-template.json`
 
 ## Beispielroute Alpe Adria
 - offizieller Radwegelink hinterlegt
 - ADFC-Tour-Link hinterlegt
-- ADFC-Sterne **nicht** voreingetragen (werden nur angezeigt, wenn gepflegt)
-- Dummywerte für Bahn- und Reservierungsdaten sind enthalten
+- manuelle ADFC-Sterne: 4
+- Dummywerte für Treffpunkt, Zeiten, Umstiege und Reservierungen enthalten

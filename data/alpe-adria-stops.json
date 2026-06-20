@@ -5,10 +5,32 @@
     "address": "Salzburg Hauptbahnhof",
     "lat": 47.813,
     "lon": 13.0457,
+    "meetingPoint": "Treffpunkt: Haupthalle am DB-Infopoint",
+    "departureTime": "08:12",
+    "arrivalTime": "10:41",
     "connection": "RJX 561 Wien Hbf → Salzburg Hbf",
     "carriageNumber": "Wagen 21",
-    "reservedSeat": "Sitzplatz 64",
-    "reservedBikeSpot": "Radplatz B07"
+    "transfers": [
+      {
+        "label": "Umstieg in Linz Hbf",
+        "arrivalTime": "09:24",
+        "departureTime": "09:31"
+      },
+      {
+        "label": "Umstieg in Attnang-Puchheim",
+        "arrivalTime": "10:02",
+        "departureTime": "10:08"
+      }
+    ],
+    "reservedSeats": [
+      "64",
+      "65",
+      "66"
+    ],
+    "reservedBikeSpots": [
+      "B07",
+      "B08"
+    ]
   },
   {
     "name": "Bad Gastein Hotel",
@@ -34,9 +56,37 @@
     "address": "Grado / Rücktransfer",
     "lat": 45.6777,
     "lon": 13.3976,
+    "meetingPoint": "Treffpunkt: Busparkplatz Grado Centro",
+    "departureTime": "16:20",
+    "arrivalTime": "20:48",
     "connection": "Micotra + Railjet Grado Shuttle → Villach Hbf → Salzburg Hbf",
     "carriageNumber": "Wagen 08",
-    "reservedSeat": "Sitzplatz 32",
-    "reservedBikeSpot": "Radplatz A03"
+    "transfers": [
+      {
+        "label": "Umstieg in Villach Hbf",
+        "arrivalTime": "17:58",
+        "departureTime": "18:16"
+      },
+      {
+        "label": "Umstieg in Schwarzach-St. Veit",
+        "arrivalTime": "19:26",
+        "departureTime": "19:34"
+      },
+      {
+        "label": "Umstieg in Bischofshofen",
+        "arrivalTime": "20:02",
+        "departureTime": "20:08"
+      }
+    ],
+    "reservedSeats": [
+      "32",
+      "33",
+      "34",
+      "35"
+    ],
+    "reservedBikeSpots": [
+      "A03",
+      "A04"
+    ]
   }
 ]
