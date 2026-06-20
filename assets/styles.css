@@ -81,8 +81,8 @@ button:disabled { opacity: .45; cursor: default; }
 @media (max-width:700px) { .container { padding:14px; } #map { height:360px; } .chart-hover-tooltip { font-size:11px; } }
 
 
-/* Feature Request V25: kompakte Toolbar / Download-Menü */
-.compact-controls { gap:8px; align-items:center; margin-bottom:8px; }
+/* Feature Request V26: kompakte Kopfzeile mit rechtsbündiger Meta-Leiste */
+.compact-controls { display:flex; gap:8px; align-items:center; margin-bottom:8px; width:100%; }
 .control-label { font-weight:700; font-size:13px; color:var(--muted); }
 .compact-controls select { min-width:170px; padding:7px 10px; border-radius:999px; }
 .compact-controls button { padding:7px 10px; border-radius:999px; font-size:13px; line-height:1.15; }
@@ -91,21 +91,18 @@ button:disabled { opacity: .45; cursor: default; }
 .download-menu summary::-webkit-details-marker { display:none; }
 .download-menu-content { position:absolute; z-index:1000; top:calc(100% + 6px); left:0; display:grid; gap:6px; min-width:190px; padding:8px; border:1px solid var(--border); border-radius:12px; background:#fff; box-shadow:0 8px 22px rgba(0,0,0,.12); }
 .download-menu-content button { width:100%; text-align:left; border-radius:9px; }
-#status { font-size:13px; }
-
-/* Feature Request V20/V25: kompakte Meta-Leiste */
-#metaBar { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin:0 0 10px; }
+#status { font-size:13px; white-space:nowrap; }
+#metaBar.meta-inline { margin-left:auto; display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:flex-end; margin-bottom:0; }
 .meta-bar-card { padding:6px 10px; border-radius:999px; box-shadow:none; line-height:1.2; }
 .meta-bar-card .title { margin:0; font-size:13px; font-weight:700; }
 .meta-bar-card .content, #adfcStarsInline, #adfcTourLinkInline { display:none !important; }
 .meta-title-link { color:var(--text); text-decoration:none; }
 .meta-title-link:hover { text-decoration:underline; }
 .meta-bar-card .star-row { font-size:13px; letter-spacing:0; vertical-align:baseline; }
-.hotel-stage-card { border-left:8px solid #64748b; background:#fffdf7; }
 
-/* Feature Request V21-V25: Logistikboxen */
+/* Logistikboxen: Start/Ziel grau analog Hotel */
 .station-inline-card, .hotel-between-stages { margin-left:22px; }
-.station-inline-card { --station-accent:#64748b; }
+.station-inline-card { --station-accent:var(--logistics-marker); }
 .station-inline-card-start { margin-bottom:-4px; }
 .station-inline-card-end { margin-top:-4px; }
 .compact-logistics-card { padding:8px 10px; border-radius:12px; }
@@ -114,7 +111,7 @@ button:disabled { opacity: .45; cursor: default; }
 .station-title { display:flex; align-items:center; gap:8px; }
 .station-title-icon { display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px; min-width:26px; border-radius:999px; background:var(--station-accent); color:#fff; font-size:14px; box-shadow:0 1px 4px rgba(0,0,0,.22); border:2px solid #fff; }
 .station-head-tools { display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
-.compact-info-line { display:flex; flex-wrap:wrap; gap:4px 12px; font-size:13px; line-height:1.3; }
+.compact-info-line { display:flex; flex-wrap:wrap; gap:4px 12px; font-size:13px; line-height:1.3; align-items:center; }
 .compact-details { font-size:12px; background:#f8fafc; border:1px solid var(--border); border-radius:999px; padding:3px 8px; }
 .compact-details[open] { border-radius:10px; }
 .compact-details summary { cursor:pointer; font-weight:700; color:var(--text); }
@@ -123,13 +120,11 @@ button:disabled { opacity: .45; cursor: default; }
 .reservation-group { display:inline-flex; align-items:center; gap:5px; flex-wrap:wrap; }
 .reservation-inline .pill-list { display:inline-flex; margin-top:0; gap:4px; }
 .reservation-inline .pill { padding:2px 6px; font-size:11px; }
-.start-card, .end-card { border-left:8px solid var(--station-accent); }
-.start-card { background:#f8fbff; }
-.end-card { background:#f7fff9; }
-.station-wagon-badge { border-color:var(--station-accent); color:var(--text); }
+.start-card, .end-card, .hotel-stage-card { border-left:8px solid var(--logistics-marker); background:#fffdf7; }
+.station-wagon-badge { border-color:var(--logistics-marker); color:var(--text); }
 .is-stop-focused .overview-card { outline:3px solid rgba(37,99,235,.28); box-shadow:0 8px 20px rgba(37,99,235,.16); }
 
-/* Feature Request V22/V24: kompakte Etappenboxen und Nummernkreis */
+/* Kompakte Etappenboxen und Nummernkreis */
 .stage-list { gap:10px; }
 .stage { grid-template-columns:6px 1fr; border-radius:10px; }
 .stage-color { width:6px; }
@@ -148,6 +143,7 @@ button:disabled { opacity: .45; cursor: default; }
 .inline-pause { color:var(--muted); font-size:12px; font-weight:600; white-space:nowrap; }
 .canvas-wrap { margin-top:6px; }
 .small-note { margin-top:6px; }
+@media (max-width:900px) { #metaBar.meta-inline { margin-left:0; width:100%; justify-content:flex-start; } }
 @media (max-width:700px) {
   .station-inline-card, .hotel-between-stages { margin-left:0; }
   .compact-card-head { align-items:flex-start; }

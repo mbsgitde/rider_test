@@ -1,12 +1,12 @@
-# Bike Tour Planner – GitHub Pages Starter V25
+# Bike Tour Planner – GitHub Pages Starter V26
 
 Minor Changes umgesetzt:
 
-- Start-/Zielmarker in der Karte verwenden jetzt dieselben Icons wie die Übersicht: 🚉 und 🏁.
-- Start-/Zielboxen in der Übersicht zeigen das jeweilige Icon in einem farbigen Kreis.
-- Toolbar oberhalb der Karte wurde kompakter gestaltet.
-- Downloads wurden in ein kompaktes Download-Menü verschoben, inklusive Tour-Steckbrief.
-- „Tourismus / offizielle Beschreibung“ wurde in „Offizielle Beschreibung“ umbenannt.
-- ADFC wurde weiter verkürzt.
+- Start- und Zielmarker sind nun grau wie Hotelmarker.
+- Start- und Ziel-Iconkreise in der Übersicht sind ebenfalls grau.
+- Offizielle Beschreibung und ADFC sitzen in derselben Zeile wie die Tourauswahl, rechtsbündig.
+- „Tourismus / offizielle Beschreibung“ ist als „Offizielle Beschreibung“ verkürzt.
+- Downloads inklusive Tour-Steckbrief sind im kompakten Download-Menü.
+- Umstiege sind auf Höhe der Verbindung platziert.
 
-Basis enthält weiterhin die V20–V24 Features.
+Basis enthält weiterhin die bisherigen V20–V25 Features.

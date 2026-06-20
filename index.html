@@ -31,20 +31,18 @@
       <button id="nextStageBtn" class="secondary hidden" title="Nächste Etappe">→</button>
       <button id="resetStageFocusBtn" class="secondary hidden" title="Alle Etappen anzeigen">Alle</button>
       <span id="status">Initialisiere …</span>
-    </div>
-
-    <div id="metaBar">
-      <div id="tourismMetaCard" class="meta-bar-card hidden">
-        <div class="title">🔗 Tourismus / offizielle Beschreibung</div>
-        <div id="tourismMetaContent" class="content"></div>
+      <div id="metaBar" class="meta-inline">
+        <div id="tourismMetaCard" class="meta-bar-card hidden">
+          <div class="title">🔗 Offizielle Beschreibung</div>
+          <div id="tourismMetaContent" class="content"></div>
+        </div>
+        <div id="adfcMetaCard" class="meta-bar-card hidden">
+          <div class="title">⭐ ADFC</div>
+          <div id="adfcStarsInline" class="star-row muted">☆☆☆☆☆</div>
+          <a id="adfcTourLinkInline" class="inline-link hidden" target="_blank" rel="noopener noreferrer">ADFC-Tour öffnen</a>
+        </div>
       </div>
-      <div id="adfcMetaCard" class="meta-bar-card hidden">
-        <div class="title">⭐ ADFC-Bewertung</div>
-        <div id="adfcStarsInline" class="star-row muted">☆☆☆☆☆</div>
-        <a id="adfcTourLinkInline" class="inline-link hidden" target="_blank" rel="noopener noreferrer">ADFC-Tour öffnen</a>
-      </div>
     </div>
-
     <div id="map"></div>
     <div id="summary" class="summary-grid"></div>
     <div id="stationBox"></div>

@@ -571,7 +571,7 @@ function renderHotelCard(hotel) {
 
 function renderTransferDetails(stop) {
   if (!Array.isArray(stop.transfers) || !stop.transfers.length) return '';
-  return `<details class="compact-details transfer-details"><summary>Umstiege (${stop.transfers.length})</summary><ul>${stop.transfers.map(t => `<li>${t.label}${t.arrivalTime || t.departureTime ? ` (${t.arrivalTime || '-'} / ${t.departureTime || '-'})` : ''}</li>`).join('')}</ul></details>`;
+  return `<details class="compact-details transfer-details"><summary>↔ Umstiege (${stop.transfers.length})</summary><ul>${stop.transfers.map(t => `<li>${t.label}${t.arrivalTime || t.departureTime ? ` (${t.arrivalTime || '-'} / ${t.departureTime || '-'})` : ''}</li>`).join('')}</ul></details>`;
 }
 
 function renderReservationInline(stop) {
@@ -581,27 +581,26 @@ function renderReservationInline(stop) {
   return rows.length ? `<div class="reservation-inline">${rows.join('')}</div>` : '';
 }
 
-function renderStationInlineCard(stop, mode, accentColor) {
+function renderStationInlineCard(stop, mode) {
   if (!stop) return null;
   const wrapper = document.createElement('aside');
   const icon = mode === 'start' ? '🚉' : '🏁';
   const label = mode === 'start' ? 'Start' : 'Ziel';
   wrapper.className = `station-inline-card station-inline-card-${mode}`;
   wrapper.dataset.stopName = stop.name;
-  if (accentColor) wrapper.style.setProperty('--station-accent', accentColor);
   wrapper.innerHTML = `
     <div class="overview-card compact-logistics-card ${mode === 'start' ? 'start-card' : 'end-card'}">
       <div class="compact-card-head">
         <div class="title station-title"><span class="station-title-icon">${icon}</span><span>${label}: ${stop.name}</span></div>
         <div class="station-head-tools">
           ${stop.carriageNumber ? `<span class="badge station-wagon-badge">${stop.carriageNumber}</span>` : ''}
-          ${renderTransferDetails(stop)}
         </div>
       </div>
       <div class="compact-info-line">
         ${stop.meetingPoint ? `<span><strong>Treffpunkt:</strong> ${stop.meetingPoint}</span>` : ''}
         ${(stop.departureTime || stop.arrivalTime) ? `<span><strong>Abfahrt / Ankunft:</strong> ${stop.departureTime || '-'} / ${stop.arrivalTime || '-'}</span>` : ''}
         ${stop.connection ? `<span><strong>Verbindung:</strong> ${stop.connection}</span>` : ''}
+        ${renderTransferDetails(stop)}
         ${stop.address ? `<span class="muted">${stop.address}</span>` : ''}
       </div>
       ${renderReservationInline(stop)}
@@ -672,8 +671,7 @@ function moveStageFocus(delta) {
 
 function createStopMarker(stop) {
   const htmlIcon = stop.type === 'overnight' ? '🏨' : (stop.type === 'start' ? '🚉' : '🏁');
-  const bgStyle = stop.markerColor ? ` style="background:${stop.markerColor}"` : '';
-  const icon = L.divIcon({ className: '', html: `<div class="logistics-label-marker"${bgStyle}>${htmlIcon}</div>`, iconSize: [28, 28], iconAnchor: [14, 14], popupAnchor: [0, -10] });
+  const icon = L.divIcon({ className: '', html: `<div class="logistics-label-marker">${htmlIcon}</div>`, iconSize: [28, 28], iconAnchor: [14, 14], popupAnchor: [0, -10] });
   return L.marker([stop.lat, stop.lon], { icon });
 }
 
@@ -688,7 +686,7 @@ function renderStages(stages) {
   mount.innerHTML = '';
   const startStop = APP.state.stops.find(stop => stop.type === 'start');
   const endStop = [...APP.state.stops].reverse().find(stop => stop.type === 'end');
-  const startCard = renderStationInlineCard(startStop, 'start', stages[0]?.color);
+  const startCard = renderStationInlineCard(startStop, 'start');
   if (startCard) mount.appendChild(startCard);
   stages.forEach((stage, idx) => {
     const el = document.createElement('section');
@@ -709,7 +707,7 @@ function renderStages(stages) {
     }
     renderChart(`chart-${idx}`, stage);
   });
-  const endCard = renderStationInlineCard(endStop, 'end', stages[stages.length - 1]?.color);
+  const endCard = renderStationInlineCard(endStop, 'end');
   if (endCard) mount.appendChild(endCard);
   applySelectionStyles();
 }
@@ -730,11 +728,7 @@ function renderMap(stages, stops) {
       APP.stageNumberMarkers.push(marker);
     }
   });
-  const firstStageColor = stages[0]?.color;
-  const lastStageColor = stages[stages.length - 1]?.color;
   stops.forEach(stop => {
-    if (stop.type === 'start' && firstStageColor) stop.markerColor = firstStageColor;
-    if (stop.type === 'end' && lastStageColor) stop.markerColor = lastStageColor;
     const marker = createStopMarker(stop).addTo(APP.routeLayerGroup);
     let popupHtml = `<strong>${stop.name}</strong>`;
     if (stop.type === 'start' || stop.type === 'end') {
