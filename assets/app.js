@@ -298,47 +298,13 @@ function updateTopMetaBar(routeMeta) {
 }
 
 function setupMapMaximizeControl() {
-  const MaximizeControl = L.Control.extend({
-    options: { position: 'topleft' },
-    onAdd() {
-      const container = L.DomUtil.create('div', 'leaflet-control map-maximize-control');
-      const button = L.DomUtil.create('button', 'map-maximize-btn', container);
-      button.type = 'button';
-      button.title = 'Karte maximieren';
-      button.setAttribute('aria-label', 'Karte maximieren');
-      button.innerHTML = '⛶';
-      L.DomEvent.disableClickPropagation(container);
-      L.DomEvent.disableScrollPropagation(container);
-      L.DomEvent.on(button, 'click', () => toggleMapMaximized(button));
-      return container;
-    }
-  });
+  const MaximizeControl = L.Control.extend({ options: { position: 'topleft' }, onAdd() { const c=L.DomUtil.create('div','leaflet-control map-maximize-control'); const b=L.DomUtil.create('button','map-maximize-btn',c); b.type='button'; b.title='Karte maximieren'; b.setAttribute('aria-label','Karte maximieren'); b.innerHTML='⛶'; L.DomEvent.disableClickPropagation(c); L.DomEvent.disableScrollPropagation(c); L.DomEvent.on(b,'click',()=>toggleMapMaximized(b)); return c; }});
   APP.map.addControl(new MaximizeControl());
-  document.addEventListener('keydown', event => {
-    if (event.key === 'Escape' && document.getElementById('map')?.classList.contains('map-maximized')) toggleMapMaximized(document.querySelector('.map-maximize-btn'), false);
-  });
+  document.addEventListener('keydown', e => { if (e.key==='Escape' && document.getElementById('map')?.classList.contains('map-maximized')) toggleMapMaximized(document.querySelector('.map-maximize-btn'), false); });
 }
-function toggleMapMaximized(button, forceState) {
-  const mapEl = document.getElementById('map'); if (!mapEl) return;
-  const shouldMaximize = typeof forceState === 'boolean' ? forceState : !mapEl.classList.contains('map-maximized');
-  mapEl.classList.toggle('map-maximized', shouldMaximize); document.body.classList.toggle('map-is-maximized', shouldMaximize);
-  if (button) { button.innerHTML = shouldMaximize ? '×' : '⛶'; button.title = shouldMaximize ? 'Karte schließen' : 'Karte maximieren'; button.setAttribute('aria-label', shouldMaximize ? 'Karte schließen' : 'Karte maximieren'); }
-  setTimeout(() => APP.map?.invalidateSize(), 150);
-}
-function updateProfileHoverMarker(stage, point) {
-  if (!point || !Number.isFinite(point.lat) || !Number.isFinite(point.lon) || !APP.map) return;
-  if (!APP.profileHoverMarker) {
-    APP.profileHoverMarker = L.circleMarker([point.lat, point.lon], { radius: 7, color: stage.color, weight: 3, fillColor: '#ffffff', fillOpacity: 1, opacity: 1, className: 'profile-hover-marker' }).addTo(APP.map);
-  } else {
-    APP.profileHoverMarker.setLatLng([point.lat, point.lon]);
-    APP.profileHoverMarker.setStyle({ color: stage.color });
-    if (!APP.map.hasLayer(APP.profileHoverMarker)) APP.profileHoverMarker.addTo(APP.map);
-  }
-  APP.profileHoverMarker.bindTooltip(`km ${point.distanceKm.toFixed(1)} · ${Math.round(point.elevation)} m · ${point.gradePct.toFixed(1)} %`, { permanent: false, direction: 'top', offset: [0, -8], opacity: 0.95 }).openTooltip();
-}
-function clearProfileHoverMarker() {
-  if (APP.profileHoverMarker && APP.map?.hasLayer(APP.profileHoverMarker)) APP.map.removeLayer(APP.profileHoverMarker);
-}
+function toggleMapMaximized(button, forceState) { const mapEl=document.getElementById('map'); if(!mapEl) return; const on=typeof forceState==='boolean'?forceState:!mapEl.classList.contains('map-maximized'); mapEl.classList.toggle('map-maximized',on); document.body.classList.toggle('map-is-maximized',on); if(button){button.innerHTML=on?'×':'⛶'; button.title=on?'Karte schließen':'Karte maximieren';} setTimeout(()=>APP.map?.invalidateSize(),150); }
+function updateProfileHoverMarker(stage, point) { if(!point||!Number.isFinite(point.lat)||!Number.isFinite(point.lon)||!APP.map) return; if(!APP.profileHoverMarker){APP.profileHoverMarker=L.circleMarker([point.lat,point.lon],{radius:7,color:stage.color,weight:3,fillColor:'#fff',fillOpacity:1,opacity:1,className:'profile-hover-marker'}).addTo(APP.map);} else {APP.profileHoverMarker.setLatLng([point.lat,point.lon]); APP.profileHoverMarker.setStyle({color:stage.color}); if(!APP.map.hasLayer(APP.profileHoverMarker)) APP.profileHoverMarker.addTo(APP.map);} APP.profileHoverMarker.bindTooltip(`km ${point.distanceKm.toFixed(1)} · ${Math.round(point.elevation)} m · ${point.gradePct.toFixed(1)} %`,{direction:'top',offset:[0,-8],opacity:.95}).openTooltip(); }
+function clearProfileHoverMarker(){ if(APP.profileHoverMarker && APP.map?.hasLayer(APP.profileHoverMarker)) APP.map.removeLayer(APP.profileHoverMarker); }
 
 async function initializeApp() {
   APP.state.config = await loadJSON('data/config.json');
@@ -432,26 +398,12 @@ function haversine(a, b) {
 }
 
 function isValidLatLon(lat, lon) { return Number.isFinite(lat) && Number.isFinite(lon) && lat >= -90 && lat <= 90 && lon >= -180 && lon <= 180; }
-function parseGoogleMapsCoordinates(url) {
-  if (!url || typeof url !== 'string') return null;
-  const variants = [url]; try { variants.push(decodeURIComponent(url)); } catch (e) {}
-  for (const text of variants) {
-    const patterns = [/@(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)(?:[,/z?&]|$)/i, /[?&](?:query|q|ll|center)=(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)(?:[&]|$)/i, /!3d(-?\d+(?:\.\d+)?)!4d(-?\d+(?:\.\d+)?)/i, /!2d(-?\d+(?:\.\d+)?)!3d(-?\d+(?:\.\d+)?)/i];
-    for (const pattern of patterns) { const match = text.match(pattern); if (!match) continue; let lat, lon; if (pattern.source.startsWith('!2d')) { lon = parseFloat(match[1]); lat = parseFloat(match[2]); } else { lat = parseFloat(match[1]); lon = parseFloat(match[2]); } if (isValidLatLon(lat, lon)) return { lat, lon }; }
-  } return null;
-}
-function normalizeMatchName(value) { return String(value || '').toLowerCase().replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss').normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/(hotel|gasthof|landhotel|bahnhof|hbf|restaurant|pension|hostel|garni|am|an|der|die|das|zum|zur)/g,' ').replace(/[^a-z0-9]+/g,' ').trim(); }
-function levenshteinDistance(a, b) { const dp = Array.from({ length: a.length + 1 }, () => Array(b.length + 1).fill(0)); for (let i=0;i<=a.length;i++) dp[i][0]=i; for (let j=0;j<=b.length;j++) dp[0][j]=j; for (let i=1;i<=a.length;i++) for (let j=1;j<=b.length;j++) { const cost=a[i-1]===b[j-1]?0:1; dp[i][j]=Math.min(dp[i-1][j]+1, dp[i][j-1]+1, dp[i-1][j-1]+cost); } return dp[a.length][b.length]; }
-function waypointSimilarity(a, b) { const na=normalizeMatchName(a); const nb=normalizeMatchName(b); if (!na || !nb) return 0; if (na===nb) return 1; if (na.includes(nb) || nb.includes(na)) return 0.92; return 1 - levenshteinDistance(na, nb) / Math.max(na.length, nb.length); }
-function findBestWaypointMatch(stop, waypoints) { const wanted = stop.matchName || stop.waypointName || stop.name; let best = null; for (const waypoint of waypoints || []) { const score = waypointSimilarity(wanted, waypoint.name); if (!best || score > best.score) best = { waypoint, score }; } const threshold = typeof stop.matchThreshold === 'number' ? stop.matchThreshold : 0.82; return best && best.score >= threshold ? best : null; }
-async function resolveStopCoordinates(stop) {
-  if (typeof stop.lat === 'number' && typeof stop.lon === 'number') return { lat: stop.lat, lon: stop.lon, source: 'json' };
-  const parsed = parseGoogleMapsCoordinates(stop.googleMapsUrl || stop.googleUrl || stop.mapsUrl || stop.googleMapsLink); if (parsed) return { ...parsed, source: 'googleMapsUrl' };
-  const match = findBestWaypointMatch(stop, APP.state.gpxWaypoints || []); if (match) { console.info(`Waypoint-Match: ${stop.name} → ${match.waypoint.name} (${Math.round(match.score * 100)}%)`); return { lat: match.waypoint.lat, lon: match.waypoint.lon, source: 'gpxWaypoint', waypointName: match.waypoint.name, matchScore: match.score }; }
-  if (stop.type === 'start' && APP.state.gpxTrackPoints?.length) { const first = APP.state.gpxTrackPoints[0]; return { lat: first.lat, lon: first.lon, source: 'firstTrackPoint' }; }
-  if (stop.type === 'end' && APP.state.gpxTrackPoints?.length) { const last = APP.state.gpxTrackPoints[APP.state.gpxTrackPoints.length - 1]; return { lat: last.lat, lon: last.lon, source: 'lastTrackPoint' }; }
-  return null;
-}
+function parseGoogleMapsCoordinates(url) { if(!url||typeof url!=='string') return null; const variants=[url]; try{variants.push(decodeURIComponent(url));}catch(e){} for(const text of variants){ const patterns=[/@(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)(?:[,/z?&]|$)/i,/[?&](?:query|q|ll|center)=(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)(?:[&]|$)/i,/!3d(-?\d+(?:\.\d+)?)!4d(-?\d+(?:\.\d+)?)/i,/!2d(-?\d+(?:\.\d+)?)!3d(-?\d+(?:\.\d+)?)/i]; for(const pattern of patterns){const match=text.match(pattern); if(!match) continue; let lat,lon; if(pattern.source.startsWith('!2d')){lon=parseFloat(match[1]);lat=parseFloat(match[2]);}else{lat=parseFloat(match[1]);lon=parseFloat(match[2]);} if(isValidLatLon(lat,lon)) return {lat,lon};}} return null; }
+function normalizeMatchName(value){return String(value||'').toLowerCase().replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss').normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/(hotel|gasthof|landhotel|bahnhof|hbf|restaurant|pension|hostel|garni|am|an|der|die|das|zum|zur)/g,' ').replace(/[^a-z0-9]+/g,' ').trim();}
+function levenshteinDistance(a,b){const dp=Array.from({length:a.length+1},()=>Array(b.length+1).fill(0)); for(let i=0;i<=a.length;i++)dp[i][0]=i; for(let j=0;j<=b.length;j++)dp[0][j]=j; for(let i=1;i<=a.length;i++)for(let j=1;j<=b.length;j++){const cost=a[i-1]===b[j-1]?0:1; dp[i][j]=Math.min(dp[i-1][j]+1,dp[i][j-1]+1,dp[i-1][j-1]+cost);} return dp[a.length][b.length];}
+function waypointSimilarity(a,b){const na=normalizeMatchName(a), nb=normalizeMatchName(b); if(!na||!nb)return 0; if(na===nb)return 1; if(na.includes(nb)||nb.includes(na))return .92; return 1-levenshteinDistance(na,nb)/Math.max(na.length,nb.length);}
+function findBestWaypointMatch(stop, waypoints){const wanted=stop.matchName||stop.waypointName||stop.name; let best=null; for(const waypoint of waypoints||[]){const score=waypointSimilarity(wanted,waypoint.name); if(!best||score>best.score) best={waypoint,score};} const threshold=typeof stop.matchThreshold==='number'?stop.matchThreshold:.82; return best&&best.score>=threshold?best:null;}
+async function resolveStopCoordinates(stop){ if(typeof stop.lat==='number'&&typeof stop.lon==='number') return {lat:stop.lat,lon:stop.lon}; const parsed=parseGoogleMapsCoordinates(stop.googleMapsUrl||stop.googleUrl||stop.mapsUrl||stop.googleMapsLink); if(parsed) return parsed; const match=findBestWaypointMatch(stop,APP.state.gpxWaypoints||[]); if(match) return {lat:match.waypoint.lat,lon:match.waypoint.lon}; if(stop.type==='start'&&APP.state.gpxTrackPoints?.length){const first=APP.state.gpxTrackPoints[0]; return {lat:first.lat,lon:first.lon};} if(stop.type==='end'&&APP.state.gpxTrackPoints?.length){const last=APP.state.gpxTrackPoints[APP.state.gpxTrackPoints.length-1]; return {lat:last.lat,lon:last.lon};} return null; }
 
 function findNearestTrackPoint(stopCoords, points) {
   let minDistance = Infinity, minIndex = 0;
@@ -483,9 +435,9 @@ function midpointOfSegment(seg) {
   return [p.lat, p.lon];
 }
 
-function cleanStagePlaceName(value) { if (!value) return ''; return String(value).replace(/(Hotel|Gasthof|Landhotel|Pension|Hostel|Garni|Bahnhof|Hbf)/gi, '').replace(/\s+/g, ' ').trim(); }
-function getStopStagePlace(stop) { if (!stop) return ''; if (stop.stagePlace) return stop.stagePlace; if (stop.place) return stop.place; if (stop.city) return stop.city; if (stop.town) return stop.town; if (stop.type === 'overnight') { const address = String(stop.address || '').trim(); if (address) return address.split(',')[0].trim(); const cleaned = cleanStagePlaceName(stop.name); if (cleaned) return cleaned; } return stop.name; }
-function formatDisplayUrl(url) { return String(url || '').replace(/^https?:\/\//, '').replace(/\/$/, ''); }
+function cleanStagePlaceName(value){ if(!value)return ''; return String(value).replace(/(Hotel|Gasthof|Landhotel|Pension|Hostel|Garni|Bahnhof|Hbf)/gi,'').replace(/\s+/g,' ').trim(); }
+function getStopStagePlace(stop){ if(!stop)return ''; if(stop.stagePlace)return stop.stagePlace; if(stop.place)return stop.place; if(stop.city)return stop.city; if(stop.town)return stop.town; if(stop.type==='overnight'){const address=String(stop.address||'').trim(); if(address)return address.split(',')[0].trim(); const cleaned=cleanStagePlaceName(stop.name); if(cleaned)return cleaned;} return stop.name; }
+function formatDisplayUrl(url){ return String(url||'').replace(/^https?:\/\//,'').replace(/\/$/,''); }
 
 function buildStages(points, stops, config) {
   const steepThreshold = config.profileView?.steepSectionThresholdPercent ?? 8;
@@ -525,7 +477,7 @@ function buildStages(points, stops, config) {
     const hotel = stops[i + 1].type === 'overnight' ? stops[i + 1] : null;
     const plausibilityLevel = hotel ? getPlausibilityLevel(hotel.distanceToRouteKm, config.routePlausibilityCheck) : null;
     const plausibilityMessage = hotel ? getPlausibilityMessage(hotel.distanceToRouteKm, plausibilityLevel) : '';
-    stages.push({ id: i + 1, name: `${getStopStagePlace(stops[i])} → ${getStopStagePlace(stops[i + 1])}`, seg, dist, up, down, netRideTimeHours, grossRideTimeHours, totalPauseMinutes, difficulty, color, hotel, plausibilityLevel, plausibilityMessage, profilePoints, steepPoints, midpointLatLng: midpointOfSegment(seg), polyline: null, bounds: null, marker: null, element: null, remainingTotalHours: netRideTimeHours, remainingTotalDistanceKm: dist });
+    stages.push({ id: i + 1, name: `${getStopStagePlace(stops[i])} → ${getStopStagePlace(stops[i + 1])}`, startTrackIndex: startIndex, endTrackIndex: endIndex, seg, dist, up, down, netRideTimeHours, grossRideTimeHours, totalPauseMinutes, difficulty, color, hotel, plausibilityLevel, plausibilityMessage, profilePoints, steepPoints, midpointLatLng: midpointOfSegment(seg), polyline: null, bounds: null, marker: null, element: null, remainingTotalHours: netRideTimeHours, remainingTotalDistanceKm: dist });
   }
   return stages;
 }
@@ -570,15 +522,7 @@ function renderChart(canvasId, stage) {
       maintainAspectRatio: false,
       parsing: false,
       interaction: { mode: 'nearest', intersect: false },
-      onHover(event, activeElements) {
-        if (activeElements && activeElements.length) {
-          const dataIndex = activeElements[0].index;
-          const p = stage.profilePoints[dataIndex];
-          updateProfileHoverMarker(stage, p);
-        } else {
-          clearProfileHoverMarker();
-        }
-      },
+      onHover(event, activeElements) { if (activeElements && activeElements.length) updateProfileHoverMarker(stage, stage.profilePoints[activeElements[0].index]); else clearProfileHoverMarker(); },
       plugins: {
         legend: { display: false },
         tooltip: {
@@ -627,43 +571,20 @@ function formatReservationPills(values) {
   return `<div class="pill-list">${values.slice(0, 10).map(v => `<span class="pill">${v}</span>`).join('')}</div>`;
 }
 
-function renderStationBox(stops) { const mount = document.getElementById('stationBox'); if (mount) mount.innerHTML = ''; }
-function renderHotelCard(hotel) { if (!hotel) return ''; return `<aside class="hotel-between-stages" data-stop-name="${hotel.name}"><div class="overview-card hotel-stage-card compact-logistics-card"><div class="compact-card-head"><div class="title">🏨 Übernachtung: ${hotel.name}</div>${hotel.hotelUrl ? `<a class="hotel-link hotel-url-link" href="${hotel.hotelUrl}" target="_blank" rel="noopener noreferrer">${formatDisplayUrl(hotel.hotelUrl)}</a>` : ''}${hotel.googleMapsUrl ? `<a class="hotel-link" href="${hotel.googleMapsUrl}" target="_blank" rel="noopener noreferrer">Maps</a>` : ''}</div>${hotel.notes ? `<div class="overview-list compact-info-line"><span class="muted">${hotel.notes}</span></div>` : ''}</div></aside>`; }
-function renderTransferDetails(stop) { if (!Array.isArray(stop.transfers) || !stop.transfers.length) return ''; return `<details class="compact-details transfer-details"><summary>↔ Umstiege (${stop.transfers.length})</summary><ul>${stop.transfers.map(t => `<li>${t.label}${t.arrivalTime || t.departureTime ? ` (${t.arrivalTime || '-'} / ${t.departureTime || '-'})` : ''}</li>`).join('')}</ul></details>`; }
-function renderReservationInline(stop) { const rows = []; if (Array.isArray(stop.reservedSeats) && stop.reservedSeats.length) rows.push(`<span class="reservation-group"><strong>Sitz:</strong>${formatReservationPills(stop.reservedSeats)}</span>`); if (Array.isArray(stop.reservedBikeSpots) && stop.reservedBikeSpots.length) rows.push(`<span class="reservation-group"><strong>Rad:</strong>${formatReservationPills(stop.reservedBikeSpots)}</span>`); return rows.length ? `<div class="reservation-inline">${rows.join('')}</div>` : ''; }
-function renderStationInlineCard(stop, mode) { if (!stop) return null; const wrapper = document.createElement('aside'); const icon = mode === 'start' ? '🚉' : '🏁'; const label = mode === 'start' ? 'Start' : 'Ziel'; wrapper.className = `station-inline-card station-inline-card-${mode}`; wrapper.dataset.stopName = stop.name; wrapper.innerHTML = `<div class="overview-card compact-logistics-card ${mode === 'start' ? 'start-card' : 'end-card'}"><div class="compact-card-head"><div class="title station-title"><span class="station-title-icon">${icon}</span><span>${label}: ${stop.name}</span></div><div class="station-head-tools">${stop.carriageNumber ? `<span class="badge station-wagon-badge">${stop.carriageNumber}</span>` : ''}${stop.googleMapsUrl ? `<a class="inline-link" href="${stop.googleMapsUrl}" target="_blank" rel="noopener noreferrer">Maps</a>` : ''}</div></div><div class="compact-info-line">${stop.meetingPoint ? `<span><strong>Treffpunkt:</strong> ${stop.meetingPoint}</span>` : ''}${(stop.departureTime || stop.arrivalTime) ? `<span><strong>Abfahrt / Ankunft:</strong> ${stop.departureTime || '-'} / ${stop.arrivalTime || '-'}</span>` : ''}${stop.connection ? `<span><strong>Verbindung:</strong> ${stop.connection}</span>` : ''}${renderTransferDetails(stop)}${stop.address ? `<span class="muted">${stop.address}</span>` : ''}</div>${renderReservationInline(stop)}</div>`; stop.element = wrapper; return wrapper; }
-function focusStop(stop) { if (!stop) return; if (stop.element) { stop.element.scrollIntoView({ behavior: 'smooth', block: 'center' }); stop.element.classList.add('is-stop-focused'); setTimeout(() => stop.element?.classList.remove('is-stop-focused'), 1600); } }
+function renderStationBox(stops){ const mount=document.getElementById('stationBox'); if(mount) mount.innerHTML=''; }
+function renderHotelCard(hotel){ if(!hotel)return ''; return `<aside class="hotel-between-stages" data-stop-name="${hotel.name}"><div class="overview-card hotel-stage-card compact-logistics-card"><div class="compact-card-head"><div class="title">🏨 Übernachtung: ${hotel.name}</div>${hotel.hotelUrl?`<a class="hotel-link hotel-url-link" href="${hotel.hotelUrl}" target="_blank" rel="noopener noreferrer">${formatDisplayUrl(hotel.hotelUrl)}</a>`:''}${hotel.googleMapsUrl?`<a class="hotel-link" href="${hotel.googleMapsUrl}" target="_blank" rel="noopener noreferrer">Maps</a>`:''}</div>${hotel.notes?`<div class="overview-list compact-info-line"><span class="muted">${hotel.notes}</span></div>`:''}</div></aside>`; }
+function renderTransferDetails(stop){ if(!Array.isArray(stop.transfers)||!stop.transfers.length)return ''; return `<details class="compact-details transfer-details"><summary>↔ Umstiege (${stop.transfers.length})</summary><ul>${stop.transfers.map(t=>`<li>${t.label}${t.arrivalTime||t.departureTime?` (${t.arrivalTime||'-'} / ${t.departureTime||'-'})`:''}</li>`).join('')}</ul></details>`; }
+function renderReservationInline(stop){ const rows=[]; if(Array.isArray(stop.reservedSeats)&&stop.reservedSeats.length) rows.push(`<span class="reservation-group"><strong>Sitz:</strong>${formatReservationPills(stop.reservedSeats)}</span>`); if(Array.isArray(stop.reservedBikeSpots)&&stop.reservedBikeSpots.length) rows.push(`<span class="reservation-group"><strong>Rad:</strong>${formatReservationPills(stop.reservedBikeSpots)}</span>`); return rows.length?`<div class="reservation-inline">${rows.join('')}</div>`:''; }
+function renderStationInlineCard(stop, mode){ if(!stop)return null; const w=document.createElement('aside'); const icon=mode==='start'?'🚉':'🏁'; const label=mode==='start'?'Start':'Ziel'; w.className=`station-inline-card station-inline-card-${mode}`; w.dataset.stopName=stop.name; w.innerHTML=`<div class="overview-card compact-logistics-card ${mode==='start'?'start-card':'end-card'}"><div class="compact-card-head"><div class="title station-title"><span class="station-title-icon">${icon}</span><span>${label}: ${stop.name}</span></div></div><div class="compact-info-line">${stop.address?`<span class="muted">${stop.address}</span>`:''}</div>${renderReservationInline(stop)}</div>`; stop.element=w; return w; }
+function focusStop(stop){ if(!stop)return; if(stop.element){ stop.element.scrollIntoView({behavior:'smooth',block:'center'}); stop.element.classList.add('is-stop-focused'); setTimeout(()=>stop.element?.classList.remove('is-stop-focused'),1600);} }
 
-function renderHotelBox(stops) { const mount = document.getElementById('hotelBox'); if (mount) mount.innerHTML = ''; }
+function renderHotelBox(stops){ const mount=document.getElementById('hotelBox'); if(mount) mount.innerHTML=''; }
 
-function highlightStage(stage) { if (stage?.polyline) { stage.polyline.setStyle({ weight: 7, opacity: 1.0 }); stage.polyline.bringToFront(); } }
-function resetStageHighlight(stage) { if (stage?.polyline) stage.polyline.setStyle({ weight: 4, opacity: 0.95 }); }
-function setStageMapVisibility(stage, visible, selected) {
-  if (stage?.polyline) {
-    stage.polyline.setStyle({ weight: visible ? (selected ? 7 : 4) : 0, opacity: visible ? (selected ? 1 : 0.95) : 0 });
-    if (visible) stage.polyline.bringToFront();
-  }
-  if (stage?.marker) {
-    if (visible) {
-      if (!APP.map.hasLayer(stage.marker)) stage.marker.addTo(APP.map);
-      stage.marker.setOpacity(selected ? 1 : 0.95);
-    } else if (APP.map.hasLayer(stage.marker)) {
-      APP.map.removeLayer(stage.marker);
-    }
-  }
-}
-function applySelectionStyles() {
-  APP.state.stages.forEach(stage => {
-    if (!stage.element) return;
-    const isSelected = APP.state.selectedStageId === stage.id;
-    const hasSelection = APP.state.selectedStageId != null;
-    stage.element.classList.toggle('is-selected', isSelected);
-    stage.element.classList.toggle('is-dimmed', hasSelection && !isSelected);
-    const showAllBtn = stage.element.querySelector('.stage-show-all-btn');
-    if (showAllBtn) showAllBtn.classList.toggle('hidden', !isSelected);
-    setStageMapVisibility(stage, !hasSelection || isSelected, isSelected);
-  });
-}
+function highlightStage(stage){ if(stage?.polyline){ stage.polyline.setStyle({weight:7,opacity:1}); stage.polyline.bringToFront(); }}
+function resetStageHighlight(stage){ if(stage?.polyline) stage.polyline.setStyle({weight:4,opacity:.95}); }
+function setStageMapVisibility(stage, visible, selected){ if(stage?.polyline){ stage.polyline.setStyle({weight:visible?(selected?7:4):0, opacity:visible?(selected?1:.95):0}); if(visible) stage.polyline.bringToFront(); } if(stage?.marker){ if(visible){ if(!APP.map.hasLayer(stage.marker)) stage.marker.addTo(APP.map); stage.marker.setOpacity(selected?1:.95); } else if(APP.map.hasLayer(stage.marker)) APP.map.removeLayer(stage.marker); }}
+function setStopMapVisibility(stop, visible){ if(!stop?.marker) return; if(visible){ if(!APP.routeLayerGroup.hasLayer(stop.marker)) APP.routeLayerGroup.addLayer(stop.marker); } else if(APP.routeLayerGroup.hasLayer(stop.marker)) APP.routeLayerGroup.removeLayer(stop.marker); }
+function applySelectionStyles(){ const hasSelection=APP.state.selectedStageId!=null; const selectedStage=APP.state.stages.find(s=>s.id===APP.state.selectedStageId); document.getElementById('summary')?.classList.toggle('context-hidden',hasSelection); document.querySelectorAll('.station-inline-card').forEach(el=>el.classList.toggle('context-hidden',hasSelection)); APP.state.stages.forEach(stage=>{ const isSelected=APP.state.selectedStageId===stage.id; if(stage.element){ stage.element.classList.toggle('is-selected',isSelected); stage.element.classList.toggle('stage-hidden',hasSelection&&!isSelected); const btn=stage.element.querySelector('.stage-show-all-btn'); if(btn) btn.classList.toggle('hidden',!isSelected); } if(stage.hotel?.element) stage.hotel.element.classList.toggle('stage-hidden',hasSelection&&!isSelected); setStageMapVisibility(stage,!hasSelection||isSelected,isSelected); }); APP.state.stops.forEach(stop=>{ const visible=!hasSelection || (selectedStage && stop.trackIndex>=selectedStage.startTrackIndex && stop.trackIndex<=selectedStage.endTrackIndex); setStopMapVisibility(stop,visible); }); }
 
 function updateFocusControls() {
   const hasSelection = APP.state.selectedStageId != null;
@@ -719,7 +640,7 @@ function renderStages(stages) {
     const el = document.createElement('section');
     stage.element = el;
     el.className = 'stage';
-    el.innerHTML = `<div class="stage-color" style="background:${stage.color}"></div><div class="stage-body"><div class="stage-head"><div class="stage-title"><span class="stage-title-number" style="background:${stage.color}">${stage.id}</span><span class="stage-title-text">${stage.name}</span></div><div class="stage-tools"><button class="stage-show-all-btn hidden" type="button" title="Alle Etappen wieder anzeigen">Alle</button><button class="stage-download-btn" type="button">Etappen-GPX herunterladen</button><div class="badge ${getDifficultyBadgeClass(stage.difficulty)}">${stage.difficulty}</div></div></div><div class="meta"><div class="meta-item"><div class="label">Distanz</div><div class="value">${stage.dist.toFixed(1)} km</div></div><div class="meta-item"><div class="label">Höhenmeter</div><div class="value">↑ ${Math.round(stage.up)} m</div></div><div class="meta-item"><div class="label">Höhenmeter</div><div class="value">↓ ${Math.round(stage.down)} m</div></div><div class="meta-item"><div class="label">Netto-Fahrzeit</div><div class="value">${formatDurationWithUnit(stage.netRideTimeHours)}</div></div><div class="meta-item"><div class="label">Brutto (inkl. Pausen)</div><div class="value">${formatDurationWithUnit(stage.grossRideTimeHours)} <span class="inline-pause">(${formatDurationWithUnit(stage.totalPauseMinutes / 60)})</span></div></div></div><div class="canvas-wrap" style="height:180px"><canvas id="chart-${idx}"></canvas></div>${stage.plausibilityLevel ? `<div class="small-note">${stage.plausibilityMessage}</div>` : ''}</div>`;
+    el.innerHTML = `<div class="stage-color" style="background:${stage.color}"></div><div class="stage-body"><div class="stage-head"><div class="stage-title"><span class="stage-title-number" style="background:${stage.color}">${stage.id}</span><span class="stage-title-text">${stage.name}</span></div><div class="stage-tools"><button class="stage-show-all-btn hidden" type="button" title="Alle Etappen wieder anzeigen">Alle Etappen einblenden</button><button class="stage-download-btn" type="button">Etappen-GPX herunterladen</button><div class="badge ${getDifficultyBadgeClass(stage.difficulty)}">${stage.difficulty}</div></div></div><div class="meta"><div class="meta-item"><div class="label">Distanz</div><div class="value">${stage.dist.toFixed(1)} km</div></div><div class="meta-item"><div class="label">Höhenmeter</div><div class="value">↑ ${Math.round(stage.up)} m</div></div><div class="meta-item"><div class="label">Höhenmeter</div><div class="value">↓ ${Math.round(stage.down)} m</div></div><div class="meta-item"><div class="label">Netto-Fahrzeit</div><div class="value">${formatDurationWithUnit(stage.netRideTimeHours)}</div></div><div class="meta-item"><div class="label">Brutto (inkl. Pausen)</div><div class="value">${formatDurationWithUnit(stage.grossRideTimeHours)} <span class="inline-pause">(${formatDurationWithUnit(stage.totalPauseMinutes / 60)})</span></div></div></div><div class="canvas-wrap" style="height:180px"><canvas id="chart-${idx}"></canvas></div>${stage.plausibilityLevel ? `<div class="small-note">${stage.plausibilityMessage}</div>` : ''}</div>`;
     el.addEventListener('mouseenter', () => { el.classList.add('is-hovered'); highlightStage(stage); });
     el.addEventListener('mouseleave', () => { el.classList.remove('is-hovered'); if (APP.state.selectedStageId !== stage.id) resetStageHighlight(stage); });
     el.addEventListener('click', () => focusStage(stage));
@@ -752,6 +673,7 @@ function renderMap(stages, stops) {
   });
   stops.forEach(stop => {
     const marker = createStopMarker(stop).addTo(APP.routeLayerGroup);
+    stop.marker = marker;
     let popupHtml = `<strong>${stop.name}</strong>`;
     if (stop.type === 'start' || stop.type === 'end') {
       if (stop.connection) popupHtml += `<br>${stop.connection}`;

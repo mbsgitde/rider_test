@@ -1,7 +1,7 @@
-# Bike Tour Planner – V33
+# Bike Tour Planner – V34
 
 Neu:
-- Wenn eine Tagesetappe in Karte oder Übersicht ausgewählt wird, werden andere Etappen auf der Karte ausgeblendet.
-- In der ausgewählten Tagesetappe erscheint ein `Alle`-Button, der alle Etappen wieder einblendet.
-- Der bestehende Toolbar-Button `Alle` funktioniert weiterhin.
-- Enthält weiterhin V32: Höhenprofil-Hover-Marker auf der Karte und Brutto-Label-Anpassung.
+- Button heißt jetzt `Alle Etappen einblenden`.
+- Bei ausgewählter Tagesetappe werden Summary/Gesamttourdaten, Start-/Zielboxen, andere Etappen und deren Hotelboxen vollständig ausgeblendet.
+- Auf der Karte werden andere Etappen und Stop-Marker außerhalb der aktiven Tagesetappe ausgeblendet.
+- Dadurch liegt die ausgewählte Tagesetappe direkt unter der Karte.

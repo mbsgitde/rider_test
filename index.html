@@ -18,23 +18,13 @@
       <label for="routeSelect" class="control-label">Tour</label>
       <select id="routeSelect"></select>
       <button id="loadBtn" title="Tour laden">↻ Laden</button>
-      <details class="download-menu">
-        <summary>⬇ Downloads</summary>
-        <div class="download-menu-content">
-          <button id="downloadFullGpxBtn" class="secondary" title="Gesamt-GPX herunterladen">GPX gesamt</button>
-          <button id="downloadAllStagesZipBtn" class="secondary" title="Gesamtstrecke und Etappen als ZIP herunterladen">ZIP gesamt + Etappen</button>
-          <button id="downloadTourBriefBtn" class="secondary" title="Tour-Steckbrief als TXT herunterladen">TXT Steckbrief</button>
-        </div>
-      </details>
-      <button id="downloadActiveStageBtn" class="secondary hidden" title="Aktive Etappe als GPX herunterladen">GPX Etappe</button>
-      <button id="prevStageBtn" class="secondary hidden" title="Vorherige Etappe">←</button>
-      <button id="nextStageBtn" class="secondary hidden" title="Nächste Etappe">→</button>
-      <button id="resetStageFocusBtn" class="secondary hidden" title="Alle Etappen anzeigen">Alle</button>
+      <details class="download-menu"><summary>⬇ Downloads</summary><div class="download-menu-content"><button id="downloadFullGpxBtn" class="secondary">GPX gesamt</button><button id="downloadAllStagesZipBtn" class="secondary">ZIP gesamt + Etappen</button><button id="downloadTourBriefBtn" class="secondary">TXT Steckbrief</button></div></details>
+      <button id="downloadActiveStageBtn" class="secondary hidden">GPX Etappe</button>
+      <button id="prevStageBtn" class="secondary hidden">←</button>
+      <button id="nextStageBtn" class="secondary hidden">→</button>
+      <button id="resetStageFocusBtn" class="secondary hidden">Alle Etappen einblenden</button>
       <span id="status">Initialisiere …</span>
-      <div id="metaBar" class="meta-inline">
-        <div id="tourismMetaCard" class="meta-bar-card hidden"><div class="title">🔗 Offizielle Beschreibung</div><div id="tourismMetaContent" class="content"></div></div>
-        <div id="adfcMetaCard" class="meta-bar-card hidden"><div class="title">⭐ ADFC</div><div id="adfcStarsInline" class="star-row muted">☆☆☆☆☆</div><a id="adfcTourLinkInline" class="inline-link hidden" target="_blank" rel="noopener noreferrer">ADFC-Tour öffnen</a></div>
-      </div>
+      <div id="metaBar" class="meta-inline"><div id="tourismMetaCard" class="meta-bar-card hidden"><div class="title">🔗 Offizielle Beschreibung</div><div id="tourismMetaContent" class="content"></div></div><div id="adfcMetaCard" class="meta-bar-card hidden"><div class="title">⭐ ADFC</div><div id="adfcStarsInline" class="star-row muted">☆☆☆☆☆</div><a id="adfcTourLinkInline" class="inline-link hidden" target="_blank" rel="noopener noreferrer">ADFC-Tour öffnen</a></div></div>
     </div>
     <div id="map"></div>
     <div id="summary" class="summary-grid"></div>
