@@ -117,10 +117,80 @@ button:disabled { opacity: .45; cursor: default; }
   letter-spacing: 0;
   vertical-align: baseline;
 }
-.hotel-between-stages {
-  margin: -6px 0 2px 22px;
-}
 .hotel-stage-card {
   border-left: 8px solid #64748b;
   background: #fffdf7;
+}
+
+/* Feature Request V21: Start/Ziel inline und Marker-Klick springt zur Übersicht */
+.station-inline-card,
+.hotel-between-stages {
+  margin-left: 22px;
+}
+.station-inline-card-start {
+  margin-bottom: -4px;
+}
+.station-inline-card-end {
+  margin-top: -4px;
+}
+.compact-logistics-card {
+  padding: 9px 12px;
+  border-radius: 12px;
+}
+.compact-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+.compact-card-head .title {
+  margin: 0;
+}
+.compact-info-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  font-size: 13px;
+  line-height: 1.35;
+}
+.compact-extra-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
+.compact-details {
+  font-size: 12px;
+  background: #f8fafc;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 4px 8px;
+}
+.compact-details summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--text);
+}
+.compact-details ul {
+  margin: 6px 0 2px 18px;
+  padding: 0;
+}
+.start-card {
+  border-left: 8px solid #2563eb;
+  background: #f8fbff;
+}
+.end-card {
+  border-left: 8px solid #16a34a;
+  background: #f7fff9;
+}
+.is-stop-focused .overview-card {
+  outline: 3px solid rgba(37,99,235,.28);
+  box-shadow: 0 8px 20px rgba(37,99,235,.16);
+}
+@media (max-width:700px) {
+  .station-inline-card,
+  .hotel-between-stages { margin-left: 0; }
+  .compact-card-head { align-items: flex-start; }
 }

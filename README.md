@@ -1,12 +1,14 @@
-# Bike Tour Planner – GitHub Pages Starter V20
+# Bike Tour Planner – GitHub Pages Starter V21
 
-Feature Request umgesetzt:
+Feature Requests umgesetzt:
 
-- Tourismus- und ADFC-Boxen drastisch verkleinert.
-- Überschriften sind direkt verlinkt.
-- ADFC-Sterne stehen direkt vor „ADFC-Bewertung“, sofern vorhanden.
-- Hotels werden zwischen den Etappen angezeigt, z. B. Bad Gastein nach Etappe 1 und Villach nach Etappe 2.
-- Die GPX-Dateien wurden direkt aus den hochgeladenen TXT-Dateien übernommen und nur mit `.gpx`-Endung abgelegt.
+- Kompakte Tourismus-/ADFC-Leiste.
+- Hotels werden zwischen den Etappen angezeigt.
+- Klick auf Unterkunfts-, Start- oder Zielmarker in der Karte springt zur passenden kompakten Übersicht.
+- Startbahnhof wird direkt vor Etappe 1 angezeigt.
+- Zielbahnhof wird direkt nach der letzten Etappe angezeigt.
+- Umstiege und Reservierungen sind platzsparend per Details-Element ausklappbar.
+- GPX-Dateien werden direkt aus den hochgeladenen TXT-Dateien als `.gpx` übernommen.
 
 ## Lokal testen
 

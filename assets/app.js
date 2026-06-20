@@ -560,39 +560,78 @@ function formatReservationPills(values) {
 
 function renderStationBox(stops) {
   const mount = document.getElementById('stationBox');
-  const stationStops = stops.filter(stop => stop.type === 'start' || stop.type === 'end');
-  const cards = stationStops.length ? stationStops.map(stop => `
-    <div class="overview-card">
-      <div class="title">${stop.type === 'start' ? '🚉 Anreise' : '🏁 Rückreise'}: ${stop.name}</div>
-      <div class="overview-list">
-        ${stop.address ? `<div>${stop.address}</div>` : ''}
-        ${stop.meetingPoint ? `<div><strong>Treffpunkt:</strong> ${stop.meetingPoint}</div>` : ''}
-        ${(stop.departureTime || stop.arrivalTime) ? `<div><strong>Abfahrt / Ankunft:</strong> ${stop.departureTime || '-'} / ${stop.arrivalTime || '-'}</div>` : ''}
-        ${stop.connection ? `<div><strong>Verbindung:</strong> ${stop.connection}</div>` : ''}
-        ${stop.carriageNumber ? `<div><strong>Wagen:</strong> ${stop.carriageNumber}</div>` : ''}
-        ${formatTransfers(stop.transfers)}
-        ${Array.isArray(stop.reservedSeats) && stop.reservedSeats.length ? `<div><strong>Sitzplätze:</strong>${formatReservationPills(stop.reservedSeats)}</div>` : ''}
-        ${Array.isArray(stop.reservedBikeSpots) && stop.reservedBikeSpots.length ? `<div><strong>Radplätze:</strong>${formatReservationPills(stop.reservedBikeSpots)}</div>` : ''}
-      </div>
-    </div>
-  `).join('') : '<div class="overview-card"><div class="title">Keine Bahnhofsdaten hinterlegt</div></div>';
-  mount.innerHTML = `<div class="overview-box"><div class="section-title">🚉 Bahnhof / An- und Rückreise</div><div class="station-grid">${cards}</div></div>`;
+  if (mount) mount.innerHTML = '';
 }
 
 function renderHotelCard(hotel) {
   if (!hotel) return '';
   return `
-    <aside class="hotel-between-stages">
-      <div class="overview-card hotel-stage-card">
-        <div class="title">🏨 Übernachtung: ${hotel.name}</div>
-        <div class="overview-list">
-          ${hotel.address ? `<div>${hotel.address}</div>` : ''}
-          ${hotel.notes ? `<div class="muted">${hotel.notes}</div>` : ''}
+    <aside class="hotel-between-stages" data-stop-name="${hotel.name}">
+      <div class="overview-card hotel-stage-card compact-logistics-card">
+        <div class="compact-card-head">
+          <div class="title">🏨 Übernachtung: ${hotel.name}</div>
+          ${hotel.hotelUrl ? `<a class="hotel-link" href="${hotel.hotelUrl}" target="_blank" rel="noopener noreferrer">Hotel öffnen</a>` : ''}
         </div>
-        ${hotel.hotelUrl ? `<a class="hotel-link" href="${hotel.hotelUrl}" target="_blank" rel="noopener noreferrer">Hotel-Link öffnen</a>` : ''}
+        <div class="overview-list compact-info-line">
+          ${hotel.address ? `<span>${hotel.address}</span>` : ''}
+          ${hotel.notes ? `<span class="muted">${hotel.notes}</span>` : ''}
+        </div>
       </div>
     </aside>
   `;
+}
+
+function renderTransferDetails(stop) {
+  if (!Array.isArray(stop.transfers) || !stop.transfers.length) return '';
+  return `<details class="compact-details"><summary>Umstiege (${stop.transfers.length})</summary><ul>${stop.transfers.map(t => `<li>${t.label}${t.arrivalTime || t.departureTime ? ` (${t.arrivalTime || '-'} / ${t.departureTime || '-'})` : ''}</li>`).join('')}</ul></details>`;
+}
+
+function renderReservationDetails(stop) {
+  const parts = [];
+  if (Array.isArray(stop.reservedSeats) && stop.reservedSeats.length) {
+    parts.push(`<div><strong>Sitzplätze:</strong>${formatReservationPills(stop.reservedSeats)}</div>`);
+  }
+  if (Array.isArray(stop.reservedBikeSpots) && stop.reservedBikeSpots.length) {
+    parts.push(`<div><strong>Radplätze:</strong>${formatReservationPills(stop.reservedBikeSpots)}</div>`);
+  }
+  if (!parts.length) return '';
+  return `<details class="compact-details"><summary>Reservierungen</summary>${parts.join('')}</details>`;
+}
+
+function renderStationInlineCard(stop, mode) {
+  if (!stop) return null;
+  const wrapper = document.createElement('aside');
+  wrapper.className = `station-inline-card station-inline-card-${mode}`;
+  wrapper.dataset.stopName = stop.name;
+  wrapper.innerHTML = `
+    <div class="overview-card compact-logistics-card ${mode === 'start' ? 'start-card' : 'end-card'}">
+      <div class="compact-card-head">
+        <div class="title">${mode === 'start' ? '🚉 Start' : '🏁 Ziel'}: ${stop.name}</div>
+        ${stop.carriageNumber ? `<span class="badge">${stop.carriageNumber}</span>` : ''}
+      </div>
+      <div class="compact-info-line">
+        ${stop.meetingPoint ? `<span><strong>Treffpunkt:</strong> ${stop.meetingPoint}</span>` : ''}
+        ${(stop.departureTime || stop.arrivalTime) ? `<span><strong>Abfahrt / Ankunft:</strong> ${stop.departureTime || '-'} / ${stop.arrivalTime || '-'}</span>` : ''}
+        ${stop.connection ? `<span><strong>Verbindung:</strong> ${stop.connection}</span>` : ''}
+        ${stop.address ? `<span class="muted">${stop.address}</span>` : ''}
+      </div>
+      <div class="compact-extra-row">
+        ${renderTransferDetails(stop)}
+        ${renderReservationDetails(stop)}
+      </div>
+    </div>
+  `;
+  stop.element = wrapper;
+  return wrapper;
+}
+
+function focusStop(stop) {
+  if (!stop) return;
+  if (stop.element) {
+    stop.element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    stop.element.classList.add('is-stop-focused');
+    setTimeout(() => stop.element?.classList.remove('is-stop-focused'), 1600);
+  }
 }
 
 function renderHotelBox(stops) {
@@ -660,6 +699,10 @@ function createStageNumberMarker(stage) {
 function renderStages(stages) {
   const mount = document.getElementById('stages');
   mount.innerHTML = '';
+  const startStop = APP.state.stops.find(stop => stop.type === 'start');
+  const endStop = [...APP.state.stops].reverse().find(stop => stop.type === 'end');
+  const startCard = renderStationInlineCard(startStop, 'start');
+  if (startCard) mount.appendChild(startCard);
   stages.forEach((stage, idx) => {
     const el = document.createElement('section');
     stage.element = el;
@@ -673,10 +716,14 @@ function renderStages(stages) {
     if (stage.hotel) {
       const hotelWrap = document.createElement('div');
       hotelWrap.innerHTML = renderHotelCard(stage.hotel);
-      mount.appendChild(hotelWrap.firstElementChild);
+      const hotelElement = hotelWrap.firstElementChild;
+      stage.hotel.element = hotelElement;
+      mount.appendChild(hotelElement);
     }
     renderChart(`chart-${idx}`, stage);
   });
+  const endCard = renderStationInlineCard(endStop, 'end');
+  if (endCard) mount.appendChild(endCard);
   applySelectionStyles();
 }
 
@@ -705,6 +752,7 @@ function renderMap(stages, stops) {
     }
     if (stop.type === 'overnight' && stop.hotelUrl) popupHtml += `<br><a href="${stop.hotelUrl}" target="_blank" rel="noopener noreferrer">Hotel-Link öffnen</a>`;
     marker.bindPopup(popupHtml);
+    marker.on('click', () => focusStop(stop));
   });
   if (APP.routeLayerGroup.getLayers().length > 0) APP.map.fitBounds(APP.routeLayerGroup.getBounds(), { padding: [20, 20] });
 }
