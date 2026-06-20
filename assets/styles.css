@@ -19,29 +19,31 @@ button.secondary, .stage-download-btn, a.control-link { background: #fff; color:
 .hidden { display:none !important; }
 button:disabled { opacity: .45; cursor: default; }
 #status { color: var(--muted); font-size: 14px; }
-#metaBar { display:flex; gap:16px; flex-wrap:wrap; align-items:center; margin: 0 0 16px; }
-.meta-link, .meta-rating { font-size: 14px; color: var(--text); }
-.meta-link a, .meta-rating a { color: var(--text); text-decoration: none; font-weight: 700; }
-.meta-link a:hover, .meta-rating a:hover { text-decoration: underline; }
-.meta-rating .count { color: var(--muted); margin-left: 6px; }
+#metaBar { display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap:12px; margin: 0 0 16px; }
+.meta-bar-card, .summary-card, .stage, .overview-box, .overview-card { background:#fff; border:1px solid var(--border); border-radius:12px; box-shadow: var(--shadow); }
+.meta-bar-card { padding: 12px 14px; }
+.meta-bar-card .title { font-weight: 700; margin-bottom: 6px; }
+.meta-bar-card .content { font-size: 14px; color: var(--text); }
+.star-row { letter-spacing: 1px; font-size: 18px; color: #f59e0b; }
+.star-row.muted { color: #cbd5e1; }
 #map { height: 460px; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); background: #fff; }
 .summary-grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap:12px; margin:16px 0 20px; }
-.summary-card, .stage, .logistics-box { background:#fff; border:1px solid var(--border); border-radius:12px; box-shadow: var(--shadow); }
 .summary-card { padding: 12px 14px; }
 .summary-card .label { color: var(--muted); font-size: 12px; margin-bottom: 6px; }
 .summary-card .value { font-size: 22px; font-weight: 700; }
-.logistics-box { padding: 14px 16px; margin: 0 0 16px; }
-.logistics-box.clickable { cursor:pointer; transition: transform .12s ease, box-shadow .12s ease; }
-.logistics-box.clickable:hover { transform: translateY(-1px); box-shadow:0 4px 12px rgba(0,0,0,.08); }
-.logistics-title { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
-.logistics-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap:10px; }
-.logistics-item { background:#fafafa; border:1px solid var(--border); border-radius:10px; padding:10px; }
-.logistics-item .label { color: var(--muted); font-size:12px; }
-.logistics-item .value { font-weight:700; margin-top:4px; }
+.overview-box { padding: 14px 16px; margin-bottom: 18px; }
+.section-title { font-size: 16px; font-weight: 700; margin-bottom: 10px; }
+.station-grid, .hotel-grid { display:grid; gap:10px; }
+.station-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.hotel-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.overview-card { padding: 10px 12px; background:#fbfbfc; }
+.overview-card .title { font-weight:700; margin-bottom:6px; }
+.overview-list { display:grid; gap:4px; font-size:13px; }
+.overview-list .muted { color: var(--muted); }
 .pill-list { display:flex; flex-wrap:wrap; gap:6px; margin-top:6px; }
 .pill { display:inline-block; padding:4px 8px; border-radius:999px; background:#eef2f7; font-size:12px; }
-.inline-link { display:inline-block; margin-top:8px; font-size:13px; }
-.stage-list { display:grid; gap:16px; margin-top:0; }
+.hotel-link, .inline-link { display:inline-block; margin-top:8px; font-size:13px; }
+.stage-list { display:grid; gap:16px; margin-top:16px; }
 .stage { display:grid; grid-template-columns:8px 1fr; overflow:hidden; transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease, opacity .16s ease, filter .16s ease; }
 .stage:hover { transform: translateY(-1px); box-shadow:0 4px 12px rgba(0,0,0,.08); }
 .stage.is-hovered { border-color:#94a3b8; box-shadow:0 6px 16px rgba(0,0,0,.12); }

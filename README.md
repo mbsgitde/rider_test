@@ -1,18 +1,38 @@
-## Bike Tour Planner – GitHub Pages Starter V20
+# Bike Tour Planner – GitHub Pages Starter V19
 
-### Änderungen in V20
-- **Meta-Bereich verschlankt**
-  - Der Tourismus-/offizielle Link ist jetzt kompakt und direkt über die Überschrift verlinkt.
-  - Die ADFC-Wertung ist ebenfalls kompakt und zeigt nur `x/5 Sterne`; die Überschrift ist direkt verlinkt.
-- **Startbahnhof vor den Etappen**
-  - Der Startbahnhof wird als eigener Kasten in voller Breite vor der ersten Etappe dargestellt.
-  - Klick auf den Kasten fokussiert den Marker auf der Karte.
-- **Endbahnhof nach den Etappen**
-  - Der Endbahnhof wird als eigener Kasten in voller Breite nach der letzten Etappe dargestellt.
-  - Klick auf den Kasten fokussiert den Marker auf der Karte.
-- **Hotels zwischen den Etappen**
-  - Hotels werden als vollbreite Karten direkt zwischen passenden Etappen angezeigt.
-  - Klick auf die Hotelkarte fokussiert den Marker auf der Karte.
-- **Bestehende Logik bleibt erhalten**
-  - ADFC-Bewertung bleibt manuell in `data/routes.json` gepflegt.
-  - Bahnhofsdaten unterstützen weiter Treffpunkt, Zeiten, bis zu 3 Umstiege sowie bis zu 10 Sitz- und Radreservierungen.
+## Änderungen in V19
+1. **Bahnhof und Hotels als eigene Kästen**
+   - Start und Ziel werden als eigene Bahnhofssektion **vor** den Etappen dargestellt.
+   - Hotels werden als eigene Sektion **nach** den Etappen dargestellt.
+
+2. **Tourismus-URL und ADFC-Bewertung zwischen Tourauswahl und Karte**
+   - Der Bereich zwischen Tourauswahl und Karte zeigt:
+     - offiziellen Tourismus-/Radwegelink
+     - manuell gepflegte ADFC-Sterne
+     - ADFC-Link
+
+3. **ADFC-Bewertung manuell im JSON**
+   - `data/routes.json` unterstützt:
+     - `adfcStars`
+     - `adfcTourUrl`
+   - Sterne werden symbolisch (`★`) dargestellt.
+
+4. **Bahnhofsdetails erweitert**
+   - Für `start` und `end` unterstützt das Stop-JSON jetzt zusätzlich:
+     - `meetingPoint`
+     - `departureTime`
+     - `arrivalTime`
+     - `transfers` (0–3 Einträge)
+     - `reservedSeats` (0–10 Einträge)
+     - `reservedBikeSpots` (0–10 Einträge)
+   - Leere Bereiche werden in der UI automatisch ausgeblendet.
+
+5. **Templates aktualisiert**
+   - `data/routes-template.json`
+   - `data/stops-template.json`
+
+## Beispielroute Alpe Adria
+- offizieller Radwegelink hinterlegt
+- ADFC-Tour-Link hinterlegt
+- manuelle ADFC-Sterne: 4
+- Dummywerte für Treffpunkt, Zeiten, Umstiege und Reservierungen enthalten

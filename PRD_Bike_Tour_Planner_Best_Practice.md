@@ -1,25 +1,32 @@
-## PRD – Bike Tour Planner (Best-Practice Kurzfassung für Repo)
+# PRD – Bike Tour Planner (Best-Practice Kurzfassung für Repo)
 
-### Zielbild V20
-Die Oberfläche folgt dem Tourablauf: kompakte externe Metadaten direkt unter der Tourauswahl, dann Karte und Summary, danach Startbahnhof, Etappen mit integrierten Hotelblöcken und abschließend der Endbahnhof.
+## Zielbild V19
+Die App trennt Tourdarstellung, Links und Logistik klar voneinander: Direkt nach der Tourauswahl stehen externe Links und Klassifizierung, danach Karte und Summary, anschließend Bahnhofsinfos vor den Etappen und Hotels nach den Etappen.
 
-### Änderungen in V20
-- **Meta-Bereich komprimiert**
-  - Tourismus-/offizieller Link als kleine, direkt verlinkte Überschrift.
-  - ADFC-Wertung als kleine, direkt verlinkte Überschrift mit knapper Angabe (`x/5 Sterne`).
-- **Startbahnhof vor der ersten Etappe**
-  - Vollbreiter Kasten vor den Etappen.
-  - Klick springt zum Marker in der Karte.
-- **Hotels zwischen den Etappen**
-  - Hotels erscheinen als Vollbreiten-Blöcke direkt nach der Etappe, an deren Ende sie liegen.
-  - Klick springt zum Marker in der Karte.
-- **Endbahnhof nach der letzten Etappe**
-  - Vollbreiter Kasten nach den Etappen.
-  - Klick springt zum Marker in der Karte.
-- **Bestehende Logistik bleibt vollständig**
-  - Treffpunkt, Abfahrts-/Ankunftszeit, Verbindung, Wagen, bis zu 3 Umstiege, bis zu 10 Sitz-/Radplatzreservierungen.
-  - Nicht gepflegte Bereiche bleiben verborgen.
+## Änderungen in V19
+1. **Neue Aufteilung der Oberfläche**
+   - Externe Links und ADFC-Bewertung zwischen Tourauswahl und Karte.
+   - Bahnhofs-/Start-Ziel-Infos in eigenem Kasten vor den Etappen.
+   - Hotels in eigenem Kasten nach den Etappen.
 
-### Entschlackung
-- Fokus nur auf Layout, Kartenverlinkung und die bestehenden Exporte.
-- Keine zusätzlichen Nebenfunktionen außerhalb dieses Umbaus.
+2. **Manuelle ADFC-Bewertung**
+   - `adfcStars` und `adfcTourUrl` werden manuell in `data/routes.json` gepflegt.
+   - Anzeige nur, wenn Werte vorhanden sind.
+
+3. **Erweiterte Bahnhofslogistik**
+   - Start und Ziel unterstützen:
+     - Treffpunkt
+     - Abfahrtszeit
+     - Ankunftszeit
+     - bis zu 3 Umstiege
+     - bis zu 10 Sitzplatzreservierungen
+     - bis zu 10 Radplatzreservierungen
+   - Leere Listen oder fehlende Werte werden nicht angezeigt.
+
+4. **Exporte bleiben vollständig**
+   - ZIP enthält Gesamtstrecke + Etappen + README + Tour-Steckbrief.
+   - README/TXT spiegeln die neuen Logistikdaten wider.
+
+## Entschlackung
+- Fokus nur auf aktuelle Kernbereiche: Tourwahl, Links/Klassifizierung, Karte, Etappen, Bahnhof, Hotels, Exporte.
+- Veraltete Zwischenstufen wurden entfernt.
