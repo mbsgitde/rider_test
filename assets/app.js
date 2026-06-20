@@ -7,7 +7,8 @@ const APP = {
   baseLayers: {},
   currentBaseLayer: null,
   mapStyleControl: null,
-  stageNumberMarkers: []
+  stageNumberMarkers: [],
+  profileHoverMarker: null
 };
 
 const stageChartHoverGuidePlugin = {
@@ -314,9 +315,7 @@ function setupMapMaximizeControl() {
   });
   APP.map.addControl(new MaximizeControl());
   document.addEventListener('keydown', event => {
-    if (event.key === 'Escape' && document.getElementById('map')?.classList.contains('map-maximized')) {
-      toggleMapMaximized(document.querySelector('.map-maximize-btn'), false);
-    }
+    if (event.key === 'Escape' && document.getElementById('map')?.classList.contains('map-maximized')) toggleMapMaximized(document.querySelector('.map-maximize-btn'), false);
   });
 }
 function toggleMapMaximized(button, forceState) {
@@ -325,6 +324,20 @@ function toggleMapMaximized(button, forceState) {
   mapEl.classList.toggle('map-maximized', shouldMaximize); document.body.classList.toggle('map-is-maximized', shouldMaximize);
   if (button) { button.innerHTML = shouldMaximize ? '×' : '⛶'; button.title = shouldMaximize ? 'Karte schließen' : 'Karte maximieren'; button.setAttribute('aria-label', shouldMaximize ? 'Karte schließen' : 'Karte maximieren'); }
   setTimeout(() => APP.map?.invalidateSize(), 150);
+}
+function updateProfileHoverMarker(stage, point) {
+  if (!point || !Number.isFinite(point.lat) || !Number.isFinite(point.lon) || !APP.map) return;
+  if (!APP.profileHoverMarker) {
+    APP.profileHoverMarker = L.circleMarker([point.lat, point.lon], { radius: 7, color: stage.color, weight: 3, fillColor: '#ffffff', fillOpacity: 1, opacity: 1, className: 'profile-hover-marker' }).addTo(APP.map);
+  } else {
+    APP.profileHoverMarker.setLatLng([point.lat, point.lon]);
+    APP.profileHoverMarker.setStyle({ color: stage.color });
+    if (!APP.map.hasLayer(APP.profileHoverMarker)) APP.profileHoverMarker.addTo(APP.map);
+  }
+  APP.profileHoverMarker.bindTooltip(`km ${point.distanceKm.toFixed(1)} · ${Math.round(point.elevation)} m · ${point.gradePct.toFixed(1)} %`, { permanent: false, direction: 'top', offset: [0, -8], opacity: 0.95 }).openTooltip();
+}
+function clearProfileHoverMarker() {
+  if (APP.profileHoverMarker && APP.map?.hasLayer(APP.profileHoverMarker)) APP.map.removeLayer(APP.profileHoverMarker);
 }
 
 async function initializeApp() {
@@ -483,7 +496,7 @@ function buildStages(points, stops, config) {
     if (endIndex <= startIndex) endIndex = Math.min(startIndex + 1, points.length - 1);
     const seg = points.slice(startIndex, endIndex + 1);
     let dist = 0, up = 0, down = 0;
-    const profilePoints = [{ distanceKm: 0, upMeters: 0, netRideTimeHours: 0, elevation: seg[0]?.ele ?? 0, gradePct: 0 }];
+    const profilePoints = [{ distanceKm: 0, upMeters: 0, netRideTimeHours: 0, elevation: seg[0]?.ele ?? 0, gradePct: 0, lat: seg[0]?.lat, lon: seg[0]?.lon }];
     const steepPoints = [];
     let cumulativeDist = 0, cumulativeUp = 0;
     for (let j = 1; j < seg.length; j++) {
@@ -493,7 +506,7 @@ function buildStages(points, stops, config) {
       const diff = seg[j].ele - seg[j - 1].ele;
       if (diff > 0) { up += diff; cumulativeUp += diff; } else down += Math.abs(diff);
       const gradePct = stepDist > 0 ? (diff / (stepDist * 1000)) * 100 : 0;
-      profilePoints.push({ distanceKm: cumulativeDist, upMeters: cumulativeUp, netRideTimeHours: 0, elevation: seg[j].ele, gradePct });
+      profilePoints.push({ distanceKm: cumulativeDist, upMeters: cumulativeUp, netRideTimeHours: 0, elevation: seg[j].ele, gradePct, lat: seg[j].lat, lon: seg[j].lon });
     }
     const timing = config.timing;
     const avgSpeed = Math.max(timing.minimumCyclingSpeedKmh, timing.baseCyclingSpeedKmh - (up / 1000) * timing.climbSpeedReductionPer1000mKmh);
@@ -557,15 +570,25 @@ function renderChart(canvasId, stage) {
       maintainAspectRatio: false,
       parsing: false,
       interaction: { mode: 'nearest', intersect: false },
+      onHover(event, activeElements) {
+        if (activeElements && activeElements.length) {
+          const dataIndex = activeElements[0].index;
+          const p = stage.profilePoints[dataIndex];
+          updateProfileHoverMarker(stage, p);
+        } else {
+          clearProfileHoverMarker();
+        }
+      },
       plugins: {
         legend: { display: false },
         tooltip: {
           enabled: false,
           external(context) {
             const tooltipModel = context.tooltip;
-            if (!tooltipModel || tooltipModel.opacity === 0 || !tooltipModel.dataPoints?.length) { tooltipEl.classList.add('hidden'); return; }
+            if (!tooltipModel || tooltipModel.opacity === 0 || !tooltipModel.dataPoints?.length) { tooltipEl.classList.add('hidden'); clearProfileHoverMarker(); return; }
             const idx = tooltipModel.dataPoints[0].dataIndex;
             const p = stage.profilePoints[idx];
+            updateProfileHoverMarker(stage, p);
             const remainingKm = Math.max(0, stage.remainingTotalDistanceKm - p.distanceKm);
             const remainingHours = Math.max(0, stage.remainingTotalHours - p.netRideTimeHours);
             tooltipEl.innerHTML = `<div><strong>${p.distanceKm.toFixed(1)} km</strong></div><div>Dauer: ${formatDurationWithUnit(p.netRideTimeHours)}</div><div>Rest: ${remainingKm.toFixed(1)} km</div><div>Restzeit: ${formatDurationWithUnit(remainingHours)}</div><div>bergauf: ${Math.round(p.upMeters)} m</div><div>Höhe: ${Math.round(p.elevation)} m</div>`;
@@ -581,6 +604,7 @@ function renderChart(canvasId, stage) {
       }
     }
   });
+  canvas.addEventListener('mouseleave', clearProfileHoverMarker);
   APP.charts.push(chart);
 }
 
@@ -680,7 +704,7 @@ function renderStages(stages) {
     const el = document.createElement('section');
     stage.element = el;
     el.className = 'stage';
-    el.innerHTML = `<div class="stage-color" style="background:${stage.color}"></div><div class="stage-body"><div class="stage-head"><div class="stage-title"><span class="stage-title-number" style="background:${stage.color}">${stage.id}</span><span class="stage-title-text">${stage.name}</span></div><div class="stage-tools"><button class="stage-download-btn" type="button">Etappen-GPX herunterladen</button><div class="badge ${getDifficultyBadgeClass(stage.difficulty)}">${stage.difficulty}</div></div></div><div class="meta"><div class="meta-item"><div class="label">Distanz</div><div class="value">${stage.dist.toFixed(1)} km</div></div><div class="meta-item"><div class="label">Höhenmeter</div><div class="value">↑ ${Math.round(stage.up)} m</div></div><div class="meta-item"><div class="label">Höhenmeter</div><div class="value">↓ ${Math.round(stage.down)} m</div></div><div class="meta-item"><div class="label">Netto-Fahrzeit</div><div class="value">${formatDurationWithUnit(stage.netRideTimeHours)}</div></div><div class="meta-item"><div class="label">Brutto inkl. Pausen</div><div class="value">${formatDurationWithUnit(stage.grossRideTimeHours)} <span class="inline-pause">(Pausen ${formatDurationWithUnit(stage.totalPauseMinutes / 60)})</span></div></div></div><div class="canvas-wrap" style="height:180px"><canvas id="chart-${idx}"></canvas></div>${stage.plausibilityLevel ? `<div class="small-note">${stage.plausibilityMessage}</div>` : ''}</div>`;
+    el.innerHTML = `<div class="stage-color" style="background:${stage.color}"></div><div class="stage-body"><div class="stage-head"><div class="stage-title"><span class="stage-title-number" style="background:${stage.color}">${stage.id}</span><span class="stage-title-text">${stage.name}</span></div><div class="stage-tools"><button class="stage-download-btn" type="button">Etappen-GPX herunterladen</button><div class="badge ${getDifficultyBadgeClass(stage.difficulty)}">${stage.difficulty}</div></div></div><div class="meta"><div class="meta-item"><div class="label">Distanz</div><div class="value">${stage.dist.toFixed(1)} km</div></div><div class="meta-item"><div class="label">Höhenmeter</div><div class="value">↑ ${Math.round(stage.up)} m</div></div><div class="meta-item"><div class="label">Höhenmeter</div><div class="value">↓ ${Math.round(stage.down)} m</div></div><div class="meta-item"><div class="label">Netto-Fahrzeit</div><div class="value">${formatDurationWithUnit(stage.netRideTimeHours)}</div></div><div class="meta-item"><div class="label">Brutto (inkl. Pausen)</div><div class="value">${formatDurationWithUnit(stage.grossRideTimeHours)} <span class="inline-pause">(${formatDurationWithUnit(stage.totalPauseMinutes / 60)})</span></div></div></div><div class="canvas-wrap" style="height:180px"><canvas id="chart-${idx}"></canvas></div>${stage.plausibilityLevel ? `<div class="small-note">${stage.plausibilityMessage}</div>` : ''}</div>`;
     el.addEventListener('mouseenter', () => { el.classList.add('is-hovered'); highlightStage(stage); });
     el.addEventListener('mouseleave', () => { el.classList.remove('is-hovered'); if (APP.state.selectedStageId !== stage.id) resetStageHighlight(stage); });
     el.addEventListener('click', () => focusStage(stage));
@@ -726,6 +750,7 @@ function renderMap(stages, stops) {
 
 async function loadTour() {
   destroyCharts();
+  clearProfileHoverMarker();
   APP.state.selectedStageId = null;
   setStatus('Lade Tour …');
   const routeName = document.getElementById('routeSelect').value;

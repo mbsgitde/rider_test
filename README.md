@@ -1,8 +1,8 @@
-# Bike Tour Planner – V31
+# Bike Tour Planner – V32
 
-Minor Changes:
-- Maximieren- und Schließen-Icon in der Karte sind zentriert.
-- Route-Summary-Kasten wurde entfernt, weil die Tour bereits in der Auswahl steht.
-- Hotelbox zeigt keine Orts-/Adresszeile mehr, da der Ort jetzt im Etappentitel steht.
-- Hotel-Link zeigt die verlinkte URL statt „Hotel öffnen“.
-- Enthält weiterhin V29/V30: Fuzzy GPX-Waypoint-Matching, Hohenzollern-GPX, kompakte UI und Kartenmaximierung.
+Neu:
+- Hover über dem Höhenprofil zeigt die entsprechende Position auf der Karte.
+- Kartenmarker zeigt km, Höhe und Steigung im Tooltip.
+- Brutto-Label geändert zu `Brutto (inkl. Pausen)`.
+- Pausenzeit steht nur noch als Klammerwert hinter der Bruttozeit, ohne das Wort „Pausen“.
+- Enthält weiterhin V31: zentriertes Karten-Maximieren, entfernten Route-Kasten, URL statt „Hotel öffnen“, schlankere Hotelboxen.
