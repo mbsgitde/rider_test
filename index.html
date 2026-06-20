@@ -1,165 +1,53 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<title>Bike Tour Planner V7</title>
-<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<style>
-body{font-family:Arial;padding:20px}
-#map{height:400px;margin-top:20px}
-.stage{border:1px solid #ccc;margin:8px;padding:8px;cursor:pointer}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bike Tour Planner – GitHub Pages Starter V19</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+  <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
-<h1>🚴 Bike Tour Planner V7</h1>
-<select id="routeSelect">
-<option value="alps">Alpenroute</option>
-<option value="lake">Seenroute</option>
-</select>
-<button onclick="loadTour()">Tour laden</button>
-<div id="map"></div>
-<div id="output"></div>
-<canvas id="elevationChart"></canvas>
-<script>
+  <div class="container">
+    <h1>🚴 Bike Tour Planner</h1>
+    <p class="lead">V19 ordnet die Oberfläche neu: Offizielle Links und ADFC-Bewertung stehen direkt unter der Tourauswahl, Bahnhofsinfos in eigener Box vor den Etappen und Hotels in eigener Box nach den Etappen.</p>
+    <div class="controls">
+      <label for="routeSelect">Tour:</label>
+      <select id="routeSelect"></select>
+      <button id="loadBtn">Tour laden</button>
+      <button id="downloadFullGpxBtn" class="secondary">Gesamt-GPX herunterladen</button>
+      <button id="downloadAllStagesZipBtn" class="secondary">Gesamt + Etappen als ZIP herunterladen</button>
+      <button id="downloadTourBriefBtn" class="secondary">Tour-Steckbrief als TXT herunterladen</button>
+      <button id="downloadActiveStageBtn" class="secondary hidden">Aktive Etappe als GPX herunterladen</button>
+      <button id="prevStageBtn" class="secondary hidden">← Vorherige Etappe</button>
+      <button id="nextStageBtn" class="secondary hidden">Nächste Etappe →</button>
+      <button id="resetStageFocusBtn" class="secondary hidden">Alle Etappen anzeigen</button>
+      <span id="status">Initialisiere …</span>
+    </div>
 
-let map=L.map('map').setView([47.5,11.5],7);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-let group=L.layerGroup().addTo(map);
-let chart;
+    <div id="metaBar">
+      <div id="tourismMetaCard" class="meta-bar-card hidden">
+        <div class="title">🔗 Tourismus / offizielle Beschreibung</div>
+        <div id="tourismMetaContent" class="content"></div>
+      </div>
+      <div id="adfcMetaCard" class="meta-bar-card hidden">
+        <div class="title">⭐ ADFC-Bewertung</div>
+        <div id="adfcStarsInline" class="star-row muted">☆☆☆☆☆</div>
+        <a id="adfcTourLinkInline" class="inline-link hidden" target="_blank" rel="noopener noreferrer">ADFC-Tour öffnen</a>
+      </div>
+    </div>
 
-function speed(dist,elevUp){
- let baseSpeed=15;
- let penalty=elevUp/1000*3; // slower with climbing
- return Math.max(8, baseSpeed-penalty);
-}
+    <div id="map"></div>
+    <div id="summary" class="summary-grid"></div>
+    <div id="stationBox"></div>
+    <div id="stages" class="stage-list"></div>
+    <div id="hotelBox"></div>
 
-function classify(dist,up){
- if(dist<60 && up<800) return 'Leicht';
- if(dist<100 && up<1500) return 'Mittel';
- return 'Schwer';
-}
-
-async function loadGPX(name){
- const text=await fetch('gpx/'+name+'.gpx').then(r=>r.text());
- const xml=new DOMParser().parseFromString(text,'text/xml');
- return Array.from(xml.getElementsByTagName('trkpt')).map(pt=>({
-  lat:+pt.getAttribute('lat'),
-  lon:+pt.getAttribute('lon'),
-  ele:+(pt.getElementsByTagName('ele')[0]?.textContent||0)
- }));
-}
-
-function dist(a,b){const R=6371;const t=x=>x*Math.PI/180;
-const dLat=t(b.lat-a.lat), dLon=t(b.lon-a.lon);
-const x=Math.sin(dLat/2)**2+Math.cos(t(a.lat))*Math.cos(t(b.lat))*Math.sin(dLon/2)**2;
-return R*2*Math.atan2(Math.sqrt(x),Math.sqrt(1-x));}
-
-async function geocode(addr){
- const u=`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(addr)}`;
- const d=await fetch(u).then(r=>r.json());
- if(!d.length) return null;
- return {lat:+d[0].lat,lon:+d[0].lon};
-}
-
-function parseGoogle(url){const m=url.match(/q=([0-9.-]+),([0-9.-]+)/);
-return m?{lat:+m[1],lon:+m[2]}:null}
-
-function nearest(s,pts){let m=Infinity,i0=0;
-pts.forEach((p,i)=>{let d0=dist(s,p);if(d0<m){m=d0;i0=i}});
-return i0}
-
-async function loadStops(r){return fetch('data/'+r+'-stops.json').then(r=>r.json())}
-
-async function prepare(pts,st){
- const res=[];
- for(const s of st){
-  let c=s.url?parseGoogle(s.url):await geocode(s.address);
-  if(!c)continue;
-  const i=nearest(c,pts);
-  res.push({...s,...c,index:i});
- }
- res.sort((a,b)=>a.index-b.index);
- return res;
-}
-
-function buildStages(pts,stops){
- let arr=[];
- for(let i=0;i<stops.length-1;i++){
-  let a=stops[i].index,b=stops[i+1].index;
-  if(b<=a) b=a+1;
-  let seg=pts.slice(a,b);
-  let d=0, up=0, down=0;
-
-  for(let j=1;j<seg.length;j++){
-    d+=dist(seg[j-1],seg[j]);
-    let diff=seg[j].ele-seg[j-1].ele;
-    if(diff>0) up+=diff;
-    else down+=Math.abs(diff);
-  }
-
-  let avgSpeed = speed(d, up);
-  let time = d / avgSpeed;
-
-  arr.push({
-    name:stops[i].name+' → '+stops[i+1].name,
-    dist:d,
-    up:up,
-    down:down,
-    time:time,
-    difficulty:classify(d,up),
-    seg,
-    ele:seg.map(p=>p.ele)
-  });
- }
- return arr;
-}
-
-function drawChart(ele){
- if(chart) chart.destroy();
- chart=new Chart(document.getElementById('elevationChart'),{
-  type:'line',
-  data:{labels:ele.map((_,i)=>i),datasets:[{label:'Höhenprofil',data:ele}]}
- });
-}
-
-async function loadTour(){
- group.clearLayers();
- const r=document.getElementById('routeSelect').value;
- const pts=await loadGPX(r);
- const stRaw=await loadStops(r);
- const st=await prepare(pts,stRaw);
-
- const stages=buildStages(pts,st);
- const colors=['red','blue','green','orange','purple'];
-
- stages.forEach((s,i)=>{
-  L.polyline(s.seg.map(p=>[p.lat,p.lon]),{color:colors[i%colors.length]}).addTo(group);
- });
-
- st.forEach(s=>L.marker([s.lat,s.lon]).addTo(group).bindPopup(s.name));
-
- const out=document.getElementById('output');
- out.innerHTML='';
-
- stages.forEach((s)=>{
-  let div=document.createElement('div');
-  div.className='stage';
-  div.innerHTML=`<b>${s.name}</b><br>
-    Distanz: ${s.dist.toFixed(1)} km<br>
-    ↑ ${Math.round(s.up)} m ↓ ${Math.round(s.down)} m<br>
-    Dauer: ${s.time.toFixed(1)} h<br>
-    Schwierigkeit: ${s.difficulty}`;
-
-  div.onclick=()=>{ drawChart(s.ele); };
-
-  out.appendChild(div);
- });
-
- map.fitBounds(group.getBounds());
-}
-
-</script>
+    <p class="footer-note">V19: ADFC-Sterne sind jetzt manuell im JSON pflegbar. Bahnhofsdetails wie Treffpunkt, Zeiten, Umstiege und Reservierungen werden nur angezeigt, wenn sie befüllt sind.</p>
+  </div>
+  <script src="assets/app.js"></script>
 </body>
 </html>
