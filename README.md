@@ -1,3 +1,3 @@
-# Digitales Roadbook – V36
+# Digitales Roadbook – V38
 
-UI-Update: kein Ladezähler, gemeinsamer Fokus von Karte und Etappe, kompakter GPX-Button, graue Fokuslinie, Gesamttourkarte und Karten-Fit-Button.
+Fixes: Skipistenfarben für Schwierigkeit, Downloads in Gesamttour-Kasten, ZIP enthält Steckbrief, technisches Auge-Icon.
