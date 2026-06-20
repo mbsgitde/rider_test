@@ -1,3 +1,3 @@
-# Digitales Roadbook – V41
+# Digitales Roadbook – V42
 
-Entfernt überflüssigen Etappen-Downloadbutton neben der Tourauswahl; ADFC/Offizielle Tour stehen direkt neben dem Tourtitel; Hotel-Webicon steht rechts neben dem Namen.
+Version in Header, Kartenlayer-Auswahl zurück, Tourlinks direkt hinter Titel, Downloads rechtsbündig, Hotel-Globus rechts vom Namen.
