@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": null,
+  "sourceFile": null,
+  "tourStartDateTime": "2026-07-01T09:00:00+02:00",
+  "valid": false,
+  "reason": "Noch keine Prognose erzeugt. Starte die GitHub Action 'Weather Forecast' oder warte auf den nächsten Zeitplanlauf.",
+  "provider": {
+    "weather": "open-meteo",
+    "ai": "groq"
+  },
+  "global": {
+    "summary": "Noch keine Wetterprognose verfügbar."
+  },
+  "points": [],
+  "stages": []
+}
