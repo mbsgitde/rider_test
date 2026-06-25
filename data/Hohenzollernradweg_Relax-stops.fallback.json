@@ -1,0 +1,38 @@
+{
+  "description": "OPTIONALER FALLBACK: Diese Datei wird nur verwendet, wenn im GPX keine Roadbook-Wegpunkte mit #type gefunden werden oder später gezielt ein Override-Modus ergänzt wird. Primärquelle ist gpx/Hohenzollernradweg_Relax.gpx.",
+  "stops": [
+    {
+      "name": "Stuttgart Hbf",
+      "type": "start",
+      "address": "Stuttgart",
+      "comment": "Fallback: Ankunft um 11:00h"
+    },
+    {
+      "name": "Landgasthof Hirsch",
+      "type": "overnight",
+      "address": "Bebenhausen",
+      "hotelUrl": "https://www.hirsch-bebenhausen.de/",
+      "comment": "Fallback: Check-In ab 15h"
+    },
+    {
+      "name": "Hotel Löwen",
+      "type": "overnight",
+      "address": "Hechingen",
+      "hotelUrl": "https://www.gasthof-hotel-loewen.de/",
+      "comment": "Fallback: Optionaler Ausflug zur Burg Hohenzollern"
+    },
+    {
+      "name": "Karls Hotel",
+      "type": "overnight",
+      "address": "Sigmaringen",
+      "hotelUrl": "https://karlshotel.de/",
+      "comment": "Fallback: Optional: Besichtigung vom Schloss Sigmaringen"
+    },
+    {
+      "name": "Bahnhof Singen (Hohentwiel)",
+      "type": "end",
+      "address": "Singen",
+      "comment": "Fallback: Rückreise mit dem Zug um 16:50h"
+    }
+  ]
+}

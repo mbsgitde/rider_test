@@ -1,26 +1,10 @@
 {
   "timing": {
-    "baseCyclingSpeedKmh": 15,
-    "climbSpeedReductionPer1000mKmh": 3,
-    "minimumCyclingSpeedKmh": 8,
-    "shortBreakMinutesPerHour": 10,
-    "longBreakMinutesPerStage": 45
-  },
-  "routePlausibilityCheck": {
-    "distanceFromRouteInfoThresholdKm": 0.5,
-    "distanceFromRouteWarningThresholdKm": 2,
-    "distanceFromRouteCriticalThresholdKm": 5
-  },
-  "mapView": {
-    "defaultBaseMap": "Humanitarian",
-    "availableBaseMaps": [
-      "Standard",
-      "Humanitarian",
-      "Topografisch"
-    ]
-  },
-  "profileView": {
-    "steepSectionThresholdPercent": 8
+    "baseCyclingSpeedKmh": 19,
+    "minimumCyclingSpeedKmh": 9,
+    "climbSpeedReductionPer1000mKmh": 4,
+    "shortBreakMinutesPerHour": 7,
+    "longBreakMinutesPerStage": 20
   },
   "visuals": {
     "stageColors": [
@@ -31,7 +15,6 @@
       "#ec4899",
       "#06b6d4",
       "#f97316"
-    ],
-    "logisticsMarkerColor": "#64748b"
+    ]
   }
 }
