@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-06-25T17:03:22.181Z",
+  "generatedAt": "2026-06-25T18:19:25.647Z",
   "sourceFile": "Hohenzollernradweg_Relax.gpx",
   "tourStartDateTime": "2026-07-01T09:00:00+02:00",
   "dailyStageStartTime": "09:00",
@@ -10,7 +10,7 @@
     "ai": "groq"
   },
   "global": {
-    "summary": "Die Wetterbedingungen auf dem Hohenzollernradweg (Relax) variieren über die vier Etappen. Am ersten Tag kann man mit Temperaturen zwischen 18,5°C und 23,1°C rechnen, wobei die Regenwahrscheinlichkeit zwischen 48% und 52% liegt. Die Windgeschwindigkeit bewegt sich zwischen 7,4 km/h und 11,5 km/h.\n\nIn den folgenden Tagen zeigt sich ein ähnliches Bild, wobei die Temperaturen zwischen 15,8°C und 23,2°C schwanken. Die Regenwahrscheinlichkeit ist überwiegend niedrig, mit Ausnahme des dritten Tages, an dem sie zwischen 23% und 31% liegt. Die Windgeschwindigkeit ist auf dem gesamten Weg relativ moderat, mit Spitzenwerten von bis zu 21,5 km/h am letzten Tag.\n\nFür Radfahrer ist es ratsam, sich auf wechselnde Wetterbedingungen einzustellen und entsprechende Kleidung sowie Ausrüstung mitzubringen. Insbesondere der Wind könnte auf dem letzten Tag eine Herausforderung darstellen.",
+    "summary": "Der Hohenzollernradweg (Relax) bietet eine vielfältige Wettererfahrung. Die Temperaturen variieren zwischen 15,8°C und 23,2°C. Es gibt nur vereinzelte Regenfälle, wie bei 40 km in der ersten Etappe mit 0,1 mm. Die Windgeschwindigkeiten reichen von 2,3 km/h bis 21,5 km/h. Die Regenwahrscheinlichkeit liegt meist unter 50%, mit Ausnahme der ersten Etappe, wo sie bis zu 52% erreicht. Für Radfahrer ist es ratsam, sich auf wechselnde Wetterbedingungen einzustellen und entsprechende Kleidung mitzubringen.",
     "stats": {
       "minTemperature": 16,
       "maxTemperature": 23,
@@ -743,7 +743,7 @@
           }
         }
       ],
-      "summary": "Die Etappe beginnt bei einer Temperatur von 19,3°C und einer Regenwahrscheinlichkeit von 49% um 07:00h. Im Laufe der Etappe bleibt die Regenwahrscheinlichkeit konstant zwischen 48% und 52%, wobei nur bei 40 km lokaler Strecke leichter Regen mit 0,1 mm Niederschlag zu erwarten ist. Die Temperaturen schwanken zwischen 18,5°C und 23,1°C, wobei der Wind mit etwa 7-11 km/h weht. Für Radfahrer ist es ratsam, sich auf wechselnde Wetterbedingungen einzustellen und entsprechende Kleidung mitzuführen.",
+      "summary": "Die Etappe beginnt bei einer Temperatur von 19,3°C und einer Regenwahrscheinlichkeit von 49% um 07:00h. Im Laufe der Etappe bleibt die Regenwahrscheinlichkeit konstant zwischen 48% und 52%, wobei nur bei 40 km lokal geringer Regen von 0,1 mm fällt. Die Temperatur variiert zwischen 18,5°C und 23,1°C, wobei der Wind mit etwa 7-11 km/h weht. Für Radfahrer ist es ratsam, sich auf wechselnde Wetterbedingungen einzustellen und entsprechende Kleidung mitzuführen.",
       "points": [
         {
           "km": 0,
@@ -1026,7 +1026,7 @@
           }
         }
       ],
-      "summary": "Die zweite Etappe von Bebenhausen nach Hechingen beginnt bei einer Temperatur von etwa 20°C und bleibt während des Tages mit einer Spanne von 19,9°C bis 22,5°C relativ konstant. Es ist mit einer geringen Regenwahrscheinlichkeit von 8-11% zu rechnen, jedoch sind keine Niederschläge vorhergesagt. Der Wind weht mit einer Geschwindigkeit von etwa 2-5 km/h, was für Radfahrer keine großen Herausforderungen darstellen sollte. Insgesamt bietet sich ein sonniger Tag mit angenehmen Temperaturen für die Fahrradtour an.",
+      "summary": "Die zweite Etappe von Bebenhausen nach Hechingen beginnt bei einer Temperatur von etwa 20°C und steigt im Laufe des Vormittags auf bis zu 22,5°C. Es ist mit einer geringen Regenwahrscheinlichkeit von etwa 8-11% zu rechnen, jedoch sind keine Niederschläge vorhergesagt. Der Wind weht mit einer Geschwindigkeit von etwa 2-5 km/h, was für Radfahrer eine angenehme Bedingung darstellt. Insgesamt bietet sich ein sonniger und trockener Tag für die Fahrradtour, bei dem die Radfahrer optimale Bedingungen vorfinden.",
       "points": [
         {
           "km": 70,
@@ -1269,7 +1269,7 @@
           }
         }
       ],
-      "summary": "Die Temperatur während der Etappe 3 von Hechingen nach Sigmaringen steigt kontinuierlich an, von 16,6°C zu Beginn auf 21,2°C gegen Ende. Es ist mit einer Regenwahrscheinlichkeit zwischen 23% und 31% zu rechnen, jedoch sind keine Niederschläge vorhergesagt. Der Wind weht mit einer Geschwindigkeit zwischen 7,1 km/h und 13,7 km/h, was Radfahrern ein moderates Vorwärtskommen ermöglichen sollte. Insgesamt bietet sich ein trockenes und allmählich wärmeres Wetter für die Radtour, wobei die Radfahrer aufgrund der Windverhältnisse und der Temperaturanstieg ihre Kleidung und Pausen entsprechend anpassen sollten.",
+      "summary": "Die Etappe 3 von Hechingen nach Sigmaringen beginnt bei einer Temperatur von etwa 16°C und erwärmt sich im Laufe des Tages auf über 21°C. Es ist mit einer Regenwahrscheinlichkeit von etwa 25-31% zu rechnen, jedoch sind keine Niederschläge vorhergesagt. Der Wind weht mit einer Geschwindigkeit von etwa 7-14 km/h, was für Radfahrer eine moderate Belastung darstellen kann. Insgesamt bietet sich ein sonniger Tag mit steigenden Temperaturen, bei dem Radfahrer jedoch auf wechselnde Windverhältnisse achten sollten.",
       "points": [
         {
           "km": 120,
@@ -1552,7 +1552,7 @@
           }
         }
       ],
-      "summary": "Die Etappe 4 von Sigmaringen nach Singen beginnt bei einer Temperatur von etwa 17,5°C. Im Laufe des Tages steigt die Temperatur auf bis zu 23,2°C an. Es ist mit einer Regenwahrscheinlichkeit von bis zu 23% zu rechnen, jedoch sind keine Niederschläge gemeldet. Der Wind weht mit Geschwindigkeiten von etwa 11,5 km/h bis 21,5 km/h, was für Radfahrer zu beachten ist. Insgesamt bietet sich ein trockener, aber windiger Tag für die Fahrradtour.",
+      "summary": "Die Etappe 4 von Sigmaringen nach Singen beginnt bei einer Temperatur von etwa 17,5°C. Im Laufe des Tages steigt die Temperatur auf bis zu 23,2°C an. Es ist mit einer Regenwahrscheinlichkeit von bis zu 23% zu rechnen, jedoch sind keine Niederschläge gemeldet. Der Wind weht mit Geschwindigkeiten von etwa 11,5 km/h bis 21,5 km/h. Für Radfahrer ist es ratsam, sich auf wechselnde Wetterbedingungen einzustellen und entsprechende Kleidung mitzuführen.",
       "points": [
         {
           "km": 190,
