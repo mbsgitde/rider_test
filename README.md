@@ -12,13 +12,14 @@ V47 wurde durch eine zu starke Umstrukturierung instabil. V48 basiert wieder auf
 
 
 ---
-## Digitales Roadbook – V50.3
+## Digitales Roadbook – V50.4
 
-Details siehe `PRD_Digitales_Roadbook_V50_3.md`.
+Details siehe `PRD_Digitales_Roadbook_V50_4.md`.
 
-### Änderung in V50.3
+### Änderung in V50.4
 
-- Groq-Prompt enthält jetzt verbindliche Fakten zur Etappe.
-- Die KI darf Etappendistanzen nicht mehr aus Wetterpunkten ableiten.
-- Die KI wird angewiesen, Etappendistanzen im Fließtext nicht zu nennen.
-- Wetterpunkte enthalten lokale Etappen-km und Gesamt-km zur sauberen Wetterabschnittsformulierung.
+- Weather Workflow hat jetzt `concurrency`, damit Cron-Läufe nicht parallel denselben Branch beschreiben.
+- Workflow synchronisiert den Branch vor der Wettergenerierung.
+- Workflow vergleicht `data/weather.json` ohne `generatedAt`.
+- Wenn sich nur `generatedAt` ändert, wird kein Commit erzeugt und damit kein Pages Deployment angestoßen.
+- V50.3 KI-Prompt-Guard bleibt enthalten.
