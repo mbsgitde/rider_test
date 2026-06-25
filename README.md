@@ -12,22 +12,15 @@ V47 wurde durch eine zu starke Umstrukturierung instabil. V48 basiert wieder auf
 
 
 ---
-## Digitales Roadbook – V49 Wetter kompakt
+## Digitales Roadbook – V49.1 Wetter-UI-Finishing
 
-V49 ergänzt V48 um eine kompakte mehrtägige Wetterprognose. Details siehe `PRD_Digitales_Roadbook_V49.md`.
+Details siehe `PRD_Digitales_Roadbook_V49_1.md`.
 
-### Wichtig
+### Änderungen
 
-- Workflow: `.github/workflows/weather.yml`
-- Sichtbare Workflow-Kopie: `_github_workflows_weather.yml_COPY_ONLY.txt`
-- Generator: `scripts/generateWeather.js`
-- Einstellungen: `data/weather-settings.json`
-- Ergebnis: `data/weather.json`
-
-### Mehrtagelogik
-
-Etappe 1 startet mit `tourStartDateTime`. Jede weitere Etappe startet am Folgetag zur `dailyStageStartTime`.
-
-### Kompakte Darstellung
-
-Die UI zeigt keine langen Listen einzelner Wetterpunkte mehr. Stattdessen gibt es pro Etappe ein Symbol, Temperaturspanne, Regen-/Windwerte und eine KI-Kurzzusammenfassung.
+- Wettergenerator liegt jetzt in `assets/generateWeather.js`.
+- GitHub Action ruft `node assets/generateWeather.js` auf.
+- Wetterkarten stehen unterhalb der Höhengrafiken.
+- Gesamt-Höhengrafik enthält Wetter-Icons pro Etappe.
+- Wettermarker auf der Karte haben niedrigere Priorität als Start/Ziel/Hotelmarker.
+- Cron läuft tagsüber: 05, 08, 11, 14, 17, 20, 22 Uhr MESZ.

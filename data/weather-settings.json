@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "enabled": true,
-  "description": "Mehrtagestour: Etappe 1 startet mit tourStartDateTime. Jede weitere Etappe startet am Folgetag zur dailyStageStartTime. UI zeigt kompakte Wetterkarten statt Datenpunktlisten.",
+  "description": "V49.1: Mehrtagestour. Etappe 1 startet mit tourStartDateTime. Folgeetappen starten am Folgetag zur dailyStageStartTime. Kompakte Wetterkarten und reduzierte Kartenmarker.",
   "tourStartDateTime": "2026-07-01T09:00:00+02:00",
   "dailyStageStartTime": "09:00",
   "sampleDistanceKm": 10,
