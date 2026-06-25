@@ -1,7 +1,11 @@
-# Digitales Roadbook – V47
+# Digitales Roadbook – V48
 
-## Änderungen in V47
+## Fix gegenüber V47
 
-- KM-Angabe der Übernachtungen im Gesamthöhenprofil steht jetzt auf exakt derselben vertikalen Höhe wie die regulären X-Achsen-KM-Labels.
-- Die Einheit `km` wurde bei den Übernachtungs-KM-Labels entfernt.
-- Die gestrichelte Linie endet nun auf Höhe der X-Achse und ist so dünn wie die regulären Achsen-/Gridlinien, bleibt aber gestrichelt.
+V47 wurde durch eine zu starke Umstrukturierung instabil. V48 basiert wieder auf der stabilen V46-Logik und übernimmt nur den gewünschten Marker-Feinschliff:
+
+- Übernachtungs-KM-Angabe im Gesamthöhenprofil auf X-Achsen-Label-Höhe.
+- Keine Einheit `km` beim Übernachtungs-KM-Label.
+- Gestrichelte Linie endet auf der X-Achse.
+- Gestrichelte Linie hat Linienstärke 1, analog zu den Achsen-/Gridlinien.
+- Tour-Dropdown, Manifest-Laden und GPX-Parsing wurden zusätzlich validiert.
