@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-06-25T11:14:58.341Z",
+  "generatedAt": "2026-06-25T11:16:55.909Z",
   "sourceFile": "Hohenzollernradweg_Relax.gpx",
   "tourStartDateTime": "2026-07-01T09:00:00+02:00",
   "valid": true,
@@ -10,7 +10,7 @@
     "ai": "groq"
   },
   "global": {
-    "summary": "Für den Hohenzollernradweg (Relax) ist am Mittwoch bei Temperaturen zwischen 15,5°C und 18,3°C mit Regen zu rechnen, insbesondere in den ersten 60 Kilometern, wo bis zu 3,3 mm Niederschlag erwartet werden. Die Regenwahrscheinlichkeit liegt zwischen 31% und 46%, wobei die höchste Wahrscheinlichkeit im Bereich von km 30 bis km 60 besteht. Der Wind weht mit Geschwindigkeiten zwischen 2 km/h und 14,1 km/h, wobei die stärksten Winde gegen Abend auftreten. Ab etwa km 120 und nachts lässt der Regen nach, und die Temperaturen bleiben relativ konstant. Für die Fahrt ist es ratsam, Regenkleidung und entsprechende Ausrüstung mitzuführen."
+    "summary": "Für den Hohenzollernradweg (Relax) ist am Mittwoch bei Temperaturen zwischen 15,5°C und 18,3°C mit Regen zu rechnen, insbesondere zwischen km 30 und km 60 mit bis zu 3,3 mm Niederschlag. Die Regenwahrscheinlichkeit liegt zwischen 31% und 46%. Der Wind weht mit Geschwindigkeiten zwischen 2 km/h und 14,1 km/h, wobei die stärksten Böen gegen Abend auftreten. Ab km 220 sinkt die Regenwahrscheinlichkeit und die Niederschlagsmenge, so dass die zweite Hälfte der Tour trockener verlaufen dürfte."
   },
   "points": [
     {
@@ -515,7 +515,7 @@
       "name": "Stuttgart → Bebenhausen",
       "startKm": 0,
       "endKm": 61.6,
-      "summary": "Für die erste Etappe von Stuttgart nach Bebenhausen erwarten wir am Mittwoch bei Start um 09:00 Uhr milde Temperaturen um 17°C. Es besteht eine Regenwahrscheinlichkeit von etwa 44-45% mit Niederschlagsmengen von 1,5-3,3 mm, wobei die stärksten Regenfälle zwischen km 30 und km 40 erwartet werden. Der Wind weht mit etwa 7-11 km/h, wobei die Windgeschwindigkeit im Laufe der Tour leicht schwankt. Insgesamt sollte man für diese etwa 60 km lange Strecke mit einer Fahrtdauer von etwa 4 Stunden auf wechselhaftes Wetter vorbereitet sein.",
+      "summary": "Für die erste Etappe von Stuttgart nach Bebenhausen am Mittwoch erwarten Sie eine wechselhafte Wetterlage. Zu Beginn der Tour um 09:00 Uhr in Stuttgart können Sie mit einer Temperatur von etwa 17,5°C und einer Regenwahrscheinlichkeit von 44% rechnen, wobei leichte Regenfälle mit 1,9 mm Niederschlag möglich sind. Im Laufe der Etappe bleibt die Temperatur größtenteils konstant, lediglich zwischen km 30 und km 40 kann es etwas kühler werden, bevor sich die Temperatur wieder erholt. Der Wind weht mit etwa 7-11 km/h, wobei die Windgeschwindigkeit im Laufe der Etappe leicht schwankt. Es ist ratsam, sich auf leichte Regenfälle vorzubereiten, insbesondere im mittleren Teil der Strecke.",
       "points": [
         {
           "km": 0,
@@ -658,7 +658,7 @@
       "name": "Bebenhausen → Hechingen",
       "startKm": 61.6,
       "endKm": 110.2,
-      "summary": "Für die Etappe 2 von Bebenhausen nach Hechingen erwarten Sie am Mittwoch bei moderaten Temperaturen zwischen 16,5 und 18,3 Grad Celsius wechselhaftes Wetter. Es besteht eine Regenwahrscheinlichkeit von etwa 40-43% mit Niederschlagsmengen von 0,3 bis 0,9 mm, insbesondere im Bereich von km 100 und km 110. Der Wind weht mit Geschwindigkeiten zwischen 6,8 und 12,7 km/h, wobei die stärksten Böen im ersten Teil der Etappe zu erwarten sind. Ab km 100 lässt der Wind nach, was die Fahrt angenehmer machen dürfte.",
+      "summary": "Für die zweite Etappe von Bebenhausen nach Hechingen erwarten wir am Mittwoch wechselhaftes Wetter. Im Verlauf des Tages können Sie mit Temperaturen zwischen 16,5 und 18,3 Grad Celsius rechnen. Es besteht eine Regenwahrscheinlichkeit von etwa 40-43%, wobei die stärksten Niederschläge gegen 16 Uhr bei etwa 0,9 mm Regen an den Kilometern 100 und 110 erwartet werden. Der Wind weht mit etwa 7-13 km/h, wobei die Windgeschwindigkeit im Laufe des Tages abnimmt. Bitte beachten Sie die Regenschauer und passen Sie Ihre Radtour entsprechend an.",
       "points": [
         {
           "km": 70,
@@ -763,7 +763,7 @@
       "name": "Hechingen → Sigmaringen",
       "startKm": 110.2,
       "endKm": 183.8,
-      "summary": "Für die dritte Etappe von Hechingen nach Sigmaringen erwarten Sie am Mittwochabend wechselhaftes Wetter mit Temperaturen zwischen 15,5 und 16,3 Grad Celsius. Es besteht eine Regenwahrscheinlichkeit von etwa 37 bis 46 Prozent, wobei die Niederschlagsmengen mit maximal 0,4 mm jedoch gering bleiben. Der Wind weht mit Geschwindigkeiten zwischen 6,3 und 14,1 km/h, wobei die stärksten Böen zwischen km 130 und 140 erwartet werden. Die Bedingungen verbessern sich leicht gegen Ende der Etappe, mit abnehmender Regenwahrscheinlichkeit und schwächerem Wind.",
+      "summary": "Für die dritte Etappe von Hechingen nach Sigmaringen erwarten wir am Mittwochabend eine kühlere Temperatur zwischen 15,5°C und 16,3°C. Es besteht eine Regenwahrscheinlichkeit von etwa 37-46%, wobei die Regenmengen mit maximal 0,4 mm jedoch gering bleiben. Der Wind weht mit etwa 6-14 km/h, wobei die stärksten Böen zwischen km 130 und 140 zu erwarten sind. Insgesamt sollte man für diese Etappe mit etwa 60 Kilometern bei wechselhaften Wetterbedingungen rechnen.",
       "points": [
         {
           "km": 120,
@@ -906,7 +906,7 @@
       "name": "Sigmaringen → Singen",
       "startKm": 183.8,
       "endKm": 259.7,
-      "summary": "Für die Etappe 4 von Sigmaringen nach Singen erwarten wir in der Nacht von Mittwoch auf Donnerstag milde Temperaturen zwischen 15 und 17 Grad Celsius. Es gibt eine geringe Regenwahrscheinlichkeit von etwa 30-35%, jedoch sind nur geringe Niederschlagsmengen von maximal 0,3 mm vorhergesagt. Der Wind weht mit moderaten 3-8 km/h, wobei die Windgeschwindigkeit im Laufe der Nacht leicht abnimmt. Auf den ersten 20 Kilometern dieser Etappe (km 190-210) ist mit den meisten Regentropfen zu rechnen, danach bleibt es trocken.",
+      "summary": "Für die Etappe 4 von Sigmaringen nach Singen erwarten wir in der Nacht von Mittwoch auf Donnerstag milde Temperaturen zwischen 15 und 17 Grad Celsius. Es besteht eine geringe Regenwahrscheinlichkeit von etwa 30-35%, wobei die Regenmengen sehr gering sind. Der Wind weht mit moderater Geschwindigkeit, insbesondere in den frühen Stunden, und lässt später nach, was die Fahrt angenehmer macht. Insgesamt bietet sich eine relativ trockene und angenehme Nacht für die Fahrradtour.",
       "points": [
         {
           "km": 190,
