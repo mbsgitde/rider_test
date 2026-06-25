@@ -12,13 +12,14 @@ V47 wurde durch eine zu starke Umstrukturierung instabil. V48 basiert wieder auf
 
 
 ---
-## Digitales Roadbook – V50.1
+## Digitales Roadbook – V50.2
 
-Details siehe `PRD_Digitales_Roadbook_V50_1.md`.
+Details siehe `PRD_Digitales_Roadbook_V50_2.md`.
 
-### Änderung in V50.1
+### Änderung in V50.2
 
-- Wetterprognose Gesamt zeigt jetzt `Start: DD/MM/YY hh:mm`.
-- Etappen-Wetterübersicht zeigt je Etappe `DD/MM/YY hh:mm`.
-- Aktive Einzeletappenansicht zeigt ebenfalls `Start: DD/MM/YY hh:mm`.
-- Karten-Popups nutzen dasselbe Datumsformat.
+- Wettericons wurden vollständig aus der Kartenansicht entfernt.
+- Wettericons pro Etappe erscheinen in der Gesamt-Höhengrafik mittig zwischen den Hotelmarkern.
+- Die Gesamtprognose enthält keine Etappenliste mehr.
+- Die einzelnen Etappenprognosen stehen direkt in den Etappen unterhalb der Höhengrafik.
+- Datumsformat: `DD.MM.YY hh:mmh`.

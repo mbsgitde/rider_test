@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
   "enabled": true,
-  "description": "V50.1: Mehrtagestour. Wettermarker seitlich neben der Route. Wetteranzeigen enthalten Datum DD/MM/YY und Startzeit hh:mm.",
+  "description": "V50.2: Keine Wettermarker auf der Karte. Wetterinfos im Gesamtprofil zwischen Hotelmarkern und je Etappe unterhalb der Höhengrafik. Datum im Format DD.MM.YY hh:mmh.",
   "tourStartDateTime": "2026-07-01T09:00:00+02:00",
   "dailyStageStartTime": "09:00",
   "sampleDistanceKm": 10,
   "mapMarkers": {
-    "global": "stage-summary-offset",
-    "stage": "start-mid-end-offset"
+    "global": "none",
+    "stage": "none"
   },
   "weatherProvider": "open-meteo",
   "ai": {
