@@ -12,15 +12,13 @@ V47 wurde durch eine zu starke Umstrukturierung instabil. V48 basiert wieder auf
 
 
 ---
-## Digitales Roadbook – V49.1 Wetter-UI-Finishing
+## Digitales Roadbook – V50.1
 
-Details siehe `PRD_Digitales_Roadbook_V49_1.md`.
+Details siehe `PRD_Digitales_Roadbook_V50_1.md`.
 
-### Änderungen
+### Änderung in V50.1
 
-- Wettergenerator liegt jetzt in `assets/generateWeather.js`.
-- GitHub Action ruft `node assets/generateWeather.js` auf.
-- Wetterkarten stehen unterhalb der Höhengrafiken.
-- Gesamt-Höhengrafik enthält Wetter-Icons pro Etappe.
-- Wettermarker auf der Karte haben niedrigere Priorität als Start/Ziel/Hotelmarker.
-- Cron läuft tagsüber: 05, 08, 11, 14, 17, 20, 22 Uhr MESZ.
+- Wetterprognose Gesamt zeigt jetzt `Start: DD/MM/YY hh:mm`.
+- Etappen-Wetterübersicht zeigt je Etappe `DD/MM/YY hh:mm`.
+- Aktive Einzeletappenansicht zeigt ebenfalls `Start: DD/MM/YY hh:mm`.
+- Karten-Popups nutzen dasselbe Datumsformat.

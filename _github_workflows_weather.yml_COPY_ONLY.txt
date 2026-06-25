@@ -3,9 +3,9 @@ name: Weather Forecast
 on:
   workflow_dispatch:
   schedule:
-    # GitHub cron runs in UTC: 03,06,09,12,15,18,20 UTC = 05,08,11,14,17,20,22 Uhr MESZ.
-    # Keine Läufe zwischen 23:00 und 05:00 Uhr deutscher Sommerzeit.
-    - cron: "0 3,6,9,12,15,18,20 * * *"
+    # GitHub cron runs in UTC: 03,04,05,06,07,10,13,16,17,18,19,20 UTC
+    # = 05,06,07,08,09,12,15,18,19,20,21,22 Uhr MESZ.
+    - cron: "0 3,4,5,6,7,10,13,16,17,18,19,20 * * *"
 
 permissions:
   contents: write
