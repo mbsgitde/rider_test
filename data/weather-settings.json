@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "enabled": true,
-  "description": "V50.4: V50.3 plus robust Weather-Workflow. Keine Pages-Deploys bei reinen generatedAt-Aenderungen.",
+  "description": "V50.5: Debug-Zeile nur in Gesamt-Wetterbox; kompakte Einzahler in Etappenübersicht; volle Etappen-Wetterbox nur im Einzeletappen-Fokus.",
   "tourStartDateTime": "2026-07-01T09:00:00+02:00",
   "dailyStageStartTime": "09:00",
   "sampleDistanceKm": 10,

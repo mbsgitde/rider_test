@@ -12,14 +12,13 @@ V47 wurde durch eine zu starke Umstrukturierung instabil. V48 basiert wieder auf
 
 
 ---
-## Digitales Roadbook – V50.4
+## Digitales Roadbook – V50.5
 
-Details siehe `PRD_Digitales_Roadbook_V50_4.md`.
+Details siehe `PRD_Digitales_Roadbook_V50_5.md`.
 
-### Änderung in V50.4
+### Änderung in V50.5
 
-- Weather Workflow hat jetzt `concurrency`, damit Cron-Läufe nicht parallel denselben Branch beschreiben.
-- Workflow synchronisiert den Branch vor der Wettergenerierung.
-- Workflow vergleicht `data/weather.json` ohne `generatedAt`.
-- Wenn sich nur `generatedAt` ändert, wird kein Commit erzeugt und damit kein Pages Deployment angestoßen.
-- V50.3 KI-Prompt-Guard bleibt enthalten.
+- Debug-Zeile nur in der Gesamt-Wetterbox.
+- In der Etappenübersicht kompakte Wetter-Einzahler statt vollständiger blauer Wetterbox.
+- Die vollständige blaue Etappen-Wetterbox erscheint nur noch im Einzeletappen-Fokus.
+- V50.4 Deployment Guard bleibt enthalten.
