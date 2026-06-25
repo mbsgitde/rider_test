@@ -1,5 +1,5 @@
 {
-  "description": "OPTIONALER FALLBACK: Diese Datei wird nur verwendet, wenn im GPX keine Roadbook-Wegpunkte mit #type gefunden werden oder später gezielt ein Override-Modus ergänzt wird. Primärquelle ist gpx/Hohenzollernradweg_Relax.gpx.",
+  "description": "OPTIONALER FALLBACK: Diese Datei wird nur verwendet, wenn im GPX keine Roadbook-Wegpunkte mit #type gefunden werden. Primärquelle ist das GPX.",
   "stops": [
     {
       "name": "Stuttgart Hbf",

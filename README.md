@@ -1,35 +1,10 @@
-# Digitales Roadbook – V43
+# Digitales Roadbook – V44
 
-## Inhalt
+Basis: V43 GPX-Metadata-Mode mit ausschließlich `gpx/Hohenzollernradweg_Relax.gpx`.
 
-Diese Version enthält ausschließlich das hochgeladene GPX-Beispiel:
+## Änderungen in V44
 
-- `gpx/Hohenzollernradweg_Relax.gpx`
-
-## Wichtige Änderung in V43
-
-- `routes.json` wurde durch `data/gpx-manifest.json` ersetzt.
-- Das Manifest listet nur die GPX-Dateien, die im Dropdown angezeigt werden sollen.
-- Der Anzeigename kommt aus GPX `<metadata><name>` bzw. `<trk><name>`.
-- Etappenstopps kommen primär aus GPX-`<wpt><desc>` Tags:
-  - `#type:start|overnight|end`
-  - `#ort:...`
-  - `#url:...` für Hotels
-  - `#comment:...`
-- ADFC und offizielle Tourlinks sind optional und werden im `#type:start`-Wegpunkt gelesen:
-  - `#adfcStars:4`
-  - `#adfcUrl:https://...`
-  - `#officialUrl:https://...`
-- `stops.fallback.json` ist ausdrücklich nur ein optionaler Fallback, falls ein GPX keine Roadbook-Tags enthält.
-
-## Dateien
-
-```text
-index.html
-assets/app.js
-assets/styles.css
-data/config.json
-data/gpx-manifest.json
-data/Hohenzollernradweg_Relax-stops.fallback.json
-gpx/Hohenzollernradweg_Relax.gpx
-```
+- Leaflet-Icon zur Kartenlayer-Auswahl verkleinert.
+- Im Höhenprofil der Gesamttour werden Übernachtungen als graue Hotelmarker `🏨` angezeigt.
+- Die Hotelmarker werden nur in der Gesamttour dargestellt, nicht in den einzelnen Etappenprofilen.
+- Je Übernachtung wird ein deutlicher gestrichelter Vertikalstrich bis zur km-Achse gezeichnet.
