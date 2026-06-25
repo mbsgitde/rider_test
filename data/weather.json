@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-06-25T15:43:19.022Z",
+  "generatedAt": "2026-06-25T15:46:48.907Z",
   "sourceFile": "Hohenzollernradweg_Relax.gpx",
   "tourStartDateTime": "2026-07-01T09:00:00+02:00",
   "dailyStageStartTime": "09:00",
@@ -10,7 +10,7 @@
     "ai": "groq"
   },
   "global": {
-    "summary": "Für die mehrtägige Fahrradtour auf dem Hohenzollernradweg (Relax) ist folgendes Wetter zu erwarten: \nAm ersten Tag (Mi., 01.07.) ist mit Temperaturen zwischen 16,1°C und 17,6°C, leichten Regenfällen (bis 3,3 mm) und einer Regenwahrscheinlichkeit von etwa 49-52% sowie mäßigem Wind (7,1-11,2 km/h) zu rechnen. \nDie folgenden Tage (Do., 02.07. und Fr., 03.07.) bringen trockenes Wetter mit Temperaturen zwischen 16,6°C und 21,2°C und Windgeschwindigkeiten von etwa 7,1-13,7 km/h. \nAm letzten Tag (Sa., 04.07.) ist mit Temperaturen zwischen 17,5°C und 23,2°C, trockenem Wetter und stärkerem Wind (11,5-21,5 km/h) zu rechnen.",
+    "summary": "Für Ihre mehrtägige Fahrradtour auf dem Hohenzollernradweg (Relax) erwarten Sie unterschiedliche Wetterbedingungen. Am ersten Tag (Mi., 01.07.) ist mit Temperaturen zwischen 16,1°C und 17,6°C sowie Regenfällen von bis zu 3,3 mm und einer Regenwahrscheinlichkeit von bis zu 52% zu rechnen. Die Windgeschwindigkeit liegt zwischen 7,1 km/h und 11,2 km/h. \n\nDie folgenden Tage zeigen eine Verbesserung des Wetters: Am zweiten Tag (Do., 02.07.) ist es trocken mit Temperaturen um 18°C und Windgeschwindigkeiten zwischen 9,4 km/h und 11,3 km/h. Am dritten Tag (Fr., 03.07.) bleibt es größtenteils trocken, die Temperaturen steigen auf bis zu 21,2°C, und die Windgeschwindigkeit variiert zwischen 7,1 km/h und 13,7 km/h. \n\nAm vierten Tag (Sa., 04.07.) ist es weiterhin trocken, die Temperaturen erreichen bis zu 23,2°C, und die Windgeschwindigkeit liegt zwischen 11,5 km/h und 21,5 km/h. Für die gesamte Tour ist es ratsam, sich auf wechselnde Wetterbedingungen vorzubereiten und entsprechende Kleidung sowie Regenschutz mitzuführen.",
     "stats": {
       "minTemperature": 16,
       "maxTemperature": 23,
@@ -742,7 +742,7 @@
           }
         }
       ],
-      "summary": "Für die erste Etappe von Stuttgart nach Bebenhausen am Mittwoch, den 01.07., um 09:00 Uhr, ist eine Temperatur zwischen 16,1°C und 17,6°C zu erwarten. Es gibt eine Regenwahrscheinlichkeit von etwa 49-52% mit Niederschlagsmengen zwischen 1,5 mm und 3,3 mm. Der Wind weht mit einer Geschwindigkeit von etwa 7-11 km/h. Die 60 Kilometer lange Strecke sollte bei diesen Bedingungen mit entsprechender Ausrüstung und Vorsicht zurückgelegt werden.",
+      "summary": "Für die erste Etappe Ihrer Fahrradtour von Stuttgart nach Bebenhausen am Mittwoch, den 01.07., sollten Sie sich auf wechselhaftes Wetter einstellen. Die Temperatur bleibt zwischen 16,1°C und 17,6°C konstant, wobei die Regenwahrscheinlichkeit zwischen 48% und 52% schwankt. Es ist mit Regenmengen von etwa 1,5 bis 3,3 mm zu rechnen, begleitet von einer Windgeschwindigkeit, die zwischen 7,1 km/h und 11,2 km/h variiert. Die 60 Kilometer lange Strecke sollte in etwa 4 Stunden zurückgelegt werden, wobei Sie aufgrund der wechselhaften Wetterbedingungen entsprechend vorbereitet sein sollten.",
       "points": [
         {
           "km": 0,
@@ -1266,7 +1266,7 @@
           }
         }
       ],
-      "summary": "Für die dritte Etappe Ihrer Fahrradtour von Hechingen nach Sigmaringen am Freitag, dem 03.07., erwarten Sie angenehme Temperaturen zwischen 15,8°C und 21,2°C. Es gibt keine Regenfälle, jedoch eine Regenwahrscheinlichkeit von etwa 23-31%. Der Wind weht mit einer Geschwindigkeit von etwa 7-13 km/h. Die Etappe erstreckt sich über 60 Kilometer, von km 120 bis km 180, und bietet somit eine gute Gelegenheit, die Landschaft zu genießen.",
+      "summary": "Am Freitag, dem 03.07., erwartet die Radfahrer auf der Etappe 3 von Hechingen nach Sigmaringen ein überwiegend trockenes Wetter mit einer Temperaturspanne von etwa 16,6°C bis 21,2°C. Die Regenwahrscheinlichkeit bleibt während der gesamten Etappe mit Werten zwischen 23% und 31% moderat, ohne dass Regen fällt. Der Wind weht mit Geschwindigkeiten zwischen 7,1 km/h und 13,7 km/h, was die Fahrt bei den insgesamt 120 Kilometern dieser Etappe begleiten wird.",
       "points": [
         {
           "km": 120,
@@ -1548,7 +1548,7 @@
           }
         }
       ],
-      "summary": "Am Samstag, dem 04.07., erwartet uns auf der Etappe von Sigmaringen nach Singen ein überwiegend sonniger Tag mit steigenden Temperaturen zwischen 17,5°C und 23,2°C. Die Regenwahrscheinlichkeit bleibt mit 14-23% relativ gering, und es ist mit keinen Regenfällen zu rechnen. Der Wind weht mit zunehmender Stärke, von 11,5 km/h auf 21,5 km/h, was insbesondere auf den letzten Kilometern der 60 km langen Etappe zu beachten ist.",
+      "summary": "Für die 4. Etappe von Sigmaringen nach Singen am Samstag, dem 04.07., erwarten Sie bei Start um 09:24 Uhr milde Temperaturen zwischen 17,5°C und 23,2°C. Es ist mit einer geringen Regenwahrscheinlichkeit von 14% bis 23% zu rechnen, jedoch sind keine Niederschläge vorhergesagt. Der Wind weht mit einer Geschwindigkeit von 11,5 km/h bis 21,5 km/h, was auf der insgesamt 60 Kilometer langen Strecke von km 190 bis km 250 zu beachten ist.",
       "points": [
         {
           "km": 190,
