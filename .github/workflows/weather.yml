@@ -3,19 +3,27 @@ name: Weather Forecast
 on:
   workflow_dispatch:
   schedule:
-    # GitHub cron runs in UTC: 03,04,05,06,07,10,13,16,17,18,19,20 UTC
+    # GitHub cron runs in UTC:
+    # 03,04,05,06,07,10,13,16,17,18,19,20 UTC
     # = 05,06,07,08,09,12,15,18,19,20,21,22 Uhr MESZ.
     - cron: "0 3,4,5,6,7,10,13,16,17,18,19,20 * * *"
 
 permissions:
   contents: write
 
+concurrency:
+  group: weather-forecast-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   generate-weather:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v6
@@ -29,8 +37,16 @@ jobs:
 
       - name: Commit generated weather.json
         run: |
+          BRANCH="${GITHUB_REF_NAME}"
+
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Remote-Stand holen und lokale Arbeitskopie aktualisieren,
+          # damit der spätere Push nicht mit "fetch first" scheitert.
+          git fetch origin "$BRANCH"
+          git pull --rebase origin "$BRANCH"
+
           git add data/weather.json
           git commit -m "Update weather forecast" || echo "No changes"
-          git push
+          git push origin HEAD:"$BRANCH"
