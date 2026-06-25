@@ -1,18 +1,1702 @@
 {
   "schemaVersion": 1,
-  "generatedAt": null,
-  "valid": false,
-  "reason": "Noch keine Prognose erzeugt. Starte die GitHub Action 'Weather Forecast'.",
+  "generatedAt": "2026-06-25T16:26:36.089Z",
+  "sourceFile": "Hohenzollernradweg_Relax.gpx",
   "tourStartDateTime": "2026-07-01T09:00:00+02:00",
   "dailyStageStartTime": "09:00",
+  "valid": true,
   "provider": {
     "weather": "open-meteo",
     "ai": "groq"
   },
   "global": {
-    "summary": "Noch keine Wetterprognose verfügbar.",
-    "stats": null
+    "summary": "Der Hohenzollernradweg (Relax) bietet eine vielfältige Wettererfahrung. Am ersten Tag, bei Kilometer 0 bis 60, liegt die Temperatur zwischen 19,1°C und 23,1°C, mit einer Regenwahrscheinlichkeit von 49-52%. Der Wind weht mit etwa 7-11 km/h. \n\nIn den folgenden Etappen, insbesondere bei Kilometer 70 bis 110, bleibt die Regenwahrscheinlichkeit gering, bei etwa 8-11%, und die Temperaturen steigen auf bis zu 22,5°C. Der Wind variiert zwischen 9-11 km/h.\n\nIn den letzten Etappen, bei Kilometer 120 bis 250, liegen die Temperaturen zwischen 15,8°C und 23,2°C, mit einer Regenwahrscheinlichkeit von 14-31%. Der Wind ist etwas stärker, mit etwa 12-21 km/h. Für Radfahrer ist es ratsam, sich auf wechselnde Wetterbedingungen einzustellen und entsprechende Kleidung mitzubringen.",
+    "stats": {
+      "minTemperature": 16,
+      "maxTemperature": 23,
+      "totalPrecipitation": 0.1,
+      "maxPrecipitationProbability": 52,
+      "maxWindSpeed": 22,
+      "dominantWeatherCode": 1,
+      "startPoint": {
+        "km": 0,
+        "localKm": 0,
+        "stageId": 1,
+        "stageIndex": 0,
+        "stageName": "Stuttgart → Bebenhausen",
+        "stageStartTime": "2026-07-01T07:00:00.000Z",
+        "lat": 48.786032,
+        "lon": 9.182346,
+        "ele": 249,
+        "time": "2026-07-01T07:00:00.000Z",
+        "weather": {
+          "weatherTime": "2026-07-01T07:00Z",
+          "temperature": 19.3,
+          "precipitation": 0,
+          "precipitationProbability": 49,
+          "windSpeed": 11.2,
+          "weatherCode": 81
+        }
+      },
+      "markerPoint": {
+        "km": 130.1,
+        "localKm": 19.8,
+        "stageId": 3,
+        "stageIndex": 2,
+        "stageName": "Hechingen → Sigmaringen",
+        "stageStartTime": "2026-07-03T07:00:00.000Z",
+        "lat": 48.289066,
+        "lon": 9.128808,
+        "ele": 715,
+        "time": "2026-07-03T08:18:19.869Z",
+        "weather": {
+          "weatherTime": "2026-07-03T08:00Z",
+          "temperature": 15.8,
+          "precipitation": 0,
+          "precipitationProbability": 23,
+          "windSpeed": 9.8,
+          "weatherCode": 1
+        }
+      },
+      "endPoint": {
+        "km": 250.1,
+        "localKm": 66.3,
+        "stageId": 4,
+        "stageIndex": 3,
+        "stageName": "Sigmaringen → Singen",
+        "stageStartTime": "2026-07-04T07:00:00.000Z",
+        "lat": 47.740755,
+        "lon": 8.934719,
+        "ele": 397,
+        "time": "2026-07-04T11:20:07.478Z",
+        "weather": {
+          "weatherTime": "2026-07-04T11:00Z",
+          "temperature": 23.2,
+          "precipitation": 0,
+          "precipitationProbability": 23,
+          "windSpeed": 21.5,
+          "weatherCode": 0
+        }
+      },
+      "icon": "🌦️"
+    }
   },
-  "points": [],
-  "stages": []
+  "points": [
+    {
+      "km": 0,
+      "localKm": 0,
+      "stageId": 1,
+      "stageIndex": 0,
+      "stageName": "Stuttgart → Bebenhausen",
+      "stageStartTime": "2026-07-01T07:00:00.000Z",
+      "lat": 48.786032,
+      "lon": 9.182346,
+      "ele": 249,
+      "time": "2026-07-01T07:00:00.000Z",
+      "weather": {
+        "weatherTime": "2026-07-01T07:00Z",
+        "temperature": 19.3,
+        "precipitation": 0,
+        "precipitationProbability": 49,
+        "windSpeed": 11.2,
+        "weatherCode": 81
+      }
+    },
+    {
+      "km": 10,
+      "localKm": 10,
+      "stageId": 1,
+      "stageIndex": 0,
+      "stageName": "Stuttgart → Bebenhausen",
+      "stageStartTime": "2026-07-01T07:00:00.000Z",
+      "lat": 48.762968,
+      "lon": 9.266779,
+      "ele": 227,
+      "time": "2026-07-01T07:39:24.012Z",
+      "weather": {
+        "weatherTime": "2026-07-01T08:00Z",
+        "temperature": 19.6,
+        "precipitation": 0,
+        "precipitationProbability": 51,
+        "windSpeed": 11.2,
+        "weatherCode": 81
+      }
+    },
+    {
+      "km": 20,
+      "localKm": 20,
+      "stageId": 1,
+      "stageIndex": 0,
+      "stageName": "Stuttgart → Bebenhausen",
+      "stageStartTime": "2026-07-01T07:00:00.000Z",
+      "lat": 48.715868,
+      "lon": 9.344141,
+      "ele": 249,
+      "time": "2026-07-01T08:18:47.059Z",
+      "weather": {
+        "weatherTime": "2026-07-01T08:00Z",
+        "temperature": 19.1,
+        "precipitation": 0,
+        "precipitationProbability": 51,
+        "windSpeed": 10.2,
+        "weatherCode": 61
+      }
+    },
+    {
+      "km": 30,
+      "localKm": 30,
+      "stageId": 1,
+      "stageIndex": 0,
+      "stageName": "Stuttgart → Bebenhausen",
+      "stageStartTime": "2026-07-01T07:00:00.000Z",
+      "lat": 48.664723,
+      "lon": 9.285157,
+      "ele": 400,
+      "time": "2026-07-01T08:58:03.951Z",
+      "weather": {
+        "weatherTime": "2026-07-01T09:00Z",
+        "temperature": 18.5,
+        "precipitation": 0,
+        "precipitationProbability": 52,
+        "windSpeed": 7.1,
+        "weatherCode": 63
+      }
+    },
+    {
+      "km": 40,
+      "localKm": 40,
+      "stageId": 1,
+      "stageIndex": 0,
+      "stageName": "Stuttgart → Bebenhausen",
+      "stageStartTime": "2026-07-01T07:00:00.000Z",
+      "lat": 48.621026,
+      "lon": 9.217084,
+      "ele": 335,
+      "time": "2026-07-01T09:37:34.988Z",
+      "weather": {
+        "weatherTime": "2026-07-01T10:00Z",
+        "temperature": 20.5,
+        "precipitation": 0.1,
+        "precipitationProbability": 48,
+        "windSpeed": 7.9,
+        "weatherCode": 63
+      }
+    },
+    {
+      "km": 50,
+      "localKm": 50,
+      "stageId": 1,
+      "stageIndex": 0,
+      "stageName": "Stuttgart → Bebenhausen",
+      "stageStartTime": "2026-07-01T07:00:00.000Z",
+      "lat": 48.604031,
+      "lon": 9.108124,
+      "ele": 416,
+      "time": "2026-07-01T10:16:49.170Z",
+      "weather": {
+        "weatherTime": "2026-07-01T10:00Z",
+        "temperature": 20.5,
+        "precipitation": 0,
+        "precipitationProbability": 48,
+        "windSpeed": 9.3,
+        "weatherCode": 61
+      }
+    },
+    {
+      "km": 60,
+      "localKm": 60,
+      "stageId": 1,
+      "stageIndex": 0,
+      "stageName": "Stuttgart → Bebenhausen",
+      "stageStartTime": "2026-07-01T07:00:00.000Z",
+      "lat": 48.54853,
+      "lon": 9.073802,
+      "ele": 343,
+      "time": "2026-07-01T10:56:10.502Z",
+      "weather": {
+        "weatherTime": "2026-07-01T11:00Z",
+        "temperature": 23.1,
+        "precipitation": 0,
+        "precipitationProbability": 48,
+        "windSpeed": 8.7,
+        "weatherCode": 63
+      }
+    },
+    {
+      "km": 70,
+      "localKm": 8.4,
+      "stageId": 2,
+      "stageIndex": 1,
+      "stageName": "Bebenhausen → Hechingen",
+      "stageStartTime": "2026-07-02T07:00:00.000Z",
+      "lat": 48.548696,
+      "lon": 8.985519,
+      "ele": 498,
+      "time": "2026-07-02T07:34:26.056Z",
+      "weather": {
+        "weatherTime": "2026-07-02T08:00Z",
+        "temperature": 19.9,
+        "precipitation": 0,
+        "precipitationProbability": 9,
+        "windSpeed": 11.3,
+        "weatherCode": 3
+      }
+    },
+    {
+      "km": 80,
+      "localKm": 18.4,
+      "stageId": 2,
+      "stageIndex": 1,
+      "stageName": "Bebenhausen → Hechingen",
+      "stageStartTime": "2026-07-02T07:00:00.000Z",
+      "lat": 48.478779,
+      "lon": 8.935614,
+      "ele": 352,
+      "time": "2026-07-02T08:15:27.831Z",
+      "weather": {
+        "weatherTime": "2026-07-02T08:00Z",
+        "temperature": 20.7,
+        "precipitation": 0,
+        "precipitationProbability": 9,
+        "windSpeed": 9.8,
+        "weatherCode": 3
+      }
+    },
+    {
+      "km": 90,
+      "localKm": 28.4,
+      "stageId": 2,
+      "stageIndex": 1,
+      "stageName": "Bebenhausen → Hechingen",
+      "stageStartTime": "2026-07-02T07:00:00.000Z",
+      "lat": 48.439546,
+      "lon": 8.92964,
+      "ele": 432,
+      "time": "2026-07-02T08:56:31.248Z",
+      "weather": {
+        "weatherTime": "2026-07-02T09:00Z",
+        "temperature": 21.9,
+        "precipitation": 0,
+        "precipitationProbability": 9,
+        "windSpeed": 10.6,
+        "weatherCode": 3
+      }
+    },
+    {
+      "km": 100,
+      "localKm": 38.4,
+      "stageId": 2,
+      "stageIndex": 1,
+      "stageName": "Bebenhausen → Hechingen",
+      "stageStartTime": "2026-07-02T07:00:00.000Z",
+      "lat": 48.385982,
+      "lon": 8.935973,
+      "ele": 555,
+      "time": "2026-07-02T09:37:34.763Z",
+      "weather": {
+        "weatherTime": "2026-07-02T10:00Z",
+        "temperature": 22.4,
+        "precipitation": 0,
+        "precipitationProbability": 8,
+        "windSpeed": 9.4,
+        "weatherCode": 3
+      }
+    },
+    {
+      "km": 110,
+      "localKm": 48.4,
+      "stageId": 2,
+      "stageIndex": 1,
+      "stageName": "Bebenhausen → Hechingen",
+      "stageStartTime": "2026-07-02T07:00:00.000Z",
+      "lat": 48.331262,
+      "lon": 8.982852,
+      "ele": 556,
+      "time": "2026-07-02T10:18:34.737Z",
+      "weather": {
+        "weatherTime": "2026-07-02T10:00Z",
+        "temperature": 22.5,
+        "precipitation": 0,
+        "precipitationProbability": 11,
+        "windSpeed": 9.2,
+        "weatherCode": 3
+      }
+    },
+    {
+      "km": 120,
+      "localKm": 9.8,
+      "stageId": 3,
+      "stageIndex": 2,
+      "stageName": "Hechingen → Sigmaringen",
+      "stageStartTime": "2026-07-03T07:00:00.000Z",
+      "lat": 48.326887,
+      "lon": 9.035295,
+      "ele": 589,
+      "time": "2026-07-03T07:38:36.968Z",
+      "weather": {
+        "weatherTime": "2026-07-03T08:00Z",
+        "temperature": 16.6,
+        "precipitation": 0,
+        "precipitationProbability": 29,
+        "windSpeed": 7.1,
+        "weatherCode": 1
+      }
+    },
+    {
+      "km": 130.1,
+      "localKm": 19.8,
+      "stageId": 3,
+      "stageIndex": 2,
+      "stageName": "Hechingen → Sigmaringen",
+      "stageStartTime": "2026-07-03T07:00:00.000Z",
+      "lat": 48.289066,
+      "lon": 9.128808,
+      "ele": 715,
+      "time": "2026-07-03T08:18:19.869Z",
+      "weather": {
+        "weatherTime": "2026-07-03T08:00Z",
+        "temperature": 15.8,
+        "precipitation": 0,
+        "precipitationProbability": 23,
+        "windSpeed": 9.8,
+        "weatherCode": 1
+      }
+    },
+    {
+      "km": 140,
+      "localKm": 29.8,
+      "stageId": 3,
+      "stageIndex": 2,
+      "stageName": "Hechingen → Sigmaringen",
+      "stageStartTime": "2026-07-03T07:00:00.000Z",
+      "lat": 48.232469,
+      "lon": 9.206434,
+      "ele": 674,
+      "time": "2026-07-03T08:57:32.449Z",
+      "weather": {
+        "weatherTime": "2026-07-03T09:00Z",
+        "temperature": 17.2,
+        "precipitation": 0,
+        "precipitationProbability": 27,
+        "windSpeed": 11.9,
+        "weatherCode": 1
+      }
+    },
+    {
+      "km": 150,
+      "localKm": 39.8,
+      "stageId": 3,
+      "stageIndex": 2,
+      "stageName": "Hechingen → Sigmaringen",
+      "stageStartTime": "2026-07-03T07:00:00.000Z",
+      "lat": 48.206517,
+      "lon": 9.219469,
+      "ele": 638,
+      "time": "2026-07-03T09:37:05.253Z",
+      "weather": {
+        "weatherTime": "2026-07-03T10:00Z",
+        "temperature": 18.6,
+        "precipitation": 0,
+        "precipitationProbability": 31,
+        "windSpeed": 13.7,
+        "weatherCode": 1
+      }
+    },
+    {
+      "km": 160,
+      "localKm": 49.8,
+      "stageId": 3,
+      "stageIndex": 2,
+      "stageName": "Hechingen → Sigmaringen",
+      "stageStartTime": "2026-07-03T07:00:00.000Z",
+      "lat": 48.143883,
+      "lon": 9.205921,
+      "ele": 608,
+      "time": "2026-07-03T10:16:30.357Z",
+      "weather": {
+        "weatherTime": "2026-07-03T10:00Z",
+        "temperature": 19.4,
+        "precipitation": 0,
+        "precipitationProbability": 31,
+        "windSpeed": 12.9,
+        "weatherCode": 1
+      }
+    },
+    {
+      "km": 170.1,
+      "localKm": 59.9,
+      "stageId": 3,
+      "stageIndex": 2,
+      "stageName": "Hechingen → Sigmaringen",
+      "stageStartTime": "2026-07-03T07:00:00.000Z",
+      "lat": 48.110319,
+      "lon": 9.27025,
+      "ele": 602,
+      "time": "2026-07-03T10:56:15.029Z",
+      "weather": {
+        "weatherTime": "2026-07-03T11:00Z",
+        "temperature": 20.7,
+        "precipitation": 0,
+        "precipitationProbability": 30,
+        "windSpeed": 12.7,
+        "weatherCode": 1
+      }
+    },
+    {
+      "km": 180.1,
+      "localKm": 69.8,
+      "stageId": 3,
+      "stageIndex": 2,
+      "stageName": "Hechingen → Sigmaringen",
+      "stageStartTime": "2026-07-03T07:00:00.000Z",
+      "lat": 48.072779,
+      "lon": 9.238251,
+      "ele": 575,
+      "time": "2026-07-03T11:35:36.998Z",
+      "weather": {
+        "weatherTime": "2026-07-03T12:00Z",
+        "temperature": 21.2,
+        "precipitation": 0,
+        "precipitationProbability": 31,
+        "windSpeed": 13.4,
+        "weatherCode": 1
+      }
+    },
+    {
+      "km": 190,
+      "localKm": 6.2,
+      "stageId": 4,
+      "stageIndex": 3,
+      "stageName": "Sigmaringen → Singen",
+      "stageStartTime": "2026-07-04T07:00:00.000Z",
+      "lat": 48.066639,
+      "lon": 9.156306,
+      "ele": 676,
+      "time": "2026-07-04T07:24:30.103Z",
+      "weather": {
+        "weatherTime": "2026-07-04T07:00Z",
+        "temperature": 17.5,
+        "precipitation": 0,
+        "precipitationProbability": 14,
+        "windSpeed": 11.5,
+        "weatherCode": 0
+      }
+    },
+    {
+      "km": 200,
+      "localKm": 16.2,
+      "stageId": 4,
+      "stageIndex": 3,
+      "stageName": "Sigmaringen → Singen",
+      "stageStartTime": "2026-07-04T07:00:00.000Z",
+      "lat": 48.004995,
+      "lon": 9.137876,
+      "ele": 602,
+      "time": "2026-07-04T08:03:44.986Z",
+      "weather": {
+        "weatherTime": "2026-07-04T08:00Z",
+        "temperature": 18.7,
+        "precipitation": 0,
+        "precipitationProbability": 16,
+        "windSpeed": 13.3,
+        "weatherCode": 1
+      }
+    },
+    {
+      "km": 210,
+      "localKm": 26.2,
+      "stageId": 4,
+      "stageIndex": 3,
+      "stageName": "Sigmaringen → Singen",
+      "stageStartTime": "2026-07-04T07:00:00.000Z",
+      "lat": 47.940579,
+      "lon": 9.082799,
+      "ele": 612,
+      "time": "2026-07-04T08:42:59.653Z",
+      "weather": {
+        "weatherTime": "2026-07-04T09:00Z",
+        "temperature": 20,
+        "precipitation": 0,
+        "precipitationProbability": 18,
+        "windSpeed": 15.9,
+        "weatherCode": 1
+      }
+    },
+    {
+      "km": 220,
+      "localKm": 36.2,
+      "stageId": 4,
+      "stageIndex": 3,
+      "stageName": "Sigmaringen → Singen",
+      "stageStartTime": "2026-07-04T07:00:00.000Z",
+      "lat": 47.881195,
+      "lon": 9.041844,
+      "ele": 620,
+      "time": "2026-07-04T09:22:15.184Z",
+      "weather": {
+        "weatherTime": "2026-07-04T09:00Z",
+        "temperature": 19.8,
+        "precipitation": 0,
+        "precipitationProbability": 18,
+        "windSpeed": 15.8,
+        "weatherCode": 0
+      }
+    },
+    {
+      "km": 230,
+      "localKm": 46.2,
+      "stageId": 4,
+      "stageIndex": 3,
+      "stageName": "Sigmaringen → Singen",
+      "stageStartTime": "2026-07-04T07:00:00.000Z",
+      "lat": 47.823865,
+      "lon": 9.058252,
+      "ele": 433,
+      "time": "2026-07-04T10:01:26.471Z",
+      "weather": {
+        "weatherTime": "2026-07-04T10:00Z",
+        "temperature": 21.2,
+        "precipitation": 0,
+        "precipitationProbability": 20,
+        "windSpeed": 19.1,
+        "weatherCode": 0
+      }
+    },
+    {
+      "km": 240,
+      "localKm": 56.2,
+      "stageId": 4,
+      "stageIndex": 3,
+      "stageName": "Sigmaringen → Singen",
+      "stageStartTime": "2026-07-04T07:00:00.000Z",
+      "lat": 47.787423,
+      "lon": 8.977046,
+      "ele": 440,
+      "time": "2026-07-04T10:40:39.066Z",
+      "weather": {
+        "weatherTime": "2026-07-04T11:00Z",
+        "temperature": 23.2,
+        "precipitation": 0,
+        "precipitationProbability": 23,
+        "windSpeed": 21.5,
+        "weatherCode": 0
+      }
+    },
+    {
+      "km": 250.1,
+      "localKm": 66.3,
+      "stageId": 4,
+      "stageIndex": 3,
+      "stageName": "Sigmaringen → Singen",
+      "stageStartTime": "2026-07-04T07:00:00.000Z",
+      "lat": 47.740755,
+      "lon": 8.934719,
+      "ele": 397,
+      "time": "2026-07-04T11:20:07.478Z",
+      "weather": {
+        "weatherTime": "2026-07-04T11:00Z",
+        "temperature": 23.2,
+        "precipitation": 0,
+        "precipitationProbability": 23,
+        "windSpeed": 21.5,
+        "weatherCode": 0
+      }
+    }
+  ],
+  "stages": [
+    {
+      "stageId": 1,
+      "stageIndex": 0,
+      "name": "Stuttgart → Bebenhausen",
+      "startKm": 0,
+      "endKm": 61.6,
+      "stageDistanceKm": 61.6,
+      "stageStartTime": "2026-07-01T07:00:00.000Z",
+      "stats": {
+        "minTemperature": 19,
+        "maxTemperature": 23,
+        "totalPrecipitation": 0.1,
+        "maxPrecipitationProbability": 52,
+        "maxWindSpeed": 11,
+        "dominantWeatherCode": 63,
+        "startPoint": {
+          "km": 0,
+          "localKm": 0,
+          "stageId": 1,
+          "stageIndex": 0,
+          "stageName": "Stuttgart → Bebenhausen",
+          "stageStartTime": "2026-07-01T07:00:00.000Z",
+          "lat": 48.786032,
+          "lon": 9.182346,
+          "ele": 249,
+          "time": "2026-07-01T07:00:00.000Z",
+          "weather": {
+            "weatherTime": "2026-07-01T07:00Z",
+            "temperature": 19.3,
+            "precipitation": 0,
+            "precipitationProbability": 49,
+            "windSpeed": 11.2,
+            "weatherCode": 81
+          }
+        },
+        "markerPoint": {
+          "km": 30,
+          "localKm": 30,
+          "stageId": 1,
+          "stageIndex": 0,
+          "stageName": "Stuttgart → Bebenhausen",
+          "stageStartTime": "2026-07-01T07:00:00.000Z",
+          "lat": 48.664723,
+          "lon": 9.285157,
+          "ele": 400,
+          "time": "2026-07-01T08:58:03.951Z",
+          "weather": {
+            "weatherTime": "2026-07-01T09:00Z",
+            "temperature": 18.5,
+            "precipitation": 0,
+            "precipitationProbability": 52,
+            "windSpeed": 7.1,
+            "weatherCode": 63
+          }
+        },
+        "endPoint": {
+          "km": 60,
+          "localKm": 60,
+          "stageId": 1,
+          "stageIndex": 0,
+          "stageName": "Stuttgart → Bebenhausen",
+          "stageStartTime": "2026-07-01T07:00:00.000Z",
+          "lat": 48.54853,
+          "lon": 9.073802,
+          "ele": 343,
+          "time": "2026-07-01T10:56:10.502Z",
+          "weather": {
+            "weatherTime": "2026-07-01T11:00Z",
+            "temperature": 23.1,
+            "precipitation": 0,
+            "precipitationProbability": 48,
+            "windSpeed": 8.7,
+            "weatherCode": 63
+          }
+        },
+        "icon": "🌦️"
+      },
+      "compactPoints": [
+        {
+          "km": 0,
+          "localKm": 0,
+          "stageId": 1,
+          "stageIndex": 0,
+          "stageName": "Stuttgart → Bebenhausen",
+          "stageStartTime": "2026-07-01T07:00:00.000Z",
+          "lat": 48.786032,
+          "lon": 9.182346,
+          "ele": 249,
+          "time": "2026-07-01T07:00:00.000Z",
+          "weather": {
+            "weatherTime": "2026-07-01T07:00Z",
+            "temperature": 19.3,
+            "precipitation": 0,
+            "precipitationProbability": 49,
+            "windSpeed": 11.2,
+            "weatherCode": 81
+          }
+        },
+        {
+          "km": 30,
+          "localKm": 30,
+          "stageId": 1,
+          "stageIndex": 0,
+          "stageName": "Stuttgart → Bebenhausen",
+          "stageStartTime": "2026-07-01T07:00:00.000Z",
+          "lat": 48.664723,
+          "lon": 9.285157,
+          "ele": 400,
+          "time": "2026-07-01T08:58:03.951Z",
+          "weather": {
+            "weatherTime": "2026-07-01T09:00Z",
+            "temperature": 18.5,
+            "precipitation": 0,
+            "precipitationProbability": 52,
+            "windSpeed": 7.1,
+            "weatherCode": 63
+          }
+        },
+        {
+          "km": 60,
+          "localKm": 60,
+          "stageId": 1,
+          "stageIndex": 0,
+          "stageName": "Stuttgart → Bebenhausen",
+          "stageStartTime": "2026-07-01T07:00:00.000Z",
+          "lat": 48.54853,
+          "lon": 9.073802,
+          "ele": 343,
+          "time": "2026-07-01T10:56:10.502Z",
+          "weather": {
+            "weatherTime": "2026-07-01T11:00Z",
+            "temperature": 23.1,
+            "precipitation": 0,
+            "precipitationProbability": 48,
+            "windSpeed": 8.7,
+            "weatherCode": 63
+          }
+        }
+      ],
+      "summary": "Die Etappe beginnt bei einer Temperatur von 19,3°C und einer Regenwahrscheinlichkeit von 49% um 07:00h. Im Verlauf der Etappe bleibt die Regenwahrscheinlichkeit konstant zwischen 48% und 52%, wobei nur bei 40 km lokaler Etappenstrecke leichter Regen mit 0,1 mm Niederschlag zu erwarten ist. Die Temperaturen steigen im Laufe des Tages an, mit einem Höchstwert von 23,1°C bei 60 km lokaler Etappenstrecke. Der Wind weht mit Geschwindigkeiten zwischen 7,1 km/h und 11,2 km/h, was für Radfahrer eine moderate Belastung darstellen kann. Insgesamt sollte man für diese Etappe auf wechselhaftes Wetter vorbereitet sein und entsprechende Kleidung mitführen.",
+      "points": [
+        {
+          "km": 0,
+          "localKm": 0,
+          "stageId": 1,
+          "stageIndex": 0,
+          "stageName": "Stuttgart → Bebenhausen",
+          "stageStartTime": "2026-07-01T07:00:00.000Z",
+          "lat": 48.786032,
+          "lon": 9.182346,
+          "ele": 249,
+          "time": "2026-07-01T07:00:00.000Z",
+          "weather": {
+            "weatherTime": "2026-07-01T07:00Z",
+            "temperature": 19.3,
+            "precipitation": 0,
+            "precipitationProbability": 49,
+            "windSpeed": 11.2,
+            "weatherCode": 81
+          }
+        },
+        {
+          "km": 10,
+          "localKm": 10,
+          "stageId": 1,
+          "stageIndex": 0,
+          "stageName": "Stuttgart → Bebenhausen",
+          "stageStartTime": "2026-07-01T07:00:00.000Z",
+          "lat": 48.762968,
+          "lon": 9.266779,
+          "ele": 227,
+          "time": "2026-07-01T07:39:24.012Z",
+          "weather": {
+            "weatherTime": "2026-07-01T08:00Z",
+            "temperature": 19.6,
+            "precipitation": 0,
+            "precipitationProbability": 51,
+            "windSpeed": 11.2,
+            "weatherCode": 81
+          }
+        },
+        {
+          "km": 20,
+          "localKm": 20,
+          "stageId": 1,
+          "stageIndex": 0,
+          "stageName": "Stuttgart → Bebenhausen",
+          "stageStartTime": "2026-07-01T07:00:00.000Z",
+          "lat": 48.715868,
+          "lon": 9.344141,
+          "ele": 249,
+          "time": "2026-07-01T08:18:47.059Z",
+          "weather": {
+            "weatherTime": "2026-07-01T08:00Z",
+            "temperature": 19.1,
+            "precipitation": 0,
+            "precipitationProbability": 51,
+            "windSpeed": 10.2,
+            "weatherCode": 61
+          }
+        },
+        {
+          "km": 30,
+          "localKm": 30,
+          "stageId": 1,
+          "stageIndex": 0,
+          "stageName": "Stuttgart → Bebenhausen",
+          "stageStartTime": "2026-07-01T07:00:00.000Z",
+          "lat": 48.664723,
+          "lon": 9.285157,
+          "ele": 400,
+          "time": "2026-07-01T08:58:03.951Z",
+          "weather": {
+            "weatherTime": "2026-07-01T09:00Z",
+            "temperature": 18.5,
+            "precipitation": 0,
+            "precipitationProbability": 52,
+            "windSpeed": 7.1,
+            "weatherCode": 63
+          }
+        },
+        {
+          "km": 40,
+          "localKm": 40,
+          "stageId": 1,
+          "stageIndex": 0,
+          "stageName": "Stuttgart → Bebenhausen",
+          "stageStartTime": "2026-07-01T07:00:00.000Z",
+          "lat": 48.621026,
+          "lon": 9.217084,
+          "ele": 335,
+          "time": "2026-07-01T09:37:34.988Z",
+          "weather": {
+            "weatherTime": "2026-07-01T10:00Z",
+            "temperature": 20.5,
+            "precipitation": 0.1,
+            "precipitationProbability": 48,
+            "windSpeed": 7.9,
+            "weatherCode": 63
+          }
+        },
+        {
+          "km": 50,
+          "localKm": 50,
+          "stageId": 1,
+          "stageIndex": 0,
+          "stageName": "Stuttgart → Bebenhausen",
+          "stageStartTime": "2026-07-01T07:00:00.000Z",
+          "lat": 48.604031,
+          "lon": 9.108124,
+          "ele": 416,
+          "time": "2026-07-01T10:16:49.170Z",
+          "weather": {
+            "weatherTime": "2026-07-01T10:00Z",
+            "temperature": 20.5,
+            "precipitation": 0,
+            "precipitationProbability": 48,
+            "windSpeed": 9.3,
+            "weatherCode": 61
+          }
+        },
+        {
+          "km": 60,
+          "localKm": 60,
+          "stageId": 1,
+          "stageIndex": 0,
+          "stageName": "Stuttgart → Bebenhausen",
+          "stageStartTime": "2026-07-01T07:00:00.000Z",
+          "lat": 48.54853,
+          "lon": 9.073802,
+          "ele": 343,
+          "time": "2026-07-01T10:56:10.502Z",
+          "weather": {
+            "weatherTime": "2026-07-01T11:00Z",
+            "temperature": 23.1,
+            "precipitation": 0,
+            "precipitationProbability": 48,
+            "windSpeed": 8.7,
+            "weatherCode": 63
+          }
+        }
+      ]
+    },
+    {
+      "stageId": 2,
+      "stageIndex": 1,
+      "name": "Bebenhausen → Hechingen",
+      "startKm": 61.6,
+      "endKm": 110.2,
+      "stageDistanceKm": 48.6,
+      "stageStartTime": "2026-07-02T07:00:00.000Z",
+      "stats": {
+        "minTemperature": 20,
+        "maxTemperature": 23,
+        "totalPrecipitation": 0,
+        "maxPrecipitationProbability": 11,
+        "maxWindSpeed": 11,
+        "dominantWeatherCode": 3,
+        "startPoint": {
+          "km": 70,
+          "localKm": 8.4,
+          "stageId": 2,
+          "stageIndex": 1,
+          "stageName": "Bebenhausen → Hechingen",
+          "stageStartTime": "2026-07-02T07:00:00.000Z",
+          "lat": 48.548696,
+          "lon": 8.985519,
+          "ele": 498,
+          "time": "2026-07-02T07:34:26.056Z",
+          "weather": {
+            "weatherTime": "2026-07-02T08:00Z",
+            "temperature": 19.9,
+            "precipitation": 0,
+            "precipitationProbability": 9,
+            "windSpeed": 11.3,
+            "weatherCode": 3
+          }
+        },
+        "markerPoint": {
+          "km": 90,
+          "localKm": 28.4,
+          "stageId": 2,
+          "stageIndex": 1,
+          "stageName": "Bebenhausen → Hechingen",
+          "stageStartTime": "2026-07-02T07:00:00.000Z",
+          "lat": 48.439546,
+          "lon": 8.92964,
+          "ele": 432,
+          "time": "2026-07-02T08:56:31.248Z",
+          "weather": {
+            "weatherTime": "2026-07-02T09:00Z",
+            "temperature": 21.9,
+            "precipitation": 0,
+            "precipitationProbability": 9,
+            "windSpeed": 10.6,
+            "weatherCode": 3
+          }
+        },
+        "endPoint": {
+          "km": 110,
+          "localKm": 48.4,
+          "stageId": 2,
+          "stageIndex": 1,
+          "stageName": "Bebenhausen → Hechingen",
+          "stageStartTime": "2026-07-02T07:00:00.000Z",
+          "lat": 48.331262,
+          "lon": 8.982852,
+          "ele": 556,
+          "time": "2026-07-02T10:18:34.737Z",
+          "weather": {
+            "weatherTime": "2026-07-02T10:00Z",
+            "temperature": 22.5,
+            "precipitation": 0,
+            "precipitationProbability": 11,
+            "windSpeed": 9.2,
+            "weatherCode": 3
+          }
+        },
+        "icon": "⛅"
+      },
+      "compactPoints": [
+        {
+          "km": 70,
+          "localKm": 8.4,
+          "stageId": 2,
+          "stageIndex": 1,
+          "stageName": "Bebenhausen → Hechingen",
+          "stageStartTime": "2026-07-02T07:00:00.000Z",
+          "lat": 48.548696,
+          "lon": 8.985519,
+          "ele": 498,
+          "time": "2026-07-02T07:34:26.056Z",
+          "weather": {
+            "weatherTime": "2026-07-02T08:00Z",
+            "temperature": 19.9,
+            "precipitation": 0,
+            "precipitationProbability": 9,
+            "windSpeed": 11.3,
+            "weatherCode": 3
+          }
+        },
+        {
+          "km": 90,
+          "localKm": 28.4,
+          "stageId": 2,
+          "stageIndex": 1,
+          "stageName": "Bebenhausen → Hechingen",
+          "stageStartTime": "2026-07-02T07:00:00.000Z",
+          "lat": 48.439546,
+          "lon": 8.92964,
+          "ele": 432,
+          "time": "2026-07-02T08:56:31.248Z",
+          "weather": {
+            "weatherTime": "2026-07-02T09:00Z",
+            "temperature": 21.9,
+            "precipitation": 0,
+            "precipitationProbability": 9,
+            "windSpeed": 10.6,
+            "weatherCode": 3
+          }
+        },
+        {
+          "km": 110,
+          "localKm": 48.4,
+          "stageId": 2,
+          "stageIndex": 1,
+          "stageName": "Bebenhausen → Hechingen",
+          "stageStartTime": "2026-07-02T07:00:00.000Z",
+          "lat": 48.331262,
+          "lon": 8.982852,
+          "ele": 556,
+          "time": "2026-07-02T10:18:34.737Z",
+          "weather": {
+            "weatherTime": "2026-07-02T10:00Z",
+            "temperature": 22.5,
+            "precipitation": 0,
+            "precipitationProbability": 11,
+            "windSpeed": 9.2,
+            "weatherCode": 3
+          }
+        }
+      ],
+      "summary": "Die Etappe 2 von Bebenhausen nach Hechingen beginnt bei einer Temperatur von etwa 20°C und erwärmt sich im Laufe des Tages auf bis zu 22,5°C. Es ist mit einer geringen Regenwahrscheinlichkeit von etwa 8-11% zu rechnen, jedoch sind keine Niederschläge vorhergesagt. Der Wind weht mit einer Geschwindigkeit von etwa 9-11 km/h, was für Radfahrer eine moderate Belastung darstellen kann. Insgesamt bietet sich ein trockenes und warmes Wetter für die Fahrt an, wobei die Radfahrer auf eine leichte Erwärmung und eine konstante Windbelastung vorbereitet sein sollten.",
+      "points": [
+        {
+          "km": 70,
+          "localKm": 8.4,
+          "stageId": 2,
+          "stageIndex": 1,
+          "stageName": "Bebenhausen → Hechingen",
+          "stageStartTime": "2026-07-02T07:00:00.000Z",
+          "lat": 48.548696,
+          "lon": 8.985519,
+          "ele": 498,
+          "time": "2026-07-02T07:34:26.056Z",
+          "weather": {
+            "weatherTime": "2026-07-02T08:00Z",
+            "temperature": 19.9,
+            "precipitation": 0,
+            "precipitationProbability": 9,
+            "windSpeed": 11.3,
+            "weatherCode": 3
+          }
+        },
+        {
+          "km": 80,
+          "localKm": 18.4,
+          "stageId": 2,
+          "stageIndex": 1,
+          "stageName": "Bebenhausen → Hechingen",
+          "stageStartTime": "2026-07-02T07:00:00.000Z",
+          "lat": 48.478779,
+          "lon": 8.935614,
+          "ele": 352,
+          "time": "2026-07-02T08:15:27.831Z",
+          "weather": {
+            "weatherTime": "2026-07-02T08:00Z",
+            "temperature": 20.7,
+            "precipitation": 0,
+            "precipitationProbability": 9,
+            "windSpeed": 9.8,
+            "weatherCode": 3
+          }
+        },
+        {
+          "km": 90,
+          "localKm": 28.4,
+          "stageId": 2,
+          "stageIndex": 1,
+          "stageName": "Bebenhausen → Hechingen",
+          "stageStartTime": "2026-07-02T07:00:00.000Z",
+          "lat": 48.439546,
+          "lon": 8.92964,
+          "ele": 432,
+          "time": "2026-07-02T08:56:31.248Z",
+          "weather": {
+            "weatherTime": "2026-07-02T09:00Z",
+            "temperature": 21.9,
+            "precipitation": 0,
+            "precipitationProbability": 9,
+            "windSpeed": 10.6,
+            "weatherCode": 3
+          }
+        },
+        {
+          "km": 100,
+          "localKm": 38.4,
+          "stageId": 2,
+          "stageIndex": 1,
+          "stageName": "Bebenhausen → Hechingen",
+          "stageStartTime": "2026-07-02T07:00:00.000Z",
+          "lat": 48.385982,
+          "lon": 8.935973,
+          "ele": 555,
+          "time": "2026-07-02T09:37:34.763Z",
+          "weather": {
+            "weatherTime": "2026-07-02T10:00Z",
+            "temperature": 22.4,
+            "precipitation": 0,
+            "precipitationProbability": 8,
+            "windSpeed": 9.4,
+            "weatherCode": 3
+          }
+        },
+        {
+          "km": 110,
+          "localKm": 48.4,
+          "stageId": 2,
+          "stageIndex": 1,
+          "stageName": "Bebenhausen → Hechingen",
+          "stageStartTime": "2026-07-02T07:00:00.000Z",
+          "lat": 48.331262,
+          "lon": 8.982852,
+          "ele": 556,
+          "time": "2026-07-02T10:18:34.737Z",
+          "weather": {
+            "weatherTime": "2026-07-02T10:00Z",
+            "temperature": 22.5,
+            "precipitation": 0,
+            "precipitationProbability": 11,
+            "windSpeed": 9.2,
+            "weatherCode": 3
+          }
+        }
+      ]
+    },
+    {
+      "stageId": 3,
+      "stageIndex": 2,
+      "name": "Hechingen → Sigmaringen",
+      "startKm": 110.2,
+      "endKm": 183.8,
+      "stageDistanceKm": 73.6,
+      "stageStartTime": "2026-07-03T07:00:00.000Z",
+      "stats": {
+        "minTemperature": 16,
+        "maxTemperature": 21,
+        "totalPrecipitation": 0,
+        "maxPrecipitationProbability": 31,
+        "maxWindSpeed": 14,
+        "dominantWeatherCode": 1,
+        "startPoint": {
+          "km": 120,
+          "localKm": 9.8,
+          "stageId": 3,
+          "stageIndex": 2,
+          "stageName": "Hechingen → Sigmaringen",
+          "stageStartTime": "2026-07-03T07:00:00.000Z",
+          "lat": 48.326887,
+          "lon": 9.035295,
+          "ele": 589,
+          "time": "2026-07-03T07:38:36.968Z",
+          "weather": {
+            "weatherTime": "2026-07-03T08:00Z",
+            "temperature": 16.6,
+            "precipitation": 0,
+            "precipitationProbability": 29,
+            "windSpeed": 7.1,
+            "weatherCode": 1
+          }
+        },
+        "markerPoint": {
+          "km": 150,
+          "localKm": 39.8,
+          "stageId": 3,
+          "stageIndex": 2,
+          "stageName": "Hechingen → Sigmaringen",
+          "stageStartTime": "2026-07-03T07:00:00.000Z",
+          "lat": 48.206517,
+          "lon": 9.219469,
+          "ele": 638,
+          "time": "2026-07-03T09:37:05.253Z",
+          "weather": {
+            "weatherTime": "2026-07-03T10:00Z",
+            "temperature": 18.6,
+            "precipitation": 0,
+            "precipitationProbability": 31,
+            "windSpeed": 13.7,
+            "weatherCode": 1
+          }
+        },
+        "endPoint": {
+          "km": 180.1,
+          "localKm": 69.8,
+          "stageId": 3,
+          "stageIndex": 2,
+          "stageName": "Hechingen → Sigmaringen",
+          "stageStartTime": "2026-07-03T07:00:00.000Z",
+          "lat": 48.072779,
+          "lon": 9.238251,
+          "ele": 575,
+          "time": "2026-07-03T11:35:36.998Z",
+          "weather": {
+            "weatherTime": "2026-07-03T12:00Z",
+            "temperature": 21.2,
+            "precipitation": 0,
+            "precipitationProbability": 31,
+            "windSpeed": 13.4,
+            "weatherCode": 1
+          }
+        },
+        "icon": "☀️"
+      },
+      "compactPoints": [
+        {
+          "km": 120,
+          "localKm": 9.8,
+          "stageId": 3,
+          "stageIndex": 2,
+          "stageName": "Hechingen → Sigmaringen",
+          "stageStartTime": "2026-07-03T07:00:00.000Z",
+          "lat": 48.326887,
+          "lon": 9.035295,
+          "ele": 589,
+          "time": "2026-07-03T07:38:36.968Z",
+          "weather": {
+            "weatherTime": "2026-07-03T08:00Z",
+            "temperature": 16.6,
+            "precipitation": 0,
+            "precipitationProbability": 29,
+            "windSpeed": 7.1,
+            "weatherCode": 1
+          }
+        },
+        {
+          "km": 150,
+          "localKm": 39.8,
+          "stageId": 3,
+          "stageIndex": 2,
+          "stageName": "Hechingen → Sigmaringen",
+          "stageStartTime": "2026-07-03T07:00:00.000Z",
+          "lat": 48.206517,
+          "lon": 9.219469,
+          "ele": 638,
+          "time": "2026-07-03T09:37:05.253Z",
+          "weather": {
+            "weatherTime": "2026-07-03T10:00Z",
+            "temperature": 18.6,
+            "precipitation": 0,
+            "precipitationProbability": 31,
+            "windSpeed": 13.7,
+            "weatherCode": 1
+          }
+        },
+        {
+          "km": 180.1,
+          "localKm": 69.8,
+          "stageId": 3,
+          "stageIndex": 2,
+          "stageName": "Hechingen → Sigmaringen",
+          "stageStartTime": "2026-07-03T07:00:00.000Z",
+          "lat": 48.072779,
+          "lon": 9.238251,
+          "ele": 575,
+          "time": "2026-07-03T11:35:36.998Z",
+          "weather": {
+            "weatherTime": "2026-07-03T12:00Z",
+            "temperature": 21.2,
+            "precipitation": 0,
+            "precipitationProbability": 31,
+            "windSpeed": 13.4,
+            "weatherCode": 1
+          }
+        }
+      ],
+      "summary": "Die Etappe 3 von Hechingen nach Sigmaringen beginnt bei einer Temperatur von etwa 16,6°C. Im Laufe des Tages steigt die Temperatur auf bis zu 21,2°C an. Es ist mit einer Regenwahrscheinlichkeit von etwa 23-31% zu rechnen, jedoch sind in den aufgezeichneten Wetterpunkten keine Regenfälle verzeichnet. Der Wind weht mit einer Geschwindigkeit von etwa 7-13,7 km/h, was für Radfahrer beachtet werden sollte. Insgesamt dürfte die Etappe bei trockenem Wetter und steigenden Temperaturen verlaufen, wobei die Radfahrer auf die zunehmende Windgeschwindigkeit achten sollten.",
+      "points": [
+        {
+          "km": 120,
+          "localKm": 9.8,
+          "stageId": 3,
+          "stageIndex": 2,
+          "stageName": "Hechingen → Sigmaringen",
+          "stageStartTime": "2026-07-03T07:00:00.000Z",
+          "lat": 48.326887,
+          "lon": 9.035295,
+          "ele": 589,
+          "time": "2026-07-03T07:38:36.968Z",
+          "weather": {
+            "weatherTime": "2026-07-03T08:00Z",
+            "temperature": 16.6,
+            "precipitation": 0,
+            "precipitationProbability": 29,
+            "windSpeed": 7.1,
+            "weatherCode": 1
+          }
+        },
+        {
+          "km": 130.1,
+          "localKm": 19.8,
+          "stageId": 3,
+          "stageIndex": 2,
+          "stageName": "Hechingen → Sigmaringen",
+          "stageStartTime": "2026-07-03T07:00:00.000Z",
+          "lat": 48.289066,
+          "lon": 9.128808,
+          "ele": 715,
+          "time": "2026-07-03T08:18:19.869Z",
+          "weather": {
+            "weatherTime": "2026-07-03T08:00Z",
+            "temperature": 15.8,
+            "precipitation": 0,
+            "precipitationProbability": 23,
+            "windSpeed": 9.8,
+            "weatherCode": 1
+          }
+        },
+        {
+          "km": 140,
+          "localKm": 29.8,
+          "stageId": 3,
+          "stageIndex": 2,
+          "stageName": "Hechingen → Sigmaringen",
+          "stageStartTime": "2026-07-03T07:00:00.000Z",
+          "lat": 48.232469,
+          "lon": 9.206434,
+          "ele": 674,
+          "time": "2026-07-03T08:57:32.449Z",
+          "weather": {
+            "weatherTime": "2026-07-03T09:00Z",
+            "temperature": 17.2,
+            "precipitation": 0,
+            "precipitationProbability": 27,
+            "windSpeed": 11.9,
+            "weatherCode": 1
+          }
+        },
+        {
+          "km": 150,
+          "localKm": 39.8,
+          "stageId": 3,
+          "stageIndex": 2,
+          "stageName": "Hechingen → Sigmaringen",
+          "stageStartTime": "2026-07-03T07:00:00.000Z",
+          "lat": 48.206517,
+          "lon": 9.219469,
+          "ele": 638,
+          "time": "2026-07-03T09:37:05.253Z",
+          "weather": {
+            "weatherTime": "2026-07-03T10:00Z",
+            "temperature": 18.6,
+            "precipitation": 0,
+            "precipitationProbability": 31,
+            "windSpeed": 13.7,
+            "weatherCode": 1
+          }
+        },
+        {
+          "km": 160,
+          "localKm": 49.8,
+          "stageId": 3,
+          "stageIndex": 2,
+          "stageName": "Hechingen → Sigmaringen",
+          "stageStartTime": "2026-07-03T07:00:00.000Z",
+          "lat": 48.143883,
+          "lon": 9.205921,
+          "ele": 608,
+          "time": "2026-07-03T10:16:30.357Z",
+          "weather": {
+            "weatherTime": "2026-07-03T10:00Z",
+            "temperature": 19.4,
+            "precipitation": 0,
+            "precipitationProbability": 31,
+            "windSpeed": 12.9,
+            "weatherCode": 1
+          }
+        },
+        {
+          "km": 170.1,
+          "localKm": 59.9,
+          "stageId": 3,
+          "stageIndex": 2,
+          "stageName": "Hechingen → Sigmaringen",
+          "stageStartTime": "2026-07-03T07:00:00.000Z",
+          "lat": 48.110319,
+          "lon": 9.27025,
+          "ele": 602,
+          "time": "2026-07-03T10:56:15.029Z",
+          "weather": {
+            "weatherTime": "2026-07-03T11:00Z",
+            "temperature": 20.7,
+            "precipitation": 0,
+            "precipitationProbability": 30,
+            "windSpeed": 12.7,
+            "weatherCode": 1
+          }
+        },
+        {
+          "km": 180.1,
+          "localKm": 69.8,
+          "stageId": 3,
+          "stageIndex": 2,
+          "stageName": "Hechingen → Sigmaringen",
+          "stageStartTime": "2026-07-03T07:00:00.000Z",
+          "lat": 48.072779,
+          "lon": 9.238251,
+          "ele": 575,
+          "time": "2026-07-03T11:35:36.998Z",
+          "weather": {
+            "weatherTime": "2026-07-03T12:00Z",
+            "temperature": 21.2,
+            "precipitation": 0,
+            "precipitationProbability": 31,
+            "windSpeed": 13.4,
+            "weatherCode": 1
+          }
+        }
+      ]
+    },
+    {
+      "stageId": 4,
+      "stageIndex": 3,
+      "name": "Sigmaringen → Singen",
+      "startKm": 183.8,
+      "endKm": 259.7,
+      "stageDistanceKm": 75.9,
+      "stageStartTime": "2026-07-04T07:00:00.000Z",
+      "stats": {
+        "minTemperature": 18,
+        "maxTemperature": 23,
+        "totalPrecipitation": 0,
+        "maxPrecipitationProbability": 23,
+        "maxWindSpeed": 22,
+        "dominantWeatherCode": 0,
+        "startPoint": {
+          "km": 190,
+          "localKm": 6.2,
+          "stageId": 4,
+          "stageIndex": 3,
+          "stageName": "Sigmaringen → Singen",
+          "stageStartTime": "2026-07-04T07:00:00.000Z",
+          "lat": 48.066639,
+          "lon": 9.156306,
+          "ele": 676,
+          "time": "2026-07-04T07:24:30.103Z",
+          "weather": {
+            "weatherTime": "2026-07-04T07:00Z",
+            "temperature": 17.5,
+            "precipitation": 0,
+            "precipitationProbability": 14,
+            "windSpeed": 11.5,
+            "weatherCode": 0
+          }
+        },
+        "markerPoint": {
+          "km": 220,
+          "localKm": 36.2,
+          "stageId": 4,
+          "stageIndex": 3,
+          "stageName": "Sigmaringen → Singen",
+          "stageStartTime": "2026-07-04T07:00:00.000Z",
+          "lat": 47.881195,
+          "lon": 9.041844,
+          "ele": 620,
+          "time": "2026-07-04T09:22:15.184Z",
+          "weather": {
+            "weatherTime": "2026-07-04T09:00Z",
+            "temperature": 19.8,
+            "precipitation": 0,
+            "precipitationProbability": 18,
+            "windSpeed": 15.8,
+            "weatherCode": 0
+          }
+        },
+        "endPoint": {
+          "km": 250.1,
+          "localKm": 66.3,
+          "stageId": 4,
+          "stageIndex": 3,
+          "stageName": "Sigmaringen → Singen",
+          "stageStartTime": "2026-07-04T07:00:00.000Z",
+          "lat": 47.740755,
+          "lon": 8.934719,
+          "ele": 397,
+          "time": "2026-07-04T11:20:07.478Z",
+          "weather": {
+            "weatherTime": "2026-07-04T11:00Z",
+            "temperature": 23.2,
+            "precipitation": 0,
+            "precipitationProbability": 23,
+            "windSpeed": 21.5,
+            "weatherCode": 0
+          }
+        },
+        "icon": "☀️"
+      },
+      "compactPoints": [
+        {
+          "km": 190,
+          "localKm": 6.2,
+          "stageId": 4,
+          "stageIndex": 3,
+          "stageName": "Sigmaringen → Singen",
+          "stageStartTime": "2026-07-04T07:00:00.000Z",
+          "lat": 48.066639,
+          "lon": 9.156306,
+          "ele": 676,
+          "time": "2026-07-04T07:24:30.103Z",
+          "weather": {
+            "weatherTime": "2026-07-04T07:00Z",
+            "temperature": 17.5,
+            "precipitation": 0,
+            "precipitationProbability": 14,
+            "windSpeed": 11.5,
+            "weatherCode": 0
+          }
+        },
+        {
+          "km": 220,
+          "localKm": 36.2,
+          "stageId": 4,
+          "stageIndex": 3,
+          "stageName": "Sigmaringen → Singen",
+          "stageStartTime": "2026-07-04T07:00:00.000Z",
+          "lat": 47.881195,
+          "lon": 9.041844,
+          "ele": 620,
+          "time": "2026-07-04T09:22:15.184Z",
+          "weather": {
+            "weatherTime": "2026-07-04T09:00Z",
+            "temperature": 19.8,
+            "precipitation": 0,
+            "precipitationProbability": 18,
+            "windSpeed": 15.8,
+            "weatherCode": 0
+          }
+        },
+        {
+          "km": 250.1,
+          "localKm": 66.3,
+          "stageId": 4,
+          "stageIndex": 3,
+          "stageName": "Sigmaringen → Singen",
+          "stageStartTime": "2026-07-04T07:00:00.000Z",
+          "lat": 47.740755,
+          "lon": 8.934719,
+          "ele": 397,
+          "time": "2026-07-04T11:20:07.478Z",
+          "weather": {
+            "weatherTime": "2026-07-04T11:00Z",
+            "temperature": 23.2,
+            "precipitation": 0,
+            "precipitationProbability": 23,
+            "windSpeed": 21.5,
+            "weatherCode": 0
+          }
+        }
+      ],
+      "summary": "Die Etappe 4 von Sigmaringen nach Singen startet bei einer Temperatur von 17,5°C und einer Regenwahrscheinlichkeit von 14%. Im Laufe des Tages steigt die Temperatur auf bis zu 23,2°C an, während die Regenwahrscheinlichkeit auf 23% ansteigt. Der Wind weht mit Geschwindigkeiten zwischen 11,5 km/h und 21,5 km/h. Für Radfahrer bedeutet dies, dass sie auf eine zunehmend wärmere und windigere Fahrt vorbereitet sein sollten, wobei Regen jedoch unwahrscheinlich bleibt.",
+      "points": [
+        {
+          "km": 190,
+          "localKm": 6.2,
+          "stageId": 4,
+          "stageIndex": 3,
+          "stageName": "Sigmaringen → Singen",
+          "stageStartTime": "2026-07-04T07:00:00.000Z",
+          "lat": 48.066639,
+          "lon": 9.156306,
+          "ele": 676,
+          "time": "2026-07-04T07:24:30.103Z",
+          "weather": {
+            "weatherTime": "2026-07-04T07:00Z",
+            "temperature": 17.5,
+            "precipitation": 0,
+            "precipitationProbability": 14,
+            "windSpeed": 11.5,
+            "weatherCode": 0
+          }
+        },
+        {
+          "km": 200,
+          "localKm": 16.2,
+          "stageId": 4,
+          "stageIndex": 3,
+          "stageName": "Sigmaringen → Singen",
+          "stageStartTime": "2026-07-04T07:00:00.000Z",
+          "lat": 48.004995,
+          "lon": 9.137876,
+          "ele": 602,
+          "time": "2026-07-04T08:03:44.986Z",
+          "weather": {
+            "weatherTime": "2026-07-04T08:00Z",
+            "temperature": 18.7,
+            "precipitation": 0,
+            "precipitationProbability": 16,
+            "windSpeed": 13.3,
+            "weatherCode": 1
+          }
+        },
+        {
+          "km": 210,
+          "localKm": 26.2,
+          "stageId": 4,
+          "stageIndex": 3,
+          "stageName": "Sigmaringen → Singen",
+          "stageStartTime": "2026-07-04T07:00:00.000Z",
+          "lat": 47.940579,
+          "lon": 9.082799,
+          "ele": 612,
+          "time": "2026-07-04T08:42:59.653Z",
+          "weather": {
+            "weatherTime": "2026-07-04T09:00Z",
+            "temperature": 20,
+            "precipitation": 0,
+            "precipitationProbability": 18,
+            "windSpeed": 15.9,
+            "weatherCode": 1
+          }
+        },
+        {
+          "km": 220,
+          "localKm": 36.2,
+          "stageId": 4,
+          "stageIndex": 3,
+          "stageName": "Sigmaringen → Singen",
+          "stageStartTime": "2026-07-04T07:00:00.000Z",
+          "lat": 47.881195,
+          "lon": 9.041844,
+          "ele": 620,
+          "time": "2026-07-04T09:22:15.184Z",
+          "weather": {
+            "weatherTime": "2026-07-04T09:00Z",
+            "temperature": 19.8,
+            "precipitation": 0,
+            "precipitationProbability": 18,
+            "windSpeed": 15.8,
+            "weatherCode": 0
+          }
+        },
+        {
+          "km": 230,
+          "localKm": 46.2,
+          "stageId": 4,
+          "stageIndex": 3,
+          "stageName": "Sigmaringen → Singen",
+          "stageStartTime": "2026-07-04T07:00:00.000Z",
+          "lat": 47.823865,
+          "lon": 9.058252,
+          "ele": 433,
+          "time": "2026-07-04T10:01:26.471Z",
+          "weather": {
+            "weatherTime": "2026-07-04T10:00Z",
+            "temperature": 21.2,
+            "precipitation": 0,
+            "precipitationProbability": 20,
+            "windSpeed": 19.1,
+            "weatherCode": 0
+          }
+        },
+        {
+          "km": 240,
+          "localKm": 56.2,
+          "stageId": 4,
+          "stageIndex": 3,
+          "stageName": "Sigmaringen → Singen",
+          "stageStartTime": "2026-07-04T07:00:00.000Z",
+          "lat": 47.787423,
+          "lon": 8.977046,
+          "ele": 440,
+          "time": "2026-07-04T10:40:39.066Z",
+          "weather": {
+            "weatherTime": "2026-07-04T11:00Z",
+            "temperature": 23.2,
+            "precipitation": 0,
+            "precipitationProbability": 23,
+            "windSpeed": 21.5,
+            "weatherCode": 0
+          }
+        },
+        {
+          "km": 250.1,
+          "localKm": 66.3,
+          "stageId": 4,
+          "stageIndex": 3,
+          "stageName": "Sigmaringen → Singen",
+          "stageStartTime": "2026-07-04T07:00:00.000Z",
+          "lat": 47.740755,
+          "lon": 8.934719,
+          "ele": 397,
+          "time": "2026-07-04T11:20:07.478Z",
+          "weather": {
+            "weatherTime": "2026-07-04T11:00Z",
+            "temperature": 23.2,
+            "precipitation": 0,
+            "precipitationProbability": 23,
+            "windSpeed": 21.5,
+            "weatherCode": 0
+          }
+        }
+      ]
+    }
+  ],
+  "routeName": "Hohenzollernradweg (Relax)",
+  "totalDistanceKm": 259.7
 }
