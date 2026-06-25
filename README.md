@@ -12,13 +12,13 @@ V47 wurde durch eine zu starke Umstrukturierung instabil. V48 basiert wieder auf
 
 
 ---
-## Digitales Roadbook – V50.5
+## Digitales Roadbook – V50.6
 
-Details siehe `PRD_Digitales_Roadbook_V50_5.md`.
+Details siehe `PRD_Digitales_Roadbook_V50_6.md`.
 
-### Änderung in V50.5
+### Änderung in V50.6
 
-- Debug-Zeile nur in der Gesamt-Wetterbox.
-- In der Etappenübersicht kompakte Wetter-Einzahler statt vollständiger blauer Wetterbox.
-- Die vollständige blaue Etappen-Wetterbox erscheint nur noch im Einzeletappen-Fokus.
-- V50.4 Deployment Guard bleibt enthalten.
+- Etappen-Wetter-Einzahler zeigt jetzt Regen-Icon: `Regen x,x mm · Risiko bis X %`.
+- Windwert steht mit Wind-Icon: `Wind bis X km/h`.
+- Der Einzahler ist in der Etappenübersicht ausklappbar und zeigt dann die vollständige Prognose.
+- Im Einzeletappen-Fokus bleibt die vollständige blaue Wetterbox direkt sichtbar.
