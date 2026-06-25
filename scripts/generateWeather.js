@@ -1,232 +1,30 @@
-/*
- * Digitales Roadbook V48 – Weather Generator
- * - liest data/gpx-manifest.json, data/config.json und data/weather-settings.json
- * - berechnet eine Timeline entlang der GPX-Strecke inkl. Höhenfaktor und Pausen
- * - fragt Open-Meteo Forecast stundenbasiert ab
- * - erzeugt Groq-KI-Zusammenfassungen für Gesamttour und Etappen
- *
- * Benötigtes GitHub Secret für KI: GROQ_API_KEY
- */
-const fs = require('fs');
-const path = require('path');
 
-const ROOT = process.cwd();
-const DATA_DIR = path.join(ROOT, 'data');
-const GPX_DIR = path.join(ROOT, 'gpx');
-
-function readJSON(file) { return JSON.parse(fs.readFileSync(file, 'utf8')); }
-function writeJSON(file, data) { fs.writeFileSync(file, JSON.stringify(data, null, 2), 'utf8'); }
-function escRegExp(s) { return String(s).replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
-function stripTags(s) { return String(s || '').replace(/<[^>]+>/g, '').trim(); }
-function decodeXml(s) { return String(s || '').replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&apos;/g,"'"); }
-function child(block, tag) { const m = new RegExp(`<[^:>]*:?${tag}[^>]*>([\\s\\S]*?)<\\/[^:>]*:?${tag}>`, 'i').exec(block || ''); return m ? decodeXml(stripTags(m[1])) : ''; }
-function parseTags(desc) { const t = {}; let cur = null; for (const raw of String(desc || '').split(/\r?\n/)) { const line = raw.trim(); if (!line) continue; const m = /^#([\wÄÖÜäöüß-]+)\s*:\s*(.*)$/.exec(line); if (m) { cur = m[1].toLowerCase(); t[cur] = m[2].trim(); } else if (cur) t[cur] += '\n' + line; } return t; }
-function tag(t, ...ks) { for (const k of ks) { const v = t[String(k).toLowerCase()]; if (v != null && String(v).trim()) return String(v).trim(); } return ''; }
-function norm(v) { return String(v || '').toLowerCase().replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss').replace(/[^a-z0-9]+/g,''); }
-function type(v) { const x = norm(v); if(['start','anfang','beginn','startpunkt','startbahnhof'].includes(x)) return 'start'; if(['overnight','hotel','unterkunft','uebernachtung','ubernachtung','lodging','campground','nacht','stay'].includes(x)) return 'overnight'; if(['end','ziel','ende','zielpunkt','zielbahnhof'].includes(x)) return 'end'; return null; }
-function hav(a,b) { const R=6371, toRad=x=>x*Math.PI/180; const dLat=toRad(b.lat-a.lat), dLon=toRad(b.lon-a.lon); const h=Math.sin(dLat/2)**2 + Math.cos(toRad(a.lat))*Math.cos(toRad(b.lat))*Math.sin(dLon/2)**2; return 2*R*Math.atan2(Math.sqrt(h), Math.sqrt(1-h)); }
-function nearest(c, pts) { let m=Infinity, idx=0; pts.forEach((p,i)=>{ const d=hav(c,p); if(d<m){m=d; idx=i;} }); return idx; }
-function place(s) { return s.address || s.name || ''; }
-function round(n, d=1) { return Number.isFinite(n) ? +n.toFixed(d) : null; }
-
-function parseGPX(raw) {
-  const metadataName = child(raw.match(/<metadata[\s\S]*?<\/metadata>/i)?.[0] || '', 'name');
-  const trackName = child(raw.match(/<trk[\s\S]*?<\/trk>/i)?.[0] || '', 'name');
-  const pts = [];
-  const trkRegex = /<trkpt\b([^>]*)>([\s\S]*?)<\/trkpt>/gi;
-  let m;
-  while ((m = trkRegex.exec(raw))) {
-    const lat = /lat=["']([^"']+)/i.exec(m[1]);
-    const lon = /lon=["']([^"']+)/i.exec(m[1]);
-    if (!lat || !lon) continue;
-    pts.push({ lat:+lat[1], lon:+lon[1], ele:+(child(m[2], 'ele') || 0) });
-  }
-  const wpts = [];
-  const wptRegex = /<wpt\b([^>]*)>([\s\S]*?)<\/wpt>/gi;
-  while ((m = wptRegex.exec(raw))) {
-    const lat = /lat=["']([^"']+)/i.exec(m[1]);
-    const lon = /lon=["']([^"']+)/i.exec(m[1]);
-    if (!lat || !lon) continue;
-    const desc = child(m[2], 'desc');
-    wpts.push({ name: child(m[2], 'name'), desc, sym: child(m[2], 'sym'), lat:+lat[1], lon:+lon[1], tags: parseTags(desc) });
-  }
-  return { metadataName, trackName, pts, wpts };
-}
-
-function stopsFromGPX(p) {
-  return p.wpts.map(w => {
-    const ty = type(tag(w.tags,'type','typ'));
-    if (!ty) return null;
-    const s = { name:w.name, type:ty, address:tag(w.tags,'ort','place','city'), comment:tag(w.tags,'comment','hinweis','notes'), hotelUrl:tag(w.tags,'url','hotelurl','website'), lat:w.lat, lon:w.lon, tags:w.tags };
-    s.trackIndex = nearest(s, p.pts);
-    return s;
-  }).filter(Boolean).sort((a,b)=>a.trackIndex-b.trackIndex);
-}
-
-function buildStages(pts, stops, cfg) {
-  const out=[];
-  for (let i=0; i<stops.length-1; i++) {
-    let a=stops[i].trackIndex, b=stops[i+1].trackIndex;
-    if (b<=a) b=a+1;
-    const seg=pts.slice(a,b+1);
-    let dist=0, up=0, down=0;
-    for (let j=1;j<seg.length;j++) {
-      const d=hav(seg[j-1], seg[j]); dist+=d;
-      const df=seg[j].ele-seg[j-1].ele;
-      if (df>0) up+=df; else down+=Math.abs(df);
-    }
-    const speed=Math.max(cfg.minimumCyclingSpeedKmh, cfg.baseCyclingSpeedKmh-(up/1000)*cfg.climbSpeedReductionPer1000mKmh);
-    out.push({ id:i+1, stageIndex:i, name:`${place(stops[i])} → ${place(stops[i+1])}`, startTrackIndex:a, endTrackIndex:b, seg, dist, up, down, speed, startKm:null, endKm:null });
-  }
-  let offset=0;
-  out.forEach(s=>{ s.startKm=offset; offset+=s.dist; s.endKm=offset; });
-  return out;
-}
-
-function validateForecastWindow(start) {
-  const now = new Date();
-  const diffDays = (start.getTime() - now.getTime()) / 86400000;
-  if (diffDays < 0) return { ok:false, reason:'Tourstart liegt in der Vergangenheit. Es wird keine Forecast-Prognose erzeugt.' };
-  if (diffDays > 14) return { ok:false, reason:'Tourstart liegt mehr als 14 Tage in der Zukunft. Es wird keine Forecast-Prognose erzeugt.' };
-  return { ok:true, reason:null };
-}
-
-function buildTimelineSamples(stages, cfg, startTime, sampleKm) {
-  const samples=[];
-  let currentTime = new Date(startTime.getTime());
-  let globalKm = 0;
-  let nextSample = 0;
-  const addSample = (p, stage, localKm) => {
-    samples.push({ km: round(globalKm,1), localKm: round(localKm,1), stageId: stage.id, stageIndex: stage.stageIndex, stageName: stage.name, lat:p.lat, lon:p.lon, ele:round(p.ele,0), time:new Date(currentTime.getTime()).toISOString() });
-    nextSample += sampleKm;
-  };
-  for (const stage of stages) {
-    let localKm=0;
-    if (samples.length===0 && stage.seg[0]) addSample(stage.seg[0], stage, 0);
-    for (let j=1;j<stage.seg.length;j++) {
-      const a=stage.seg[j-1], b=stage.seg[j];
-      const d=hav(a,b);
-      const minutes = (d / stage.speed) * 60;
-      const shortBreakMinutes = minutes * (cfg.shortBreakMinutesPerHour || 0) / 60;
-      currentTime = new Date(currentTime.getTime() + (minutes + shortBreakMinutes) * 60000);
-      globalKm += d; localKm += d;
-      if (globalKm + 1e-9 >= nextSample) addSample(b, stage, localKm);
-    }
-    currentTime = new Date(currentTime.getTime() + (cfg.longBreakMinutesPerStage || 0) * 60000);
-  }
-  return samples;
-}
-
-function closestHourlyWeather(data, targetIso) {
-  const times = data?.hourly?.time || [];
-  if (!times.length) return null;
-  const target = new Date(targetIso).getTime();
-  let best = 0, bestDiff = Infinity;
-  times.forEach((t,i)=>{ const ms = new Date(t + 'Z').getTime(); const diff=Math.abs(ms-target); if(diff<bestDiff){best=i;bestDiff=diff;} });
-  const h = data.hourly;
-  return {
-    weatherTime: times[best] + 'Z',
-    temperature: round(h.temperature_2m?.[best],1),
-    precipitation: round(h.precipitation?.[best],1),
-    precipitationProbability: h.precipitation_probability?.[best] ?? null,
-    windSpeed: round(h.wind_speed_10m?.[best],1),
-    weatherCode: h.weather_code?.[best] ?? null
-  };
-}
-
-const weatherCache = new Map();
-async function fetchWeatherForPoint(p) {
-  const key = `${p.lat.toFixed(3)},${p.lon.toFixed(3)}`;
-  let data = weatherCache.get(key);
-  if (!data) {
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${p.lat}&longitude=${p.lon}&hourly=temperature_2m,precipitation,precipitation_probability,wind_speed_10m,weather_code&forecast_days=16&timezone=UTC`;
-    const res = await fetch(url);
-    if (!res.ok) throw new Error(`Open-Meteo Fehler ${res.status} für ${key}`);
-    data = await res.json();
-    weatherCache.set(key, data);
-  }
-  return closestHourlyWeather(data, p.time);
-}
-
-function compactPoint(p) {
-  const w=p.weather||{};
-  return `km ${Math.round(p.km)} (${new Date(p.time).toLocaleString('de-DE',{weekday:'short',hour:'2-digit',minute:'2-digit', timeZone:'Europe/Berlin'})}): ${w.temperature ?? '–'}°C, Regen ${w.precipitation ?? '–'} mm, Regenwahrscheinlichkeit ${w.precipitationProbability ?? '–'}%, Wind ${w.windSpeed ?? '–'} km/h`;
-}
-
-async function groqSummary(title, points, settings) {
-  if (!settings.ai?.enabled) return 'KI-Zusammenfassung deaktiviert.';
-  const apiKey = process.env.GROQ_API_KEY;
-  if (!apiKey) return 'Keine KI-Zusammenfassung verfügbar: GROQ_API_KEY ist nicht gesetzt.';
-  const prompt = `Du bist ein deutschsprachiger Wetterberater für mehrtägige Fahrradtouren.\nErstelle für "${title}" eine kurze, konkrete Prognose in 3-5 Sätzen.\nBerücksichtige Temperatur, Regen, Wind, zeitlichen Verlauf und Kilometerabschnitte.\nKeine Markdown-Tabelle, keine erfundenen Daten.\n\nWetterpunkte:\n${points.map(compactPoint).join('\n')}`;
-  const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-    method: 'POST',
-    headers: { 'Authorization': `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      model: settings.ai.model || 'llama-3.3-70b-versatile',
-      temperature: 0.2,
-      messages: [
-        { role:'system', content:'Du formulierst präzise, knappe Wetterprognosen für Radreisen auf Deutsch.' },
-        { role:'user', content: prompt }
-      ]
-    })
-  });
-  if (!res.ok) return `KI-Zusammenfassung konnte nicht erzeugt werden (Groq HTTP ${res.status}).`;
-  const json = await res.json();
-  return json.choices?.[0]?.message?.content?.trim() || 'Keine KI-Zusammenfassung erhalten.';
-}
-
-async function main() {
-  const config = readJSON(path.join(DATA_DIR, 'config.json'));
-  const manifest = readJSON(path.join(DATA_DIR, 'gpx-manifest.json'));
-  const settings = readJSON(path.join(DATA_DIR, 'weather-settings.json'));
-  const files = Array.isArray(manifest) ? manifest : (manifest.files || []);
-  const sourceFile = files[0];
-  const outFile = path.join(DATA_DIR, 'weather.json');
-  const start = new Date(settings.tourStartDateTime);
-  const provider = { weather:'open-meteo', ai:settings.ai?.provider || 'groq' };
-  const baseOut = { schemaVersion:1, generatedAt:new Date().toISOString(), sourceFile, tourStartDateTime:settings.tourStartDateTime, valid:false, reason:null, provider, global:{summary:''}, points:[], stages:[] };
-
-  if (!settings.enabled) { baseOut.reason='Wetterprognose ist in data/weather-settings.json deaktiviert.'; baseOut.global.summary=baseOut.reason; writeJSON(outFile, baseOut); return; }
-  const valid = validateForecastWindow(start);
-  if (!valid.ok) { baseOut.reason=valid.reason; baseOut.global.summary=valid.reason; writeJSON(outFile, baseOut); return; }
-
-  const gpxRaw = fs.readFileSync(path.join(GPX_DIR, sourceFile), 'utf8');
-  const parsed = parseGPX(gpxRaw);
-  const stops = stopsFromGPX(parsed);
-  if (parsed.pts.length < 2) throw new Error('GPX enthält keine ausreichenden Trackpunkte.');
-  if (stops.length < 2) throw new Error('GPX enthält keine ausreichenden Roadbook-Wegpunkte (#type).');
-
-  const stages = buildStages(parsed.pts, stops, config.timing);
-  const sampleKm = settings.sampleDistanceKm || 10;
-  const samples = buildTimelineSamples(stages, config.timing, start, sampleKm);
-
-  for (const p of samples) {
-    p.weather = await fetchWeatherForPoint(p);
-  }
-
-  const stageOut = [];
-  for (const s of stages) {
-    const pts = samples.filter(p => p.stageId === s.id);
-    stageOut.push({
-      stageId: s.id,
-      stageIndex: s.stageIndex,
-      name: s.name,
-      startKm: round(s.startKm,1),
-      endKm: round(s.endKm,1),
-      summary: await groqSummary(`Etappe ${s.id}: ${s.name}`, pts, settings),
-      points: pts
-    });
-  }
-
-  const globalSummary = await groqSummary(parsed.metadataName || parsed.trackName || sourceFile, samples, settings);
-  const out = { ...baseOut, valid:true, reason:null, routeName:parsed.metadataName || parsed.trackName || sourceFile, totalDistanceKm:round(stages.at(-1).endKm,1), global:{ summary:globalSummary }, points:samples, stages:stageOut };
-  writeJSON(outFile, out);
-  console.log(`Wetterprognose geschrieben: ${outFile} (${samples.length} Punkte, ${stageOut.length} Etappen)`);
-}
-
-main().catch(err => {
-  console.error(err);
-  const outFile = path.join(DATA_DIR, 'weather.json');
-  writeJSON(outFile, { schemaVersion:1, generatedAt:new Date().toISOString(), valid:false, reason:String(err.message||err), global:{summary:'Wetterprognose konnte nicht erzeugt werden: '+String(err.message||err)}, points:[], stages:[] });
-  process.exit(1);
-});
+const fs=require('fs');
+const DATA='data',GPX='gpx';
+const read=f=>JSON.parse(fs.readFileSync(f,'utf8')); const write=(f,o)=>fs.writeFileSync(f,JSON.stringify(o,null,2),'utf8');
+const strip=s=>String(s||'').replace(/<[^>]+>/g,'').replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').trim();
+function child(block,tag){const r=new RegExp(`<[^:>]*:?${tag}[^>]*>([\\s\\S]*?)<\\/[^:>]*:?${tag}>`,'i').exec(block||'');return r?strip(r[1]):''}
+function tags(desc){const t={};let c=null;for(const raw of String(desc||'').split(/\r?\n/)){const l=raw.trim();const m=/^#([\wÄÖÜäöüß-]+)\s*:\s*(.*)$/.exec(l);if(m){c=m[1].toLowerCase();t[c]=m[2].trim()}else if(c&&l)t[c]+='\n'+l}return t}
+function tag(t,...ks){for(const k of ks){const v=t[k.toLowerCase()];if(v&&String(v).trim())return String(v).trim()}return''}
+function norm(v){return String(v||'').toLowerCase().replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss').replace(/[^a-z0-9]+/g,'')}
+function type(v){const x=norm(v);if(['start','anfang','beginn','startpunkt','startbahnhof'].includes(x))return'start';if(['overnight','hotel','unterkunft','uebernachtung','ubernachtung','lodging','campground','nacht','stay'].includes(x))return'overnight';if(['end','ziel','ende','zielpunkt','zielbahnhof'].includes(x))return'end';return null}
+function hav(a,b){const R=6371.0088,rad=x=>x*Math.PI/180,dla=rad(b.lat-a.lat),dlo=rad(b.lon-a.lon),la1=rad(a.lat),la2=rad(b.lat);const h=Math.sin(dla/2)**2+Math.cos(la1)*Math.cos(la2)*Math.sin(dlo/2)**2;return 2*R*Math.atan2(Math.sqrt(h),Math.sqrt(1-h))}
+function nearest(c,pts){let m=1e9,idx=0;pts.forEach((p,i)=>{const d=hav(c,p);if(d<m){m=d;idx=i}});return idx}
+function parseGPX(raw){const pts=[];let m;const tr=/<trkpt\b([^>]*)>([\s\S]*?)<\/trkpt>/gi;while((m=tr.exec(raw))){const lat=/lat=["']([^"']+)/i.exec(m[1]),lon=/lon=["']([^"']+)/i.exec(m[1]);if(lat&&lon)pts.push({lat:+lat[1],lon:+lon[1],ele:+(child(m[2],'ele')||0)})}const wpts=[];const wr=/<wpt\b([^>]*)>([\s\S]*?)<\/wpt>/gi;while((m=wr.exec(raw))){const lat=/lat=["']([^"']+)/i.exec(m[1]),lon=/lon=["']([^"']+)/i.exec(m[1]);if(!lat||!lon)continue;const d=child(m[2],'desc'),tg=tags(d);wpts.push({name:child(m[2],'name'),desc:d,tags:tg,lat:+lat[1],lon:+lon[1]})}return{metadataName:child(raw.match(/<metadata[\s\S]*?<\/metadata>/i)?.[0]||'','name'),trackName:child(raw.match(/<trk[\s\S]*?<\/trk>/i)?.[0]||'','name'),pts,wpts}}
+function stops(p){return p.wpts.map(w=>{const ty=type(tag(w.tags,'type','typ'));if(!ty)return null;const s={name:w.name,type:ty,address:tag(w.tags,'ort','place','city'),lat:w.lat,lon:w.lon,tags:w.tags};s.trackIndex=nearest(s,p.pts);return s}).filter(Boolean).sort((a,b)=>a.trackIndex-b.trackIndex)}
+function stages(pts,st,cfg){let out=[],off=0;for(let i=0;i<st.length-1;i++){let a=st[i].trackIndex,b=st[i+1].trackIndex;if(b<=a)b=a+1;const seg=pts.slice(a,b+1);let dist=0,up=0;for(let j=1;j<seg.length;j++){dist+=hav(seg[j-1],seg[j]);const df=seg[j].ele-seg[j-1].ele;if(df>0)up+=df}const speed=Math.max(cfg.minimumCyclingSpeedKmh,cfg.baseCyclingSpeedKmh-(up/1000)*cfg.climbSpeedReductionPer1000mKmh);out.push({id:i+1,stageIndex:i,name:`${st[i].address||st[i].name} → ${st[i+1].address||st[i+1].name}`,seg,dist,up,speed,startKm:off,endKm:off+dist});off+=dist}return out}
+function valid(start,stageCount){const now=new Date();const last=new Date(start.getTime()+(stageCount-1)*86400000);const d1=(start-now)/86400000, d2=(last-now)/86400000;if(d1<0)return[false,'Tourstart liegt in der Vergangenheit.'];if(d2>14)return[false,`Die letzte Etappe liegt mehr als 14 Tage in der Zukunft (${stageCount} Etappen).`];return[true,null]}
+function offsetOf(iso){const m=String(iso).match(/([+-])(\d{2}):(\d{2})$/);if(!m)return 0;return (m[1]=='-'?-1:1)*(+m[2]*60+ +m[3])}
+function partsOf(iso){const m=String(iso).match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})/);if(!m)throw Error('Ungültige tourStartDateTime');return{y:+m[1],mo:+m[2],d:+m[3],h:+m[4],mi:+m[5]}}
+function stageStart(settings,stageIndex){const off=offsetOf(settings.tourStartDateTime);const p=partsOf(settings.tourStartDateTime);let h=p.h,mi=p.mi;if(stageIndex>0){const t=String(settings.dailyStageStartTime||'09:00').split(':');h=+t[0];mi=+t[1]||0}return new Date(Date.UTC(p.y,p.mo-1,p.d+stageIndex,h,mi)-off*60000)}
+function samples(stages,cfg,settings,sampleKm){let res=[],gkm=0,next=0;function add(p,s,lkm,time){res.push({km:+gkm.toFixed(1),localKm:+lkm.toFixed(1),stageId:s.id,stageIndex:s.stageIndex,stageName:s.name,stageStartTime:stageStart(settings,s.stageIndex).toISOString(),lat:p.lat,lon:p.lon,ele:Math.round(p.ele),time:new Date(time).toISOString()});next+=sampleKm}for(const s of stages){let time=stageStart(settings,s.stageIndex),lkm=0;if(!res.length)add(s.seg[0],s,0,time);else if(gkm>=next-1e-9)add(s.seg[0],s,0,time);for(let j=1;j<s.seg.length;j++){const d=hav(s.seg[j-1],s.seg[j]);const mins=d/s.speed*60;time=new Date(time.getTime()+(mins+mins*(cfg.shortBreakMinutesPerHour||0)/60)*60000);gkm+=d;lkm+=d;if(gkm>=next-1e-9)add(s.seg[j],s,lkm,time)}}return res}
+const cache=new Map();async function wx(p){const key=`${p.lat.toFixed(3)},${p.lon.toFixed(3)}`;let data=cache.get(key);if(!data){const url=`https://api.open-meteo.com/v1/forecast?latitude=${p.lat}&longitude=${p.lon}&hourly=temperature_2m,precipitation,precipitation_probability,wind_speed_10m,weather_code&forecast_days=16&timezone=UTC`;const r=await fetch(url);if(!r.ok)throw Error('Open-Meteo HTTP '+r.status);data=await r.json();cache.set(key,data)}const target=new Date(p.time).getTime(),times=data.hourly.time;let bi=0,bd=1e99;times.forEach((t,i)=>{const d=Math.abs(new Date(t+'Z')-target);if(d<bd){bd=d;bi=i}});const h=data.hourly;return{weatherTime:times[bi]+'Z',temperature:h.temperature_2m[bi],precipitation:h.precipitation[bi],precipitationProbability:h.precipitation_probability[bi],windSpeed:h.wind_speed_10m[bi],weatherCode:h.weather_code[bi]}}
+function round(n,d=1){return Number.isFinite(n)?+n.toFixed(d):null}
+function iconFor(stats){if((stats.totalPrecipitation||0)>3||(stats.maxPrecipitationProbability||0)>=60)return'🌧️';if((stats.totalPrecipitation||0)>0.5||(stats.maxPrecipitationProbability||0)>=35)return'🌦️';if([0,1].includes(+stats.dominantWeatherCode))return'☀️';if([2,3].includes(+stats.dominantWeatherCode))return'⛅';return'🌤️'}
+function pointPick(points,mode){if(!points.length)return null;if(mode==='start')return points[0];if(mode==='end')return points[points.length-1];return points[Math.floor(points.length/2)]}
+function stats(points){if(!points.length)return null;const temps=points.map(p=>p.weather?.temperature).filter(Number.isFinite);const prec=points.map(p=>p.weather?.precipitation).filter(Number.isFinite);const probs=points.map(p=>p.weather?.precipitationProbability).filter(Number.isFinite);const winds=points.map(p=>p.weather?.windSpeed).filter(Number.isFinite);const codes=points.map(p=>p.weather?.weatherCode).filter(Number.isFinite);const counts={};codes.forEach(c=>counts[c]=(counts[c]||0)+1);let dominant=+Object.entries(counts).sort((a,b)=>b[1]-a[1])[0]?.[0];const st={minTemperature:round(Math.min(...temps),0),maxTemperature:round(Math.max(...temps),0),totalPrecipitation:round(prec.reduce((a,b)=>a+b,0),1),maxPrecipitationProbability:round(Math.max(...probs),0),maxWindSpeed:round(Math.max(...winds),0),dominantWeatherCode:Number.isFinite(dominant)?dominant:null,startPoint:pointPick(points,'start'),markerPoint:pointPick(points,'mid'),endPoint:pointPick(points,'end')};st.icon=iconFor(st);return st}
+function compactPoints(points){if(!points.length)return[];const picks=[pointPick(points,'start'),pointPick(points,'mid'),pointPick(points,'end')];return picks.filter((p,i,a)=>p&&a.findIndex(x=>x.km===p.km&&x.time===p.time)===i)}
+function line(p){const w=p.weather||{};return`Etappe ${p.stageId}, km ${Math.round(p.km)} (${new Date(p.time).toLocaleString('de-DE',{weekday:'short',day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit',timeZone:'Europe/Berlin'})}): ${w.temperature}°C, Regen ${w.precipitation} mm, Regenwahrscheinlichkeit ${w.precipitationProbability}%, Wind ${w.windSpeed} km/h`}
+async function summary(title,pts,settings){if(!settings.ai?.enabled)return'KI-Zusammenfassung deaktiviert.';const key=process.env.GROQ_API_KEY;if(!key)return'Keine KI-Zusammenfassung verfügbar: GROQ_API_KEY ist nicht gesetzt.';const prompt=`Du bist Wetterberater für eine mehrtägige Fahrradtour. Fasse "${title}" in 3-5 deutschen Sätzen zusammen. Wichtig: Die Tour hat mehrere Etappen an unterschiedlichen Tagen. Berücksichtige Datum/Uhrzeit, Temperaturspanne, Regen, Wind, Verlauf und Kilometerabschnitte. Keine erfundenen Daten.\n\n${pts.map(line).join('\n')}`;const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{Authorization:`Bearer ${key}`,'Content-Type':'application/json'},body:JSON.stringify({model:settings.ai.model||'llama-3.3-70b-versatile',temperature:.2,messages:[{role:'system',content:'Du formulierst knappe Wetterprognosen für Radreisen auf Deutsch.'},{role:'user',content:prompt}]})});if(!r.ok)return`KI-Zusammenfassung konnte nicht erzeugt werden (Groq HTTP ${r.status}).`;const j=await r.json();return j.choices?.[0]?.message?.content?.trim()||'Keine KI-Zusammenfassung erhalten.'}
+async function main(){const cfg=read(`${DATA}/config.json`).timing, man=read(`${DATA}/gpx-manifest.json`), settings=read(`${DATA}/weather-settings.json`), file=(Array.isArray(man)?man:man.files)[0];let out={schemaVersion:1,generatedAt:new Date().toISOString(),sourceFile:file,tourStartDateTime:settings.tourStartDateTime,dailyStageStartTime:settings.dailyStageStartTime||'09:00',valid:false,provider:{weather:'open-meteo',ai:'groq'},global:{summary:'',stats:null},points:[],stages:[]};const p=parseGPX(fs.readFileSync(`${GPX}/${file}`,'utf8')), st=stops(p), sg=stages(p.pts,st,cfg);const [ok,reason]=valid(stageStart(settings,0),sg.length);if(!ok){out.reason=reason;out.global.summary=reason;write(`${DATA}/weather.json`,out);return}const sm=samples(sg,cfg,settings,settings.sampleDistanceKm||10);for(const pnt of sm)pnt.weather=await wx(pnt);for(const s of sg){const pp=sm.filter(x=>x.stageId===s.id);out.stages.push({stageId:s.id,stageIndex:s.stageIndex,name:s.name,startKm:+s.startKm.toFixed(1),endKm:+s.endKm.toFixed(1),stageStartTime:stageStart(settings,s.stageIndex).toISOString(),stats:stats(pp),compactPoints:compactPoints(pp),summary:await summary(`Etappe ${s.id}: ${s.name}`,pp,settings),points:pp})}out.valid=true;out.routeName=p.metadataName||p.trackName||file;out.totalDistanceKm=+sg.at(-1).endKm.toFixed(1);out.points=sm;out.global.stats=stats(sm);out.global.summary=await summary(out.routeName,sm,settings);write(`${DATA}/weather.json`,out);console.log(`V49 Wetter kompakt geschrieben: ${out.totalDistanceKm} km, ${sm.length} Punkte intern, ${out.stages.length} Etappen`)}
+main().catch(e=>{console.error(e);write(`${DATA}/weather.json`,{schemaVersion:1,generatedAt:new Date().toISOString(),valid:false,reason:String(e.message||e),global:{summary:'Wetterprognose konnte nicht erzeugt werden: '+String(e.message||e),stats:null},points:[],stages:[]});process.exit(1)})

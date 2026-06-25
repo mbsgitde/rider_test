@@ -1,9 +1,14 @@
 {
   "schemaVersion": 1,
   "enabled": true,
-  "description": "Startdatum/-uhrzeit der Tour. Nur wenn dieser Zeitpunkt in der Zukunft und max. 14 Tage entfernt ist, wird eine Prognose generiert.",
+  "description": "Mehrtagestour: Etappe 1 startet mit tourStartDateTime. Jede weitere Etappe startet am Folgetag zur dailyStageStartTime. UI zeigt kompakte Wetterkarten statt Datenpunktlisten.",
   "tourStartDateTime": "2026-07-01T09:00:00+02:00",
+  "dailyStageStartTime": "09:00",
   "sampleDistanceKm": 10,
+  "mapMarkers": {
+    "global": "stage-summary",
+    "stage": "start-mid-end"
+  },
   "weatherProvider": "open-meteo",
   "ai": {
     "enabled": true,

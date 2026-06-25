@@ -12,48 +12,22 @@ V47 wurde durch eine zu starke Umstrukturierung instabil. V48 basiert wieder auf
 
 
 ---
+## Digitales Roadbook – V49 Wetter kompakt
 
-## V48 Wetterprognose-Erweiterung
+V49 ergänzt V48 um eine kompakte mehrtägige Wetterprognose. Details siehe `PRD_Digitales_Roadbook_V49.md`.
 
-Diese ZIP-Version erweitert V48 um eine automatisierte Wetterprognose entlang der Route.
+### Wichtig
 
-### Enthaltene neue Dateien
+- Workflow: `.github/workflows/weather.yml`
+- Sichtbare Workflow-Kopie: `_github_workflows_weather.yml_COPY_ONLY.txt`
+- Generator: `scripts/generateWeather.js`
+- Einstellungen: `data/weather-settings.json`
+- Ergebnis: `data/weather.json`
 
-- `data/weather-settings.json` – Startdatum/-uhrzeit und Sampling-Distanz
-- `data/weather.json` – generierter Forecast für Frontend und GitHub Pages
-- `scripts/generateWeather.js` – Generator für Open-Meteo + Groq-Zusammenfassung
-- `.github/workflows/weather.yml` – GitHub Actions Workflow
+### Mehrtagelogik
 
-### GitHub Secret
+Etappe 1 startet mit `tourStartDateTime`. Jede weitere Etappe startet am Folgetag zur `dailyStageStartTime`.
 
-Für die KI-Zusammenfassung muss im Repository ein Secret hinterlegt werden:
+### Kompakte Darstellung
 
-```text
-Settings → Secrets and variables → Actions → New repository secret
-Name: GROQ_API_KEY
-Value: <dein Groq API Key>
-```
-
-Ohne `GROQ_API_KEY` wird die Wetterdatei trotzdem erzeugt, aber die Zusammenfassung enthält dann einen Hinweis, dass keine KI-Zusammenfassung verfügbar ist.
-
-### Startdatum ändern
-
-Das Startdatum steht in:
-
-```text
-data/weather-settings.json
-```
-
-Beispiel:
-
-```json
-"tourStartDateTime": "2026-07-01T09:00:00+02:00"
-```
-
-Es wird nur dann eine Forecast-Prognose erzeugt, wenn der Startzeitpunkt in der Zukunft und maximal 14 Tage entfernt ist.
-
-### Anzeigeverhalten
-
-- Keine Etappe aktiv: Wetterprognose für die Gesamttour im Übersichtsbereich.
-- Etappe aktiv: Wetterprognose nur für die aktive Etappe; die übrigen Etappen sind ausgeblendet.
-- Karte: Wettermarker werden passend zum aktuellen Kontext (Gesamt/Etappe) angezeigt.
+Die UI zeigt keine langen Listen einzelner Wetterpunkte mehr. Stattdessen gibt es pro Etappe ein Symbol, Temperaturspanne, Regen-/Windwerte und eine KI-Kurzzusammenfassung.
