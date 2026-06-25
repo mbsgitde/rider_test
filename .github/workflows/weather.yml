@@ -3,7 +3,9 @@ name: Weather Forecast
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 3,4,5,6,7,10,13,16,17,18,19,20 * * *"
+    # GitHub cron runs in UTC: 03,06,09,12,15,18,20 UTC = 05,08,11,14,17,20,22 Uhr MESZ.
+    # Keine Läufe zwischen 23:00 und 05:00 Uhr deutscher Sommerzeit.
+    - cron: "0 3,6,9,12,15,18,20 * * *"
 
 permissions:
   contents: write
@@ -11,7 +13,6 @@ permissions:
 jobs:
   generate-weather:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -24,12 +25,12 @@ jobs:
       - name: Generate weather forecast
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
-        run: node scripts/generateWeather.js
+        run: node assets/generateWeather.js
 
       - name: Commit generated weather.json
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/weather.json
-          git commit -m "Update weather forecast" || echo "No weather changes"
+          git commit -m "Update weather forecast" || echo "No changes"
           git push
