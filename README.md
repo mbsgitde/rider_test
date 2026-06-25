@@ -1,10 +1,12 @@
-# Digitales Roadbook – V44
+# Digitales Roadbook – V45
 
-Basis: V43 GPX-Metadata-Mode mit ausschließlich `gpx/Hohenzollernradweg_Relax.gpx`.
+Basis: V44 mit GPX-Metadata-Mode und ausschließlich `gpx/Hohenzollernradweg_Relax.gpx`.
 
-## Änderungen in V44
+## Änderungen in V45
 
-- Leaflet-Icon zur Kartenlayer-Auswahl verkleinert.
-- Im Höhenprofil der Gesamttour werden Übernachtungen als graue Hotelmarker `🏨` angezeigt.
-- Die Hotelmarker werden nur in der Gesamttour dargestellt, nicht in den einzelnen Etappenprofilen.
-- Je Übernachtung wird ein deutlicher gestrichelter Vertikalstrich bis zur km-Achse gezeichnet.
+- Hotelicon im runden Marker der Gesamthöhenübersicht zentriert.
+- KM-Label der Hotelmarker unterhalb der gestrichelten Linie auf X-Achsen-Niveau verschoben.
+- X-Achse zeigt nur ganze Kilometer.
+- Distanzfelder zeigen gerundete Kilometer ohne Nachkommastellen.
+- Hover-Tooltip und Karten-Hover enthalten zusätzlich kumulierte positive und negative Höhenmeter.
+- Netto- und Bruttofahrtzeit wurden zu einem Feld zusammengeführt: `Fahrtzeit (inkl. Pausen)` mit Wert `Nettofahrzeit (Gesamtfahrzeit inkl. Pausen)`.
