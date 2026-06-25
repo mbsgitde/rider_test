@@ -3,8 +3,7 @@ name: Weather Forecast
 on:
   workflow_dispatch:
   schedule:
-    # GitHub cron runs in UTC:
-    # 03,04,05,06,07,10,13,16,17,18,19,20 UTC
+    # GitHub cron runs in UTC: 03,04,05,06,07,10,13,16,17,18,19,20 UTC
     # = 05,06,07,08,09,12,15,18,19,20,21,22 Uhr MESZ.
     - cron: "0 3,4,5,6,7,10,13,16,17,18,19,20 * * *"
 
@@ -30,10 +29,52 @@ jobs:
         with:
           node-version: 24
 
+      - name: Sync latest branch state
+        run: |
+          BRANCH="${GITHUB_REF_NAME}"
+          git fetch origin "$BRANCH"
+          git pull --rebase origin "$BRANCH"
+
+      - name: Keep previous weather
+        run: |
+          if [ -f data/weather.json ]; then
+            cp data/weather.json /tmp/weather.before.json
+          fi
+
       - name: Generate weather forecast
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: node assets/generateWeather.js
+
+      - name: Detect meaningful weather changes
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const before = '/tmp/weather.before.json';
+          const after = 'data/weather.json';
+          if (!fs.existsSync(before) || !fs.existsSync(after)) process.exit(0);
+          function normalize(value) {
+            if (Array.isArray(value)) return value.map(normalize);
+            if (value && typeof value === 'object') {
+              const out = {};
+              for (const key of Object.keys(value).sort()) {
+                if (key === 'generatedAt') continue;
+                out[key] = normalize(value[key]);
+              }
+              return out;
+            }
+            return value;
+          }
+          const oldJson = JSON.parse(fs.readFileSync(before, 'utf8'));
+          const newJson = JSON.parse(fs.readFileSync(after, 'utf8'));
+          if (JSON.stringify(normalize(oldJson)) === JSON.stringify(normalize(newJson))) {
+            fs.copyFileSync(before, after);
+            fs.writeFileSync('/tmp/weather.nochange', '1');
+            console.log('Only generatedAt changed; restored previous weather.json and will skip commit.');
+          } else {
+            console.log('Meaningful weather change detected.');
+          }
+          NODE
 
       - name: Commit generated weather.json
         run: |
@@ -42,11 +83,18 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          # Remote-Stand holen und lokale Arbeitskopie aktualisieren,
-          # damit der spätere Push nicht mit "fetch first" scheitert.
-          git fetch origin "$BRANCH"
-          git pull --rebase origin "$BRANCH"
+          if [ -f /tmp/weather.nochange ]; then
+            echo "No meaningful weather changes"
+            exit 0
+          fi
 
           git add data/weather.json
-          git commit -m "Update weather forecast" || echo "No changes"
+
+          if git diff --cached --quiet; then
+            echo "No weather changes"
+            exit 0
+          fi
+
+          git commit -m "Update weather forecast"
+          git pull --rebase --autostash origin "$BRANCH"
           git push origin HEAD:"$BRANCH"
