@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "enabled": true,
-  "description": "V50.2: Keine Wettermarker auf der Karte. Wetterinfos im Gesamtprofil zwischen Hotelmarkern und je Etappe unterhalb der Höhengrafik. Datum im Format DD.MM.YY hh:mmh.",
+  "description": "V50.3: Keine Wettermarker auf der Karte. Wetterinfos im Gesamtprofil und je Etappe. KI-Prompt mit verbindlichen Etappenfakten gegen Distanz-Halluzinationen.",
   "tourStartDateTime": "2026-07-01T09:00:00+02:00",
   "dailyStageStartTime": "09:00",
   "sampleDistanceKm": 10,

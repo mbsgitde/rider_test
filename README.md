@@ -12,14 +12,13 @@ V47 wurde durch eine zu starke Umstrukturierung instabil. V48 basiert wieder auf
 
 
 ---
-## Digitales Roadbook – V50.2
+## Digitales Roadbook – V50.3
 
-Details siehe `PRD_Digitales_Roadbook_V50_2.md`.
+Details siehe `PRD_Digitales_Roadbook_V50_3.md`.
 
-### Änderung in V50.2
+### Änderung in V50.3
 
-- Wettericons wurden vollständig aus der Kartenansicht entfernt.
-- Wettericons pro Etappe erscheinen in der Gesamt-Höhengrafik mittig zwischen den Hotelmarkern.
-- Die Gesamtprognose enthält keine Etappenliste mehr.
-- Die einzelnen Etappenprognosen stehen direkt in den Etappen unterhalb der Höhengrafik.
-- Datumsformat: `DD.MM.YY hh:mmh`.
+- Groq-Prompt enthält jetzt verbindliche Fakten zur Etappe.
+- Die KI darf Etappendistanzen nicht mehr aus Wetterpunkten ableiten.
+- Die KI wird angewiesen, Etappendistanzen im Fließtext nicht zu nennen.
+- Wetterpunkte enthalten lokale Etappen-km und Gesamt-km zur sauberen Wetterabschnittsformulierung.
