@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "description": "Statisches Manifest: Nur diese GPX-Dateien werden im Tour-Dropdown angezeigt. Anzeigename und Roadbook-Daten kommen aus dem GPX.",
   "files": [
     "Hohenzollernradweg_Relax.gpx"
-  ]
+  ],
+  "description": "Statisches Manifest für das Tour-Dropdown."
 }

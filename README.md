@@ -1,8 +1,7 @@
-# Digitales Roadbook – V46
+# Digitales Roadbook – V47
 
-Basis: V45 mit GPX-Metadata-Mode und ausschließlich `gpx/Hohenzollernradweg_Relax.gpx`.
+## Änderungen in V47
 
-## Änderungen in V46
-
-- Hotelicon im runden Marker der Gesamthöhenübersicht wird über die tatsächliche Glyph-Bounding-Box zentriert.
-- Fahrtzeitwert zeigt nur noch `Nettofahrzeit (Gesamtfahrzeit)` ohne den Zusatz `inkl. Pausen` in der Klammer.
+- KM-Angabe der Übernachtungen im Gesamthöhenprofil steht jetzt auf exakt derselben vertikalen Höhe wie die regulären X-Achsen-KM-Labels.
+- Die Einheit `km` wurde bei den Übernachtungs-KM-Labels entfernt.
+- Die gestrichelte Linie endet nun auf Höhe der X-Achse und ist so dünn wie die regulären Achsen-/Gridlinien, bleibt aber gestrichelt.
