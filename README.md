@@ -22,3 +22,22 @@ Details siehe `PRD_Digitales_Roadbook_V50_6.md`.
 - Windwert steht mit Wind-Icon: `Wind bis X km/h`.
 - Der Einzahler ist in der Etappenübersicht ausklappbar und zeigt dann die vollständige Prognose.
 - Im Einzeletappen-Fokus bleibt die vollständige blaue Wetterbox direkt sichtbar.
+
+
+---
+## Digitales Roadbook – V50.7 / v1.0-Prep
+
+Siehe:
+
+- `PRD_Digitales_Roadbook_V50_7.md`
+- `docs/GPX_TAGGING.md`
+- `docs/WEATHER_AUTOMATION.md`
+- `docs/RELEASE_PLAN_V1.md`
+
+### Neu
+
+- GPX-basierte Wetterzeiten mit `#date`, `#starttime` oder `#datetime`.
+- Groq-Modell default: `openai/gpt-oss-120b`.
+- Prognosegüte je Etappe und Gesamtprognose.
+- Gesamt-Höhengrafik mit X-Achse nur an Start, Hotels und Ende.
+- Überschrift der Etappen-Wetterbox: `Wetterprognose für DD.MM.YY um HH:mmh`.
