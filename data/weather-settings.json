@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "enabled": true,
-  "description": "V50.6: Etappen-Wetter-Einzahler mit Regen/Wind-Icons und aufklappbarer Detailprognose.",
+  "description": "V50.7: v1.0-prep. GPX #date/#starttime/#datetime, Prognoseguete, Hotel-Ticks im Gesamtprofil, Groq GPT OSS 120B.",
   "tourStartDateTime": "2026-07-01T09:00:00+02:00",
   "dailyStageStartTime": "09:00",
   "sampleDistanceKm": 10,
@@ -13,6 +13,7 @@
   "ai": {
     "enabled": true,
     "provider": "groq",
-    "model": "llama-3.3-70b-versatile"
-  }
+    "model": "openai/gpt-oss-120b"
+  },
+  "timezoneOffset": "+02:00"
 }
