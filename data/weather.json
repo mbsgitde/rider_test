@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-06-26T17:40:22.704Z",
+  "generatedAt": "2026-06-26T17:56:58.438Z",
   "sourceFile": "Hohenzollernradweg_Relax.gpx",
   "tourStartDateTime": "2026-07-01T09:00:00+02:00",
   "dailyStageStartTime": "09:00",
@@ -10,7 +10,7 @@
     "ai": "groq"
   },
   "global": {
-    "summary": "Der Hohenzollernradweg (Relax) erstreckt sich über 259,7 km in vier Etappen, wobei die mittlere Prognosegüte als „mittel“ eingestuft wird. Die Temperatur liegt im Verlauf der Tour zwischen 16,3 °C (früher Morgen der 3. Etappe) und 23,2 °C (später Vormittag der 2. Etappe); Niederschläge bleiben praktisch aus (maximal 0,3 mm), jedoch liegt die Regenwahrscheinlichkeit am ersten Tag noch bei bis zu 50 %, danach sinkt sie auf unter 20 %. Der Wind weht zu Beginn leicht bis mäßig (12,9 km/h) und nimmt bis zum vierten Tag auf fast windstill (1,9 km/h) ab. Radfahrer sollten daher leichte, atmungsaktive Kleidung mit einer dünnen Regenjacke einplanen, sich auf milde Brisen einstellen und die kühleren Morgenstunden für die anspruchsvolleren Anstiege nutzen.",
+    "summary": "Der Wetterbericht für den Hohenzollernradweg (Relax) ist insgesamt von mittlerer Prognosegüte (Mittel) und zeigt eine Temperaturspanne von etwa 16 °C bis 23 °C, wobei die kühleren Werte am frühen Morgen des dritten Tages und die wärmsten am zweiten Tag zu erwarten sind. Regen ist kaum zu erwarten – nur vereinzelte, sehr leichte Niederschläge (maximal 0,3 mm) am Vormittag des ersten Tages, während die Regenwahrscheinlichkeit im Verlauf der Tour von rund 50 % zu Beginn auf unter 20 % abnimmt. Der Wind weht zu Beginn mit etwa 13 km/h, lässt sich jedoch bis zum vierten Tag fast vollständig abschwächen (unter 2 km/h). Für Radfahrer empfiehlt sich daher leichte, atmungsaktive Kleidung mit einer dünnen Regenjacke für den ersten Morgen, während die späteren Etappen bei milden Temperaturen und kaum Wind besonders komfortabel zu fahren sind.",
     "stats": {
       "minTemperature": 16,
       "maxTemperature": 23,
@@ -755,7 +755,7 @@
           }
         }
       ],
-      "summary": "Die Etappe startet um 07:00 Uhr mit einer mittleren Prognosegüte; die Temperatur liegt zu Beginn bei 18,8 °C und steigt bis zum Ende auf etwa 21,4 °C. Die Regenwahrscheinlichkeit liegt zwischen 39 % und 50 % und es wird nur sehr leichter Niederschlag (maximal 0,3 mm) erwartet, wobei die ersten 40 km noch trocken bleiben und ab 40 km ein leichter Sprühregen möglich ist. Der Wind weht zu Beginn mit rund 13 km/h aus leichtem Südwest und nimmt bis zum Ziel auf etwa 9 km/h ab. Radfahrer sollten ein dünnes, atmungsaktives Regen- oder Windjackett einplanen und bei den leicht steigenden Temperaturen ggf. die Kleidung anpassen, um komfortabel zu bleiben.",
+      "summary": "Die Prognose für den 1. Juli ist von mittlerer Güte und zeigt im Verlauf der Fahrt Temperaturen zwischen etwa 18,8 °C und 21,4 °C. Die Regenwahrscheinlichkeit liegt durchgehend bei rund 40‑50 % und die erwarteten Niederschlagsmengen bleiben sehr gering (max. 0,3 mm). Der Wind weht zu Beginn mit etwa 13 km/h und nimmt bis zum Ziel auf rund 9 km/h ab. Radfahrer sollten leichte, atmungsaktive Kleidung einplanen, aber ein dünnes Regen‑ bzw. Windjackett mitführen, da kurze Schauer möglich sind und der Wind moderat ist.",
       "points": [
         {
           "km": 0,
@@ -1044,7 +1044,7 @@
           }
         }
       ],
-      "summary": "Die Vorhersage für die zweite Etappe ist von mittlerer Güte und zeigt eine Temperaturentwicklung von etwa 20,8 °C zu Beginn (8 km) bis maximal 23,2 °C im späteren Verlauf (38 – 48 km). Regen ist mit 0 mm und einer maximalen Wahrscheinlichkeit von 7 % praktisch ausgeschlossen. Der Wind bleibt schwach bis leicht ansteigend, von rund 5,6 km/h (8 km) auf etwa 9,2 km/h (38 – 48 km). Radfahrer sollten leichte, atmungsaktive Kleidung wählen, früh am Morgen eventuell eine dünne Jacke einplanen und die milden Windverhältnisse für ein angenehmes Fahrverhalten nutzen.",
+      "summary": "Die Vorhersage für die Etappe 2 ist von mittlerer Güte („mittel“) und zeigt eine angenehme Temperaturspanne von etwa 20,8 °C zu Beginn (8 km) bis konstant 23,2 °C ab dem 28 km‑Markt. Regen ist nicht zu erwarten – die gemessenen Niederschlagswerte liegen bei 0 mm und die Regenwahrscheinlichkeit bleibt zwischen 4 % und 7 %. Der Wind bleibt schwach bis mäßig, von 5,6 km/h (8 km) bis maximal 9,2 km/h (38 km und 48 km). Für Radfahrer bedeutet das leichte, trockene Wetter mit kaum Wind, dass ein atmungsaktives Oberteil und ein dünner Regenschutz für den Fall einer kurzen Schauerentwicklung ausreichend sind.",
       "points": [
         {
           "km": 70,
@@ -1293,7 +1293,7 @@
           }
         }
       ],
-      "summary": "Die Prognose für die Etappe 3 ist mittelwertig; die Temperaturen steigen von etwa 16 °C am frühen Morgen (10 km) auf rund 21 °C gegen Mittag (70 km). Regen ist nicht zu erwarten (0 mm), jedoch liegt die Regenwahrscheinlichkeit am Höchstwert bei 25 %. Der Wind bleibt schwach bis mäßig, von 6,5 km/h (10 km) bis maximal 10,5 km/h (40 km). Radfahrer sollten leichte, atmungsaktive Kleidung wählen, ein dünnes Regenschutz‑Tuch für den kleinen Niederschlags‑Risiko einpacken und den leichten Wind nicht unterschätzen.",
+      "summary": "Die Wetterlage für die Etappe 3 ist insgesamt mild: die Temperatur steigt von etwa 16 °C am frühen Morgen bis rund 21,5 °C gegen Mittag. Regen ist nicht zu erwarten (0 mm), die Regenwahrscheinlichkeit bleibt niedrig bei maximal 25 %. Der Wind ist schwach bis mäßig, von etwa 6,5 km/h zu Beginn bis rund 10,5 km/h im Verlauf der Fahrt. Bei mittlerer Prognosegüte (mittel) empfiehlt sich leichte, atmungsaktive Kleidung und ein kleiner Regenschutz für den unwahrscheinlichen Fall eines kurzen Schauers.",
       "points": [
         {
           "km": 120,
@@ -1582,7 +1582,7 @@
           }
         }
       ],
-      "summary": "Die Temperaturen steigen im Verlauf der Etappe von etwa 16,6 °C (6 km) am frühen Morgen bis rund 22,6 °C (56 – 66 km) gegen Mittag. Regen ist nicht zu erwarten – die gemessenen Werte liegen bei 0 mm und die Regenwahrscheinlichkeit bleibt niedrig (12 % – 19 %). Der Wind bleibt schwach, zwischen 1,9 km/h und 3,9 km/h, sodass er kaum Einfluss auf das Fahrverhalten haben wird. Da die Prognosegüte als niedrig eingestuft ist, empfiehlt sich ein leichter Regenschutz für den Fall einer kurzfristigen Änderung, aber grundsätzlich kann mit milden, trockenen Bedingungen gerechnet werden.",
+      "summary": "Die Temperaturen steigen von etwa 16,6 °C bei 6 km (07:24 Uhr) auf rund 22,6 °C ab 56 km (10:40 Uhr) und bleiben bis 66 km (11:20 Uhr) auf diesem Höchstwert. Regen ist nicht zu erwarten (0 mm), die Regenwahrscheinlichkeit liegt durchgehend zwischen 12 % und 19 %. Der Wind ist schwach, von 3,9 km/h zu Beginn (8 km) bis nur 1,9 km/h in der Mittagshitze. Da die Prognosegüte niedrig ist, sollten Radfahrer dennoch leichte Schichten einplanen und auf mögliche kurzfristige Änderungen achten.",
       "points": [
         {
           "km": 190,
