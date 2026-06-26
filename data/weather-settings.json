@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "enabled": true,
-  "description": "V50.8: GPX-Zeiten mit deutschem Datum, automatische Folgetage, URL-Normalisierung, Zielpunkt-Tourlinks, Profilachsen-Feinschliff.",
+  "description": "V50.8.1: Hotfix generateWeather firstStart, deutsches GPX-Datum, automatische Folgetage, Groq GPT OSS 120B.",
   "tourStartDateTime": "2026-07-01T09:00:00+02:00",
   "dailyStageStartTime": "09:00",
   "sampleDistanceKm": 10,
