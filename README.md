@@ -25,19 +25,16 @@ Details siehe `PRD_Digitales_Roadbook_V50_6.md`.
 
 
 ---
-## Digitales Roadbook – V50.7 / v1.0-Prep
+## Digitales Roadbook – V50.8 / v1.0-Prep
 
-Siehe:
+Siehe `PRD_Digitales_Roadbook_V50_8.md`.
 
-- `PRD_Digitales_Roadbook_V50_7.md`
-- `docs/GPX_TAGGING.md`
-- `docs/WEATHER_AUTOMATION.md`
-- `docs/RELEASE_PLAN_V1.md`
+### Neu in V50.8
 
-### Neu
-
-- GPX-basierte Wetterzeiten mit `#date`, `#starttime` oder `#datetime`.
-- Groq-Modell default: `openai/gpt-oss-120b`.
-- Prognosegüte je Etappe und Gesamtprognose.
-- Gesamt-Höhengrafik mit X-Achse nur an Start, Hotels und Ende.
-- Überschrift der Etappen-Wetterbox: `Wetterprognose für DD.MM.YY um HH:mmh`.
+- GPX-Datum im deutschen Format `DD.MM.YYYY` mit automatischen Folgetagen.
+- Etappen benötigen nur noch `#starttime:hh:mm`.
+- URLs aus GPX werden automatisch mit `https://` ergänzt.
+- ADFC-/Official-Links können vom Zielpunkt gelesen werden.
+- Übernachtungsmarkierungen im Gesamtprofil optisch an Koordinatensystemlinien angepasst.
+- Gesamt-KM-Endwert wird generisch zusätzlich zur 0 angezeigt.
+- Abstand Gesamtprofil zur orangefarbenen Wetterbox harmonisiert.

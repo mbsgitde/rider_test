@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "enabled": true,
-  "description": "V50.7: v1.0-prep. GPX #date/#starttime/#datetime, Prognoseguete, Hotel-Ticks im Gesamtprofil, Groq GPT OSS 120B.",
+  "description": "V50.8: GPX-Zeiten mit deutschem Datum, automatische Folgetage, URL-Normalisierung, Zielpunkt-Tourlinks, Profilachsen-Feinschliff.",
   "tourStartDateTime": "2026-07-01T09:00:00+02:00",
   "dailyStageStartTime": "09:00",
   "sampleDistanceKm": 10,
