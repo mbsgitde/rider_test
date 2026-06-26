@@ -44,25 +44,9 @@ jobs:
           const fs = require('fs');
           const before = '/tmp/weather.before.json', after = 'data/weather.json';
           if (!fs.existsSync(before) || !fs.existsSync(after)) process.exit(0);
-          function normalize(v){
-            if(Array.isArray(v)) return v.map(normalize);
-            if(v && typeof v === 'object'){
-              const o={};
-              for(const k of Object.keys(v).sort()){
-                if(k === 'generatedAt') continue;
-                o[k] = normalize(v[k]);
-              }
-              return o;
-            }
-            return v;
-          }
-          const oldJson=JSON.parse(fs.readFileSync(before,'utf8'));
-          const newJson=JSON.parse(fs.readFileSync(after,'utf8'));
-          if(JSON.stringify(normalize(oldJson))===JSON.stringify(normalize(newJson))){
-            fs.copyFileSync(before,after);
-            fs.writeFileSync('/tmp/weather.nochange','1');
-            console.log('Only generatedAt changed; restored previous weather.json and will skip commit.');
-          } else console.log('Meaningful weather change detected.');
+          function normalize(v){ if(Array.isArray(v)) return v.map(normalize); if(v&&typeof v==='object'){const o={}; for(const k of Object.keys(v).sort()){ if(k==='generatedAt') continue; o[k]=normalize(v[k]); } return o;} return v; }
+          const oldJson=JSON.parse(fs.readFileSync(before,'utf8')), newJson=JSON.parse(fs.readFileSync(after,'utf8'));
+          if(JSON.stringify(normalize(oldJson))===JSON.stringify(normalize(newJson))){fs.copyFileSync(before,after);fs.writeFileSync('/tmp/weather.nochange','1');console.log('Only generatedAt changed; restored previous weather.json and will skip commit.')} else console.log('Meaningful weather change detected.');
           NODE
       - name: Commit generated weather.json
         run: |
