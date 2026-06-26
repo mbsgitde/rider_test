@@ -24,6 +24,6 @@ Details siehe `PRD_Digitales_Roadbook_V50_6.md`.
 - Im Einzeletappen-Fokus bleibt die vollständige blaue Wetterbox direkt sichtbar.
 
 
-## V50.8.1
+## V50.8.4
 
-Hotfix für Weather Forecast Action: `firstStart`-Initialisierung korrigiert.
+Komplettes ZIP mit Weather-, Gesamtachsen-, Link- und Icon-Hotfixes.
