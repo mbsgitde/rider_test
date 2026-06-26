@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-06-26T10:27:15.981Z",
+  "generatedAt": "2026-06-26T15:28:02.421Z",
   "sourceFile": "Hohenzollernradweg_Relax.gpx",
   "tourStartDateTime": "2026-07-01T09:00:00+02:00",
   "dailyStageStartTime": "09:00",
@@ -10,12 +10,12 @@
     "ai": "groq"
   },
   "global": {
-    "summary": "Der Hohenzollernradweg (Relax) bietet eine vielfältige Wetterlage während der 4-tägigen Tour. Die Temperaturen variieren zwischen 16,1°C und 22,7°C. Regenfälle sind vor allem in der ersten Etappe mit bis zu 2 mm Niederschlag zu erwarten, während die folgenden Etappen weitgehend trocken bleiben. Die Windgeschwindigkeiten bewegen sich zwischen 1,9 km/h und 12,5 km/h. Für Radfahrer ist es ratsam, sich auf wechselnde Wetterbedingungen einzustellen und entsprechende Kleidung sowie Ausrüstung mitzuführen. Die Regenwahrscheinlichkeit ist am höchsten in der ersten Etappe, während die Windgeschwindigkeiten in den späteren Etappen tendenziell abnehmen.",
+    "summary": "Der Hohenzollernradweg (Relax) bietet eine vielfältige Wetterlage während der 4-tägigen Tour. Am ersten Tag kann mit Temperaturen zwischen 16,1°C und 19,2°C gerechnet werden, begleitet von Regen mit einer Wahrscheinlichkeit von bis zu 50% und Windgeschwindigkeiten von etwa 2,3 bis 5,5 km/h. Die folgenden Tage zeigen eine zunehmende Erwärmung, insbesondere am zweiten Tag mit Temperaturen bis zu 22,7°C und geringer Regenwahrscheinlichkeit. Am dritten und vierten Tag kann es zu leichten Regenschauern kommen, jedoch bleibt die Regenwahrscheinlichkeit größtenteils unter 30%. Die Windgeschwindigkeiten variieren zwischen 1,9 und 12,5 km/h. Für Radfahrer ist es ratsam, sich auf wechselnde Wetterbedingungen vorzubereiten und entsprechende Ausrüstung mitzuführen.",
     "stats": {
       "minTemperature": 16,
       "maxTemperature": 23,
       "totalPrecipitation": 7.2,
-      "maxPrecipitationProbability": 46,
+      "maxPrecipitationProbability": 50,
       "maxWindSpeed": 13,
       "dominantWeatherCode": 3,
       "startPoint": {
@@ -33,7 +33,7 @@
           "weatherTime": "2026-07-01T07:00Z",
           "temperature": 16.8,
           "precipitation": 1.4,
-          "precipitationProbability": 46,
+          "precipitationProbability": 50,
           "windSpeed": 5.5,
           "weatherCode": 3
         }
@@ -73,7 +73,7 @@
           "weatherTime": "2026-07-04T11:00Z",
           "temperature": 22.6,
           "precipitation": 0,
-          "precipitationProbability": 12,
+          "precipitationProbability": 19,
           "windSpeed": 1.9,
           "weatherCode": 1
         }
@@ -97,7 +97,7 @@
         "weatherTime": "2026-07-01T07:00Z",
         "temperature": 16.8,
         "precipitation": 1.4,
-        "precipitationProbability": 46,
+        "precipitationProbability": 50,
         "windSpeed": 5.5,
         "weatherCode": 3
       }
@@ -117,7 +117,7 @@
         "weatherTime": "2026-07-01T08:00Z",
         "temperature": 17.2,
         "precipitation": 1.4,
-        "precipitationProbability": 45,
+        "precipitationProbability": 50,
         "windSpeed": 3.8,
         "weatherCode": 3
       }
@@ -137,7 +137,7 @@
         "weatherTime": "2026-07-01T08:00Z",
         "temperature": 16.7,
         "precipitation": 1.6,
-        "precipitationProbability": 45,
+        "precipitationProbability": 46,
         "windSpeed": 3.7,
         "weatherCode": 3
       }
@@ -157,7 +157,7 @@
         "weatherTime": "2026-07-01T09:00Z",
         "temperature": 16.1,
         "precipitation": 2,
-        "precipitationProbability": 45,
+        "precipitationProbability": 49,
         "windSpeed": 2.3,
         "weatherCode": 61
       }
@@ -177,7 +177,7 @@
         "weatherTime": "2026-07-01T10:00Z",
         "temperature": 17.5,
         "precipitation": 0,
-        "precipitationProbability": 35,
+        "precipitationProbability": 46,
         "windSpeed": 2.4,
         "weatherCode": 3
       }
@@ -197,7 +197,7 @@
         "weatherTime": "2026-07-01T10:00Z",
         "temperature": 17.3,
         "precipitation": 0,
-        "precipitationProbability": 35,
+        "precipitationProbability": 44,
         "windSpeed": 3.8,
         "weatherCode": 3
       }
@@ -217,7 +217,7 @@
         "weatherTime": "2026-07-01T11:00Z",
         "temperature": 19.2,
         "precipitation": 0,
-        "precipitationProbability": 34,
+        "precipitationProbability": 39,
         "windSpeed": 5.2,
         "weatherCode": 3
       }
@@ -397,7 +397,7 @@
         "weatherTime": "2026-07-03T10:00Z",
         "temperature": 18.3,
         "precipitation": 0.08,
-        "precipitationProbability": 22,
+        "precipitationProbability": 18,
         "windSpeed": 12.1,
         "weatherCode": 1
       }
@@ -417,7 +417,7 @@
         "weatherTime": "2026-07-03T10:00Z",
         "temperature": 20.4,
         "precipitation": 0.05,
-        "precipitationProbability": 22,
+        "precipitationProbability": 18,
         "windSpeed": 10.8,
         "weatherCode": 2
       }
@@ -437,7 +437,7 @@
         "weatherTime": "2026-07-03T11:00Z",
         "temperature": 21.1,
         "precipitation": 0.05,
-        "precipitationProbability": 21,
+        "precipitationProbability": 22,
         "windSpeed": 9.5,
         "weatherCode": 2
       }
@@ -457,7 +457,7 @@
         "weatherTime": "2026-07-03T12:00Z",
         "temperature": 21.6,
         "precipitation": 0.6,
-        "precipitationProbability": 27,
+        "precipitationProbability": 28,
         "windSpeed": 8,
         "weatherCode": 2
       }
@@ -477,7 +477,7 @@
         "weatherTime": "2026-07-04T07:00Z",
         "temperature": 16.6,
         "precipitation": 0,
-        "precipitationProbability": 7,
+        "precipitationProbability": 12,
         "windSpeed": 3.2,
         "weatherCode": 3
       }
@@ -497,7 +497,7 @@
         "weatherTime": "2026-07-04T08:00Z",
         "temperature": 17.6,
         "precipitation": 0,
-        "precipitationProbability": 8,
+        "precipitationProbability": 13,
         "windSpeed": 3.9,
         "weatherCode": 3
       }
@@ -517,7 +517,7 @@
         "weatherTime": "2026-07-04T09:00Z",
         "temperature": 18.8,
         "precipitation": 0,
-        "precipitationProbability": 11,
+        "precipitationProbability": 17,
         "windSpeed": 2.7,
         "weatherCode": 3
       }
@@ -537,7 +537,7 @@
         "weatherTime": "2026-07-04T09:00Z",
         "temperature": 19.1,
         "precipitation": 0,
-        "precipitationProbability": 11,
+        "precipitationProbability": 17,
         "windSpeed": 2.3,
         "weatherCode": 2
       }
@@ -557,7 +557,7 @@
         "weatherTime": "2026-07-04T10:00Z",
         "temperature": 20.3,
         "precipitation": 0,
-        "precipitationProbability": 11,
+        "precipitationProbability": 17,
         "windSpeed": 2.7,
         "weatherCode": 3
       }
@@ -577,7 +577,7 @@
         "weatherTime": "2026-07-04T11:00Z",
         "temperature": 22.6,
         "precipitation": 0,
-        "precipitationProbability": 12,
+        "precipitationProbability": 19,
         "windSpeed": 1.9,
         "weatherCode": 1
       }
@@ -597,7 +597,7 @@
         "weatherTime": "2026-07-04T11:00Z",
         "temperature": 22.6,
         "precipitation": 0,
-        "precipitationProbability": 12,
+        "precipitationProbability": 19,
         "windSpeed": 1.9,
         "weatherCode": 1
       }
@@ -616,7 +616,7 @@
         "minTemperature": 16,
         "maxTemperature": 19,
         "totalPrecipitation": 6.4,
-        "maxPrecipitationProbability": 46,
+        "maxPrecipitationProbability": 50,
         "maxWindSpeed": 6,
         "dominantWeatherCode": 3,
         "startPoint": {
@@ -634,7 +634,7 @@
             "weatherTime": "2026-07-01T07:00Z",
             "temperature": 16.8,
             "precipitation": 1.4,
-            "precipitationProbability": 46,
+            "precipitationProbability": 50,
             "windSpeed": 5.5,
             "weatherCode": 3
           }
@@ -654,7 +654,7 @@
             "weatherTime": "2026-07-01T09:00Z",
             "temperature": 16.1,
             "precipitation": 2,
-            "precipitationProbability": 45,
+            "precipitationProbability": 49,
             "windSpeed": 2.3,
             "weatherCode": 61
           }
@@ -674,7 +674,7 @@
             "weatherTime": "2026-07-01T11:00Z",
             "temperature": 19.2,
             "precipitation": 0,
-            "precipitationProbability": 34,
+            "precipitationProbability": 39,
             "windSpeed": 5.2,
             "weatherCode": 3
           }
@@ -697,7 +697,7 @@
             "weatherTime": "2026-07-01T07:00Z",
             "temperature": 16.8,
             "precipitation": 1.4,
-            "precipitationProbability": 46,
+            "precipitationProbability": 50,
             "windSpeed": 5.5,
             "weatherCode": 3
           }
@@ -717,7 +717,7 @@
             "weatherTime": "2026-07-01T09:00Z",
             "temperature": 16.1,
             "precipitation": 2,
-            "precipitationProbability": 45,
+            "precipitationProbability": 49,
             "windSpeed": 2.3,
             "weatherCode": 61
           }
@@ -737,13 +737,13 @@
             "weatherTime": "2026-07-01T11:00Z",
             "temperature": 19.2,
             "precipitation": 0,
-            "precipitationProbability": 34,
+            "precipitationProbability": 39,
             "windSpeed": 5.2,
             "weatherCode": 3
           }
         }
       ],
-      "summary": "Die Etappe beginnt bei einer Temperatur von 16,8°C und einer Regenwahrscheinlichkeit von 46% um 07:00h. Im Laufe der Fahrt bleibt die Regenwahrscheinlichkeit konstant bei etwa 45% bis zu 30 km, bevor sie auf 35% sinkt. Die Temperaturen schwanken zwischen 16,1°C und 19,2°C, wobei der Windgeschwindigkeiten zwischen 2,3 km/h und 5,5 km/h variieren. Für Radfahrer ist es ratsam, sich auf wechselhaftes Wetter mit Regenschauern vorzubereiten, insbesondere in den ersten 40 km.",
+      "summary": "Am Start der Etappe 1 in Stuttgart herrschen bei 16,8°C und einer Regenwahrscheinlichkeit von 50% wechselhafte Bedingungen. Im Laufe der Etappe bleibt die Regenwahrscheinlichkeit mit Werten zwischen 39% und 50% konstant, wobei die Regenmenge zwischen 0 und 2 mm variiert. Die Temperatur bewegt sich zwischen 16,1°C und 19,2°C, wobei der Wind mit Geschwindigkeiten zwischen 2,3 km/h und 5,5 km/h weht. Für Radfahrer ist es ratsam, sich auf wechselnde Wetterbedingungen einzustellen und entsprechende Kleidung mitzuführen.",
       "points": [
         {
           "km": 0,
@@ -760,7 +760,7 @@
             "weatherTime": "2026-07-01T07:00Z",
             "temperature": 16.8,
             "precipitation": 1.4,
-            "precipitationProbability": 46,
+            "precipitationProbability": 50,
             "windSpeed": 5.5,
             "weatherCode": 3
           }
@@ -780,7 +780,7 @@
             "weatherTime": "2026-07-01T08:00Z",
             "temperature": 17.2,
             "precipitation": 1.4,
-            "precipitationProbability": 45,
+            "precipitationProbability": 50,
             "windSpeed": 3.8,
             "weatherCode": 3
           }
@@ -800,7 +800,7 @@
             "weatherTime": "2026-07-01T08:00Z",
             "temperature": 16.7,
             "precipitation": 1.6,
-            "precipitationProbability": 45,
+            "precipitationProbability": 46,
             "windSpeed": 3.7,
             "weatherCode": 3
           }
@@ -820,7 +820,7 @@
             "weatherTime": "2026-07-01T09:00Z",
             "temperature": 16.1,
             "precipitation": 2,
-            "precipitationProbability": 45,
+            "precipitationProbability": 49,
             "windSpeed": 2.3,
             "weatherCode": 61
           }
@@ -840,7 +840,7 @@
             "weatherTime": "2026-07-01T10:00Z",
             "temperature": 17.5,
             "precipitation": 0,
-            "precipitationProbability": 35,
+            "precipitationProbability": 46,
             "windSpeed": 2.4,
             "weatherCode": 3
           }
@@ -860,7 +860,7 @@
             "weatherTime": "2026-07-01T10:00Z",
             "temperature": 17.3,
             "precipitation": 0,
-            "precipitationProbability": 35,
+            "precipitationProbability": 44,
             "windSpeed": 3.8,
             "weatherCode": 3
           }
@@ -880,7 +880,7 @@
             "weatherTime": "2026-07-01T11:00Z",
             "temperature": 19.2,
             "precipitation": 0,
-            "precipitationProbability": 34,
+            "precipitationProbability": 39,
             "windSpeed": 5.2,
             "weatherCode": 3
           }
@@ -1026,7 +1026,7 @@
           }
         }
       ],
-      "summary": "Die zweite Etappe von Bebenhausen nach Hechingen beginnt bei einer Temperatur von etwa 20°C und steigt im Laufe des Vormittags auf über 22°C an. Es ist mit einer geringen Regenwahrscheinlichkeit von etwa 6-9% zu rechnen, jedoch sind keine Niederschläge vorhergesagt. Der Wind weht mit einer Geschwindigkeit von etwa 8-11 km/h, was für Radfahrer eine moderate Belastung darstellen kann. Insgesamt bietet sich für diese Etappe gutes Wetter für eine Radtour, mit angenehmen Temperaturen und nur geringem Regenrisiko.",
+      "summary": "Die zweite Etappe von Bebenhausen nach Hechingen beginnt bei einer Temperatur von etwa 20°C und steigt im Laufe des Vormittags auf über 22°C an. Es ist mit einer geringen Regenwahrscheinlichkeit von etwa 6-9% zu rechnen, jedoch sind keine Niederschläge vorhergesagt. Der Wind weht mit einer Geschwindigkeit von etwa 8-11 km/h, was für Radfahrer eine moderate Belastung darstellen kann. Insgesamt bietet sich ein trockenes und warmes Wetter für die Fahrt, was die Bedingungen für die Radfahrer begünstigt.",
       "points": [
         {
           "km": 70,
@@ -1142,7 +1142,7 @@
         "minTemperature": 17,
         "maxTemperature": 22,
         "totalPrecipitation": 0.8,
-        "maxPrecipitationProbability": 27,
+        "maxPrecipitationProbability": 28,
         "maxWindSpeed": 13,
         "dominantWeatherCode": 2,
         "startPoint": {
@@ -1180,7 +1180,7 @@
             "weatherTime": "2026-07-03T10:00Z",
             "temperature": 18.3,
             "precipitation": 0.08,
-            "precipitationProbability": 22,
+            "precipitationProbability": 18,
             "windSpeed": 12.1,
             "weatherCode": 1
           }
@@ -1200,7 +1200,7 @@
             "weatherTime": "2026-07-03T12:00Z",
             "temperature": 21.6,
             "precipitation": 0.6,
-            "precipitationProbability": 27,
+            "precipitationProbability": 28,
             "windSpeed": 8,
             "weatherCode": 2
           }
@@ -1243,7 +1243,7 @@
             "weatherTime": "2026-07-03T10:00Z",
             "temperature": 18.3,
             "precipitation": 0.08,
-            "precipitationProbability": 22,
+            "precipitationProbability": 18,
             "windSpeed": 12.1,
             "weatherCode": 1
           }
@@ -1263,13 +1263,13 @@
             "weatherTime": "2026-07-03T12:00Z",
             "temperature": 21.6,
             "precipitation": 0.6,
-            "precipitationProbability": 27,
+            "precipitationProbability": 28,
             "windSpeed": 8,
             "weatherCode": 2
           }
         }
       ],
-      "summary": "Die Etappe 3 von Hechingen nach Sigmaringen beginnt bei einer Temperatur von etwa 17°C und steigt im Laufe des Tages auf über 21°C an. Es gibt nur geringe Niederschläge, die Regenwahrscheinlichkeit liegt zwischen 11% und 27%. Der Wind weht mit einer Geschwindigkeit von etwa 8-12 km/h, was für Radfahrer noch gut zu bewältigen ist. Insgesamt bietet sich ein relativ trockener Tag mit angenehmen Temperaturen für die Fahrradtour, jedoch sollten Radfahrer aufgrund der steigenden Regenwahrscheinlichkeit im Laufe des Tages vorbereitet sein.",
+      "summary": "Die Etappe 3 von Hechingen nach Sigmaringen beginnt bei einer Temperatur von etwa 17°C und bleibt im Laufe des Tages mit einer Spanne von 16,9°C bis 21,6°C relativ mild. Es gibt nur geringe Niederschläge, mit einer Regenwahrscheinlichkeit, die im Laufe des Tages von 11% auf 28% ansteigt. Der Wind weht mit einer Geschwindigkeit von etwa 8-12 km/h, was für Radfahrer noch gut zu bewältigen ist. Insgesamt bietet sich ein relativ gutes Wetter für die Fahrradtour, jedoch sollten Radfahrer aufgrund der steigenden Regenwahrscheinlichkeit im Laufe des Tages vorbereitet sein.",
       "points": [
         {
           "km": 120,
@@ -1346,7 +1346,7 @@
             "weatherTime": "2026-07-03T10:00Z",
             "temperature": 18.3,
             "precipitation": 0.08,
-            "precipitationProbability": 22,
+            "precipitationProbability": 18,
             "windSpeed": 12.1,
             "weatherCode": 1
           }
@@ -1366,7 +1366,7 @@
             "weatherTime": "2026-07-03T10:00Z",
             "temperature": 20.4,
             "precipitation": 0.05,
-            "precipitationProbability": 22,
+            "precipitationProbability": 18,
             "windSpeed": 10.8,
             "weatherCode": 2
           }
@@ -1386,7 +1386,7 @@
             "weatherTime": "2026-07-03T11:00Z",
             "temperature": 21.1,
             "precipitation": 0.05,
-            "precipitationProbability": 21,
+            "precipitationProbability": 22,
             "windSpeed": 9.5,
             "weatherCode": 2
           }
@@ -1406,7 +1406,7 @@
             "weatherTime": "2026-07-03T12:00Z",
             "temperature": 21.6,
             "precipitation": 0.6,
-            "precipitationProbability": 27,
+            "precipitationProbability": 28,
             "windSpeed": 8,
             "weatherCode": 2
           }
@@ -1425,7 +1425,7 @@
         "minTemperature": 17,
         "maxTemperature": 23,
         "totalPrecipitation": 0,
-        "maxPrecipitationProbability": 12,
+        "maxPrecipitationProbability": 19,
         "maxWindSpeed": 4,
         "dominantWeatherCode": 3,
         "startPoint": {
@@ -1443,7 +1443,7 @@
             "weatherTime": "2026-07-04T07:00Z",
             "temperature": 16.6,
             "precipitation": 0,
-            "precipitationProbability": 7,
+            "precipitationProbability": 12,
             "windSpeed": 3.2,
             "weatherCode": 3
           }
@@ -1463,7 +1463,7 @@
             "weatherTime": "2026-07-04T09:00Z",
             "temperature": 19.1,
             "precipitation": 0,
-            "precipitationProbability": 11,
+            "precipitationProbability": 17,
             "windSpeed": 2.3,
             "weatherCode": 2
           }
@@ -1483,7 +1483,7 @@
             "weatherTime": "2026-07-04T11:00Z",
             "temperature": 22.6,
             "precipitation": 0,
-            "precipitationProbability": 12,
+            "precipitationProbability": 19,
             "windSpeed": 1.9,
             "weatherCode": 1
           }
@@ -1506,7 +1506,7 @@
             "weatherTime": "2026-07-04T07:00Z",
             "temperature": 16.6,
             "precipitation": 0,
-            "precipitationProbability": 7,
+            "precipitationProbability": 12,
             "windSpeed": 3.2,
             "weatherCode": 3
           }
@@ -1526,7 +1526,7 @@
             "weatherTime": "2026-07-04T09:00Z",
             "temperature": 19.1,
             "precipitation": 0,
-            "precipitationProbability": 11,
+            "precipitationProbability": 17,
             "windSpeed": 2.3,
             "weatherCode": 2
           }
@@ -1546,13 +1546,13 @@
             "weatherTime": "2026-07-04T11:00Z",
             "temperature": 22.6,
             "precipitation": 0,
-            "precipitationProbability": 12,
+            "precipitationProbability": 19,
             "windSpeed": 1.9,
             "weatherCode": 1
           }
         }
       ],
-      "summary": "Die Etappe 4 von Sigmaringen nach Singen beginnt bei einer Temperatur von etwa 16,6°C. Im Laufe des Tages steigt die Temperatur auf bis zu 22,6°C an. Es ist mit einer geringen Regenwahrscheinlichkeit von etwa 7-12% zu rechnen, jedoch sind keine Niederschläge vorhergesagt. Der Wind weht mit einer Geschwindigkeit von etwa 1,9-3,9 km/h, was für Radfahrer relativ günstig ist. Insgesamt bietet sich ein trockenes und warmes Wetter für die Fahrt an.",
+      "summary": "Die Etappe 4 von Sigmaringen nach Singen beginnt bei einer Temperatur von etwa 16,6°C. Im Laufe des Tages steigt die Temperatur auf bis zu 22,6°C an. Es ist mit einer Regenwahrscheinlichkeit von maximal 19% zu rechnen, jedoch sind keine Niederschläge zu erwarten. Der Wind weht mit einer Geschwindigkeit von etwa 1,9 bis 3,9 km/h, was für Radfahrer eine gute Bedingung darstellt. Insgesamt bietet sich ein sonniger Tag mit angenehmen Temperaturen und leichtem Wind, ideal für eine Radtour.",
       "points": [
         {
           "km": 190,
@@ -1569,7 +1569,7 @@
             "weatherTime": "2026-07-04T07:00Z",
             "temperature": 16.6,
             "precipitation": 0,
-            "precipitationProbability": 7,
+            "precipitationProbability": 12,
             "windSpeed": 3.2,
             "weatherCode": 3
           }
@@ -1589,7 +1589,7 @@
             "weatherTime": "2026-07-04T08:00Z",
             "temperature": 17.6,
             "precipitation": 0,
-            "precipitationProbability": 8,
+            "precipitationProbability": 13,
             "windSpeed": 3.9,
             "weatherCode": 3
           }
@@ -1609,7 +1609,7 @@
             "weatherTime": "2026-07-04T09:00Z",
             "temperature": 18.8,
             "precipitation": 0,
-            "precipitationProbability": 11,
+            "precipitationProbability": 17,
             "windSpeed": 2.7,
             "weatherCode": 3
           }
@@ -1629,7 +1629,7 @@
             "weatherTime": "2026-07-04T09:00Z",
             "temperature": 19.1,
             "precipitation": 0,
-            "precipitationProbability": 11,
+            "precipitationProbability": 17,
             "windSpeed": 2.3,
             "weatherCode": 2
           }
@@ -1649,7 +1649,7 @@
             "weatherTime": "2026-07-04T10:00Z",
             "temperature": 20.3,
             "precipitation": 0,
-            "precipitationProbability": 11,
+            "precipitationProbability": 17,
             "windSpeed": 2.7,
             "weatherCode": 3
           }
@@ -1669,7 +1669,7 @@
             "weatherTime": "2026-07-04T11:00Z",
             "temperature": 22.6,
             "precipitation": 0,
-            "precipitationProbability": 12,
+            "precipitationProbability": 19,
             "windSpeed": 1.9,
             "weatherCode": 1
           }
@@ -1689,7 +1689,7 @@
             "weatherTime": "2026-07-04T11:00Z",
             "temperature": 22.6,
             "precipitation": 0,
-            "precipitationProbability": 12,
+            "precipitationProbability": 19,
             "windSpeed": 1.9,
             "weatherCode": 1
           }
