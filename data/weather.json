@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-06-27T11:41:02.464Z",
+  "generatedAt": "2026-06-27T14:48:20.705Z",
   "sourceFile": "Hohenzollernradweg_Relax.gpx",
   "tourStartDateTime": "2026-07-01T09:45:00.000Z",
   "dailyStageStartTime": "09:00",
@@ -10,7 +10,7 @@
     "ai": "groq"
   },
   "global": {
-    "summary": "Der Hohenzollernradweg (Relax) beginnt am 1. Juli mit warmen Temperaturen von 20,6 °C, die bis zum Ziel der ersten Etappe auf 22,8 °C ansteigen, während die Regenwahrscheinlichkeit stets unter 40 % bleibt und der Wind von 11,8  km/h auf etwa 6  km/h nachlässt.  \n\nAm 2. Juli bleibt das Wetter ähnlich mild (20,5 – 22,7 °C), die Regenwahrscheinlichkeit sinkt weiter auf maximal 6 % und der Wind ist fast windstill (1,1 – 5,5  km/h).  \n\nDie dritte Etappe am 3. Juli ist kühler zu Beginn (15,0 – 15,8 °C), die Regenwahrscheinlichkeit steigt leicht auf 17 % und der Wind weht moderat mit 9,9 – 15,5  km/h, wobei die Temperatur bis zum Ende auf 20,7 °C ansteigt.  \n\nAm 4. Juli startet die vierte Etappe bei 14,2 °C, erwärmt sich bis zu 23,5 °C, die Regenwahrscheinlichkeit bleibt niedrig zwischen 11 % und 14 % und der Wind bleibt schwach und konstant um 7  km/h.  \n\nInsgesamt ist über die vier Etappen hinweg mit überwiegend trockenem, sonnigem Wetter und nur leichtem bis mäßigem Wind zu rechnen.",
+    "summary": "Am 01.07. 26 steigt die Temperatur auf der ersten Etappe von 20,6 °C zu Beginn auf 22,8 °C am Ziel, der Regen bleibt bei 0 mm und die Regenwahrscheinlichkeit fällt von 35 % auf etwa 26 %, während der Wind von 11,8 km/h auf 6,2 km/h nachlässt.  \nAm 02.07. 26 liegen die Werte auf der zweiten Etappe zwischen 20,5 °C und 22,7 °C, es gibt keinen Niederschlag, die Regenwahrscheinlichkeit liegt konstant bei 4–6 % und der Wind ist schwach (1,1–5,5 km/h).  \nAm 03.07. 26 ist es auf der dritten Etappe kühler, die Temperatur steigt von 15,8 °C auf 20,7 °C, der Wind weht moderat mit 10–15 km/h und die Regenwahrscheinlichkeit erreicht maximal 17 %, jedoch bleibt der Regen bei 0 mm.  \nAm 04.07. 26 erwärmt sich die vierte Etappe von 14,2 °C auf 23,5 °C, der Wind bleibt leicht (ca. 7–9 km/h) und die Regenwahrscheinlichkeit liegt zwischen 11 % und 14 %, ebenfalls ohne Niederschlag.",
     "stats": {
       "minTemperature": 14,
       "maxTemperature": 24,
@@ -753,7 +753,7 @@
           }
         }
       ],
-      "summary": "Zu Beginn der Etappe um 09 Uhr 45 min beträgt die Temperatur 20,6 °C, die Regenwahrscheinlichkeit liegt bei 35 % und der Wind weht mit 11,8 km/h. Im weiteren Verlauf steigt die Temperatur leicht an und erreicht gegen 13 Uhr 41 min 22,8 °C, während die Regenwahrscheinlichkeit zwischen 23 % und 38 % schwankt. Gleichzeitig lässt der Wind kontinuierlich nach und beträgt am Ende etwa 6,2 km/h.",
+      "summary": "Zu Beginn der Etappe um 09:45 Uhr beträgt die Temperatur 20,6 °C, die Regenwahrscheinlichkeit liegt bei 35 % und der Wind weht mit 11,8 km/h. Im weiteren Verlauf steigt die Temperatur leicht an und erreicht gegen 13:41 Uhr 22,8 °C, während die Regenwahrscheinlichkeit durchgehend unter 40 % bleibt. Der Wind nimmt kontinuierlich ab und weht zum Schluss nur noch etwa 6,2 km/h. Insgesamt ist mit trockenem Wetter zu rechnen – kein Niederschlag ist in den Prognosen verzeichnet.",
       "points": [
         {
           "km": 0,
@@ -1041,7 +1041,7 @@
           }
         }
       ],
-      "summary": "Zu Beginn der Etappe, um 07:34 Uhr, beträgt die Temperatur 20,5 °C, die Regenwahrscheinlichkeit liegt bei 6 % und der Wind weht nur 1,1 km/h. Gegen 08:56 Uhr steigt die Temperatur auf 22,5 °C, die Regenwahrscheinlichkeit sinkt leicht auf 5 % und der Wind nimmt auf 2,9 km/h zu. In der späten Vormittagsphase, um 09:37 Uhr und 10:18 Uhr, bleibt die Temperatur konstant bei 22,7 °C, die Regenwahrscheinlichkeit liegt bei 4 % und der Wind erreicht 5,5 km/h. Insgesamt bleibt das Wetter trocken und die Bedingungen bleiben leicht windig.",
+      "summary": "Für die Etappe 2 von Bebenhausen nach Hechingen bleibt das Wetter durchgehend trocken – in allen Messpunkten wird kein Regen gemessen und die Regenwahrscheinlichkeit liegt zwischen 4 % und 6 %. Die Temperatur steigt zu Beginn von etwa 20,5 °C auf rund 22,7 °C gegen Ende der Fahrt. Der Wind ist zu Beginn fast still (ca. 1 km/h) und nimmt bis zum Ziel leicht an, wobei er maximal etwa 5,5 km/h erreicht. Insgesamt können Sie mit milden Bedingungen und kaum Niederschlagsrisiko rechnen.",
       "points": [
         {
           "km": 70,
@@ -1289,7 +1289,7 @@
           }
         }
       ],
-      "summary": "Zu Beginn der Etappe, um 07 Uhr 38, beträgt die Temperatur etwa 15,8 °C, die Regenwahrscheinlichkeit liegt bei 9 % und der Wind weht rund 10 km/h. Im weiteren Verlauf steigt die Temperatur kontinuierlich an und erreicht gegen 11 Uhr 35 etwa 20,7 °C, wobei die Regenwahrscheinlichkeit stets unter 18 % bleibt und der Wind moderat zwischen 13 und 15 km/h weht. Durchgehend wird kein Niederschlag erwartet.",
+      "summary": "Etappe 3 von Hechingen nach Sigmaringen startet bei etwa 15 °C und einer Regenwahrscheinlichkeit von rund 10 %. Im Verlauf der Fahrt steigt die Temperatur kontinuierlich an und liegt gegen Mittag bei etwa 21 °C, während die Regenwahrscheinlichkeit maximal bei 17 % bleibt. Der Wind bleibt moderat, beginnend bei etwa 10  km/h und erreicht im Mittelbereich 13–15  km/h. Insgesamt ist mit trockenem Wetter und nur leichtem Wind zu rechnen.",
       "points": [
         {
           "km": 120,
@@ -1577,7 +1577,7 @@
           }
         }
       ],
-      "summary": "Zu Beginn der Etappe, gegen 07 Uhr, liegt die Temperatur bei etwa 14 °C und die Regenwahrscheinlichkeit beträgt nur 14 %. Im weiteren Verlauf steigt die Temperatur kontinuierlich auf rund 23 °C bis etwa 11 Uhr, während die Regenwahrscheinlichkeit auf etwa 11 % sinkt. Der Wind bleibt schwach, von rund 9 km/h am frühen Morgen bis etwa 6 km/h zur Mittagszeit.",
+      "summary": "Zu Beginn der Etappe, um 07 Uhr 24, beträgt die Temperatur etwa 14 °C, die Regenwahrscheinlichkeit liegt bei 14 % und der Wind weht rund 9,4 km/h. Im weiteren Verlauf steigt die Temperatur kontinuierlich an und erreicht gegen 11 Uhr 20 etwa 23,5 °C, während die Regenwahrscheinlichkeit auf rund 11 % sinkt und der Wind sich auf etwa 6,4 km/h reduziert. Zwischen 08 Uhr 03 und 10 Uhr 40 bleibt es durchgehend trocken – kein Niederschlag ist gemeldet. Insgesamt herrscht ein mildes, überwiegend sonniges Wetter mit leicht abnehmender Windstärke.",
       "points": [
         {
           "km": 190,
