@@ -1,4 +1,4 @@
-# Digitales Roadbook – Hohenzollernradweg Relax
+# Digitales Roadbook
 
 **Version:** 1.0 Beta  
 **Projektart:** Studierendenprojekt im Kontext des Hochschulzertifikat KI-Kompetenzen für die Praxis der Hochschule München  
