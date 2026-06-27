@@ -24,6 +24,17 @@ Details siehe `PRD_Digitales_Roadbook_V50_6.md`.
 - Im Einzeletappen-Fokus bleibt die vollständige blaue Wetterbox direkt sichtbar.
 
 
-## V50.8.4
+---
+## Digitales Roadbook – V50.8 / v1.0-Prep
 
-Komplettes ZIP mit Weather-, Gesamtachsen-, Link- und Icon-Hotfixes.
+Siehe `PRD_Digitales_Roadbook_V50_8.md`.
+
+### Neu in V50.8
+
+- GPX-Datum im deutschen Format `DD.MM.YYYY` mit automatischen Folgetagen.
+- Etappen benötigen nur noch `#starttime:hh:mm`.
+- URLs aus GPX werden automatisch mit `https://` ergänzt.
+- ADFC-/Official-Links können vom Zielpunkt gelesen werden.
+- Übernachtungsmarkierungen im Gesamtprofil optisch an Koordinatensystemlinien angepasst.
+- Gesamt-KM-Endwert wird generisch zusätzlich zur 0 angezeigt.
+- Abstand Gesamtprofil zur orangefarbenen Wetterbox harmonisiert.
