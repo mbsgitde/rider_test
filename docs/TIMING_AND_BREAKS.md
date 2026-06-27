@@ -9,3 +9,8 @@
   "longBreakMinutesPerStage": 20
 }
 ```
+
+- `baseCyclingSpeedKmh`: Grundgeschwindigkeit.
+- `minimumCyclingSpeedKmh`: Untergrenze der Geschwindigkeit.
+- `climbSpeedReductionPer1000mKmh`: Reduktion je 1000 Höhenmeter.
+- `shortBreakMinutesPerHour`: Pausenminuten pro Fahrstunde.

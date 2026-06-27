@@ -1,12 +1,19 @@
 # PRD – Digitales Roadbook 1.0 Beta
 
-## Ziele
+## Ziel
 
-- Statisches digitales Roadbook für mehrtägige Fahrradtouren.
-- GPX-basierte Etappen, Hotels, Ziel und Tourlinks.
-- Wetterautomatisierung via GitHub Actions.
-- KI-Zusammenfassung via Groq `openai/gpt-oss-120b`.
-- Gesamtübersicht mit 25-km-Raster und zusätzlichen Hotel-/Ziel-KM-Markern.
+Statisches digitales Roadbook für mehrtägige Fahrradtouren.
+
+## Muss-Anforderungen
+
+- GPX-Route laden.
+- Start, Overnights und Ziel aus Komoot-/GPX-`#Tags` lesen.
+- Etappen bilden.
+- Gesamtübersicht mit 25-km-Raster darstellen.
+- Hotel-/Overnight-KM und Ziel-KM im Gesamtprofil anzeigen.
+- Wetterdaten per GitHub Action erzeugen.
+- KI-Zusammenfassung via Groq `openai/gpt-oss-120b` ermöglichen.
+- Lizenz-, Attribution- und KI-Hinweise anzeigen.
 
 ## Kontext
 

@@ -43,7 +43,7 @@
 {
   "schemaVersion": 1,
   "enabled": true,
-  "description": "1.0 Beta: GPX-Zeiten, 25-km-Gesamtübersicht, GPT-OSS 120B, vollständige Dokumentation.",
+  "description": "V50.6: Etappen-Wetter-Einzahler mit Regen/Wind-Icons und aufklappbarer Detailprognose.",
   "tourStartDateTime": "2026-07-01T09:00:00+02:00",
   "dailyStageStartTime": "09:00",
   "sampleDistanceKm": 10,
@@ -55,8 +55,7 @@
   "ai": {
     "enabled": true,
     "provider": "groq",
-    "model": "openai/gpt-oss-120b"
-  },
-  "timezoneOffset": "+02:00"
+    "model": "llama-3.3-70b-versatile"
+  }
 }
 ```

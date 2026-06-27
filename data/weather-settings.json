@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "enabled": true,
-  "description": "1.0 Beta: GPX-Zeiten, 25-km-Gesamtübersicht, GPT-OSS 120B, vollständige Dokumentation.",
+  "description": "1.0 Beta v2: konsolidiert, README/Footer korrigiert.",
   "tourStartDateTime": "2026-07-01T09:00:00+02:00",
   "dailyStageStartTime": "09:00",
   "sampleDistanceKm": 10,

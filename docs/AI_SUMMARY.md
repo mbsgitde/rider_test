@@ -6,6 +6,12 @@ Die KI-Zusammenfassung verwendet Groq.
 openai/gpt-oss-120b
 ```
 
+Anzeigename im Projekt:
+
+```text
+GPT-OSS 120B
+```
+
 GitHub Secret:
 
 ```text
