@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "enabled": true,
-  "description": "V50.8.4: Complete ZIP. Weather hotfix, GPX-Datum, Gesamtachsenlabels, Tourlinks und Button-Icon-Ausrichtung.",
+  "description": "1.0 Beta: GPX-Zeiten, 25-km-Gesamtübersicht, GPT-OSS 120B, vollständige Dokumentation.",
   "tourStartDateTime": "2026-07-01T09:00:00+02:00",
   "dailyStageStartTime": "09:00",
   "sampleDistanceKm": 10,

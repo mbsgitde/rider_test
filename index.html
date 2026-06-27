@@ -1,1 +1,50 @@
-<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Digitales Roadbook</title><link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"><script src="https://unpkg.com/leaflet/dist/leaflet.js"></script><script src="https://cdn.jsdelivr.net/npm/chart.js"></script><script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script><link rel="stylesheet" href="assets/styles.css"></head><body><div class="container"><h1>🚴 Digitales Roadbook <span class="version-label">(V50.8.4)</span></h1><div class="controls"><label>Tour</label><select id="routeSelect"></select><button id="loadBtn">↻ Laden</button><span id="status"></span></div><div id="map"></div><div id="summary"></div><div id="stages" class="stage-list"></div></div><script src="assets/app.js"></script></body></html>
+<!doctype html>
+<!DOCTYPE html>
+<html lang="de">
+<!-- Digitales Roadbook 1.0 Beta: statische GitHub-Pages-App für GPX-Roadbooks. -->
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <title>
+   Digitales Roadbook – 1.0 Beta
+  </title>
+  <link href="https://unpkg.com/leaflet/dist/leaflet.css" rel="stylesheet"/>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js">
+  </script>
+  <link href="assets/styles.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div class="container">
+   <h1>
+    🚴 Digitales Roadbook
+    <span class="version-label">
+     1.0 Beta
+    </span>
+   </h1>
+   <div class="controls">
+    <label>
+     Tour
+    </label>
+    <select id="routeSelect">
+    </select>
+    <button id="loadBtn">
+     ↻ Laden
+    </button>
+    <span id="status">
+    </span>
+   </div>
+   <div id="map">
+   </div>
+   <div id="summary">
+   </div>
+   <div class="stage-list" id="stages">
+   </div>
+  </div>
+  <script src="assets/app.js">
+  </script>
+ </body>
+</html>

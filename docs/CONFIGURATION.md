@@ -1,14 +1,6 @@
-# Konfiguration – Digitales Roadbook
+# Konfiguration
 
-Diese Datei beschreibt die zentralen Konfigurationsdateien des Projekts.
-
----
-
-## 1. `data/gpx-manifest.json`
-
-Legt fest, welche GPX-Dateien geladen werden können.
-
-Aktueller Inhalt:
+## `data/gpx-manifest.json`
 
 ```json
 {
@@ -20,19 +12,7 @@ Aktueller Inhalt:
 }
 ```
 
-### Wichtige Regeln
-
-- Die Datei verweist auf GPX-Dateien im Ordner `gpx/`.
-- Der Dateiname muss exakt übereinstimmen.
-- Für eine neue Route muss die GPX-Datei in `gpx/` liegen und im Manifest referenziert werden.
-
----
-
-## 2. `data/config.json`
-
-Steuert allgemeine App- und Berechnungsparameter.
-
-Aktueller Inhalt:
+## `data/config.json`
 
 ```json
 {
@@ -57,24 +37,13 @@ Aktueller Inhalt:
 }
 ```
 
-### Wichtige Bereiche
-
-- `timing`: Geschwindigkeit, Mindestgeschwindigkeit, Steigungsreduktion und Pausenlogik.
-- `visuals.stageColors`: Farben der Etappen.
-
----
-
-## 3. `data/weather-settings.json`
-
-Steuert Wettergenerierung, Tourstart-Fallback, Sampling und KI-Modell.
-
-Aktueller Inhalt:
+## `data/weather-settings.json`
 
 ```json
 {
   "schemaVersion": 1,
   "enabled": true,
-  "description": "V50.6: Etappen-Wetter-Einzahler mit Regen/Wind-Icons und aufklappbarer Detailprognose.",
+  "description": "1.0 Beta: GPX-Zeiten, 25-km-Gesamtübersicht, GPT-OSS 120B, vollständige Dokumentation.",
   "tourStartDateTime": "2026-07-01T09:00:00+02:00",
   "dailyStageStartTime": "09:00",
   "sampleDistanceKm": 10,
@@ -86,31 +55,8 @@ Aktueller Inhalt:
   "ai": {
     "enabled": true,
     "provider": "groq",
-    "model": "llama-3.3-70b-versatile"
-  }
+    "model": "openai/gpt-oss-120b"
+  },
+  "timezoneOffset": "+02:00"
 }
 ```
-
----
-
-## 4. `data/weather.json`
-
-Wird automatisch erzeugt. Diese Datei sollte normalerweise nicht manuell gepflegt werden.
-
-### Erzeugung
-
-```bash
-node assets/generateWeather.js
-```
-
-oder per GitHub Action:
-
-```text
-Actions → Weather Forecast → Run workflow
-```
-
----
-
-## 5. `data/Hohenzollernradweg_Relax-stops.fallback.json`
-
-Fallback-Datei für Stops, falls GPX-Tags nicht vollständig ausgewertet werden können. Vorrangig sollen Stops jedoch über GPX-`#Tags` gepflegt werden.
