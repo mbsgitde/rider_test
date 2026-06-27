@@ -1,10 +1,6 @@
-# GPX Tagging für Wetterzeiten
+# GPX Tagging
 
-V50.8 unterstützt Wetter-Startzeiten direkt aus dem `<desc>` eines Start- oder Übernachtungs-Wegpunkts.
-
-## Empfohlenes Format
-
-Am Startpunkt:
+Startpunkt:
 
 ```text
 #type:start
@@ -13,7 +9,7 @@ Am Startpunkt:
 #starttime:11:45
 ```
 
-An den Übernachtungspunkten reicht die Uhrzeit:
+Overnight-Punkte:
 
 ```text
 #type:overnight
@@ -21,25 +17,10 @@ An den Übernachtungspunkten reicht die Uhrzeit:
 #starttime:09:00
 ```
 
-Daraus berechnet der Generator automatisch:
+Zielpunkt kann ADFC-/Tourlinks enthalten:
 
 ```text
-Etappe 1 = Startdatum
-Etappe 2 = Startdatum + 1 Tag
-Etappe 3 = Startdatum + 2 Tage
-Etappe 4 = Startdatum + 3 Tage
+#adfcStars:4
+#adfcUrl:www.adfc-radtourismus.de/hohenzollern-radweg/
+#officialUrl:www.schwaebischealb.de/rad/hohenzollern-radweg
 ```
-
-## URLs
-
-`https://` kann weggelassen werden. Das Frontend ergänzt es automatisch.
-
-```text
-#url:www.example.de
-#adfcUrl:www.example.de/tour
-#officialUrl:www.example.de/offiziell
-```
-
-## Tourlinks
-
-ADFC- und offizielle Tourlinks können am Startpunkt oder am Zielpunkt stehen.
