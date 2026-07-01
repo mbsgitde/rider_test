@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-01T07:12:48.180Z",
+  "generatedAt": "2026-07-01T18:53:53.259Z",
   "sourceFile": "Hohenzollernradweg_Relax.gpx",
-  "tourStartDateTime": "2026-07-01T09:00:00+02:00",
+  "tourStartDateTime": "2026-07-17T09:00:00+02:00",
   "dailyStageStartTime": "09:00",
   "valid": false,
   "provider": {
@@ -10,10 +10,10 @@
     "ai": "groq"
   },
   "global": {
-    "summary": "Tourstart liegt in der Vergangenheit.",
+    "summary": "Die letzte Etappe liegt mehr als 14 Tage in der Zukunft (4 Etappen).",
     "stats": null
   },
   "points": [],
   "stages": [],
-  "reason": "Tourstart liegt in der Vergangenheit."
+  "reason": "Die letzte Etappe liegt mehr als 14 Tage in der Zukunft (4 Etappen)."
 }
