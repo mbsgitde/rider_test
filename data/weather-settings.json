@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "enabled": true,
   "description": "1.0 Beta v2: konsolidiert, README/Footer korrigiert.",
-  "tourStartDateTime": "2026-07-17T09:00:00+02:00",
+  "tourStartDateTime": "2026-07-10T09:00:00+02:00",
   "dailyStageStartTime": "09:00",
   "sampleDistanceKm": 10,
   "mapMarkers": {
