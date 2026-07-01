@@ -13,9 +13,9 @@
     <name>Stuttgart Hbf</name>
     <desc>#type:start
 #ort:Stuttgart
-#date:01.07.2026
-#starttime:11:45
-#comment:Ankunft um 11:00h</desc>
+#date:17.07.2026
+#starttime:09:00
+#comment:Ankunft um 08:00h</desc>
     <sym>Flag, Blue</sym>
   </wpt>
   <wpt lat="48.782555" lon="9.238079">
