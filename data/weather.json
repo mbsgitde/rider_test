@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-02T21:07:57.199Z",
+  "generatedAt": "2026-07-03T06:33:24.512Z",
   "sourceFile": "Hohenzollernradweg_Relax.gpx",
   "tourStartDateTime": "2026-07-10T09:00:00+02:00",
   "dailyStageStartTime": "09:00",
@@ -10,13 +10,13 @@
     "ai": "groq"
   },
   "global": {
-    "summary": "Der Hohenzollernradweg (Relax) startet am 10. Juli mit kühlen 19 – 20 °C und steigert sich bis zum 13. Juli auf bis zu 31 °C, wobei die Tageshöchstwerte vor allem an den Etappen 3 und 4 erreicht werden. Während der gesamten Tour fällt kein Regen, die Regenwahrscheinlichkeit bleibt jedoch von 0 % am ersten Morgen bis zu etwa 30 % am späten Vormittag des dritten Tages leicht an. Der Wind ist überwiegend schwach bis mäßig (2 – 13 km/h) und nimmt im Verlauf der Tage leicht ab, sodass er kaum eine Belastung darstellt. Radfahrer sollten leichte, atmungsaktive Kleidung für die wärmenden Mittagsstunden einplanen, ausreichend Wasser und Sonnenschutz mitführen und für die späteren Etappen ein Regenschutz‑Set bereithalten, falls die steigende Regenwahrscheinlichkeit einsetzt.",
+    "summary": "Der Hohenzollernradweg (Relax) startet am 10. Juli mit Temperaturen um 20 °C und endet am 13. Juli bei Höchstwerten von etwa 32 °C, wobei an allen vier Etappen kein Niederschlag gemessen wurde und die Regenwahrscheinlichkeit stets unter 20 % blieb. Morgens liegt das Wetter noch kühl (≈22 °C) und trocken, während sich im Tagesverlauf – besonders an Etappe 3 (Hechingen → Sigmaringen) – die Temperaturen kontinuierlich bis über 31 °C steigern. Der Wind ist insgesamt schwach bis mäßig: zu Beginn weht er mit bis zu 17  km/h, danach bleibt er meist zwischen 0,7  km/h und 10  km/h, sodass keine starken Gegen- oder Rückenwinde zu erwarten sind. Für Radfahrer empfiehlt sich leichte, atmungsaktive Kleidung, Sonnenschutz und ausreichende Flüssigkeitszufuhr, besonders in den Mittagsstunden der dritten Etappe, während die geringen Windgeschwindigkeiten das Vorankommen nicht behindern.",
     "stats": {
       "minTemperature": 20,
-      "maxTemperature": 31,
+      "maxTemperature": 32,
       "totalPrecipitation": 0,
-      "maxPrecipitationProbability": 33,
-      "maxWindSpeed": 13,
+      "maxPrecipitationProbability": 20,
+      "maxWindSpeed": 17,
       "dominantWeatherCode": 0,
       "startPoint": {
         "km": 0,
@@ -31,10 +31,10 @@
         "time": "2026-07-10T07:00:00.000Z",
         "weather": {
           "weatherTime": "2026-07-10T07:00Z",
-          "temperature": 19.7,
+          "temperature": 20.1,
           "precipitation": 0,
-          "precipitationProbability": 0,
-          "windSpeed": 7.4,
+          "precipitationProbability": 1,
+          "windSpeed": 10.7,
           "weatherCode": 0
         }
       },
@@ -51,10 +51,10 @@
         "time": "2026-07-12T08:18:19.869Z",
         "weather": {
           "weatherTime": "2026-07-12T08:00Z",
-          "temperature": 24.3,
+          "temperature": 25.6,
           "precipitation": 0,
-          "precipitationProbability": 12,
-          "windSpeed": 4.8,
+          "precipitationProbability": 8,
+          "windSpeed": 6.2,
           "weatherCode": 0
         }
       },
@@ -73,8 +73,8 @@
           "weatherTime": "2026-07-13T11:00Z",
           "temperature": 31.2,
           "precipitation": 0,
-          "precipitationProbability": 24,
-          "windSpeed": 6.2,
+          "precipitationProbability": 6,
+          "windSpeed": 10.1,
           "weatherCode": 0
         }
       },
@@ -95,10 +95,10 @@
       "time": "2026-07-10T07:00:00.000Z",
       "weather": {
         "weatherTime": "2026-07-10T07:00Z",
-        "temperature": 19.7,
+        "temperature": 20.1,
         "precipitation": 0,
-        "precipitationProbability": 0,
-        "windSpeed": 7.4,
+        "precipitationProbability": 1,
+        "windSpeed": 10.7,
         "weatherCode": 0
       }
     },
@@ -115,10 +115,10 @@
       "time": "2026-07-10T07:39:24.012Z",
       "weather": {
         "weatherTime": "2026-07-10T08:00Z",
-        "temperature": 22.3,
+        "temperature": 22.6,
         "precipitation": 0,
-        "precipitationProbability": 0,
-        "windSpeed": 9.2,
+        "precipitationProbability": 1,
+        "windSpeed": 11.6,
         "weatherCode": 0
       }
     },
@@ -135,10 +135,10 @@
       "time": "2026-07-10T08:18:47.059Z",
       "weather": {
         "weatherTime": "2026-07-10T08:00Z",
-        "temperature": 21.6,
+        "temperature": 22,
         "precipitation": 0,
-        "precipitationProbability": 0,
-        "windSpeed": 9.2,
+        "precipitationProbability": 1,
+        "windSpeed": 11.6,
         "weatherCode": 0
       }
     },
@@ -155,10 +155,10 @@
       "time": "2026-07-10T08:58:03.951Z",
       "weather": {
         "weatherTime": "2026-07-10T09:00Z",
-        "temperature": 23.1,
+        "temperature": 23.5,
         "precipitation": 0,
         "precipitationProbability": 0,
-        "windSpeed": 10.8,
+        "windSpeed": 14,
         "weatherCode": 0
       }
     },
@@ -175,10 +175,10 @@
       "time": "2026-07-10T09:37:34.988Z",
       "weather": {
         "weatherTime": "2026-07-10T10:00Z",
-        "temperature": 24.7,
+        "temperature": 25.1,
         "precipitation": 0,
         "precipitationProbability": 0,
-        "windSpeed": 12.1,
+        "windSpeed": 16.1,
         "weatherCode": 0
       }
     },
@@ -195,10 +195,10 @@
       "time": "2026-07-10T10:16:49.170Z",
       "weather": {
         "weatherTime": "2026-07-10T10:00Z",
-        "temperature": 24.4,
+        "temperature": 25,
         "precipitation": 0,
         "precipitationProbability": 0,
-        "windSpeed": 12.7,
+        "windSpeed": 16.4,
         "weatherCode": 0
       }
     },
@@ -215,10 +215,10 @@
       "time": "2026-07-10T10:56:10.502Z",
       "weather": {
         "weatherTime": "2026-07-10T11:00Z",
-        "temperature": 26.1,
+        "temperature": 26.8,
         "precipitation": 0,
-        "precipitationProbability": 0,
-        "windSpeed": 13.2,
+        "precipitationProbability": 1,
+        "windSpeed": 17.3,
         "weatherCode": 0
       }
     },
@@ -235,10 +235,10 @@
       "time": "2026-07-11T07:34:26.056Z",
       "weather": {
         "weatherTime": "2026-07-11T08:00Z",
-        "temperature": 21.1,
+        "temperature": 22.3,
         "precipitation": 0,
-        "precipitationProbability": 5,
-        "windSpeed": 2.9,
+        "precipitationProbability": 4,
+        "windSpeed": 2.4,
         "weatherCode": 0
       }
     },
@@ -255,10 +255,10 @@
       "time": "2026-07-11T08:15:27.831Z",
       "weather": {
         "weatherTime": "2026-07-11T08:00Z",
-        "temperature": 21,
+        "temperature": 22.3,
         "precipitation": 0,
-        "precipitationProbability": 5,
-        "windSpeed": 1.4,
+        "precipitationProbability": 4,
+        "windSpeed": 0.7,
         "weatherCode": 0
       }
     },
@@ -275,10 +275,10 @@
       "time": "2026-07-11T08:56:31.248Z",
       "weather": {
         "weatherTime": "2026-07-11T09:00Z",
-        "temperature": 23.1,
+        "temperature": 24.6,
         "precipitation": 0,
-        "precipitationProbability": 6,
-        "windSpeed": 3.1,
+        "precipitationProbability": 5,
+        "windSpeed": 0.9,
         "weatherCode": 0
       }
     },
@@ -295,10 +295,10 @@
       "time": "2026-07-11T09:37:34.763Z",
       "weather": {
         "weatherTime": "2026-07-11T10:00Z",
-        "temperature": 25.1,
+        "temperature": 26.6,
         "precipitation": 0,
-        "precipitationProbability": 7,
-        "windSpeed": 5.2,
+        "precipitationProbability": 6,
+        "windSpeed": 3.5,
         "weatherCode": 0
       }
     },
@@ -315,10 +315,10 @@
       "time": "2026-07-11T10:18:34.737Z",
       "weather": {
         "weatherTime": "2026-07-11T10:00Z",
-        "temperature": 25.3,
+        "temperature": 26.6,
         "precipitation": 0,
-        "precipitationProbability": 8,
-        "windSpeed": 5,
+        "precipitationProbability": 10,
+        "windSpeed": 4.8,
         "weatherCode": 0
       }
     },
@@ -335,10 +335,10 @@
       "time": "2026-07-12T07:38:36.968Z",
       "weather": {
         "weatherTime": "2026-07-12T08:00Z",
-        "temperature": 26,
+        "temperature": 27.3,
         "precipitation": 0,
-        "precipitationProbability": 9,
-        "windSpeed": 4,
+        "precipitationProbability": 11,
+        "windSpeed": 7.3,
         "weatherCode": 0
       }
     },
@@ -355,10 +355,10 @@
       "time": "2026-07-12T08:18:19.869Z",
       "weather": {
         "weatherTime": "2026-07-12T08:00Z",
-        "temperature": 24.3,
+        "temperature": 25.6,
         "precipitation": 0,
-        "precipitationProbability": 12,
-        "windSpeed": 4.8,
+        "precipitationProbability": 8,
+        "windSpeed": 6.2,
         "weatherCode": 0
       }
     },
@@ -375,10 +375,10 @@
       "time": "2026-07-12T08:57:32.449Z",
       "weather": {
         "weatherTime": "2026-07-12T09:00Z",
-        "temperature": 26.1,
+        "temperature": 27.2,
         "precipitation": 0,
-        "precipitationProbability": 19,
-        "windSpeed": 5.1,
+        "precipitationProbability": 12,
+        "windSpeed": 6.4,
         "weatherCode": 1
       }
     },
@@ -395,10 +395,10 @@
       "time": "2026-07-12T09:37:05.253Z",
       "weather": {
         "weatherTime": "2026-07-12T10:00Z",
-        "temperature": 27.4,
+        "temperature": 28.6,
         "precipitation": 0,
-        "precipitationProbability": 26,
-        "windSpeed": 4,
+        "precipitationProbability": 16,
+        "windSpeed": 6,
         "weatherCode": 1
       }
     },
@@ -415,10 +415,10 @@
       "time": "2026-07-12T10:16:30.357Z",
       "weather": {
         "weatherTime": "2026-07-12T10:00Z",
-        "temperature": 28.1,
+        "temperature": 29.9,
         "precipitation": 0,
-        "precipitationProbability": 26,
-        "windSpeed": 3.4,
+        "precipitationProbability": 16,
+        "windSpeed": 4.8,
         "weatherCode": 1
       }
     },
@@ -435,10 +435,10 @@
       "time": "2026-07-12T10:56:15.029Z",
       "weather": {
         "weatherTime": "2026-07-12T11:00Z",
-        "temperature": 29.6,
+        "temperature": 31.3,
         "precipitation": 0,
-        "precipitationProbability": 27,
-        "windSpeed": 5.8,
+        "precipitationProbability": 16,
+        "windSpeed": 7,
         "weatherCode": 1
       }
     },
@@ -455,10 +455,10 @@
       "time": "2026-07-12T11:35:36.998Z",
       "weather": {
         "weatherTime": "2026-07-12T12:00Z",
-        "temperature": 30.4,
+        "temperature": 31.8,
         "precipitation": 0,
-        "precipitationProbability": 33,
-        "windSpeed": 6.6,
+        "precipitationProbability": 20,
+        "windSpeed": 6.5,
         "weatherCode": 3
       }
     },
@@ -475,10 +475,10 @@
       "time": "2026-07-13T07:24:30.103Z",
       "weather": {
         "weatherTime": "2026-07-13T07:00Z",
-        "temperature": 23.8,
+        "temperature": 22.1,
         "precipitation": 0,
-        "precipitationProbability": 13,
-        "windSpeed": 7,
+        "precipitationProbability": 4,
+        "windSpeed": 10.1,
         "weatherCode": 1
       }
     },
@@ -495,10 +495,10 @@
       "time": "2026-07-13T08:03:44.986Z",
       "weather": {
         "weatherTime": "2026-07-13T08:00Z",
-        "temperature": 25.5,
+        "temperature": 23,
         "precipitation": 0,
-        "precipitationProbability": 18,
-        "windSpeed": 9.4,
+        "precipitationProbability": 7,
+        "windSpeed": 9.7,
         "weatherCode": 0
       }
     },
@@ -515,10 +515,10 @@
       "time": "2026-07-13T08:42:59.653Z",
       "weather": {
         "weatherTime": "2026-07-13T09:00Z",
-        "temperature": 27.3,
+        "temperature": 24.9,
         "precipitation": 0,
-        "precipitationProbability": 22,
-        "windSpeed": 7.3,
+        "precipitationProbability": 13,
+        "windSpeed": 8.7,
         "weatherCode": 0
       }
     },
@@ -535,10 +535,10 @@
       "time": "2026-07-13T09:22:15.184Z",
       "weather": {
         "weatherTime": "2026-07-13T09:00Z",
-        "temperature": 27.1,
+        "temperature": 25.8,
         "precipitation": 0,
-        "precipitationProbability": 22,
-        "windSpeed": 4.3,
+        "precipitationProbability": 13,
+        "windSpeed": 8.8,
         "weatherCode": 0
       }
     },
@@ -555,10 +555,10 @@
       "time": "2026-07-13T10:01:26.471Z",
       "weather": {
         "weatherTime": "2026-07-13T10:00Z",
-        "temperature": 28.9,
+        "temperature": 27.8,
         "precipitation": 0,
-        "precipitationProbability": 21,
-        "windSpeed": 3.9,
+        "precipitationProbability": 4,
+        "windSpeed": 9.4,
         "weatherCode": 0
       }
     },
@@ -577,8 +577,8 @@
         "weatherTime": "2026-07-13T11:00Z",
         "temperature": 31.2,
         "precipitation": 0,
-        "precipitationProbability": 24,
-        "windSpeed": 6.2,
+        "precipitationProbability": 6,
+        "windSpeed": 10.1,
         "weatherCode": 0
       }
     },
@@ -597,8 +597,8 @@
         "weatherTime": "2026-07-13T11:00Z",
         "temperature": 31.2,
         "precipitation": 0,
-        "precipitationProbability": 24,
-        "windSpeed": 6.2,
+        "precipitationProbability": 6,
+        "windSpeed": 10.1,
         "weatherCode": 0
       }
     }
@@ -614,10 +614,10 @@
       "stageStartTime": "2026-07-10T07:00:00.000Z",
       "stats": {
         "minTemperature": 20,
-        "maxTemperature": 26,
+        "maxTemperature": 27,
         "totalPrecipitation": 0,
-        "maxPrecipitationProbability": 0,
-        "maxWindSpeed": 13,
+        "maxPrecipitationProbability": 1,
+        "maxWindSpeed": 17,
         "dominantWeatherCode": 0,
         "startPoint": {
           "km": 0,
@@ -632,10 +632,10 @@
           "time": "2026-07-10T07:00:00.000Z",
           "weather": {
             "weatherTime": "2026-07-10T07:00Z",
-            "temperature": 19.7,
+            "temperature": 20.1,
             "precipitation": 0,
-            "precipitationProbability": 0,
-            "windSpeed": 7.4,
+            "precipitationProbability": 1,
+            "windSpeed": 10.7,
             "weatherCode": 0
           }
         },
@@ -652,10 +652,10 @@
           "time": "2026-07-10T08:58:03.951Z",
           "weather": {
             "weatherTime": "2026-07-10T09:00Z",
-            "temperature": 23.1,
+            "temperature": 23.5,
             "precipitation": 0,
             "precipitationProbability": 0,
-            "windSpeed": 10.8,
+            "windSpeed": 14,
             "weatherCode": 0
           }
         },
@@ -672,10 +672,10 @@
           "time": "2026-07-10T10:56:10.502Z",
           "weather": {
             "weatherTime": "2026-07-10T11:00Z",
-            "temperature": 26.1,
+            "temperature": 26.8,
             "precipitation": 0,
-            "precipitationProbability": 0,
-            "windSpeed": 13.2,
+            "precipitationProbability": 1,
+            "windSpeed": 17.3,
             "weatherCode": 0
           }
         },
@@ -695,10 +695,10 @@
           "time": "2026-07-10T07:00:00.000Z",
           "weather": {
             "weatherTime": "2026-07-10T07:00Z",
-            "temperature": 19.7,
+            "temperature": 20.1,
             "precipitation": 0,
-            "precipitationProbability": 0,
-            "windSpeed": 7.4,
+            "precipitationProbability": 1,
+            "windSpeed": 10.7,
             "weatherCode": 0
           }
         },
@@ -715,10 +715,10 @@
           "time": "2026-07-10T08:58:03.951Z",
           "weather": {
             "weatherTime": "2026-07-10T09:00Z",
-            "temperature": 23.1,
+            "temperature": 23.5,
             "precipitation": 0,
             "precipitationProbability": 0,
-            "windSpeed": 10.8,
+            "windSpeed": 14,
             "weatherCode": 0
           }
         },
@@ -735,15 +735,15 @@
           "time": "2026-07-10T10:56:10.502Z",
           "weather": {
             "weatherTime": "2026-07-10T11:00Z",
-            "temperature": 26.1,
+            "temperature": 26.8,
             "precipitation": 0,
-            "precipitationProbability": 0,
-            "windSpeed": 13.2,
+            "precipitationProbability": 1,
+            "windSpeed": 17.3,
             "weatherCode": 0
           }
         }
       ],
-      "summary": "Der Tag beginnt kühl bei etwa 19 °C und erwärmt sich bis zum späten Vormittag auf rund 26 °C. Es gibt keinerlei Niederschlag und die Regenwahrscheinlichkeit liegt durchgehend bei 0 %. Der Wind ist leicht, steigt jedoch von etwa 7  km/h zu Beginn auf rund 13  km/h gegen Ende der Strecke. Für Radfahrer empfiehlt sich leichte, atmungsaktive Kleidung, Sonnenschutz und ausreichend Flüssigkeitszufuhr, da die Temperaturen zügig ansteigen und der leichte Wind kaum Gegenwind bietet.",
+      "summary": "Die Temperaturen steigen von etwa 20 °C zu Beginn der Fahrt bis fast 27 °C gegen Mittag, sodass leichte, atmungsaktive Kleidung empfehlenswert ist. Regen ist nicht zu erwarten – die gemessenen Niederschlagswerte liegen bei 0 mm und die Regenwahrscheinlichkeit bleibt unter 2 %. Der Wind nimmt im Verlauf von etwa 10 km/h am Morgen auf rund 17 km/h am späten Vormittag zu, was besonders in exponierten Abschnitten ein wenig Gegenwind bedeuten kann. Radfahrer sollten ausreichend trinken, Sonnencreme einpacken und bei den stärkeren Böen die Sitzposition etwas anpassen, um stabil zu bleiben.",
       "points": [
         {
           "km": 0,
@@ -758,10 +758,10 @@
           "time": "2026-07-10T07:00:00.000Z",
           "weather": {
             "weatherTime": "2026-07-10T07:00Z",
-            "temperature": 19.7,
+            "temperature": 20.1,
             "precipitation": 0,
-            "precipitationProbability": 0,
-            "windSpeed": 7.4,
+            "precipitationProbability": 1,
+            "windSpeed": 10.7,
             "weatherCode": 0
           }
         },
@@ -778,10 +778,10 @@
           "time": "2026-07-10T07:39:24.012Z",
           "weather": {
             "weatherTime": "2026-07-10T08:00Z",
-            "temperature": 22.3,
+            "temperature": 22.6,
             "precipitation": 0,
-            "precipitationProbability": 0,
-            "windSpeed": 9.2,
+            "precipitationProbability": 1,
+            "windSpeed": 11.6,
             "weatherCode": 0
           }
         },
@@ -798,10 +798,10 @@
           "time": "2026-07-10T08:18:47.059Z",
           "weather": {
             "weatherTime": "2026-07-10T08:00Z",
-            "temperature": 21.6,
+            "temperature": 22,
             "precipitation": 0,
-            "precipitationProbability": 0,
-            "windSpeed": 9.2,
+            "precipitationProbability": 1,
+            "windSpeed": 11.6,
             "weatherCode": 0
           }
         },
@@ -818,10 +818,10 @@
           "time": "2026-07-10T08:58:03.951Z",
           "weather": {
             "weatherTime": "2026-07-10T09:00Z",
-            "temperature": 23.1,
+            "temperature": 23.5,
             "precipitation": 0,
             "precipitationProbability": 0,
-            "windSpeed": 10.8,
+            "windSpeed": 14,
             "weatherCode": 0
           }
         },
@@ -838,10 +838,10 @@
           "time": "2026-07-10T09:37:34.988Z",
           "weather": {
             "weatherTime": "2026-07-10T10:00Z",
-            "temperature": 24.7,
+            "temperature": 25.1,
             "precipitation": 0,
             "precipitationProbability": 0,
-            "windSpeed": 12.1,
+            "windSpeed": 16.1,
             "weatherCode": 0
           }
         },
@@ -858,10 +858,10 @@
           "time": "2026-07-10T10:16:49.170Z",
           "weather": {
             "weatherTime": "2026-07-10T10:00Z",
-            "temperature": 24.4,
+            "temperature": 25,
             "precipitation": 0,
             "precipitationProbability": 0,
-            "windSpeed": 12.7,
+            "windSpeed": 16.4,
             "weatherCode": 0
           }
         },
@@ -878,10 +878,10 @@
           "time": "2026-07-10T10:56:10.502Z",
           "weather": {
             "weatherTime": "2026-07-10T11:00Z",
-            "temperature": 26.1,
+            "temperature": 26.8,
             "precipitation": 0,
-            "precipitationProbability": 0,
-            "windSpeed": 13.2,
+            "precipitationProbability": 1,
+            "windSpeed": 17.3,
             "weatherCode": 0
           }
         }
@@ -896,10 +896,10 @@
       "stageDistanceKm": 48.6,
       "stageStartTime": "2026-07-11T07:00:00.000Z",
       "stats": {
-        "minTemperature": 21,
-        "maxTemperature": 25,
+        "minTemperature": 22,
+        "maxTemperature": 27,
         "totalPrecipitation": 0,
-        "maxPrecipitationProbability": 8,
+        "maxPrecipitationProbability": 10,
         "maxWindSpeed": 5,
         "dominantWeatherCode": 0,
         "startPoint": {
@@ -915,10 +915,10 @@
           "time": "2026-07-11T07:34:26.056Z",
           "weather": {
             "weatherTime": "2026-07-11T08:00Z",
-            "temperature": 21.1,
+            "temperature": 22.3,
             "precipitation": 0,
-            "precipitationProbability": 5,
-            "windSpeed": 2.9,
+            "precipitationProbability": 4,
+            "windSpeed": 2.4,
             "weatherCode": 0
           }
         },
@@ -935,10 +935,10 @@
           "time": "2026-07-11T08:56:31.248Z",
           "weather": {
             "weatherTime": "2026-07-11T09:00Z",
-            "temperature": 23.1,
+            "temperature": 24.6,
             "precipitation": 0,
-            "precipitationProbability": 6,
-            "windSpeed": 3.1,
+            "precipitationProbability": 5,
+            "windSpeed": 0.9,
             "weatherCode": 0
           }
         },
@@ -955,10 +955,10 @@
           "time": "2026-07-11T10:18:34.737Z",
           "weather": {
             "weatherTime": "2026-07-11T10:00Z",
-            "temperature": 25.3,
+            "temperature": 26.6,
             "precipitation": 0,
-            "precipitationProbability": 8,
-            "windSpeed": 5,
+            "precipitationProbability": 10,
+            "windSpeed": 4.8,
             "weatherCode": 0
           }
         },
@@ -978,10 +978,10 @@
           "time": "2026-07-11T07:34:26.056Z",
           "weather": {
             "weatherTime": "2026-07-11T08:00Z",
-            "temperature": 21.1,
+            "temperature": 22.3,
             "precipitation": 0,
-            "precipitationProbability": 5,
-            "windSpeed": 2.9,
+            "precipitationProbability": 4,
+            "windSpeed": 2.4,
             "weatherCode": 0
           }
         },
@@ -998,10 +998,10 @@
           "time": "2026-07-11T08:56:31.248Z",
           "weather": {
             "weatherTime": "2026-07-11T09:00Z",
-            "temperature": 23.1,
+            "temperature": 24.6,
             "precipitation": 0,
-            "precipitationProbability": 6,
-            "windSpeed": 3.1,
+            "precipitationProbability": 5,
+            "windSpeed": 0.9,
             "weatherCode": 0
           }
         },
@@ -1018,15 +1018,15 @@
           "time": "2026-07-11T10:18:34.737Z",
           "weather": {
             "weatherTime": "2026-07-11T10:00Z",
-            "temperature": 25.3,
+            "temperature": 26.6,
             "precipitation": 0,
-            "precipitationProbability": 8,
-            "windSpeed": 5,
+            "precipitationProbability": 10,
+            "windSpeed": 4.8,
             "weatherCode": 0
           }
         }
       ],
-      "summary": "Am Morgen steigt die Temperatur von etwa 21 °C bei fast windstillen Verhältnissen (≈ 2 km/h) auf rund 25 °C, wobei die leichte Brise gegen Ende der Etappe leicht zunimmt (≈ 5 km/h). Die Regenwahrscheinlichkeit bleibt den gesamten Verlauf über sehr gering (5 %–8 %) und es wird kein Niederschlag erwartet. Gegen 09:30 Uhr erreicht die Wärme ihr Maximum, sodass sich die Fahrt in den mittleren Stunden angenehm warm, aber nicht drückend anfühlt. Für Radfahrer empfiehlt sich leichte, atmungsaktive Kleidung und ein Hut gegen die wachsende Sonne, während ein dünner Windschutz für die letzten Kilometer sinnvoll ist.",
+      "summary": "Die Temperaturen steigen am Morgen von etwa 22 °C zu Beginn der Fahrt auf rund 26 °C gegen Ende der Etappe, sodass ein leichter Übergang von kühleren zu warmen Bedingungen zu erwarten ist. Regen ist nicht zu verzeichnen; die Niederschlagswahrscheinlichkeit bleibt den ganzen Tag über niedrig (maximal 10 %). Der Wind bleibt schwach, mit Geschwindigkeiten zwischen 0,7 km/h und 4,8 km/h, sodass er kaum Einfluss auf das Fahrverhalten haben wird. Radfahrer sollten zu Beginn eine dünne Schicht tragen und später zu leichter, atmungsaktiver Kleidung wechseln, dabei ausreichend Flüssigkeit einplanen. Insgesamt bietet das Wetter ideale Bedingungen für eine entspannte Fahrt von Bebenhausen nach Hechingen.",
       "points": [
         {
           "km": 70,
@@ -1041,10 +1041,10 @@
           "time": "2026-07-11T07:34:26.056Z",
           "weather": {
             "weatherTime": "2026-07-11T08:00Z",
-            "temperature": 21.1,
+            "temperature": 22.3,
             "precipitation": 0,
-            "precipitationProbability": 5,
-            "windSpeed": 2.9,
+            "precipitationProbability": 4,
+            "windSpeed": 2.4,
             "weatherCode": 0
           }
         },
@@ -1061,10 +1061,10 @@
           "time": "2026-07-11T08:15:27.831Z",
           "weather": {
             "weatherTime": "2026-07-11T08:00Z",
-            "temperature": 21,
+            "temperature": 22.3,
             "precipitation": 0,
-            "precipitationProbability": 5,
-            "windSpeed": 1.4,
+            "precipitationProbability": 4,
+            "windSpeed": 0.7,
             "weatherCode": 0
           }
         },
@@ -1081,10 +1081,10 @@
           "time": "2026-07-11T08:56:31.248Z",
           "weather": {
             "weatherTime": "2026-07-11T09:00Z",
-            "temperature": 23.1,
+            "temperature": 24.6,
             "precipitation": 0,
-            "precipitationProbability": 6,
-            "windSpeed": 3.1,
+            "precipitationProbability": 5,
+            "windSpeed": 0.9,
             "weatherCode": 0
           }
         },
@@ -1101,10 +1101,10 @@
           "time": "2026-07-11T09:37:34.763Z",
           "weather": {
             "weatherTime": "2026-07-11T10:00Z",
-            "temperature": 25.1,
+            "temperature": 26.6,
             "precipitation": 0,
-            "precipitationProbability": 7,
-            "windSpeed": 5.2,
+            "precipitationProbability": 6,
+            "windSpeed": 3.5,
             "weatherCode": 0
           }
         },
@@ -1121,10 +1121,10 @@
           "time": "2026-07-11T10:18:34.737Z",
           "weather": {
             "weatherTime": "2026-07-11T10:00Z",
-            "temperature": 25.3,
+            "temperature": 26.6,
             "precipitation": 0,
-            "precipitationProbability": 8,
-            "windSpeed": 5,
+            "precipitationProbability": 10,
+            "windSpeed": 4.8,
             "weatherCode": 0
           }
         }
@@ -1139,10 +1139,10 @@
       "stageDistanceKm": 73.6,
       "stageStartTime": "2026-07-12T07:00:00.000Z",
       "stats": {
-        "minTemperature": 24,
-        "maxTemperature": 30,
+        "minTemperature": 26,
+        "maxTemperature": 32,
         "totalPrecipitation": 0,
-        "maxPrecipitationProbability": 33,
+        "maxPrecipitationProbability": 20,
         "maxWindSpeed": 7,
         "dominantWeatherCode": 1,
         "startPoint": {
@@ -1158,10 +1158,10 @@
           "time": "2026-07-12T07:38:36.968Z",
           "weather": {
             "weatherTime": "2026-07-12T08:00Z",
-            "temperature": 26,
+            "temperature": 27.3,
             "precipitation": 0,
-            "precipitationProbability": 9,
-            "windSpeed": 4,
+            "precipitationProbability": 11,
+            "windSpeed": 7.3,
             "weatherCode": 0
           }
         },
@@ -1178,10 +1178,10 @@
           "time": "2026-07-12T09:37:05.253Z",
           "weather": {
             "weatherTime": "2026-07-12T10:00Z",
-            "temperature": 27.4,
+            "temperature": 28.6,
             "precipitation": 0,
-            "precipitationProbability": 26,
-            "windSpeed": 4,
+            "precipitationProbability": 16,
+            "windSpeed": 6,
             "weatherCode": 1
           }
         },
@@ -1198,10 +1198,10 @@
           "time": "2026-07-12T11:35:36.998Z",
           "weather": {
             "weatherTime": "2026-07-12T12:00Z",
-            "temperature": 30.4,
+            "temperature": 31.8,
             "precipitation": 0,
-            "precipitationProbability": 33,
-            "windSpeed": 6.6,
+            "precipitationProbability": 20,
+            "windSpeed": 6.5,
             "weatherCode": 3
           }
         },
@@ -1221,10 +1221,10 @@
           "time": "2026-07-12T07:38:36.968Z",
           "weather": {
             "weatherTime": "2026-07-12T08:00Z",
-            "temperature": 26,
+            "temperature": 27.3,
             "precipitation": 0,
-            "precipitationProbability": 9,
-            "windSpeed": 4,
+            "precipitationProbability": 11,
+            "windSpeed": 7.3,
             "weatherCode": 0
           }
         },
@@ -1241,10 +1241,10 @@
           "time": "2026-07-12T09:37:05.253Z",
           "weather": {
             "weatherTime": "2026-07-12T10:00Z",
-            "temperature": 27.4,
+            "temperature": 28.6,
             "precipitation": 0,
-            "precipitationProbability": 26,
-            "windSpeed": 4,
+            "precipitationProbability": 16,
+            "windSpeed": 6,
             "weatherCode": 1
           }
         },
@@ -1261,15 +1261,15 @@
           "time": "2026-07-12T11:35:36.998Z",
           "weather": {
             "weatherTime": "2026-07-12T12:00Z",
-            "temperature": 30.4,
+            "temperature": 31.8,
             "precipitation": 0,
-            "precipitationProbability": 33,
-            "windSpeed": 6.6,
+            "precipitationProbability": 20,
+            "windSpeed": 6.5,
             "weatherCode": 3
           }
         }
       ],
-      "summary": "Am Morgen steigt die Temperatur von etwa 26 °C zu Beginn der Fahrt rasch an und erreicht gegen Mittag rund 30 °C. Der Regen bleibt aus, jedoch liegt die Wahrscheinlichkeit für Niederschlag am späten Vormittag bei bis zu 33  %, sodass ein kurzer Regenschauer nicht ausgeschlossen ist. Der Wind ist schwach bis mäßig, mit Geschwindigkeiten zwischen 4  und 6,6  km/h, sodass er kaum Widerstand leistet. Radfahrer sollten leichte, atmungsaktive Kleidung tragen, ausreichend trinken und ggf. eine Regenjacke für den späteren Vormittag einplanen.",
+      "summary": "Bei km 10 beträgt die Temperatur 27,3 °C und steigt bis km 70 auf 31,8 °C, sodass die Tageswärme zwischen etwa 27 °C und 32 °C liegt. Die Regenwahrscheinlichkeit bleibt niedrig – maximal 20 % bei km 70 – und es wird voraussichtlich kein Niederschlag gemessen. Der Wind ist durchgehend schwach, von 7,3 km/h bei km 10 auf 6,5 km/h bei km 70, sodass er kaum Einfluss auf das Fahrverhalten hat. Radfahrer sollten leichte, atmungsaktive Kleidung tragen, ausreichend Sonnenschutz und Trinkwasser einplanen und die warmen Mittelstunden besonders gut hydrieren.",
       "points": [
         {
           "km": 120,
@@ -1284,10 +1284,10 @@
           "time": "2026-07-12T07:38:36.968Z",
           "weather": {
             "weatherTime": "2026-07-12T08:00Z",
-            "temperature": 26,
+            "temperature": 27.3,
             "precipitation": 0,
-            "precipitationProbability": 9,
-            "windSpeed": 4,
+            "precipitationProbability": 11,
+            "windSpeed": 7.3,
             "weatherCode": 0
           }
         },
@@ -1304,10 +1304,10 @@
           "time": "2026-07-12T08:18:19.869Z",
           "weather": {
             "weatherTime": "2026-07-12T08:00Z",
-            "temperature": 24.3,
+            "temperature": 25.6,
             "precipitation": 0,
-            "precipitationProbability": 12,
-            "windSpeed": 4.8,
+            "precipitationProbability": 8,
+            "windSpeed": 6.2,
             "weatherCode": 0
           }
         },
@@ -1324,10 +1324,10 @@
           "time": "2026-07-12T08:57:32.449Z",
           "weather": {
             "weatherTime": "2026-07-12T09:00Z",
-            "temperature": 26.1,
+            "temperature": 27.2,
             "precipitation": 0,
-            "precipitationProbability": 19,
-            "windSpeed": 5.1,
+            "precipitationProbability": 12,
+            "windSpeed": 6.4,
             "weatherCode": 1
           }
         },
@@ -1344,10 +1344,10 @@
           "time": "2026-07-12T09:37:05.253Z",
           "weather": {
             "weatherTime": "2026-07-12T10:00Z",
-            "temperature": 27.4,
+            "temperature": 28.6,
             "precipitation": 0,
-            "precipitationProbability": 26,
-            "windSpeed": 4,
+            "precipitationProbability": 16,
+            "windSpeed": 6,
             "weatherCode": 1
           }
         },
@@ -1364,10 +1364,10 @@
           "time": "2026-07-12T10:16:30.357Z",
           "weather": {
             "weatherTime": "2026-07-12T10:00Z",
-            "temperature": 28.1,
+            "temperature": 29.9,
             "precipitation": 0,
-            "precipitationProbability": 26,
-            "windSpeed": 3.4,
+            "precipitationProbability": 16,
+            "windSpeed": 4.8,
             "weatherCode": 1
           }
         },
@@ -1384,10 +1384,10 @@
           "time": "2026-07-12T10:56:15.029Z",
           "weather": {
             "weatherTime": "2026-07-12T11:00Z",
-            "temperature": 29.6,
+            "temperature": 31.3,
             "precipitation": 0,
-            "precipitationProbability": 27,
-            "windSpeed": 5.8,
+            "precipitationProbability": 16,
+            "windSpeed": 7,
             "weatherCode": 1
           }
         },
@@ -1404,10 +1404,10 @@
           "time": "2026-07-12T11:35:36.998Z",
           "weather": {
             "weatherTime": "2026-07-12T12:00Z",
-            "temperature": 30.4,
+            "temperature": 31.8,
             "precipitation": 0,
-            "precipitationProbability": 33,
-            "windSpeed": 6.6,
+            "precipitationProbability": 20,
+            "windSpeed": 6.5,
             "weatherCode": 3
           }
         }
@@ -1422,11 +1422,11 @@
       "stageDistanceKm": 75.9,
       "stageStartTime": "2026-07-13T07:00:00.000Z",
       "stats": {
-        "minTemperature": 24,
+        "minTemperature": 22,
         "maxTemperature": 31,
         "totalPrecipitation": 0,
-        "maxPrecipitationProbability": 24,
-        "maxWindSpeed": 9,
+        "maxPrecipitationProbability": 13,
+        "maxWindSpeed": 10,
         "dominantWeatherCode": 0,
         "startPoint": {
           "km": 190,
@@ -1441,10 +1441,10 @@
           "time": "2026-07-13T07:24:30.103Z",
           "weather": {
             "weatherTime": "2026-07-13T07:00Z",
-            "temperature": 23.8,
+            "temperature": 22.1,
             "precipitation": 0,
-            "precipitationProbability": 13,
-            "windSpeed": 7,
+            "precipitationProbability": 4,
+            "windSpeed": 10.1,
             "weatherCode": 1
           }
         },
@@ -1461,10 +1461,10 @@
           "time": "2026-07-13T09:22:15.184Z",
           "weather": {
             "weatherTime": "2026-07-13T09:00Z",
-            "temperature": 27.1,
+            "temperature": 25.8,
             "precipitation": 0,
-            "precipitationProbability": 22,
-            "windSpeed": 4.3,
+            "precipitationProbability": 13,
+            "windSpeed": 8.8,
             "weatherCode": 0
           }
         },
@@ -1483,8 +1483,8 @@
             "weatherTime": "2026-07-13T11:00Z",
             "temperature": 31.2,
             "precipitation": 0,
-            "precipitationProbability": 24,
-            "windSpeed": 6.2,
+            "precipitationProbability": 6,
+            "windSpeed": 10.1,
             "weatherCode": 0
           }
         },
@@ -1504,10 +1504,10 @@
           "time": "2026-07-13T07:24:30.103Z",
           "weather": {
             "weatherTime": "2026-07-13T07:00Z",
-            "temperature": 23.8,
+            "temperature": 22.1,
             "precipitation": 0,
-            "precipitationProbability": 13,
-            "windSpeed": 7,
+            "precipitationProbability": 4,
+            "windSpeed": 10.1,
             "weatherCode": 1
           }
         },
@@ -1524,10 +1524,10 @@
           "time": "2026-07-13T09:22:15.184Z",
           "weather": {
             "weatherTime": "2026-07-13T09:00Z",
-            "temperature": 27.1,
+            "temperature": 25.8,
             "precipitation": 0,
-            "precipitationProbability": 22,
-            "windSpeed": 4.3,
+            "precipitationProbability": 13,
+            "windSpeed": 8.8,
             "weatherCode": 0
           }
         },
@@ -1546,13 +1546,13 @@
             "weatherTime": "2026-07-13T11:00Z",
             "temperature": 31.2,
             "precipitation": 0,
-            "precipitationProbability": 24,
-            "windSpeed": 6.2,
+            "precipitationProbability": 6,
+            "windSpeed": 10.1,
             "weatherCode": 0
           }
         }
       ],
-      "summary": "Am Morgen steigt die Temperatur von etwa 23,8 °C im ersten Kilometerabschnitt (6 km) rasch an und erreicht in den mittleren Abschnitten (56 – 66 km) rund 31,2 °C. Der Regen bleibt aus – die gemessenen Niederschlagswerte liegen bei 0 mm und die Regenwahrscheinlichkeit liegt höchstens bei 24 %. Der Wind ist schwach bis mäßig, mit Geschwindigkeiten zwischen 3,9 km/h und 9,4 km/h, sodass er kaum Widerstand bietet. Radfahrer sollten daher frühzeitig mit leichter, atmungsaktiver Kleidung und ausreichender Flüssigkeitszufuhr starten, um die zunehmende Hitze gut zu bewältigen.",
+      "summary": "Am frühen Morgen liegt die Temperatur bei etwa 22 °C und steigt im Verlauf der Fahrt bis zu rund 31 °C, sodass ein Temperaturbereich von 22 – 31 °C zu erwarten ist. Die Regenwahrscheinlichkeit bleibt niedrig – maximal 13 % – und es wird kein Niederschlag gemeldet. Der Wind weht leicht aus südlicher Richtung mit Geschwindigkeiten zwischen 8  und 10  km/h, was kaum Widerstand bietet. Radfahrer sollten besonders in der Mittagzeit auf ausreichende Flüssigkeitszufuhr und Sonnenschutz achten, da die Hitze deutlich zunimmt.",
       "points": [
         {
           "km": 190,
@@ -1567,10 +1567,10 @@
           "time": "2026-07-13T07:24:30.103Z",
           "weather": {
             "weatherTime": "2026-07-13T07:00Z",
-            "temperature": 23.8,
+            "temperature": 22.1,
             "precipitation": 0,
-            "precipitationProbability": 13,
-            "windSpeed": 7,
+            "precipitationProbability": 4,
+            "windSpeed": 10.1,
             "weatherCode": 1
           }
         },
@@ -1587,10 +1587,10 @@
           "time": "2026-07-13T08:03:44.986Z",
           "weather": {
             "weatherTime": "2026-07-13T08:00Z",
-            "temperature": 25.5,
+            "temperature": 23,
             "precipitation": 0,
-            "precipitationProbability": 18,
-            "windSpeed": 9.4,
+            "precipitationProbability": 7,
+            "windSpeed": 9.7,
             "weatherCode": 0
           }
         },
@@ -1607,10 +1607,10 @@
           "time": "2026-07-13T08:42:59.653Z",
           "weather": {
             "weatherTime": "2026-07-13T09:00Z",
-            "temperature": 27.3,
+            "temperature": 24.9,
             "precipitation": 0,
-            "precipitationProbability": 22,
-            "windSpeed": 7.3,
+            "precipitationProbability": 13,
+            "windSpeed": 8.7,
             "weatherCode": 0
           }
         },
@@ -1627,10 +1627,10 @@
           "time": "2026-07-13T09:22:15.184Z",
           "weather": {
             "weatherTime": "2026-07-13T09:00Z",
-            "temperature": 27.1,
+            "temperature": 25.8,
             "precipitation": 0,
-            "precipitationProbability": 22,
-            "windSpeed": 4.3,
+            "precipitationProbability": 13,
+            "windSpeed": 8.8,
             "weatherCode": 0
           }
         },
@@ -1647,10 +1647,10 @@
           "time": "2026-07-13T10:01:26.471Z",
           "weather": {
             "weatherTime": "2026-07-13T10:00Z",
-            "temperature": 28.9,
+            "temperature": 27.8,
             "precipitation": 0,
-            "precipitationProbability": 21,
-            "windSpeed": 3.9,
+            "precipitationProbability": 4,
+            "windSpeed": 9.4,
             "weatherCode": 0
           }
         },
@@ -1669,8 +1669,8 @@
             "weatherTime": "2026-07-13T11:00Z",
             "temperature": 31.2,
             "precipitation": 0,
-            "precipitationProbability": 24,
-            "windSpeed": 6.2,
+            "precipitationProbability": 6,
+            "windSpeed": 10.1,
             "weatherCode": 0
           }
         },
@@ -1689,8 +1689,8 @@
             "weatherTime": "2026-07-13T11:00Z",
             "temperature": 31.2,
             "precipitation": 0,
-            "precipitationProbability": 24,
-            "windSpeed": 6.2,
+            "precipitationProbability": 6,
+            "windSpeed": 10.1,
             "weatherCode": 0
           }
         }
