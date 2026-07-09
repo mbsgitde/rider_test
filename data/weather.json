@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-09T06:50:59.219Z",
+  "generatedAt": "2026-07-09T10:30:37.377Z",
   "sourceFile": "Hohenzollernradweg_Relax.gpx",
   "tourStartDateTime": "2026-07-15T09:00:00+02:00",
   "dailyStageStartTime": "09:00",
@@ -10,7 +10,7 @@
     "ai": "groq"
   },
   "global": {
-    "summary": "Der erste Tag startet um 07 Uhr bei angenehmen 24 °C, steigt bis zum Mittag auf über 30 °C und bleibt trocken bei nur 9 % Regenwahrscheinlichkeit sowie leichtem Wind von 5–10 km/h – ausreichender Sonnenschutz und regelmäßige Flüssigkeitszufuhr sind empfehlenswert. Am zweiten Tag liegt die Temperatur zwischen 27 °C und 31 °C, die Regenwahrscheinlichkeit liegt bei etwa 20 % und der Wind bleibt schwach (ca. 7–10 km/h), sodass ein leichter, atmungsaktiver Regenmantel für eventuelle Schauer ausreicht. Der dritte Tag ist kühler (≈ 20 – 25 °C) und windiger (≈ 17–19 km/h); die Regenwahrscheinlichkeit steigt bis zu 37 % und es gibt leichte Niederschläge (max. 0,5 mm), daher sollten Radfahrer windabgewandte Routen wählen und ein wasserabweisendes Kleidungsstück mitnehmen. Am vierten Tag erwärmt sich das Wetter wieder auf 20 – 27 °C, die Regenwahrscheinlichkeit bleibt niedrig (≈ 20 %) und der Wind ist nur leicht (4–8 km/h), sodass die Bedingungen für eine entspannte Fahrt optimal sind.",
+    "summary": "Der Temperaturverlauf reicht von kühlen ≈ 20 °C am frühen Morgen der vierten Etappe bis zu heißen ≈ 32 °C gegen Mittag der ersten Etappe, wobei die Tageshöchstwerte überwiegend zwischen 28 °C und 31 °C liegen. Leichte Niederschläge (max. 0,5 mm) treten nur am dritten Tag auf, die Regenwahrscheinlichkeit steigt dort bis zu 37 % – ein dünner Regenmantel ist empfehlenswert. Der Wind ist meist schwach (≈ 5–10 km/h), wird jedoch am dritten Tag deutlich stärker (≈ 19 km/h) und kann die Fahrt etwas erschweren. Radfahrer sollten morgens ausreichend Sonnenschutz und ausreichend Trinkwasser einplanen, für die mittleren Tage leichte Regenkleidung bereithalten und bei stärkerem Wind die Sitzposition etwas aerodynamischer wählen. Insgesamt ist das Wetter überwiegend trocken und warm, sodass die Tour bei guter Vorbereitung komfortabel zu bewältigen ist.",
     "stats": {
       "minTemperature": 20,
       "maxTemperature": 32,
@@ -743,7 +743,7 @@
           }
         }
       ],
-      "summary": "Am Morgen startet das Wetter bei etwa 24 °C und bleibt den ganzen Tag über trocken – die Regenwahrscheinlichkeit liegt stets unter 12 %. Gegen Mitte der Strecke steigt die Temperatur auf rund 30 °C, mit einem Höchstwert von 32 °C nahe dem Ziel. Der Wind bleibt schwach bis mäßig, von etwa 5  km/h zu Beginn bis maximal 10  km/h im letzten Abschnitt. Radfahrer sollten daher früh genug starten, ausreichend trinken und Sonnenschutz einplanen, um die zunehmende Hitze gut zu bewältigen.",
+      "summary": "Die Temperaturen steigen im Verlauf der Fahrt von etwa 24 °C zu Beginn bis rund 32 °C gegen Ende, sodass mit einer spürbaren Wärmeentwicklung zu rechnen ist. Regen ist praktisch nicht zu erwarten – die maximale Niederschlagswahrscheinlichkeit liegt bei 11 % und es wird kein Niederschlag gemessen. Der Wind bleibt schwach, zwischen 5  km/h und 11  km/h, sodass er kaum Einfluss auf das Fahrverhalten haben wird. Radfahrer sollten frühzeitig mit leichter, atmungsaktiver Kleidung und ausreichender Sonnencreme starten, danach ausreichend trinken und ggf. eine Kopfbedeckung für die Mittagshitze mitnehmen. Ein lockerer, gut belüfteter Rucksack und ein Trinksystem sind empfehlenswert, um die steigenden Temperaturen komfortabel zu bewältigen.",
       "points": [
         {
           "km": 0,
@@ -1026,7 +1026,7 @@
           }
         }
       ],
-      "summary": "Am Morgen steigt die Temperatur von etwa 27,7 °C bei km 8 auf rund 31,4 °C gegen km 48, sodass Sie mit einer maximalen Hitze von knapp 32 °C rechnen müssen. Die Regenwahrscheinlichkeit liegt konstant bei etwa 20 % und es wird kein Niederschlag gemessen, sodass trockenes Fahren zu erwarten ist. Der Wind bleibt schwach, von 7 km/h zu Beginn bis maximal 10 km/h gegen km 48, was kaum Gegenwind bedeutet. Radfahrer sollten daher ausreichend Flüssigkeit einplanen, Sonnencreme nutzen und leichte, atmungsaktive Kleidung wählen.",
+      "summary": "Auf der Strecke von Bebenhausen nach Hechingen steigen die Temperaturen von etwa 27,7 °C bei km 8 (07:34 Uhr) auf rund 31,4 °C bei km 48 (10:18 Uhr) an. Der Regen bleibt mit 0 mm völlig aus, die Regenwahrscheinlichkeit liegt konstant bei etwa 20 % – ein trockenes Wetter ist also zu erwarten. Der Wind ist schwach bis mäßig, von 7,3 km/h zu Beginn bis maximal 9,9 km/h gegen Ende der frühen Fahrzeit. Radfahrer sollten daher ausreichend Flüssigkeit einplanen, Sonnencreme nutzen und leichte, atmungsaktive Kleidung wählen, um die steigende Hitze gut zu bewältigen.",
       "points": [
         {
           "km": 70,
@@ -1269,7 +1269,7 @@
           }
         }
       ],
-      "summary": "Die Temperaturen steigen im Verlauf der Fahrt von etwa 21 °C am frühen Morgen (km 10) auf rund 25 °C gegen Mittag (km 70). Die Regenwahrscheinlichkeit nimmt von ca. 20 % zu Beginn auf etwa 35‑37 % am späten Vormittag zu, wobei nur geringe Niederschlagsmengen (max. 0,5 mm) zu erwarten sind. Der Wind bleibt moderat, etwa 18‑19 km/h, und ändert sich kaum über die gesamte Strecke. Radfahrer sollten leichte, atmungsaktive Kleidung tragen, einen dünnen Regenschutz einplanen und ggf. einen Sonnenhut mitnehmen, um sowohl leichten Sprühregen als auch die wärmende Sonne zu bewältigen.",
+      "summary": "Die Temperaturen steigen von etwa 20 °C am frühen Morgen (km 10) auf rund 25 °C gegen Mittag (km 70). Leichte Niederschläge von 0,1–0,5 mm sind möglich, wobei die Regenwahrscheinlichkeit im Verlauf von 23 % auf 37 % anzieht. Der Wind bleibt moderat, zwischen 17 km/h und 19 km/h, und wechselt nur leicht in Richtung. Radfahrer sollten ein dünnes Regen- bzw. Windjackett einplanen und die steigende Hitze gegen Mittag berücksichtigen.",
       "points": [
         {
           "km": 120,
@@ -1552,7 +1552,7 @@
           }
         }
       ],
-      "summary": "Die Temperaturen beginnen am frühen Morgen bei etwa 19,8 °C (190 km) und steigen bis zum späten Vormittag auf rund 26,9 °C (250 km). Regen ist kaum zu erwarten – die gemessenen Niederschlagsmengen liegen zwischen 0 mm und 0,1 mm, die Regenwahrscheinlichkeit liegt durchgehend zwischen 21 % und 29 %. Der Wind bleibt schwach bis mäßig, mit Geschwindigkeiten von 4,8 km/h bis 7,8 km/h, sodass er kaum Widerstand bietet. Für Radfahrer empfiehlt sich leichte, atmungsaktive Kleidung, ausreichend Trinkwasser und ein kleiner Regenschutz für den Fall einer kurzen Schauerentwicklung.",
+      "summary": "Die Temperatur steigt von etwa 20 °C am frühen Morgen (km 6) auf fast 27 °C gegen Mittag (km 56‑66). Die Regenwahrscheinlichkeit liegt größtenteils unter 30  %; ein einziger leichter Schauer von 0,1 mm wurde um 07:24 Uhr gemessen. Der Wind bleibt schwach bis mäßig, zwischen 4,8 km/h und 7,8 km/h, ohne klare Vorherrschaft einer Richtung. Radfahrer sollten leichte, atmungsaktive Kleidung wählen, einen dünnen Regenmantel für den frühen Abschnitt einpacken und ausreichend trinken, da die Temperaturen im Tagesverlauf merklich ansteigen.",
       "points": [
         {
           "km": 190,
