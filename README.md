@@ -240,7 +240,7 @@ Gesamtdistanz: ca. 259,7 km → Marker 260
 
 Dieses Projekt ist ein **Studierendenprojekt im Kontext des Hochschulzertifikat KI-Kompetenzen für die Praxis der Hochschule München**.
 
-Der komplette Code wurde KI-Unterstützt mit mit Microsoft 365 Copilot erstellt.
+Der komplette Code wurde KI-Unterstützt mit Microsoft 365 Copilot erstellt.
 
 Projektlizenz:
 
